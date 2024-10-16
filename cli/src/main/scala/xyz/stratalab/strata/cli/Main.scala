@@ -47,8 +47,8 @@ object Main
               simpleMintingSubcmds(params)
             case StrataCliMode.indexerquery =>
               indexerQuerySubcmd(params)
-            case StrataCliMode.bifrostquery =>
-              bifrostQuerySubcmd(params)
+            case StrataCliMode.nodequery =>
+              nodeQuerySubcmd(params)
             case StrataCliMode.server =>
               serverSubcmd(params)
             case _ =>

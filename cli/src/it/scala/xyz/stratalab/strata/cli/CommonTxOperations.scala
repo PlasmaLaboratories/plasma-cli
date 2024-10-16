@@ -38,7 +38,7 @@ trait CommonTxOperations
           "-h",
           HOST,
           "--port",
-          s"$BIFROST_PORT",
+          s"$NODE_PORT",
           "--keyfile",
           c.keyFile,
           "-w",
@@ -101,7 +101,7 @@ trait CommonTxOperations
           "-w",
           c.password,
           "--port",
-          s"$BIFROST_PORT",
+          s"$NODE_PORT",
           "-o",
           outputFile, // BOB_SECOND_TX_RAW,
           "-n",
@@ -191,7 +191,7 @@ trait CommonTxOperations
           "-w",
           c.password,
           "--port",
-          s"$BIFROST_PORT",
+          s"$NODE_PORT",
           "-o",
           outputFile, // BOB_SECOND_TX_RAW,
           "-a",
@@ -252,7 +252,7 @@ trait CommonTxOperations
           "-h",
           HOST,
           "--port",
-          s"$BIFROST_PORT",
+          s"$NODE_PORT",
           "-n",
           "private",
           "--keyfile",
@@ -299,7 +299,7 @@ trait CommonTxOperations
           "-h",
           HOST,
           "--port",
-          s"$BIFROST_PORT",
+          s"$NODE_PORT",
           "-n",
           "private",
           "--keyfile",
@@ -346,7 +346,7 @@ trait CommonTxOperations
           "-h",
           HOST,
           "--port",
-          s"$BIFROST_PORT",
+          s"$NODE_PORT",
           "-n",
           "private",
           "--keyfile",
@@ -392,7 +392,7 @@ trait CommonTxOperations
           "-h",
           HOST,
           "--port",
-          s"$BIFROST_PORT",
+          s"$NODE_PORT",
           "--walletdb",
           c.walletFile,
           "--token",
@@ -420,7 +420,7 @@ trait CommonTxOperations
           "-h",
           HOST,
           "--port",
-          s"$BIFROST_PORT",
+          s"$NODE_PORT",
           "--walletdb",
           c.walletFile,
           "--token",
@@ -448,7 +448,7 @@ trait CommonTxOperations
           "-h",
           HOST,
           "--port",
-          s"$BIFROST_PORT",
+          s"$NODE_PORT",
           "--walletdb",
           c.walletFile,
           "--token",
@@ -477,7 +477,7 @@ trait CommonTxOperations
           "-h",
           HOST,
           "--port",
-          s"$BIFROST_PORT",
+          s"$NODE_PORT",
           "--walletdb",
           c.walletFile,
           "--token",
@@ -506,7 +506,7 @@ trait CommonTxOperations
           "-h",
           HOST,
           "--port",
-          s"$BIFROST_PORT",
+          s"$NODE_PORT",
           "--walletdb",
           c.walletFile,
           "--token",
@@ -739,7 +739,7 @@ trait CommonTxOperations
     .make[IO](
       channelResource(
         HOST,
-        BIFROST_PORT,
+        NODE_PORT,
         false
       )
     )
@@ -765,7 +765,7 @@ trait CommonTxOperations
       "-h",
       HOST,
       "--port",
-      s"$BIFROST_PORT"
+      s"$NODE_PORT"
     ) ++ (if (secure) List("--secure", "true") else List.empty)
   )
 }

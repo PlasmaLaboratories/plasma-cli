@@ -30,7 +30,7 @@ trait SimpleMintingModeModule
         validateParams.network.networkId,
         NetworkConstants.MAIN_LEDGER_ID,
         validateParams.host,
-        validateParams.bifrostPort,
+        validateParams.nodePort,
         validateParams.secureConnection
       )
     )

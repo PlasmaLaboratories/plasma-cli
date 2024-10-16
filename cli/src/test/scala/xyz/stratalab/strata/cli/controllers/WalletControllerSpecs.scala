@@ -50,6 +50,13 @@ class WalletControllerSpecs extends CatsEffectSuite with WalletKeyApiModule {
     _ =>
       val controller = new WalletController[IO](
         new BaseWalletStateAlgebra[IO] {
+
+          override def validateWalletInitialization(
+              networkId: Int,
+              ledgerId: Int,
+              mainKey: KeyPair
+          ): IO[Either[Seq[String], Unit]] = ???
+
           override def getCurrentIndicesForFunds(
               fellowship: String,
               template: String,

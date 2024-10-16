@@ -9,6 +9,12 @@ import quivr.models.{KeyPair, Preimage, Proposition}
 
 class BaseWalletStateAlgebra[F[_]] extends WalletStateAlgebra[F] {
 
+  override def validateWalletInitialization(
+      networkId: Int,
+      ledgerId: Int,
+      mainKey: KeyPair
+  ): F[Either[Seq[String], Unit]] = ???
+
   override def getInteractionList(
       fellowship: String,
       template: String

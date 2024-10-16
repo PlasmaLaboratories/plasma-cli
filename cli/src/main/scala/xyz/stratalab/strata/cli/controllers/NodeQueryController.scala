@@ -10,14 +10,14 @@ import xyz.stratalab.consensus.models.BlockId
 import com.google.protobuf.ByteString
 
 class NodeQueryController[F[_]: Sync](
-    bifrostQueryAlgebra: NodeQueryAlgebra[F]
+    nodeQueryAlgebra: NodeQueryAlgebra[F]
 ) {
 
   def makeBlock(
       nbOfBlocks: Int
   ): F[Either[String, String]] = {
     import cats.implicits._
-    bifrostQueryAlgebra.makeBlock(nbOfBlocks).map { _ =>
+    nodeQueryAlgebra.makeBlock(nbOfBlocks).map { _ =>
       "Block(s) created successfully".asRight[String]
     }
   }
@@ -26,7 +26,7 @@ class NodeQueryController[F[_]: Sync](
       height: Long
   ): F[Either[String, String]] = {
     import cats.implicits._
-    bifrostQueryAlgebra
+    nodeQueryAlgebra
       .blockByHeight(
         height
       )
@@ -53,7 +53,7 @@ class NodeQueryController[F[_]: Sync](
       pBlockId: String
   ): F[Either[String, String]] = {
     import cats.implicits._
-    bifrostQueryAlgebra
+    nodeQueryAlgebra
       .blockById(
         Encoding
           .decodeFromBase58(pBlockId)
@@ -80,7 +80,7 @@ class NodeQueryController[F[_]: Sync](
 
   def fetchTransaction(transactionId: String): F[Either[String, String]] = {
     import cats.implicits._
-    bifrostQueryAlgebra
+    nodeQueryAlgebra
       .fetchTransaction(
         Encoding
           .decodeFromBase58(transactionId)

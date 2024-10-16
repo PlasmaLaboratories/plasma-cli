@@ -209,7 +209,7 @@ object StrataCliParamsParserModule {
       .required()
 
   def portArg = opt[Int]("port")
-    .action((x, c) => c.copy(bifrostPort = x))
+    .action((x, c) => c.copy(nodePort = x))
     .text("Port Node node. (mandatory)")
     .validate(x =>
       if (x >= 0 && x <= 65536) success
@@ -493,8 +493,8 @@ object StrataCliParamsParserModule {
           )): _*
         )
     )
-  val bifrostQueryMode = cmd("node-query")
-    .action((_, c) => c.copy(mode = StrataCliMode.bifrostquery))
+  val nodeQueryMode = cmd("node-query")
+    .action((_, c) => c.copy(mode = StrataCliMode.nodequery))
     .text("Node query mode")
     .children(
       cmd("mint-block")
@@ -932,7 +932,7 @@ object StrataCliParamsParserModule {
       templatesMode,
       fellowshipsMode,
       indexerQueryMode,
-      bifrostQueryMode,
+      nodeQueryMode,
       walletMode,
       transactionMode,
       simpleTransactionMode,

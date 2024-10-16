@@ -32,7 +32,7 @@ trait IndexerQueryModeModule
           .make[IO](
             channelResource(
               validateParams.host,
-              validateParams.bifrostPort,
+              validateParams.nodePort,
               validateParams.secureConnection
             )
           )

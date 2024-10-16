@@ -15,7 +15,7 @@ import xyz.stratalab.consensus.models.BlockHeader
 class NodeQueryControllerSpec extends CatsEffectSuite with DummyObjects {
 
   test("blockByHeight should return error when block is not there") {
-    val bifrostQueryController = new NodeQueryController[IO](
+    val nodeQueryController = new NodeQueryController[IO](
       new BaseNodeQueryAlgebra[IO] {
 
         override def blockByHeight(
@@ -25,14 +25,14 @@ class NodeQueryControllerSpec extends CatsEffectSuite with DummyObjects {
 
       }
     )
-    bifrostQueryController
+    nodeQueryController
       .blockByHeight(1)
       .assertEquals(
         Left("No blocks found at that height")
       )
   }
   test("blockByHeight should display a block when it is there") {
-    val bifrostQueryController = new NodeQueryController[IO](
+    val nodeQueryController = new NodeQueryController[IO](
       new BaseNodeQueryAlgebra[IO] {
 
         override def blockByHeight(
@@ -44,7 +44,7 @@ class NodeQueryControllerSpec extends CatsEffectSuite with DummyObjects {
 
       }
     )
-    bifrostQueryController
+    nodeQueryController
       .blockByHeight(1)
       .assertEquals(
         Right(BlockDisplayOps.display(blockId01, Seq(iotransaction01)))
@@ -52,7 +52,7 @@ class NodeQueryControllerSpec extends CatsEffectSuite with DummyObjects {
   }
 
   test("blockById should return error when block is not there") {
-    val bifrostQueryController = new NodeQueryController[IO](
+    val nodeQueryController = new NodeQueryController[IO](
       new BaseNodeQueryAlgebra[IO] {
 
         override def blockById(
@@ -62,7 +62,7 @@ class NodeQueryControllerSpec extends CatsEffectSuite with DummyObjects {
 
       }
     )
-    bifrostQueryController
+    nodeQueryController
       .blockById("A7k6tpK25N5ZvmjkYn8jN6CnP8u9aNheT9cYb7ZjS3PN")
       .assertEquals(
         Left("No blocks found at that block id")
@@ -70,7 +70,7 @@ class NodeQueryControllerSpec extends CatsEffectSuite with DummyObjects {
   }
 
   test("blockById should display a block when it is there") {
-    val bifrostQueryController = new NodeQueryController[IO](
+    val nodeQueryController = new NodeQueryController[IO](
       new BaseNodeQueryAlgebra[IO] {
 
         override def blockById(
@@ -82,7 +82,7 @@ class NodeQueryControllerSpec extends CatsEffectSuite with DummyObjects {
 
       }
     )
-    bifrostQueryController
+    nodeQueryController
       .blockById("A7k6tpK25N5ZvmjkYn8jN6CnP8u9aNheT9cYb7ZjS3PN")
       .assertEquals(
         Right(BlockDisplayOps.display(blockId01, Seq(iotransaction01)))
@@ -90,7 +90,7 @@ class NodeQueryControllerSpec extends CatsEffectSuite with DummyObjects {
   }
 
   test("fetchTransaction should return error when transaction is not there") {
-    val bifrostQueryController = new NodeQueryController[IO](
+    val nodeQueryController = new NodeQueryController[IO](
       new BaseNodeQueryAlgebra[IO] {
 
         override def fetchTransaction(
@@ -99,7 +99,7 @@ class NodeQueryControllerSpec extends CatsEffectSuite with DummyObjects {
 
       }
     )
-    bifrostQueryController
+    nodeQueryController
       .fetchTransaction("A7k6tpK25N5ZvmjkYn8jN6CnP8u9aNheT9cYb7ZjS3PN")
       .assertEquals(
         Left(
@@ -109,7 +109,7 @@ class NodeQueryControllerSpec extends CatsEffectSuite with DummyObjects {
   }
 
   test("fetchTransaction should display a transaction when it is there") {
-    val bifrostQueryController = new NodeQueryController[IO](
+    val nodeQueryController = new NodeQueryController[IO](
       new BaseNodeQueryAlgebra[IO] {
 
         override def fetchTransaction(
@@ -118,7 +118,7 @@ class NodeQueryControllerSpec extends CatsEffectSuite with DummyObjects {
 
       }
     )
-    bifrostQueryController
+    nodeQueryController
       .fetchTransaction("A7k6tpK25N5ZvmjkYn8jN6CnP8u9aNheT9cYb7ZjS3PN")
       .assertEquals(
         Right(iotransaction01.display)

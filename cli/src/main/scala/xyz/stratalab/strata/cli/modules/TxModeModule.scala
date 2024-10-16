@@ -31,7 +31,7 @@ trait TxModeModule extends TxParserAlgebraModule with TransactionAlgebraModule {
           transactionOps(
             validateParams.walletFile,
             validateParams.host,
-            validateParams.bifrostPort,
+            validateParams.nodePort,
             validateParams.secureConnection
           )
         ).broadcastSimpleTransactionFromParams(validateParams.someInputFile.get)
@@ -44,7 +44,7 @@ trait TxModeModule extends TxParserAlgebraModule with TransactionAlgebraModule {
           transactionOps(
             validateParams.walletFile,
             validateParams.host,
-            validateParams.bifrostPort,
+            validateParams.nodePort,
             validateParams.secureConnection
           )
         ).proveSimpleTransactionFromParams(
@@ -62,7 +62,7 @@ trait TxModeModule extends TxParserAlgebraModule with TransactionAlgebraModule {
           transactionOps(
             validateParams.walletFile,
             validateParams.host,
-            validateParams.bifrostPort,
+            validateParams.nodePort,
             validateParams.secureConnection
           )
         ).inspectTransaction(validateParams.someInputFile.get)
@@ -75,7 +75,7 @@ trait TxModeModule extends TxParserAlgebraModule with TransactionAlgebraModule {
           transactionOps(
             validateParams.walletFile,
             validateParams.host,
-            validateParams.bifrostPort,
+            validateParams.nodePort,
             validateParams.secureConnection
           )
         )

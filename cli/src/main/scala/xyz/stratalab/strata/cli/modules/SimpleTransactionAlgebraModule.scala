@@ -13,7 +13,7 @@ trait SimpleTransactionAlgebraModule
       walletFile: String,
       networkId: Int,
       host: String,
-      bifrostPort: Int,
+      nodePort: Int,
       secureConnection: Boolean
   ) = SimpleTransactionAlgebra
     .make[IO](
@@ -21,7 +21,7 @@ trait SimpleTransactionAlgebraModule
       walletStateAlgebra(walletFile),
       indexerQueryAlgebra(
         host,
-        bifrostPort,
+        nodePort,
         secureConnection
       ),
       transactionBuilderApi(

@@ -17,6 +17,7 @@ import xyz.stratalab.sdk.models.Indices
 import xyz.stratalab.sdk.models.box.Lock
 import xyz.stratalab.sdk.models.box.Challenge
 import quivr.models.Proposition
+import quivr.models.KeyPair
 
 class SimpleMintingControllerSpec
     extends CatsEffectSuite

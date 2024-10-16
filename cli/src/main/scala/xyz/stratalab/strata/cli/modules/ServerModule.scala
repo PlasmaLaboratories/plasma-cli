@@ -77,7 +77,7 @@ trait ServerModule extends FellowshipsModeModule with WalletModeModule {
             .toAbsolutePath()
             .toString(),
           validateParams.host,
-          validateParams.bifrostPort,
+          validateParams.nodePort,
           validateParams.secureConnection
         )
         resp <- Ok(TxResponse(result).asJson)
@@ -123,7 +123,7 @@ trait ServerModule extends FellowshipsModeModule with WalletModeModule {
               ),
               channelResource(
                 validateParams.host,
-                validateParams.bifrostPort,
+                validateParams.nodePort,
                 validateParams.secureConnection
               ),
               walletResource(validateParams.walletFile)

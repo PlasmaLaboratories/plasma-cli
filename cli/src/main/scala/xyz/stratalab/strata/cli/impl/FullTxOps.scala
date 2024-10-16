@@ -93,7 +93,7 @@ object FullTxOps
       txFile: String,
       provedTxFile: String,
       host: String,
-      bifrostPort: Int,
+      nodePort: Int,
       secureConnection: Boolean
   ): IO[Either[String, String]] = {
     val simpleTxController = new SimpleTransactionController(
@@ -104,7 +104,7 @@ object FullTxOps
         walletFile,
         networkId.networkId,
         host,
-        bifrostPort,
+        nodePort,
         secureConnection
       )
     )
@@ -117,7 +117,7 @@ object FullTxOps
       transactionOps(
         walletFile,
         host,
-        bifrostPort,
+        nodePort,
         secureConnection
       )
     )

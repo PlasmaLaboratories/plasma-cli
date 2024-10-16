@@ -15,7 +15,7 @@ trait SimpleMintingAlgebraModule
       networkId: Int,
       ledgerId: Int,
       host: String,
-      bifrostPort: Int,
+      nodePort: Int,
       secureConnection: Boolean
   ) = SimpleMintingAlgebra.make[IO](
     Sync[IO],
@@ -23,7 +23,7 @@ trait SimpleMintingAlgebraModule
     walletStateAlgebra(walletFile),
     walletManagementUtils,
     transactionBuilderApi(networkId, ledgerId),
-    indexerQueryAlgebra(host, bifrostPort, secureConnection)
+    indexerQueryAlgebra(host, nodePort, secureConnection)
   )
 
 }

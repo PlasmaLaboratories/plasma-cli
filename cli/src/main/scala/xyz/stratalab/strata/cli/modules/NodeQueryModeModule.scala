@@ -10,13 +10,13 @@ import xyz.stratalab.strata.cli.StrataCliParamsParserModule
 
 trait NodeQueryModeModule extends RpcChannelResource {
 
-  def bifrostQuerySubcmd(
+  def nodeQuerySubcmd(
       validateParams: StrataCliParams
   ): IO[Either[String, String]] = {
-    val bifrostQueryAlgebra = NodeQueryAlgebra.make[IO](
+    val nodeQueryAlgebra = NodeQueryAlgebra.make[IO](
       channelResource(
         validateParams.host,
-        validateParams.bifrostPort,
+        validateParams.nodePort,
         validateParams.secureConnection
       )
     )
@@ -25,26 +25,26 @@ trait NodeQueryModeModule extends RpcChannelResource {
         IO.pure(
           Left(
             OParser.usage(
-              StrataCliParamsParserModule.bifrostQueryMode
+              StrataCliParamsParserModule.nodeQueryMode
             ) + "\nA subcommand needs to be specified"
           )
         )
       case StrataCliSubCmd.mintblock =>
-        new NodeQueryController(bifrostQueryAlgebra)
+        new NodeQueryController(nodeQueryAlgebra)
           .makeBlock(
             validateParams.nbOfBlocks
           )
       case StrataCliSubCmd.blockbyheight =>
         new NodeQueryController(
-          bifrostQueryAlgebra
+          nodeQueryAlgebra
         ).blockByHeight(validateParams.height)
       case StrataCliSubCmd.blockbyid =>
         new NodeQueryController(
-          bifrostQueryAlgebra
+          nodeQueryAlgebra
         ).blockById(validateParams.blockId)
       case StrataCliSubCmd.transactionbyid =>
         new NodeQueryController(
-          bifrostQueryAlgebra
+          nodeQueryAlgebra
         ).fetchTransaction(validateParams.transactionId)
     }
   }

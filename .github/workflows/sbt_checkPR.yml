@@ -29,9 +29,9 @@ jobs:
     needs: unit-test
     services:
       # Label used to access the service container
-      bifrost:
+      node:
         # Docker Hub image
-        image: docker.io/stratalab/strata-node:0.0.0-8200-805081dd
+        image: ghcr.io/plasmalaboratories/strata-node:0.0.0-8208-6b04bc0f
         #
         ports:
           - 9084:9084 

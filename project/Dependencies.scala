@@ -4,7 +4,7 @@ object Dependencies {
 
   lazy val strataOrg = "xyz.stratalab"
 
-  lazy val sdkVersion = "0.0.0+253-9a3a528c-SNAPSHOT"
+  lazy val sdkVersion = "0.0.0+264-fceb968c-SNAPSHOT"
   val strataSdk = strataOrg %% "strata-sdk" % sdkVersion
   val circeVersion = "0.15.0-M1"
 

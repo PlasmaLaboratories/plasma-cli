@@ -11,7 +11,7 @@ import xyz.stratalab.sdk.models.SeriesId
 object StrataCliMode extends Enumeration {
   type StrataCliMode = Value
 
-  val invalid, wallet, indexerquery, bifrostquery, simpletransaction,
+  val invalid, wallet, indexerquery, nodequery, simpletransaction,
       simpleminting, fellowships, templates, tx, server =
     Value
 }
@@ -103,7 +103,7 @@ final case class StrataCliParams(
     lockTemplate: String = "",
     inputVks: Seq[File] = Seq(),
     host: String = "",
-    bifrostPort: Int = 0,
+    nodePort: Int = 0,
     walletFile: String = "",
     password: String = "",
     fromFellowship: String = "self",
