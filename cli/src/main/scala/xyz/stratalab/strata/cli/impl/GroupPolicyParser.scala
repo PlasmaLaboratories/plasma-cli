@@ -3,10 +3,10 @@ package xyz.stratalab.strata.cli.impl
 import cats.effect.kernel.Sync
 import cats.effect.kernel.Resource
 import scala.io.BufferedSource
-import co.topl.brambl.models.Event
-import co.topl.brambl.utils.Encoding
+import xyz.stratalab.sdk.models.Event
+import xyz.stratalab.sdk.utils.Encoding
 import com.google.protobuf.ByteString
-import co.topl.brambl.models.SeriesId
+import xyz.stratalab.sdk.models.SeriesId
 
 case class GroupPolicy(
     label: String,

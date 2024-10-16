@@ -1,7 +1,7 @@
 package xyz.stratalab.strata.cli.controllers
 
 import cats.Id
-import co.topl.brambl.dataApi.{FellowshipStorageAlgebra, WalletFellowship}
+import xyz.stratalab.sdk.dataApi.{FellowshipStorageAlgebra, WalletFellowship}
 import munit.FunSuite
 
 class FellowshipsControllerSpec extends FunSuite {

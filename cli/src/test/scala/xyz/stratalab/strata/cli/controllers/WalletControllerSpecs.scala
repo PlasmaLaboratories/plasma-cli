@@ -2,15 +2,15 @@ package xyz.stratalab.strata.cli.controllers
 
 import cats.data.EitherT
 import cats.effect.IO
-import xyz.stratalab.strata.cli.mockbase.BaseGenusQueryAlgebra
+import xyz.stratalab.strata.cli.mockbase.BaseIndexerQueryAlgebra
 import xyz.stratalab.strata.cli.mockbase.BaseWalletAlgebra
 import xyz.stratalab.strata.cli.mockbase.BaseWalletApi
 import xyz.stratalab.strata.cli.mockbase.BaseWalletManagementUtils
 import xyz.stratalab.strata.cli.mockbase.BaseWalletStateAlgebra
 import xyz.stratalab.strata.cli.modules.WalletKeyApiModule
-import co.topl.brambl.models.Indices
-import co.topl.brambl.utils.Encoding
-import co.topl.brambl.wallet.WalletApi
+import xyz.stratalab.sdk.models.Indices
+import xyz.stratalab.sdk.utils.Encoding
+import xyz.stratalab.sdk.wallet.WalletApi
 import munit.CatsEffectSuite
 import quivr.models.KeyPair
 
@@ -50,6 +50,13 @@ class WalletControllerSpecs extends CatsEffectSuite with WalletKeyApiModule {
     _ =>
       val controller = new WalletController[IO](
         new BaseWalletStateAlgebra[IO] {
+
+          override def validateWalletInitialization(
+              networkId: Int,
+              ledgerId: Int,
+              mainKey: KeyPair
+          ): IO[Either[Seq[String], Unit]] = ???
+
           override def getCurrentIndicesForFunds(
               fellowship: String,
               template: String,
@@ -66,7 +73,7 @@ class WalletControllerSpecs extends CatsEffectSuite with WalletKeyApiModule {
           ): IO[KeyPair] = walletApi.deriveChildKeys(vk, idx)
         }, // : WalletApi[F],
         new BaseWalletAlgebra[IO], // : WalletAlgebra[F],
-        new BaseGenusQueryAlgebra[IO] // : dataApi.GenusQueryAlgebra[F]
+        new BaseIndexerQueryAlgebra[IO] // : dataApi.IndexerQueryAlgebra[F]
       )
       import cats.implicits._
       for {
@@ -126,7 +133,7 @@ class WalletControllerSpecs extends CatsEffectSuite with WalletKeyApiModule {
 
       }, // : WalletApi[F],
       new BaseWalletAlgebra[IO], // : WalletAlgebra[F],
-      new BaseGenusQueryAlgebra[IO] // : dataApi.GenusQueryAlgebra[F]
+      new BaseIndexerQueryAlgebra[IO] // : dataApi.IndexerQueryAlgebra[F]
     )
     assertIO(
       for {
@@ -160,7 +167,7 @@ class WalletControllerSpecs extends CatsEffectSuite with WalletKeyApiModule {
 
       }, // : WalletApi[F],
       new BaseWalletAlgebra[IO], // : WalletAlgebra[F],
-      new BaseGenusQueryAlgebra[IO] // : dataApi.GenusQueryAlgebra[F]
+      new BaseIndexerQueryAlgebra[IO] // : dataApi.IndexerQueryAlgebra[F]
     )
     assertIO(
       for {
@@ -193,7 +200,7 @@ class WalletControllerSpecs extends CatsEffectSuite with WalletKeyApiModule {
 
       }, // : WalletApi[F],
       new BaseWalletAlgebra[IO], // : WalletAlgebra[F],
-      new BaseGenusQueryAlgebra[IO] // : dataApi.GenusQueryAlgebra[F]
+      new BaseIndexerQueryAlgebra[IO] // : dataApi.IndexerQueryAlgebra[F]
     )
     assertIO(
       for {
@@ -231,7 +238,7 @@ class WalletControllerSpecs extends CatsEffectSuite with WalletKeyApiModule {
 
       }, // : WalletApi[F],
       new BaseWalletAlgebra[IO], // : WalletAlgebra[F],
-      new BaseGenusQueryAlgebra[IO] // : dataApi.GenusQueryAlgebra[F]
+      new BaseIndexerQueryAlgebra[IO] // : dataApi.IndexerQueryAlgebra[F]
     )
     assertIO(
       for {
@@ -264,7 +271,7 @@ class WalletControllerSpecs extends CatsEffectSuite with WalletKeyApiModule {
 
       }, // : WalletApi[F],
       new BaseWalletAlgebra[IO], // : WalletAlgebra[F],
-      new BaseGenusQueryAlgebra[IO] // : dataApi.GenusQueryAlgebra[F]
+      new BaseIndexerQueryAlgebra[IO] // : dataApi.IndexerQueryAlgebra[F]
     )
     assertIO(
       for {
@@ -301,7 +308,7 @@ class WalletControllerSpecs extends CatsEffectSuite with WalletKeyApiModule {
 
       }, // : WalletApi[F],
       new BaseWalletAlgebra[IO], // : WalletAlgebra[F],
-      new BaseGenusQueryAlgebra[IO] // : dataApi.GenusQueryAlgebra[F]
+      new BaseIndexerQueryAlgebra[IO] // : dataApi.IndexerQueryAlgebra[F]
     )
     assertIO(
       for {
@@ -310,7 +317,9 @@ class WalletControllerSpecs extends CatsEffectSuite with WalletKeyApiModule {
           Sha256
         )
       } yield res,
-      Right("Secret added. Hash: ee15b31e49931db6551ed8a82f1422ce5a5a8debabe8e81a724c88f79996d0df")
+      Right(
+        "Secret added. Hash: ee15b31e49931db6551ed8a82f1422ce5a5a8debabe8e81a724c88f79996d0df"
+      )
     )
   }
 
@@ -333,7 +342,7 @@ class WalletControllerSpecs extends CatsEffectSuite with WalletKeyApiModule {
 
       }, // : WalletApi[F],
       new BaseWalletAlgebra[IO], // : WalletAlgebra[F],
-      new BaseGenusQueryAlgebra[IO] // : dataApi.GenusQueryAlgebra[F]
+      new BaseIndexerQueryAlgebra[IO] // : dataApi.IndexerQueryAlgebra[F]
     )
     assertIO(
       for {
@@ -371,7 +380,7 @@ class WalletControllerSpecs extends CatsEffectSuite with WalletKeyApiModule {
 
       }, // : WalletApi[F],
       new BaseWalletAlgebra[IO], // : WalletAlgebra[F],
-      new BaseGenusQueryAlgebra[IO] // : dataApi.GenusQueryAlgebra[F]
+      new BaseIndexerQueryAlgebra[IO] // : dataApi.IndexerQueryAlgebra[F]
     )
     assertIO(
       for {
@@ -380,7 +389,9 @@ class WalletControllerSpecs extends CatsEffectSuite with WalletKeyApiModule {
           Blake2b
         )
       } yield res,
-      Right("Secret added. Hash: 0a0f4e1461688b3dbf01cad2882e5779998efcf7ee3800c80e964fd0424d7e0c")
+      Right(
+        "Secret added. Hash: 0a0f4e1461688b3dbf01cad2882e5779998efcf7ee3800c80e964fd0424d7e0c"
+      )
     )
   }
 }

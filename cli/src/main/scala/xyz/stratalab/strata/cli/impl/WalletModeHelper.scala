@@ -1,16 +1,16 @@
 package xyz.stratalab.strata.cli.impl
 
 import cats.effect.kernel.Sync
-import co.topl.brambl.codecs.AddressCodecs
-import co.topl.brambl.dataApi
-import co.topl.brambl.syntax.{AssetType, GroupType, LvlType, SeriesType}
-import co.topl.brambl.utils.Encoding
-import co.topl.genus.services.{Txo, TxoState}
+import xyz.stratalab.sdk.codecs.AddressCodecs
+import xyz.stratalab.sdk.dataApi
+import xyz.stratalab.sdk.syntax.{AssetType, GroupType, LvlType, SeriesType}
+import xyz.stratalab.sdk.utils.Encoding
+import xyz.stratalab.indexer.services.{Txo, TxoState}
 import xyz.stratalab.shared.models._
 
 case class WalletModeHelper[F[_]: Sync](
     walletStateAlgebra: dataApi.WalletStateAlgebra[F],
-    genusQueryAlgebra: dataApi.GenusQueryAlgebra[F]
+    indexerQueryAlgebra: dataApi.IndexerQueryAlgebra[F]
 ) {
 
   def getBalance(
@@ -49,7 +49,7 @@ case class WalletModeHelper[F[_]: Sync](
         .whenA(someAddress.isEmpty)
       balance <- someAddress
         .map(address =>
-          genusQueryAlgebra
+          indexerQueryAlgebra
             .queryUtxo(
               AddressCodecs.decodeAddress(address).toOption.get,
               TxoState.UNSPENT

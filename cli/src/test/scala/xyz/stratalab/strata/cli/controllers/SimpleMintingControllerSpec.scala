@@ -8,15 +8,16 @@ import xyz.stratalab.strata.cli.impl.SeriesPolicyParserModule
 import xyz.stratalab.strata.cli.impl.SimpleMintingAlgebra
 import xyz.stratalab.strata.cli.modules.DummyObjects
 import xyz.stratalab.strata.cli.modules.SimpleMintingAlgebraModule
-import co.topl.brambl.constants.NetworkConstants
+import xyz.stratalab.sdk.constants.NetworkConstants
 import munit.CatsEffectSuite
 import java.io.File
 import cats.Monad
 import xyz.stratalab.strata.cli.mockbase.BaseWalletStateAlgebra
-import co.topl.brambl.models.Indices
-import co.topl.brambl.models.box.Lock
-import co.topl.brambl.models.box.Challenge
+import xyz.stratalab.sdk.models.Indices
+import xyz.stratalab.sdk.models.box.Lock
+import xyz.stratalab.sdk.models.box.Challenge
 import quivr.models.Proposition
+import quivr.models.KeyPair
 
 class SimpleMintingControllerSpec
     extends CatsEffectSuite
@@ -25,7 +26,6 @@ class SimpleMintingControllerSpec
     with AssetStatementParserModule
     with SimpleMintingAlgebraModule
     with DummyObjects {
-
 
   def makeWalletStateAlgebraMockWithAddress[F[_]: Monad] =
     new BaseWalletStateAlgebra[F] {
@@ -97,8 +97,6 @@ class SimpleMintingControllerSpec
 
     }
 
-
-
   val controllerUnderTest = new SimpleMintingController(
     groupPolicyParserAlgebra(NetworkConstants.PRIVATE_NETWORK_ID),
     seriesPolicyParserAlgebra(NetworkConstants.PRIVATE_NETWORK_ID),
@@ -116,7 +114,7 @@ class SimpleMintingControllerSpec
       NetworkConstants.PRIVATE_NETWORK_ID,
       NetworkConstants.MAIN_LEDGER_ID
     ),
-    makeGenusQueryAlgebraMockWithAddress
+    makeIndexerQueryAlgebraMockWithAddress
   )
 
   test(

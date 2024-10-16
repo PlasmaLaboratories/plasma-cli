@@ -5,8 +5,8 @@ import cats.effect.kernel.Sync
 import xyz.stratalab.strata.cli.impl.CommonParserError
 import xyz.stratalab.strata.cli.impl.TransactionAlgebra
 import xyz.stratalab.strata.cli.impl.TxParserAlgebra
-import co.topl.brambl.display.DisplayOps.DisplayTOps
-import co.topl.brambl.models.transaction.IoTransaction
+import xyz.stratalab.sdk.display.DisplayOps.DisplayTOps
+import xyz.stratalab.sdk.models.transaction.IoTransaction
 
 import java.io.FileInputStream
 import java.io.FileOutputStream

@@ -3,13 +3,13 @@ package xyz.stratalab.strata.cli.controllers
 import cats.Monad
 import cats.effect.kernel.Sync
 import xyz.stratalab.strata.cli.TokenType
-import co.topl.brambl.codecs.AddressCodecs
-import co.topl.brambl.dataApi.{GenusQueryAlgebra, WalletStateAlgebra}
-import co.topl.brambl.display.DisplayOps.DisplayTOps
+import xyz.stratalab.sdk.codecs.AddressCodecs
+import xyz.stratalab.sdk.dataApi.{IndexerQueryAlgebra, WalletStateAlgebra}
+import xyz.stratalab.sdk.display.DisplayOps.DisplayTOps
 
-class GenusQueryController[F[_]: Sync](
+class IndexerQueryController[F[_]: Sync](
     walletStateAlgebra: WalletStateAlgebra[F],
-    genusQueryAlgebra: GenusQueryAlgebra[F]
+    indexerQueryAlgebra: IndexerQueryAlgebra[F]
 ) {
 
   def queryUtxoFromParams(
@@ -29,7 +29,7 @@ class GenusQueryController[F[_]: Sync](
       )
       .flatMap {
         case Some(address) =>
-          genusQueryAlgebra
+          indexerQueryAlgebra
             .queryUtxo(AddressCodecs.decodeAddress(address).toOption.get)
             .map(_.filter { x =>
               import monocle.macros.syntax.lens._

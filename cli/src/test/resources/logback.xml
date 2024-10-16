@@ -12,8 +12,8 @@
       <appender-ref ref="STDOUT" />
   </appender>
 
-  <logger name="Bifrost" level="DEBUG" />
-  <logger name="Bifrost.P2P" level="WARN" />
+  <logger name="Node" level="DEBUG" />
+  <logger name="Node.P2P" level="WARN" />
   <root level="INFO">
       <appender-ref ref="STDOUT" />
   </root>

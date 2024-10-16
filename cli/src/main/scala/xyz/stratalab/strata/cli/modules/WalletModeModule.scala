@@ -4,7 +4,7 @@ import cats.effect.IO
 import xyz.stratalab.strata.cli.StrataCliParams
 import xyz.stratalab.strata.cli.StrataCliSubCmd
 import xyz.stratalab.strata.cli.controllers.WalletController
-import co.topl.brambl.dataApi.{GenusQueryAlgebra, RpcChannelResource}
+import xyz.stratalab.sdk.dataApi.{IndexerQueryAlgebra, RpcChannelResource}
 import scopt.OParser
 import xyz.stratalab.strata.cli.StrataCliParamsParserModule
 
@@ -28,11 +28,11 @@ trait WalletModeModule
       walletAlgebra(
         validateParams.walletFile
       ),
-      GenusQueryAlgebra
+      IndexerQueryAlgebra
         .make[IO](
           channelResource(
             validateParams.host,
-            validateParams.bifrostPort,
+            validateParams.nodePort,
             validateParams.secureConnection
           )
         )

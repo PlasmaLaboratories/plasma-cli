@@ -1,38 +1,38 @@
 package xyz.stratalab.strata.cli.modules
 
 import cats.effect.IO
-import xyz.stratalab.strata.cli.controllers.GenusQueryController
-import co.topl.brambl.dataApi.{GenusQueryAlgebra, RpcChannelResource}
+import xyz.stratalab.strata.cli.controllers.IndexerQueryController
+import xyz.stratalab.sdk.dataApi.{IndexerQueryAlgebra, RpcChannelResource}
 import xyz.stratalab.strata.cli.StrataCliSubCmd
 import xyz.stratalab.strata.cli.StrataCliParams
 import scopt.OParser
 import xyz.stratalab.strata.cli.StrataCliParamsParserModule
 
-trait GenusQueryModeModule
+trait IndexerQueryModeModule
     extends WalletStateAlgebraModule
     with RpcChannelResource {
 
-  def genusQuerySubcmd(
+  def indexerQuerySubcmd(
       validateParams: StrataCliParams
   ): IO[Either[String, String]] = validateParams.subcmd match {
     case StrataCliSubCmd.invalid =>
-        IO.pure(
-          Left(
-            OParser.usage(
-              StrataCliParamsParserModule.genusQueryMode
-            ) + "\nA subcommand needs to be specified"
-          )
+      IO.pure(
+        Left(
+          OParser.usage(
+            StrataCliParamsParserModule.indexerQueryMode
+          ) + "\nA subcommand needs to be specified"
         )
+      )
     case StrataCliSubCmd.utxobyaddress =>
-      new GenusQueryController(
+      new IndexerQueryController(
         walletStateAlgebra(
           validateParams.walletFile
         ),
-        GenusQueryAlgebra
+        IndexerQueryAlgebra
           .make[IO](
             channelResource(
               validateParams.host,
-              validateParams.bifrostPort,
+              validateParams.nodePort,
               validateParams.secureConnection
             )
           )

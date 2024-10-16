@@ -1,7 +1,7 @@
 package xyz.stratalab.strata.cli.controllers
 
 import cats.effect.IO
-import co.topl.brambl.dataApi.{TemplateStorageAlgebra, WalletTemplate}
+import xyz.stratalab.sdk.dataApi.{TemplateStorageAlgebra, WalletTemplate}
 import munit.CatsEffectSuite
 
 class TemplatesControllerSpec extends CatsEffectSuite {

@@ -1,9 +1,9 @@
 package xyz.stratalab.strata.cli.mockbase
 
-import co.topl.brambl.models.Indices
-import co.topl.brambl.wallet.WalletApi
-import co.topl.crypto.encryption.VaultStore
-import co.topl.crypto.generation.mnemonic.MnemonicSize
+import xyz.stratalab.sdk.models.Indices
+import xyz.stratalab.sdk.wallet.WalletApi
+import xyz.stratalab.crypto.encryption.VaultStore
+import xyz.stratalab.crypto.generation.mnemonic.MnemonicSize
 import quivr.models.KeyPair
 import quivr.models.VerificationKey
 
@@ -62,5 +62,8 @@ class BaseWalletApi[F[_]] extends WalletApi[F] {
       passphrase: Option[String]
   ): F[Either[WalletApi.WalletApiFailure, VaultStore[F]]] = ???
 
-  override def saveMnemonic(mnemonic: IndexedSeq[String], mnemonicName: String): F[Either[WalletApi.WalletApiFailure, Unit]] = ???
+  override def saveMnemonic(
+      mnemonic: IndexedSeq[String],
+      mnemonicName: String
+  ): F[Either[WalletApi.WalletApiFailure, Unit]] = ???
 }

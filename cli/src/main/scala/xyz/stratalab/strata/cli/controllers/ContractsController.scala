@@ -3,9 +3,9 @@ package xyz.stratalab.strata.cli.controllers
 import cats.Id
 import cats.data.Validated
 import cats.effect.kernel.Sync
-import co.topl.brambl.dataApi.{TemplateStorageAlgebra, WalletTemplate}
+import xyz.stratalab.sdk.dataApi.{TemplateStorageAlgebra, WalletTemplate}
 import xyz.stratalab.strata.cli.impl.QuivrFastParser
-import co.topl.brambl.codecs.LockTemplateCodecs
+import xyz.stratalab.sdk.codecs.LockTemplateCodecs
 
 class TemplatesController[F[_]: Sync](
     templateStorageAlgebra: TemplateStorageAlgebra[F]

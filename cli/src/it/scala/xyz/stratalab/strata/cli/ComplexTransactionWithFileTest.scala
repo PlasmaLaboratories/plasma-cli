@@ -3,8 +3,8 @@ package xyz.stratalab.strata.cli
 import cats.effect.ExitCode
 import cats.effect.IO
 import cats.effect.kernel.Resource
-import co.topl.brambl.codecs.AddressCodecs.decodeAddress
-import co.topl.brambl.utils.Encoding
+import xyz.stratalab.sdk.codecs.AddressCodecs.decodeAddress
+import xyz.stratalab.sdk.utils.Encoding
 import munit.CatsEffectSuite
 
 import java.nio.file.Files
@@ -50,10 +50,11 @@ class ComplexTransactionWithFileTest
             .iterateUntil(_ == ExitCode.Success),
           240.seconds
         )
-        ALICE_TO_ADDRESS <- walletController(ALICE_WALLET).currentaddress("self", "default", None)
+        ALICE_TO_ADDRESS <- walletController(ALICE_WALLET)
+          .currentaddress("self", "default", None)
         genesisAddress <- walletController(ALICE_WALLET)
           .currentaddress("nofellowship", "genesis", Some(1))
-        utxos <- genusQueryAlgebra
+        utxos <- indexerQueryAlgebra
           .queryUtxo(
             decodeAddress(genesisAddress.get).toOption.get
           )
@@ -178,14 +179,24 @@ class ComplexTransactionWithFileTest
         )
         _ <- IO.println("Importing or VK to bob's wallet")
         _ <- assertIO(
-          importVk("alice_bob_0", "or_sign", ALICE_COMPLEX_VK_OR, BOB_COMPLEX_VK_OR).run(
+          importVk(
+            "alice_bob_0",
+            "or_sign",
+            ALICE_COMPLEX_VK_OR,
+            BOB_COMPLEX_VK_OR
+          ).run(
             bobContext
           ),
           ExitCode.Success
         )
         _ <- IO.println("Importing or VK to alice's wallet")
         _ <- assertIO(
-          importVk("alice_bob_0", "or_sign", ALICE_COMPLEX_VK_OR, BOB_COMPLEX_VK_OR).run(
+          importVk(
+            "alice_bob_0",
+            "or_sign",
+            ALICE_COMPLEX_VK_OR,
+            BOB_COMPLEX_VK_OR
+          ).run(
             aliceContext
           ),
           ExitCode.Success
@@ -206,21 +217,31 @@ class ComplexTransactionWithFileTest
         )
         _ <- IO.println("Importing and VK to bob's wallet")
         _ <- assertIO(
-          importVk("alice_bob_0", "and_sign", ALICE_COMPLEX_VK_AND, BOB_COMPLEX_VK_AND).run(
+          importVk(
+            "alice_bob_0",
+            "and_sign",
+            ALICE_COMPLEX_VK_AND,
+            BOB_COMPLEX_VK_AND
+          ).run(
             bobContext
           ),
           ExitCode.Success
         )
         _ <- IO.println("Importing VK to alice's wallet")
         _ <- assertIO(
-          importVk("alice_bob_0", "and_sign", ALICE_COMPLEX_VK_AND, BOB_COMPLEX_VK_AND).run(
+          importVk(
+            "alice_bob_0",
+            "and_sign",
+            ALICE_COMPLEX_VK_AND,
+            BOB_COMPLEX_VK_AND
+          ).run(
             aliceContext
           ),
           ExitCode.Success
         )
         aliceAddress <- walletController(ALICE_WALLET)
           .currentaddress("self", "default", Some(1))
-        utxos <- genusQueryAlgebra
+        utxos <- indexerQueryAlgebra
           .queryUtxo(
             decodeAddress(aliceAddress.get).toOption.get
           )
@@ -318,12 +339,12 @@ class ComplexTransactionWithFileTest
           .currentaddress("alice_bob_0", "and_sign", Some(1))
         orAddress <- walletController(ALICE_WALLET)
           .currentaddress("alice_bob_0", "or_sign", Some(1))
-        utxosAnd <- genusQueryAlgebra
+        utxosAnd <- indexerQueryAlgebra
           .queryUtxo(
             decodeAddress(andAddress.get).toOption.get
           )
           .map(_.filter(_.transactionOutput.value.value.isLvl))
-        utxosOr <- genusQueryAlgebra
+        utxosOr <- indexerQueryAlgebra
           .queryUtxo(
             decodeAddress(orAddress.get).toOption.get
           )
@@ -440,6 +461,5 @@ class ComplexTransactionWithFileTest
       ExitCode.Success
     )
   }
-
 
 }

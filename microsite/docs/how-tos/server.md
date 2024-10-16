@@ -17,7 +17,7 @@ server init --walletdb $WALLETDB --keyfile $KEYFILE -n $NETWORK --host $HOST --p
 
 This will start the graphical interface on port 3000. The GUI will use
 the wallet database file specified in the `--walletdb` option. The
-`--host` and `--port` options are used to connect to the Bifrost node.
+`--host` and `--port` options are used to connect to the Node node.
 The `--secure` option is used to specify whether to use HTTPS or HTTP and
 is optional.
 To access the interface, open a browser and go to the following URL:

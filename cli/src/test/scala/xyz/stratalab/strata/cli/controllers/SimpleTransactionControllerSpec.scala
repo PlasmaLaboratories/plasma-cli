@@ -11,15 +11,15 @@ import xyz.stratalab.strata.cli.impl.SimpleTransactionAlgebra
 import xyz.stratalab.strata.cli.mockbase.BaseWalletStateAlgebra
 import xyz.stratalab.strata.cli.modules.DummyObjects
 import xyz.stratalab.strata.cli.modules.SimpleMintingAlgebraModule
-import co.topl.brambl.codecs.AddressCodecs
-import co.topl.brambl.constants.NetworkConstants
-import co.topl.brambl.models.Indices
-import co.topl.brambl.models.box.Lock
+import xyz.stratalab.sdk.codecs.AddressCodecs
+import xyz.stratalab.sdk.constants.NetworkConstants
+import xyz.stratalab.sdk.models.Indices
+import xyz.stratalab.sdk.models.box.Lock
 import munit.CatsEffectSuite
 import com.google.protobuf.ByteString
-import co.topl.brambl.models.GroupId
-import co.topl.brambl.utils.Encoding
-import co.topl.brambl.models.SeriesId
+import xyz.stratalab.sdk.models.GroupId
+import xyz.stratalab.sdk.utils.Encoding
+import xyz.stratalab.sdk.models.SeriesId
 
 class SimpleTransactionControllerSpec
     extends CatsEffectSuite
@@ -110,7 +110,7 @@ class SimpleTransactionControllerSpec
   def simplTransactionAlgebra() = SimpleTransactionAlgebra.make[IO](
     walletApi,
     makeWalletStateAlgebraMockWithAddress[IO],
-    makeGenusQueryAlgebraMockWithAddress,
+    makeIndexerQueryAlgebraMockWithAddress,
     transactionBuilderApi(
       NetworkConstants.PRIVATE_NETWORK_ID,
       NetworkConstants.MAIN_LEDGER_ID

@@ -2,17 +2,17 @@ package xyz.stratalab.strata.cli.impl
 
 import cats.effect.kernel.Resource
 import cats.effect.kernel.Sync
-import co.topl.brambl.builders.TransactionBuilderApi
-import co.topl.brambl.codecs.AddressCodecs
-import co.topl.brambl.dataApi.GenusQueryAlgebra
-import co.topl.brambl.dataApi.WalletStateAlgebra
-import co.topl.brambl.models.Indices
-import co.topl.brambl.models.LockAddress
-import co.topl.brambl.models.box.Lock
-import co.topl.brambl.syntax.ValueTypeIdentifier
-import co.topl.brambl.utils.Encoding
-import co.topl.brambl.wallet.WalletApi
-import co.topl.genus.services.Txo
+import xyz.stratalab.sdk.builders.TransactionBuilderApi
+import xyz.stratalab.sdk.codecs.AddressCodecs
+import xyz.stratalab.sdk.dataApi.IndexerQueryAlgebra
+import xyz.stratalab.sdk.dataApi.WalletStateAlgebra
+import xyz.stratalab.sdk.models.Indices
+import xyz.stratalab.sdk.models.LockAddress
+import xyz.stratalab.sdk.models.box.Lock
+import xyz.stratalab.sdk.syntax.ValueTypeIdentifier
+import xyz.stratalab.sdk.utils.Encoding
+import xyz.stratalab.sdk.wallet.WalletApi
+import xyz.stratalab.indexer.services.Txo
 import quivr.models.KeyPair
 
 import java.io.FileOutputStream
@@ -44,7 +44,7 @@ object SimpleTransactionAlgebra {
   def make[F[_]: Sync](
       walletApi: WalletApi[F],
       walletStateApi: WalletStateAlgebra[F],
-      utxoAlgebra: GenusQueryAlgebra[F],
+      utxoAlgebra: IndexerQueryAlgebra[F],
       transactionBuilderApi: TransactionBuilderApi[F],
       walletManagementUtils: WalletManagementUtils[F]
   ) =

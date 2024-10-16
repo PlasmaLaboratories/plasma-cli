@@ -2,13 +2,13 @@ package xyz.stratalab.strata.cli.impl
 
 import cats.Monad
 import cats.effect.kernel.Sync
-import co.topl.brambl.builders.TransactionBuilderApi
-import co.topl.brambl.dataApi.GenusQueryAlgebra
-import co.topl.brambl.dataApi.WalletStateAlgebra
-import co.topl.brambl.models.Event
-import co.topl.brambl.models.box.AssetMintingStatement
-import co.topl.brambl.wallet.WalletApi
-import co.topl.genus.services.Txo
+import xyz.stratalab.sdk.builders.TransactionBuilderApi
+import xyz.stratalab.sdk.dataApi.IndexerQueryAlgebra
+import xyz.stratalab.sdk.dataApi.WalletStateAlgebra
+import xyz.stratalab.sdk.models.Event
+import xyz.stratalab.sdk.models.box.AssetMintingStatement
+import xyz.stratalab.sdk.wallet.WalletApi
+import xyz.stratalab.indexer.services.Txo
 import com.google.protobuf.ByteString
 import io.circe.Json
 
@@ -61,14 +61,14 @@ object SimpleMintingAlgebra {
       walletStateApi: WalletStateAlgebra[F],
       walletManagementUtils: WalletManagementUtils[F],
       transactionBuilderApi: TransactionBuilderApi[F],
-      utxoAlgebra: GenusQueryAlgebra[F]
+      utxoAlgebra: IndexerQueryAlgebra[F]
   ): SimpleMintingAlgebra[F] = new SimpleMintingAlgebra[F]
     with WalletApiHelpers[F]
     with GroupMintingOps[F]
     with SeriesMintingOps[F]
     with AssetMintingOps[F] {
 
-    override implicit val sync: cats.effect.kernel.Sync[F]= psync
+    override implicit val sync: cats.effect.kernel.Sync[F] = psync
 
     implicit val m: Monad[F] = sync
 
@@ -87,9 +87,9 @@ object SimpleMintingAlgebra {
     ) = for {
       keyPair <-
         walletManagementUtils
-        .loadKeys(
-          keyfile,
-          password
+          .loadKeys(
+            keyfile,
+            password
           )
       someCurrentIndices <- getCurrentIndices(
         fromFellowship,

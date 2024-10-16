@@ -3,10 +3,10 @@ import cats.Id
 import cats.effect.IO
 import cats.effect._
 import xyz.stratalab.strata.cli.impl.WalletModeHelper
-import co.topl.brambl.dataApi.GenusQueryAlgebra
-import co.topl.brambl.dataApi.WalletStateAlgebra
-import co.topl.brambl.servicekit.FellowshipStorageApi
-import co.topl.brambl.servicekit.TemplateStorageApi
+import xyz.stratalab.sdk.dataApi.IndexerQueryAlgebra
+import xyz.stratalab.sdk.dataApi.WalletStateAlgebra
+import xyz.stratalab.sdk.servicekit.FellowshipStorageApi
+import xyz.stratalab.sdk.servicekit.TemplateStorageApi
 import xyz.stratalab.shared.models.AssetTokenBalanceDTO
 import xyz.stratalab.shared.models.BalanceRequestDTO
 import xyz.stratalab.shared.models.BalanceResponseDTO
@@ -26,7 +26,7 @@ import org.http4s.dsl.io._
 
 import java.sql.Connection
 import xyz.stratalab.shared.models.NetworkResponseDTO
-import co.topl.brambl.utils.Encoding
+import xyz.stratalab.sdk.utils.Encoding
 
 case class WalletHttpService(
     walletStateAlgebra: WalletStateAlgebra[IO],
@@ -43,7 +43,7 @@ case class WalletHttpService(
           input <- req.as[BalanceRequestDTO]
           balanceEither <- WalletModeHelper[IO](
             walletStateAlgebra,
-            GenusQueryAlgebra
+            IndexerQueryAlgebra
               .make[IO](
                 channelResource
               )
@@ -118,7 +118,7 @@ case class WalletHttpService(
         )
         import xyz.stratalab.strata.cli.views.WalletModelDisplayOps._
         import io.circe.parser.parse
-        import co.topl.brambl.codecs.LockTemplateCodecs._
+        import xyz.stratalab.sdk.codecs.LockTemplateCodecs._
         import cats.implicits._
         for {
           templates <- templateStorageAlgebra.findTemplates()

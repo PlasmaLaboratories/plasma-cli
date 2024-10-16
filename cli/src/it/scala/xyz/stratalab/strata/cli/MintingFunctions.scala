@@ -2,8 +2,8 @@ package xyz.stratalab.strata.cli
 
 import cats.effect.ExitCode
 import cats.effect.IO
-import co.topl.brambl.codecs.AddressCodecs.decodeAddress
-import co.topl.brambl.utils.Encoding
+import xyz.stratalab.sdk.codecs.AddressCodecs.decodeAddress
+import xyz.stratalab.sdk.utils.Encoding
 import munit.CatsEffectSuite
 
 trait MintingFunctions extends PolicyTemplates {
@@ -19,7 +19,7 @@ trait MintingFunctions extends PolicyTemplates {
     _ <- IO.println("Crate a group minting policy")
     ALICE_CURRENT_ADDRESS <- walletController(ALICE_WALLET)
       .currentaddress("self", "default", None)
-    utxos <- genusQueryAlgebra
+    utxos <- indexerQueryAlgebra
       .queryUtxo(
         decodeAddress(ALICE_CURRENT_ADDRESS.get).toOption.get
       )
@@ -42,7 +42,7 @@ trait MintingFunctions extends PolicyTemplates {
         1,
         100,
         ALICE_FIRST_GROUP_POLICY,
-        ALICE_FIRST_GROUP_MINTING_TX, 
+        ALICE_FIRST_GROUP_MINTING_TX,
         secure
       ).run(aliceContext),
       ExitCode.Success
@@ -64,9 +64,10 @@ trait MintingFunctions extends PolicyTemplates {
     res <- IO.asyncForIO.timeout(
       (for {
         _ <- IO.println("Querying alice's change account")
-        queryRes <- queryAccountGroupTokens("self", "default", None, secure).run(
-          aliceContext
-        )
+        queryRes <- queryAccountGroupTokens("self", "default", None, secure)
+          .run(
+            aliceContext
+          )
         _ <- IO.sleep(5.seconds)
       } yield queryRes)
         .iterateUntil(_ == ExitCode.Success),
@@ -78,7 +79,7 @@ trait MintingFunctions extends PolicyTemplates {
     _ <- IO.println("Crate a series minting policy")
     ALICE_CURRENT_ADDRESS <- walletController(ALICE_WALLET)
       .currentaddress("self", "default", None)
-    utxos <- genusQueryAlgebra
+    utxos <- indexerQueryAlgebra
       .queryUtxo(
         decodeAddress(ALICE_CURRENT_ADDRESS.get).toOption.get
       )
@@ -125,9 +126,10 @@ trait MintingFunctions extends PolicyTemplates {
     res <- IO.asyncForIO.timeout(
       (for {
         _ <- IO.println("Querying alice's change account")
-        queryRes <- queryAccountSeriesTokens("self", "default", None, secure).run(
-          aliceContext
-        )
+        queryRes <- queryAccountSeriesTokens("self", "default", None, secure)
+          .run(
+            aliceContext
+          )
         _ <- IO.sleep(5.seconds)
       } yield queryRes)
         .iterateUntil(_ == ExitCode.Success),
@@ -139,7 +141,7 @@ trait MintingFunctions extends PolicyTemplates {
     _ <- IO.println("Crate an asset minting statement")
     ALICE_CURRENT_ADDRESS <- walletController(ALICE_WALLET)
       .currentaddress("self", "default", None)
-    utxos <- genusQueryAlgebra
+    utxos <- indexerQueryAlgebra
       .queryUtxo(
         decodeAddress(ALICE_CURRENT_ADDRESS.get).toOption.get
       )
@@ -195,9 +197,10 @@ trait MintingFunctions extends PolicyTemplates {
     res <- IO.asyncForIO.timeout(
       (for {
         _ <- IO.println("Querying alice's change account")
-        queryRes <- queryAccountAssetTokens("self", "default", None, secure).run(
-          aliceContext
-        )
+        queryRes <- queryAccountAssetTokens("self", "default", None, secure)
+          .run(
+            aliceContext
+          )
         _ <- IO.sleep(5.seconds)
       } yield queryRes)
         .iterateUntil(_ == ExitCode.Success),

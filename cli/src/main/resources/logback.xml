@@ -13,8 +13,8 @@
         <appender-ref ref="STDOUT"/>
     </root>
 
-    <logger level="INFO" name="co.topl.daml.assets.processors" />
-    <logger level="INFO" name="co.topl.daml.polys.processors" />
+    <logger level="INFO" name="xyz.stratalab.daml.assets.processors" />
+    <logger level="INFO" name="xyz.stratalab.daml.polys.processors" />
     <logger level="OFF" name="akka.event.slf4j.Slf4jLogger" />
 
 </configuration>

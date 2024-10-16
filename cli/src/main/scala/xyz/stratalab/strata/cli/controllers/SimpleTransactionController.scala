@@ -5,14 +5,14 @@ import cats.data.Validated
 import cats.effect.kernel.Sync
 import xyz.stratalab.strata.cli.TokenType
 import xyz.stratalab.strata.cli.impl.SimpleTransactionAlgebra
-import co.topl.brambl.dataApi.WalletStateAlgebra
-import co.topl.brambl.models.GroupId
-import co.topl.brambl.models.LockAddress
-import co.topl.brambl.models.SeriesId
-import co.topl.brambl.syntax.AssetType
-import co.topl.brambl.syntax.GroupType
-import co.topl.brambl.syntax.LvlType
-import co.topl.brambl.syntax.SeriesType
+import xyz.stratalab.sdk.dataApi.WalletStateAlgebra
+import xyz.stratalab.sdk.models.GroupId
+import xyz.stratalab.sdk.models.LockAddress
+import xyz.stratalab.sdk.models.SeriesId
+import xyz.stratalab.sdk.syntax.AssetType
+import xyz.stratalab.sdk.syntax.GroupType
+import xyz.stratalab.sdk.syntax.LvlType
+import xyz.stratalab.sdk.syntax.SeriesType
 
 class SimpleTransactionController[F[_]: Sync](
     walletStateAlgebra: WalletStateAlgebra[F],
@@ -52,7 +52,8 @@ class SimpleTransactionController[F[_]: Sync](
             case TokenType.lvl    => LvlType
             case TokenType.group  => GroupType(groupId.get)
             case TokenType.series => SeriesType(seriesId.get)
-            case TokenType.asset => AssetType(groupId.get.value, seriesId.get.value)
+            case TokenType.asset =>
+              AssetType(groupId.get.value, seriesId.get.value)
             case _ => throw new Exception("Token type not supported")
           })
           res <- simplTransactionOps

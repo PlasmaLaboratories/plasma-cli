@@ -8,7 +8,7 @@ import xyz.stratalab.strata.cli.impl.GroupPolicyParser
 import xyz.stratalab.strata.cli.impl.SeriesPolicyParser
 import xyz.stratalab.strata.cli.impl.SimpleMintingAlgebra
 import xyz.stratalab.strata.cli.impl.SimpleTransactionAlgebraError
-import co.topl.brambl.utils.Encoding
+import xyz.stratalab.sdk.utils.Encoding
 import com.google.protobuf.ByteString
 
 import java.io.File

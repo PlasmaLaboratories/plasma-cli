@@ -2,12 +2,12 @@
 sidebar_position: 3
 ---
 
-# Genus Query Mode
+# Indexer Query Mode
 
 ```
-Command: genus-query [utxo-by-address]
-Genus query mode
-Command: genus-query utxo-by-address [options]
+Command: indexer-query [utxo-by-address]
+Indexer query mode
+Command: indexer-query utxo-by-address [options]
 Query utxo
   --from-fellowship <value>
                            Fellowship where we are sending the funds from
@@ -15,7 +15,7 @@ Query utxo
   --from-interaction <value>
                            Interaction from where we are sending the funds from
   -h, --host <value>       The host of the node. (mandatory)
-  --port <value>           Port Bifrost node. (mandatory)
+  --port <value>           Port Node node. (mandatory)
   -s, --secure <value>     Enables the secure connection to the node. (optional)
   --from-address <value>   Address where we are sending the funds from
   --walletdb <value>       Wallet DB file. (mandatory)

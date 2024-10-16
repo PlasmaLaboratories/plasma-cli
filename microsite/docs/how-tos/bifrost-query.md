@@ -2,7 +2,7 @@
 sidebar_position: 7
 ---
 
-# Query the Bifrost Node
+# Query the Node Node
 
 There are several ways to query the bifrost node. You can query blocks, transactions, utxos, etc.
 

@@ -2,9 +2,9 @@ package xyz.stratalab.strata.cli.impl
 
 import cats.effect.kernel.Resource
 import cats.effect.kernel.Sync
-import co.topl.brambl.models.Event
-import co.topl.brambl.models.box.FungibilityType
-import co.topl.brambl.models.box.QuantityDescriptorType
+import xyz.stratalab.sdk.models.Event
+import xyz.stratalab.sdk.models.box.FungibilityType
+import xyz.stratalab.sdk.models.box.QuantityDescriptorType
 import com.google.protobuf.struct.Value
 import io.circe.Json
 

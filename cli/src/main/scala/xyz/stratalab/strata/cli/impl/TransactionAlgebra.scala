@@ -2,24 +2,24 @@ package xyz.stratalab.strata.cli.impl
 
 import cats.effect.kernel.Resource
 import cats.effect.kernel.Sync
-import co.topl.brambl.Context
-import co.topl.brambl.dataApi.BifrostQueryAlgebra
-import co.topl.brambl.dataApi.WalletStateAlgebra
-import co.topl.brambl.models.Datum
-import co.topl.brambl.models.Event
-import co.topl.brambl.models.transaction.IoTransaction
-import co.topl.brambl.syntax.cryptoToPbKeyPair
-import co.topl.brambl.utils.Encoding
-import co.topl.brambl.validation.TransactionAuthorizationError
-import co.topl.brambl.validation.TransactionSyntaxError
-import co.topl.brambl.validation.TransactionSyntaxError.EmptyInputs
-import co.topl.brambl.validation.TransactionSyntaxError.InvalidDataLength
-import co.topl.brambl.validation.TransactionSyntaxInterpreter
-import co.topl.brambl.wallet.CredentiallerInterpreter
-import co.topl.brambl.wallet.WalletApi
-import co.topl.crypto.signing.ExtendedEd25519
-import co.topl.quivr.runtime.QuivrRuntimeError
-import co.topl.quivr.runtime.QuivrRuntimeErrors
+import xyz.stratalab.sdk.Context
+import xyz.stratalab.sdk.dataApi.NodeQueryAlgebra
+import xyz.stratalab.sdk.dataApi.WalletStateAlgebra
+import xyz.stratalab.sdk.models.Datum
+import xyz.stratalab.sdk.models.Event
+import xyz.stratalab.sdk.models.transaction.IoTransaction
+import xyz.stratalab.sdk.syntax.cryptoToPbKeyPair
+import xyz.stratalab.sdk.utils.Encoding
+import xyz.stratalab.sdk.validation.TransactionAuthorizationError
+import xyz.stratalab.sdk.validation.TransactionSyntaxError
+import xyz.stratalab.sdk.validation.TransactionSyntaxError.EmptyInputs
+import xyz.stratalab.sdk.validation.TransactionSyntaxError.InvalidDataLength
+import xyz.stratalab.sdk.validation.TransactionSyntaxInterpreter
+import xyz.stratalab.sdk.wallet.CredentiallerInterpreter
+import xyz.stratalab.sdk.wallet.WalletApi
+import xyz.stratalab.crypto.signing.ExtendedEd25519
+import xyz.stratalab.quivr.runtime.QuivrRuntimeError
+import xyz.stratalab.quivr.runtime.QuivrRuntimeErrors
 import io.grpc.ManagedChannel
 import quivr.models.KeyPair
 
@@ -69,7 +69,7 @@ object TransactionAlgebra {
       override def broadcastSimpleTransactionFromParams(
           provedTxFile: String
       ): F[Either[SimpleTransactionAlgebraError, String]] = {
-        import co.topl.brambl.models.transaction.IoTransaction
+        import xyz.stratalab.sdk.models.transaction.IoTransaction
         import cats.implicits._
         val inputRes = Resource
           .make {
@@ -103,7 +103,7 @@ object TransactionAlgebra {
               )
             )
             .whenA(validations.nonEmpty)
-          response <- BifrostQueryAlgebra
+          response <- NodeQueryAlgebra
             .make[F](channelResource)
             .broadcastTransaction(provedTransaction)
             .map(_ => provedTransaction)
@@ -114,7 +114,7 @@ object TransactionAlgebra {
         } yield response).attempt.map(e =>
           e match {
             case Right(tx) =>
-              import co.topl.brambl.syntax._
+              import xyz.stratalab.sdk.syntax._
               Encoding.encodeToBase58(tx.id.value.toByteArray()).asRight
             case Left(e: SimpleTransactionAlgebraError) => e.asLeft
             case Left(e) => UnexpectedError(e.getMessage()).asLeft
@@ -136,7 +136,7 @@ object TransactionAlgebra {
                 mockKeyPair
               )
           )
-          tipBlockHeader <- BifrostQueryAlgebra
+          tipBlockHeader <- NodeQueryAlgebra
             .make[F](channelResource)
             .blockByDepth(1L)
             .map(_.get._2)
@@ -213,7 +213,7 @@ object TransactionAlgebra {
           password: String,
           outputRes: Resource[F, FileOutputStream]
       ): F[Either[SimpleTransactionAlgebraError, Unit]] = {
-        import co.topl.brambl.models.transaction.IoTransaction
+        import xyz.stratalab.sdk.models.transaction.IoTransaction
         import cats.implicits._
 
         (for {

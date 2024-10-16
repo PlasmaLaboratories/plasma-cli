@@ -3,9 +3,9 @@ package xyz.stratalab.strata.cli
 import cats.effect.ExitCode
 import cats.effect.IO
 import cats.effect.IOApp
-import xyz.stratalab.strata.cli.modules.BifrostQueryModeModule
+import xyz.stratalab.strata.cli.modules.NodeQueryModeModule
 import xyz.stratalab.strata.cli.modules.TemplateModeModule
-import xyz.stratalab.strata.cli.modules.GenusQueryModeModule
+import xyz.stratalab.strata.cli.modules.IndexerQueryModeModule
 import xyz.stratalab.strata.cli.modules.FellowshipsModeModule
 import xyz.stratalab.strata.cli.modules.SimpleTransactionModeModule
 import xyz.stratalab.strata.cli.modules.TxModeModule
@@ -16,8 +16,8 @@ import xyz.stratalab.strata.cli.modules.ServerModule
 
 object Main
     extends IOApp
-    with GenusQueryModeModule
-    with BifrostQueryModeModule
+    with IndexerQueryModeModule
+    with NodeQueryModeModule
     with TemplateModeModule
     with FellowshipsModeModule
     with WalletModeModule
@@ -45,10 +45,10 @@ object Main
               simpleTransactionSubcmds(params)
             case StrataCliMode.simpleminting =>
               simpleMintingSubcmds(params)
-            case StrataCliMode.genusquery =>
-              genusQuerySubcmd(params)
-            case StrataCliMode.bifrostquery =>
-              bifrostQuerySubcmd(params)
+            case StrataCliMode.indexerquery =>
+              indexerQuerySubcmd(params)
+            case StrataCliMode.nodequery =>
+              nodeQuerySubcmd(params)
             case StrataCliMode.server =>
               serverSubcmd(params)
             case _ =>

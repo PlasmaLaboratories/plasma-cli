@@ -1,7 +1,7 @@
 package xyz.stratalab.strata.cli.impl
 
 import munit.CatsEffectSuite
-import co.topl.brambl.constants.NetworkConstants
+import xyz.stratalab.sdk.constants.NetworkConstants
 import cats.effect.kernel.Resource
 import cats.effect.IO
 

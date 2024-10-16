@@ -14,7 +14,7 @@ Command: tx broadcast [options]
 Broadcast transaction
   -n, --network <value>    Network name: Possible values: mainnet, testnet, private. (mandatory)
   -h, --host <value>       The host of the node. (mandatory)
-  --port <value>           Port Bifrost node. (mandatory)
+  --port <value>           Port Node node. (mandatory)
   -s, --secure <value>     Enables the secure connection to the node. (optional)
   -i, --input <value>      The input file. (mandatory)
 Command: tx prove [options]
@@ -28,7 +28,7 @@ Command: tx create [options]
 Create transaction
   -n, --network <value>    Network name: Possible values: mainnet, testnet, private. (mandatory)
   -h, --host <value>       The host of the node. (mandatory)
-  --port <value>           Port Bifrost node. (mandatory)
+  --port <value>           Port Node node. (mandatory)
   -s, --secure <value>     Enables the secure connection to the node. (optional)
   -o, --output <value>     The output file. (mandatory)
   -i, --input <value>      The input file. (mandatory)

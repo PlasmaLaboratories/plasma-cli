@@ -1,6 +1,5 @@
 package xyz.stratalab.strata.cli.modules
 
-
 import cats.effect.IO
 import xyz.stratalab.strata.cli.impl.SimpleMintingAlgebra
 import cats.effect.kernel.Sync
@@ -9,14 +8,14 @@ trait SimpleMintingAlgebraModule
     extends WalletStateAlgebraModule
     with WalletManagementUtilsModule
     with TransactionBuilderApiModule
-    with GenusQueryAlgebraModule {
+    with IndexerQueryAlgebraModule {
 
   def simpleMintingAlgebra(
       walletFile: String,
       networkId: Int,
       ledgerId: Int,
       host: String,
-      bifrostPort: Int,
+      nodePort: Int,
       secureConnection: Boolean
   ) = SimpleMintingAlgebra.make[IO](
     Sync[IO],
@@ -24,7 +23,7 @@ trait SimpleMintingAlgebraModule
     walletStateAlgebra(walletFile),
     walletManagementUtils,
     transactionBuilderApi(networkId, ledgerId),
-    genusQueryAlgebra(host, bifrostPort, secureConnection)
+    indexerQueryAlgebra(host, nodePort, secureConnection)
   )
 
 }

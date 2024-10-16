@@ -2,10 +2,10 @@ import sbt._
 
 object Dependencies {
 
-  lazy val toplOrg = "co.topl"
+  lazy val strataOrg = "xyz.stratalab"
 
-  lazy val bramblVersion = "2.0.0-beta8"
-  val bramblSdk = toplOrg %% "brambl-sdk" % bramblVersion 
+  lazy val sdkVersion = "0.0.0+264-fceb968c-SNAPSHOT"
+  val strataSdk = strataOrg %% "strata-sdk" % sdkVersion
   val circeVersion = "0.15.0-M1"
 
   val monocleCore = "dev.optics" %% "monocle-core" % "3.2.0"
@@ -14,8 +14,8 @@ object Dependencies {
 
   val laminarVersion = "16.0.0"
 
-  val bramblCrypto = toplOrg %% "crypto" % bramblVersion
-  val bramblServiceKit = toplOrg %% "service-kit" % bramblVersion
+  val sdkCrypto = strataOrg %% "crypto" % sdkVersion
+  val sdkServiceKit = strataOrg %% "service-kit" % sdkVersion
 
   val grpcNetty =
     "io.grpc" % "grpc-netty" % scalapb.compiler.Version.grpcJavaVersion
@@ -31,13 +31,14 @@ object Dependencies {
   lazy val logback = "ch.qos.logback" % "logback-classic" % "1.4.14"
   lazy val sqlite = "org.xerial" % "sqlite-jdbc" % "3.45.0.0"
   lazy val fastparse = "com.lihaoyi" %% "fastparse" % "3.0.1"
-  lazy val munitCatsEffects =  "org.typelevel" %% "munit-cats-effect" % "2.0.0-M1" % "it,test"
+  lazy val munitCatsEffects =
+    "org.typelevel" %% "munit-cats-effect" % "2.0.0-M1" % "it,test"
   lazy val circeYaml = "io.circe" %% "circe-yaml-v12" % "0.14.3-RC3"
   lazy val circeGenericJVM = "io.circe" %% "circe-generic" % circeVersion
   lazy val log4cats = "org.typelevel" %% "log4cats-slf4j" % "2.6.0"
 
-  lazy val http4sEmber = "org.http4s" %% "http4s-ember-server" %  "0.23.23"
-  lazy val http4sCirce = "org.http4s" %% "http4s-circe" %  "0.23.23"
-  lazy val http4sDsl = "org.http4s" %% "http4s-dsl" %  "0.23.23"
+  lazy val http4sEmber = "org.http4s" %% "http4s-ember-server" % "0.23.23"
+  lazy val http4sCirce = "org.http4s" %% "http4s-circe" % "0.23.23"
+  lazy val http4sDsl = "org.http4s" %% "http4s-dsl" % "0.23.23"
 
 }

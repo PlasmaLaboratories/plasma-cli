@@ -3,13 +3,13 @@ package xyz.stratalab.strata.cli
 import munit.FunSuite
 import scopt.OParser
 
-class ParamsGenusQueryTest extends FunSuite {
+class ParamsIndexerQueryTest extends FunSuite {
 
   import StrataCliParamsParserModule._
 
   test("Test from-fellowship transactions require index (UTXO query)") {
     val args0 = List(
-      "genus-query",
+      "indexer-query",
       "utxo-by-address",
       "--from-fellowship",
       "nofellowship",

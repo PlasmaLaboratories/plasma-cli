@@ -7,7 +7,7 @@ import xyz.stratalab.strata.cli.StrataCliParams
 import xyz.stratalab.strata.cli.StrataCliSubCmd
 import xyz.stratalab.strata.cli.http.WalletHttpService
 import xyz.stratalab.strata.cli.impl.FullTxOps
-import co.topl.brambl.codecs.AddressCodecs
+import xyz.stratalab.sdk.codecs.AddressCodecs
 import xyz.stratalab.shared.models.TxRequest
 import xyz.stratalab.shared.models.TxResponse
 import io.circe.generic.auto._
@@ -77,7 +77,7 @@ trait ServerModule extends FellowshipsModeModule with WalletModeModule {
             .toAbsolutePath()
             .toString(),
           validateParams.host,
-          validateParams.bifrostPort,
+          validateParams.nodePort,
           validateParams.secureConnection
         )
         resp <- Ok(TxResponse(result).asJson)
@@ -123,7 +123,7 @@ trait ServerModule extends FellowshipsModeModule with WalletModeModule {
               ),
               channelResource(
                 validateParams.host,
-                validateParams.bifrostPort,
+                validateParams.nodePort,
                 validateParams.secureConnection
               ),
               walletResource(validateParams.walletFile)

@@ -2,7 +2,7 @@ package xyz.stratalab.strata.cli.mockbase
 
 import xyz.stratalab.strata.cli.impl.WalletManagementUtils
 import cats.effect.kernel.Sync
-import co.topl.crypto.encryption.VaultStore
+import xyz.stratalab.crypto.encryption.VaultStore
 import quivr.models.KeyPair
 
 class BaseWalletManagementUtils[F[_]: Sync]

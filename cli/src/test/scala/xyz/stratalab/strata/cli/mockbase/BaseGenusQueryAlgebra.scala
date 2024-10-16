@@ -1,10 +1,10 @@
 package xyz.stratalab.strata.cli.mockbase
 
-import co.topl.brambl.dataApi.GenusQueryAlgebra
-import co.topl.brambl.models.LockAddress
-import co.topl.genus.services.{Txo, TxoState}
+import xyz.stratalab.sdk.dataApi.IndexerQueryAlgebra
+import xyz.stratalab.sdk.models.LockAddress
+import xyz.stratalab.indexer.services.{Txo, TxoState}
 
-class BaseGenusQueryAlgebra[F[_]] extends GenusQueryAlgebra[F] {
+class BaseIndexerQueryAlgebra[F[_]] extends IndexerQueryAlgebra[F] {
 
   override def queryUtxo(
       fromAddress: LockAddress,

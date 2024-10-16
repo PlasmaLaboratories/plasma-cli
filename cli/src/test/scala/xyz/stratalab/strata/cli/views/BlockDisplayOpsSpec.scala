@@ -1,7 +1,7 @@
 package xyz.stratalab.strata.cli.views
 
 import xyz.stratalab.strata.cli.modules.DummyObjects
-import co.topl.brambl.display.DisplayOps.DisplayTOps
+import xyz.stratalab.sdk.display.DisplayOps.DisplayTOps
 
 class BlockDisplayOpsSpec extends munit.FunSuite with DummyObjects {
 
@@ -19,7 +19,9 @@ Value                      : 100
 
   test("Block and transaction display should show the correct data") {
     val display = BlockDisplayOps.display(blockId01, Seq(iotransaction01))
-    assertNoDiff(display.trim(), """
+    assertNoDiff(
+      display.trim(),
+      """
 BlockId: 11111111111111111111111111111111
 
 Block Body:
@@ -35,6 +37,10 @@ Series Policies
 
 
 Asset Minting Statements
+========================
+
+
+Asset Merging Statements
 ========================
 
 
@@ -54,7 +60,8 @@ Value                      : 100
 Datum
 =====
 Value                      :
-""".trim())
+""".trim()
+    )
   }
 
 }

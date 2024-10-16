@@ -1,8 +1,8 @@
 package xyz.stratalab.strata.cli.views
 
-import co.topl.brambl.display.DisplayOps.DisplayTOps
-import co.topl.brambl.models.transaction.IoTransaction
-import co.topl.consensus.models.BlockId
+import xyz.stratalab.sdk.display.DisplayOps.DisplayTOps
+import xyz.stratalab.sdk.models.transaction.IoTransaction
+import xyz.stratalab.consensus.models.BlockId
 
 object BlockDisplayOps {
 

@@ -1,17 +1,17 @@
 package xyz.stratalab.strata.cli
 
-import co.topl.brambl.constants.NetworkConstants
-import co.topl.brambl.models.LockAddress
+import xyz.stratalab.sdk.constants.NetworkConstants
+import xyz.stratalab.sdk.models.LockAddress
 
 import java.io.File
 import scala.collection.immutable.IndexedSeq
-import co.topl.brambl.models.GroupId
-import co.topl.brambl.models.SeriesId
+import xyz.stratalab.sdk.models.GroupId
+import xyz.stratalab.sdk.models.SeriesId
 
 object StrataCliMode extends Enumeration {
   type StrataCliMode = Value
 
-  val invalid, wallet, genusquery, bifrostquery, simpletransaction,
+  val invalid, wallet, indexerquery, nodequery, simpletransaction,
       simpleminting, fellowships, templates, tx, server =
     Value
 }
@@ -21,8 +21,8 @@ object StrataCliSubCmd extends Enumeration {
 
   val invalid, init, recoverkeys, utxobyaddress, blockbyheight, blockbyid,
       transactionbyid, create, prove, broadcast, currentaddress, list, add,
-      inspect, exportvk, addsecret, getpreimage, importvks, sync, setinteraction,
-      listinteraction, balance, mintblock = Value
+      inspect, exportvk, addsecret, getpreimage, importvks, sync,
+      setinteraction, listinteraction, balance, mintblock = Value
 }
 
 sealed abstract class NetworkIdentifiers(
@@ -84,10 +84,7 @@ object DigestType {
 sealed abstract class DigestType(
     val shortName: String,
     val digestIdentifier: String
-) {
-
-
-}
+) {}
 
 case object Sha256 extends DigestType("sha256", "Sha256")
 case object Blake2b extends DigestType("blake2b", "Blake2b256")
@@ -106,7 +103,7 @@ final case class StrataCliParams(
     lockTemplate: String = "",
     inputVks: Seq[File] = Seq(),
     host: String = "",
-    bifrostPort: Int = 0,
+    nodePort: Int = 0,
     walletFile: String = "",
     password: String = "",
     fromFellowship: String = "self",

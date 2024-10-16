@@ -22,7 +22,7 @@ Create transaction
                            Interaction where we are sending the change to
   -n, --network <value>    Network name: Possible values: mainnet, testnet, private. (mandatory)
   -h, --host <value>       The host of the node. (mandatory)
-  --port <value>           Port Bifrost node. (mandatory)
+  --port <value>           Port Node node. (mandatory)
   -s, --secure <value>     Enables the secure connection to the node. (optional)
   -k, --keyfile <value>    The key file.
   -w, --password <value>   Password for the encrypted key. (mandatory)

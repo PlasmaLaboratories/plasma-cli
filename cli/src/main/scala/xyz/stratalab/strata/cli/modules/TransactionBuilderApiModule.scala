@@ -1,7 +1,7 @@
 package xyz.stratalab.strata.cli.modules
 
 import cats.effect.IO
-import co.topl.brambl.builders.TransactionBuilderApi
+import xyz.stratalab.sdk.builders.TransactionBuilderApi
 
 trait TransactionBuilderApiModule {
   def transactionBuilderApi(networkId: Int, ledgerId: Int) =

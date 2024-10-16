@@ -1,16 +1,24 @@
 package xyz.stratalab.strata.cli.mockbase
 
 import cats.data.ValidatedNel
-import co.topl.brambl.builders.locks.LockTemplate
-import co.topl.brambl.dataApi.WalletStateAlgebra
-import co.topl.brambl.models.Indices
-import co.topl.brambl.models.box.Lock
+import xyz.stratalab.sdk.builders.locks.LockTemplate
+import xyz.stratalab.sdk.dataApi.WalletStateAlgebra
+import xyz.stratalab.sdk.models.Indices
+import xyz.stratalab.sdk.models.box.Lock
 import quivr.models.{KeyPair, Preimage, Proposition}
 
 class BaseWalletStateAlgebra[F[_]] extends WalletStateAlgebra[F] {
 
-  override def getInteractionList(fellowship: String, template: String): F[Option[List[(Indices, String)]]] = ???
+  override def validateWalletInitialization(
+      networkId: Int,
+      ledgerId: Int,
+      mainKey: KeyPair
+  ): F[Either[Seq[String], Unit]] = ???
 
+  override def getInteractionList(
+      fellowship: String,
+      template: String
+  ): F[Option[List[(Indices, String)]]] = ???
 
   override def setCurrentIndices(
       fellowship: String,
@@ -36,7 +44,10 @@ class BaseWalletStateAlgebra[F[_]] extends WalletStateAlgebra[F] {
       digestProposition: Proposition.Digest
   ): F[Option[Preimage]] = ???
 
-  override def addPreimage(preimage: Preimage, digest: Proposition.Digest): F[Unit] = ???
+  override def addPreimage(
+      preimage: Preimage,
+      digest: Proposition.Digest
+  ): F[Unit] = ???
 
   override def getCurrentAddress: F[String] = ???
 

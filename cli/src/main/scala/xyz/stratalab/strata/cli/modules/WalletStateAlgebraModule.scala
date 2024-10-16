@@ -1,8 +1,8 @@
 package xyz.stratalab.strata.cli.modules
 
 import cats.effect.IO
-import co.topl.brambl.servicekit.WalletStateApi
-import co.topl.brambl.servicekit.WalletStateResource
+import xyz.stratalab.sdk.servicekit.WalletStateApi
+import xyz.stratalab.sdk.servicekit.WalletStateResource
 
 trait WalletStateAlgebraModule
     extends WalletStateResource

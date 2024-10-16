@@ -17,6 +17,6 @@ trait BaseConstants {
 
   val HOST = "localhost"//"testnet.topl.co"
 
-  val BIFROST_PORT = 9084 // 443
+  val NODE_PORT = 9084 // 443
 
 }

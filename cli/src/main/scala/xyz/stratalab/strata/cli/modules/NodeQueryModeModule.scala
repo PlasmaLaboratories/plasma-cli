@@ -1,22 +1,22 @@
 package xyz.stratalab.strata.cli.modules
 
 import cats.effect.IO
-import xyz.stratalab.strata.cli.controllers.BifrostQueryController
+import xyz.stratalab.strata.cli.controllers.NodeQueryController
 import xyz.stratalab.strata.cli.StrataCliSubCmd
-import co.topl.brambl.dataApi.{BifrostQueryAlgebra, RpcChannelResource}
+import xyz.stratalab.sdk.dataApi.{NodeQueryAlgebra, RpcChannelResource}
 import xyz.stratalab.strata.cli.StrataCliParams
 import scopt.OParser
 import xyz.stratalab.strata.cli.StrataCliParamsParserModule
 
-trait BifrostQueryModeModule extends RpcChannelResource {
+trait NodeQueryModeModule extends RpcChannelResource {
 
-  def bifrostQuerySubcmd(
+  def nodeQuerySubcmd(
       validateParams: StrataCliParams
   ): IO[Either[String, String]] = {
-    val bifrostQueryAlgebra = BifrostQueryAlgebra.make[IO](
+    val nodeQueryAlgebra = NodeQueryAlgebra.make[IO](
       channelResource(
         validateParams.host,
-        validateParams.bifrostPort,
+        validateParams.nodePort,
         validateParams.secureConnection
       )
     )
@@ -25,26 +25,26 @@ trait BifrostQueryModeModule extends RpcChannelResource {
         IO.pure(
           Left(
             OParser.usage(
-              StrataCliParamsParserModule.bifrostQueryMode
+              StrataCliParamsParserModule.nodeQueryMode
             ) + "\nA subcommand needs to be specified"
           )
         )
       case StrataCliSubCmd.mintblock =>
-        new BifrostQueryController(bifrostQueryAlgebra)
+        new NodeQueryController(nodeQueryAlgebra)
           .makeBlock(
             validateParams.nbOfBlocks
           )
       case StrataCliSubCmd.blockbyheight =>
-        new BifrostQueryController(
-          bifrostQueryAlgebra
+        new NodeQueryController(
+          nodeQueryAlgebra
         ).blockByHeight(validateParams.height)
       case StrataCliSubCmd.blockbyid =>
-        new BifrostQueryController(
-          bifrostQueryAlgebra
+        new NodeQueryController(
+          nodeQueryAlgebra
         ).blockById(validateParams.blockId)
       case StrataCliSubCmd.transactionbyid =>
-        new BifrostQueryController(
-          bifrostQueryAlgebra
+        new NodeQueryController(
+          nodeQueryAlgebra
         ).fetchTransaction(validateParams.transactionId)
     }
   }

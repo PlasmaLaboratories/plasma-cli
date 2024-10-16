@@ -1,43 +1,42 @@
 package xyz.stratalab.strata.cli.modules
 
-
 import cats.Monad
-import co.topl.brambl.codecs.AddressCodecs
-import co.topl.brambl.dataApi.GenusQueryAlgebra
-import co.topl.brambl.models.Datum
-import co.topl.brambl.models.GroupId
-import co.topl.brambl.models.LockAddress
-import co.topl.brambl.models.SeriesId
-import co.topl.brambl.models.TransactionId
-import co.topl.brambl.models.TransactionOutputAddress
-import co.topl.brambl.models.box.Attestation
-import co.topl.brambl.models.box.Challenge
-import co.topl.brambl.models.box.FungibilityType
-import co.topl.brambl.models.box.Lock
-import co.topl.brambl.models.box.QuantityDescriptorType
-import co.topl.brambl.models.box.Value
-import co.topl.brambl.models.transaction.SpentTransactionOutput
-import co.topl.brambl.models.transaction.UnspentTransactionOutput
-import co.topl.brambl.utils.Encoding
-import co.topl.consensus.models.BlockId
-import co.topl.genus.services.Txo
-import co.topl.genus.services.TxoState
-import co.topl.node.models.BlockBody
+import xyz.stratalab.sdk.codecs.AddressCodecs
+import xyz.stratalab.sdk.dataApi.IndexerQueryAlgebra
+import xyz.stratalab.sdk.models.Datum
+import xyz.stratalab.sdk.models.GroupId
+import xyz.stratalab.sdk.models.LockAddress
+import xyz.stratalab.sdk.models.SeriesId
+import xyz.stratalab.sdk.models.TransactionId
+import xyz.stratalab.sdk.models.TransactionOutputAddress
+import xyz.stratalab.sdk.models.box.Attestation
+import xyz.stratalab.sdk.models.box.Challenge
+import xyz.stratalab.sdk.models.box.FungibilityType
+import xyz.stratalab.sdk.models.box.Lock
+import xyz.stratalab.sdk.models.box.QuantityDescriptorType
+import xyz.stratalab.sdk.models.box.Value
+import xyz.stratalab.sdk.models.transaction.SpentTransactionOutput
+import xyz.stratalab.sdk.models.transaction.UnspentTransactionOutput
+import xyz.stratalab.sdk.utils.Encoding
+import xyz.stratalab.consensus.models.BlockId
+import xyz.stratalab.indexer.services.Txo
+import xyz.stratalab.indexer.services.TxoState
+import xyz.stratalab.node.models.BlockBody
 import com.google.protobuf.ByteString
 import quivr.models.Int128
 import quivr.models.Proposition
-import co.topl.consensus.models.BlockHeader
-import co.topl.consensus.models.EligibilityCertificate
-import co.topl.consensus.models.OperationalCertificate
-import co.topl.consensus.models.StakingAddress
-import co.topl.consensus.models.ProtocolVersion
-import co.topl.consensus.models.VerificationKeyKesProduct
-import co.topl.consensus.models.SignatureKesProduct
-import co.topl.consensus.models.SignatureKesSum
+import xyz.stratalab.consensus.models.BlockHeader
+import xyz.stratalab.consensus.models.EligibilityCertificate
+import xyz.stratalab.consensus.models.OperationalCertificate
+import xyz.stratalab.consensus.models.StakingAddress
+import xyz.stratalab.consensus.models.ProtocolVersion
+import xyz.stratalab.consensus.models.VerificationKeyKesProduct
+import xyz.stratalab.consensus.models.SignatureKesProduct
+import xyz.stratalab.consensus.models.SignatureKesSum
 
 trait DummyObjects {
 
-  import co.topl.brambl.syntax._
+  import xyz.stratalab.sdk.syntax._
 
   lazy val transactionId01 = TransactionId(
     ByteString.copyFrom(
@@ -170,7 +169,7 @@ trait DummyObjects {
       lockAddress01,
       lvlValue01
     ),
-    co.topl.genus.services.TxoState.UNSPENT,
+    xyz.stratalab.indexer.services.TxoState.UNSPENT,
     transactionOutputAddress01
   )
 
@@ -179,7 +178,7 @@ trait DummyObjects {
       lockAddress01,
       groupValue01
     ),
-    co.topl.genus.services.TxoState.UNSPENT,
+    xyz.stratalab.indexer.services.TxoState.UNSPENT,
     transactionOutputAddress02
   )
 
@@ -188,7 +187,7 @@ trait DummyObjects {
       lockAddress01,
       seriesValue01
     ),
-    co.topl.genus.services.TxoState.UNSPENT,
+    xyz.stratalab.indexer.services.TxoState.UNSPENT,
     transactionOutputAddress03
   )
 
@@ -197,7 +196,7 @@ trait DummyObjects {
       lockAddress01,
       assetValue01
     ),
-    co.topl.genus.services.TxoState.UNSPENT,
+    xyz.stratalab.indexer.services.TxoState.UNSPENT,
     transactionOutputAddress03
   )
 
@@ -234,7 +233,7 @@ trait DummyObjects {
         subRoot = ByteString.copyFrom(Array.fill[Byte](32)(0))
       ),
       ByteString.copyFrom(Array.fill[Byte](32)(0)),
-      ByteString.copyFrom(Array.fill[Byte](64)(0)),
+      ByteString.copyFrom(Array.fill[Byte](64)(0))
     ),
     address = StakingAddress(
       value = ByteString.copyFrom(Array.fill[Byte](32)(0))
@@ -257,7 +256,7 @@ trait DummyObjects {
     lvlValue01
   )
 
-  lazy val iotransaction01 = co.topl.brambl.models.transaction
+  lazy val iotransaction01 = xyz.stratalab.sdk.models.transaction
     .IoTransaction(
       Some(transactionId01),
       Seq(stxo01),
@@ -265,8 +264,8 @@ trait DummyObjects {
       Datum.IoTransaction.defaultInstance
     )
 
-  def makeGenusQueryAlgebraMockWithAddress[F[_]: Monad] =
-    new GenusQueryAlgebra[F] {
+  def makeIndexerQueryAlgebraMockWithAddress[F[_]: Monad] =
+    new IndexerQueryAlgebra[F] {
 
       override def queryUtxo(
           fromAddress: LockAddress,
@@ -277,8 +276,8 @@ trait DummyObjects {
         )
       }
     }
-  def makeGenusQueryAlgebraMockWithOneAddress[F[_]: Monad] =
-    new GenusQueryAlgebra[F] {
+  def makeIndexerQueryAlgebraMockWithOneAddress[F[_]: Monad] =
+    new IndexerQueryAlgebra[F] {
 
       override def queryUtxo(
           fromAddress: LockAddress,

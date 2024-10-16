@@ -3,8 +3,8 @@ package xyz.stratalab.strata.cli
 import cats.effect.ExitCode
 import munit.CatsEffectSuite
 import cats.effect.IO
-import co.topl.brambl.codecs.AddressCodecs.decodeAddress
-import co.topl.brambl.utils.Encoding
+import xyz.stratalab.sdk.codecs.AddressCodecs.decodeAddress
+import xyz.stratalab.sdk.utils.Encoding
 import scala.concurrent.duration.Duration
 
 class GeneralTransferTests
@@ -40,7 +40,7 @@ class GeneralTransferTests
         BOB_CURRENT_ADDRESS <- walletController(BOB_WALLET)
           .currentaddress("self", "default", None)
         _ <- IO.println("Bob's current address: " + BOB_CURRENT_ADDRESS)
-        utxos <- genusQueryAlgebra
+        utxos <- indexerQueryAlgebra
           .queryUtxo(
             decodeAddress(ALICE_CURRENT_ADDRESS.get).toOption.get
           )
@@ -102,7 +102,7 @@ class GeneralTransferTests
           .currentaddress("self", "default", None)
         BOB_CURRENT_ADDRESS <- walletController(BOB_WALLET)
           .currentaddress("self", "default", None)
-        utxos <- genusQueryAlgebra
+        utxos <- indexerQueryAlgebra
           .queryUtxo(
             decodeAddress(ALICE_CURRENT_ADDRESS.get).toOption.get
           )
@@ -164,7 +164,7 @@ class GeneralTransferTests
           .currentaddress("self", "default", None)
         BOB_CURRENT_ADDRESS <- walletController(BOB_WALLET)
           .currentaddress("self", "default", None)
-        utxos <- genusQueryAlgebra
+        utxos <- indexerQueryAlgebra
           .queryUtxo(
             decodeAddress(ALICE_CURRENT_ADDRESS.get).toOption.get
           )
@@ -183,9 +183,13 @@ class GeneralTransferTests
             ALICE_TRANSFER_ASSET_TX_RAW,
             TokenType.asset,
             utxos.head.transactionOutput.value.value.asset
-              .map(x => Encoding.encodeToHex(x.groupId.get.value.toByteArray())),
+              .map(x =>
+                Encoding.encodeToHex(x.groupId.get.value.toByteArray())
+              ),
             utxos.head.transactionOutput.value.value.asset
-              .map(x => Encoding.encodeToHex(x.seriesId.get.value.toByteArray()))
+              .map(x =>
+                Encoding.encodeToHex(x.seriesId.get.value.toByteArray())
+              )
           ).run(aliceContext),
           ExitCode.Success
         )

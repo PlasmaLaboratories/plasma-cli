@@ -1,14 +1,14 @@
 package xyz.stratalab.strata.cli.mockbase
 
-import co.topl.brambl.dataApi.BifrostQueryAlgebra
-import co.topl.brambl.models.TransactionId
-import co.topl.brambl.models.transaction.IoTransaction
-import co.topl.consensus.models.BlockId
-import co.topl.node.models.BlockBody
-import co.topl.consensus.models.BlockHeader
-import co.topl.node.services.SynchronizationTraversalRes
+import xyz.stratalab.sdk.dataApi.NodeQueryAlgebra
+import xyz.stratalab.sdk.models.TransactionId
+import xyz.stratalab.sdk.models.transaction.IoTransaction
+import xyz.stratalab.consensus.models.BlockId
+import xyz.stratalab.node.models.BlockBody
+import xyz.stratalab.consensus.models.BlockHeader
+import xyz.stratalab.node.services.SynchronizationTraversalRes
 
-abstract class BaseBifrostQueryAlgebra[F[_]] extends BifrostQueryAlgebra[F] {
+abstract class BaseNodeQueryAlgebra[F[_]] extends NodeQueryAlgebra[F] {
 
   override def synchronizationTraversal()
       : F[Iterator[SynchronizationTraversalRes]] = ???

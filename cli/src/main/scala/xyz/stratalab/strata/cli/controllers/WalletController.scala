@@ -3,21 +3,21 @@ package xyz.stratalab.strata.cli.controllers
 import cats.data.OptionT
 import cats.effect.kernel.Resource
 import cats.effect.kernel.Sync
-import co.topl.brambl.builders.TransactionBuilderApi
+import xyz.stratalab.sdk.builders.TransactionBuilderApi
 import xyz.stratalab.strata.cli.StrataCliParams
 import xyz.stratalab.strata.cli.impl.WalletAlgebra
 import xyz.stratalab.strata.cli.impl.WalletManagementUtils
 import xyz.stratalab.strata.cli.impl.WalletModeHelper
-import co.topl.brambl.codecs.AddressCodecs
-import co.topl.brambl.constants.NetworkConstants
-import co.topl.brambl.dataApi
-import co.topl.brambl.models.Indices
-import co.topl.brambl.models.LockAddress
-import co.topl.brambl.models.LockId
-import co.topl.brambl.utils.Encoding
-import co.topl.brambl.wallet.WalletApi
-import co.topl.genus.services.Txo
-import co.topl.genus.services.TxoState
+import xyz.stratalab.sdk.codecs.AddressCodecs
+import xyz.stratalab.sdk.constants.NetworkConstants
+import xyz.stratalab.sdk.dataApi
+import xyz.stratalab.sdk.models.Indices
+import xyz.stratalab.sdk.models.LockAddress
+import xyz.stratalab.sdk.models.LockId
+import xyz.stratalab.sdk.utils.Encoding
+import xyz.stratalab.sdk.wallet.WalletApi
+import xyz.stratalab.indexer.services.Txo
+import xyz.stratalab.indexer.services.TxoState
 import xyz.stratalab.shared.models.AssetTokenBalanceDTO
 import xyz.stratalab.shared.models.GroupTokenBalanceDTO
 import xyz.stratalab.shared.models.LvlBalance
@@ -32,21 +32,21 @@ import quivr.models.Proposition
 import xyz.stratalab.strata.cli.DigestType
 import quivr.models.Digest
 import xyz.stratalab.strata.cli.Sha256
-import co.topl.crypto.hash.Blake2b256
+import xyz.stratalab.crypto.hash.Blake2b256
 
 class WalletController[F[_]: Sync](
     walletStateAlgebra: dataApi.WalletStateAlgebra[F],
     walletManagementUtils: WalletManagementUtils[F],
     walletApi: WalletApi[F],
     walletAlgebra: WalletAlgebra[F],
-    genusQueryAlgebra: dataApi.GenusQueryAlgebra[F]
+    indexerQueryAlgebra: dataApi.IndexerQueryAlgebra[F]
 ) {
 
   def addSecret(
       secretTxt: String,
       digest: DigestType
   ): F[Either[String, String]] = {
-    import co.topl.crypto.hash.implicits.sha256Hash
+    import xyz.stratalab.crypto.hash.implicits.sha256Hash
     import cats.implicits._
     val paddedSecret = secretTxt.getBytes() ++ Array
       .fill(32 - secretTxt.getBytes().length)(0.toByte)
@@ -132,8 +132,8 @@ class WalletController[F[_]: Sync](
   ): F[Either[String, String]] = {
     import cats.implicits._
     import TransactionBuilderApi.implicits._
-    import co.topl.brambl.common.ContainsEvidence.Ops
-    import co.topl.brambl.common.ContainsImmutable.instances._
+    import xyz.stratalab.sdk.common.ContainsEvidence.Ops
+    import xyz.stratalab.sdk.common.ContainsImmutable.instances._
     for {
       keyAndEncodedKeys <- (inputVks
         .map { file =>
@@ -390,8 +390,8 @@ class WalletController[F[_]: Sync](
   ): F[Either[String, String]] = {
     import cats.implicits._
     import TransactionBuilderApi.implicits._
-    import co.topl.brambl.common.ContainsEvidence.Ops
-    import co.topl.brambl.common.ContainsImmutable.instances._
+    import xyz.stratalab.sdk.common.ContainsEvidence.Ops
+    import xyz.stratalab.sdk.common.ContainsImmutable.instances._
     (for {
       // current indices
       someIndices <- walletStateAlgebra.getCurrentIndicesForFunds(
@@ -408,7 +408,7 @@ class WalletController[F[_]: Sync](
       // txos that are spent at current address
       txos <- someAddress
         .map(address =>
-          genusQueryAlgebra
+          indexerQueryAlgebra
             .queryUtxo(
               AddressCodecs.decodeAddress(address).toOption.get,
               TxoState.SPENT
@@ -476,7 +476,7 @@ class WalletController[F[_]: Sync](
     import cats.implicits._
     WalletModeHelper[F](
       walletStateAlgebra,
-      genusQueryAlgebra
+      indexerQueryAlgebra
     ).getBalance(
       someAddress,
       someFellowship,

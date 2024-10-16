@@ -1,12 +1,12 @@
 package xyz.stratalab.strata.cli.impl
 
-import co.topl.brambl.codecs.AddressCodecs
-import co.topl.brambl.constants.NetworkConstants
-import co.topl.brambl.models.TransactionId
-import co.topl.brambl.models.TransactionOutputAddress
-import co.topl.brambl.models.box.Value
-import co.topl.brambl.models.transaction.UnspentTransactionOutput
-import co.topl.brambl.utils.Encoding
+import xyz.stratalab.sdk.codecs.AddressCodecs
+import xyz.stratalab.sdk.constants.NetworkConstants
+import xyz.stratalab.sdk.models.TransactionId
+import xyz.stratalab.sdk.models.TransactionOutputAddress
+import xyz.stratalab.sdk.models.box.Value
+import xyz.stratalab.sdk.models.transaction.UnspentTransactionOutput
+import xyz.stratalab.sdk.utils.Encoding
 import com.google.protobuf.ByteString
 import quivr.models.Int128
 
@@ -46,18 +46,18 @@ object CommonParsingOps {
   ) = for {
     sp <- Right(address.split("#"))
     idx <- Try(sp(1).toInt).toEither.leftMap(_ =>
-        InvalidAddress("Invalid index for address: " + address)
-      )
+      InvalidAddress("Invalid index for address: " + address)
+    )
     txIdByteArray <- Encoding
-        .decodeFromBase58(sp(0))
-        .leftMap(_ => InvalidAddress("Invalid transaction id for: " + sp(0)))
+      .decodeFromBase58(sp(0))
+      .leftMap(_ => InvalidAddress("Invalid transaction id for: " + sp(0)))
     txId <- Right(
-        TransactionId(
-          ByteString.copyFrom(
-            txIdByteArray
-          )
+      TransactionId(
+        ByteString.copyFrom(
+          txIdByteArray
         )
       )
+    )
   } yield TransactionOutputAddress(
     networkId,
     NetworkConstants.MAIN_LEDGER_ID,

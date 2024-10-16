@@ -29,9 +29,9 @@ jobs:
     needs: unit-test
     services:
       # Label used to access the service container
-      bifrost:
+      node:
         # Docker Hub image
-        image: ghcr.io/topl/bifrost-node:2.0.0-beta3
+        image: ghcr.io/plasmalaboratories/strata-node:0.0.0-8208-6b04bc0f
         #
         ports:
           - 9084:9084 
@@ -84,7 +84,7 @@ jobs:
           token: '${{ github.token }}'
           initial-status: success
           environment: release
-          environment-url: https://s01.oss.sonatype.org/content/repositories/releases/co/topl/brambl-cli_2.13/
+          environment-url: https://s01.oss.sonatype.org/content/repositories/releases/xyz/stratalab/strata-cli_2.13/
       - uses: chrnorm/deployment-action@v2
         name: Create GitHub deployment (snapshot)
         id: deployment-snap
@@ -92,7 +92,7 @@ jobs:
         with:
           token: '${{ github.token }}'
           initial-status: success
-          environment-url: https://s01.oss.sonatype.org/content/repositories/snapshots/co/topl/brambl-cli_2.13/
+          environment-url: https://s01.oss.sonatype.org/content/repositories/snapshots/xyz/stratalab/strata-cli_2.13/
           environment: snapshot
   deploy-docs:
     name: Deploy to GitHub Pages

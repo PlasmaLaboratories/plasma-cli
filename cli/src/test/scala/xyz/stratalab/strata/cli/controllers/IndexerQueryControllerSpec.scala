@@ -4,13 +4,13 @@ import cats.Monad
 import cats.effect.IO
 import xyz.stratalab.strata.cli.mockbase.BaseWalletStateAlgebra
 import xyz.stratalab.strata.cli.modules.DummyObjects
-import co.topl.brambl.dataApi.GenusQueryAlgebra
-import co.topl.brambl.display.DisplayOps.DisplayTOps
-import co.topl.brambl.models.LockAddress
-import co.topl.genus.services.{Txo, TxoState}
+import xyz.stratalab.sdk.dataApi.IndexerQueryAlgebra
+import xyz.stratalab.sdk.display.DisplayOps.DisplayTOps
+import xyz.stratalab.sdk.models.LockAddress
+import xyz.stratalab.indexer.services.{Txo, TxoState}
 import munit.CatsEffectSuite
 
-class GenusQueryControllerSpec extends CatsEffectSuite with DummyObjects {
+class IndexerQueryControllerSpec extends CatsEffectSuite with DummyObjects {
 
   def makeWalletStateAlgebraMock[F[_]: Monad] = new BaseWalletStateAlgebra[F] {
 
@@ -32,7 +32,7 @@ class GenusQueryControllerSpec extends CatsEffectSuite with DummyObjects {
       )
     }
 
-  def makeGenusQueryAlgebraMock[F[_]: Monad] = new GenusQueryAlgebra[F] {
+  def makeIndexerQueryAlgebraMock[F[_]: Monad] = new IndexerQueryAlgebra[F] {
 
     override def queryUtxo(
         fromAddress: LockAddress,
@@ -45,11 +45,16 @@ class GenusQueryControllerSpec extends CatsEffectSuite with DummyObjects {
     "queryUtxoFromParams should return an error if the address is not there"
   ) {
     val walletStateAlgebra = makeWalletStateAlgebraMock[IO]
-    val genusQueryAlgebra = makeGenusQueryAlgebraMock[IO]
-    val genusQueryController =
-      new GenusQueryController[IO](walletStateAlgebra, genusQueryAlgebra)
+    val indexerQueryAlgebra = makeIndexerQueryAlgebraMock[IO]
+    val indexerQueryController =
+      new IndexerQueryController[IO](walletStateAlgebra, indexerQueryAlgebra)
     val result =
-      genusQueryController.queryUtxoFromParams(None, "fellowship", "template", None)
+      indexerQueryController.queryUtxoFromParams(
+        None,
+        "fellowship",
+        "template",
+        None
+      )
     assertIO(result, Left("Address not found"))
   }
 
@@ -57,11 +62,16 @@ class GenusQueryControllerSpec extends CatsEffectSuite with DummyObjects {
     "queryUtxoFromParams should return a formatted string if the address is there"
   ) {
     val walletStateAlgebra = makeWalletStateAlgebraMockWithAddress[IO]
-    val genusQueryAlgebra = makeGenusQueryAlgebraMockWithOneAddress[IO]
-    val genusQueryController =
-      new GenusQueryController[IO](walletStateAlgebra, genusQueryAlgebra)
+    val indexerQueryAlgebra = makeIndexerQueryAlgebraMockWithOneAddress[IO]
+    val indexerQueryController =
+      new IndexerQueryController[IO](walletStateAlgebra, indexerQueryAlgebra)
     val result =
-      genusQueryController.queryUtxoFromParams(None, "fellowship", "template", None)
+      indexerQueryController.queryUtxoFromParams(
+        None,
+        "fellowship",
+        "template",
+        None
+      )
     assertIO(
       result,
       Right(txo01.display)

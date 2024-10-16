@@ -44,10 +44,10 @@ the group constructor token can only be registered once. The group contructor
 token identifier is the hash of the group policy file. To get the UTXO from an address we need to run the following command:
 
 ```bash
-brambl-cli genus-query utxo-by-address --from-fellowship $FELLOWSHIP --from-template $LOCK_TEMPLATE -h $HOST --port $PORT --walletdb $WALLET
+brambl-cli indexer-query utxo-by-address --from-fellowship $FELLOWSHIP --from-template $LOCK_TEMPLATE -h $HOST --port $PORT --walletdb $WALLET
 ```
 
-This will query the UXTOs for the address in the genus node. It uses the wallet to derive the right address to query.
+This will query the UXTOs for the address in the indexer node. It uses the wallet to derive the right address to query.
 
 The output will look something like this:
 

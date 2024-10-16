@@ -8,7 +8,7 @@ import xyz.stratalab.strata.cli.modules.TransactionBuilderApiModule
 import xyz.stratalab.strata.cli.modules.WalletAlgebraModule
 import xyz.stratalab.strata.cli.modules.WalletManagementUtilsModule
 import xyz.stratalab.strata.cli.modules.WalletStateAlgebraModule
-import co.topl.brambl.dataApi.{GenusQueryAlgebra, RpcChannelResource}
+import xyz.stratalab.sdk.dataApi.{IndexerQueryAlgebra, RpcChannelResource}
 
 trait CommonTxOperations
     extends TransactionBuilderApiModule
@@ -38,7 +38,7 @@ trait CommonTxOperations
           "-h",
           HOST,
           "--port",
-          s"$BIFROST_PORT",
+          s"$NODE_PORT",
           "--keyfile",
           c.keyFile,
           "-w",
@@ -101,7 +101,7 @@ trait CommonTxOperations
           "-w",
           c.password,
           "--port",
-          s"$BIFROST_PORT",
+          s"$NODE_PORT",
           "-o",
           outputFile, // BOB_SECOND_TX_RAW,
           "-n",
@@ -191,7 +191,7 @@ trait CommonTxOperations
           "-w",
           c.password,
           "--port",
-          s"$BIFROST_PORT",
+          s"$NODE_PORT",
           "-o",
           outputFile, // BOB_SECOND_TX_RAW,
           "-a",
@@ -252,7 +252,7 @@ trait CommonTxOperations
           "-h",
           HOST,
           "--port",
-          s"$BIFROST_PORT",
+          s"$NODE_PORT",
           "-n",
           "private",
           "--keyfile",
@@ -299,7 +299,7 @@ trait CommonTxOperations
           "-h",
           HOST,
           "--port",
-          s"$BIFROST_PORT",
+          s"$NODE_PORT",
           "-n",
           "private",
           "--keyfile",
@@ -346,7 +346,7 @@ trait CommonTxOperations
           "-h",
           HOST,
           "--port",
-          s"$BIFROST_PORT",
+          s"$NODE_PORT",
           "-n",
           "private",
           "--keyfile",
@@ -383,7 +383,7 @@ trait CommonTxOperations
     Kleisli[IO, WalletKeyConfig, ExitCode]((c: WalletKeyConfig) =>
       Main.run(
         List(
-          "genus-query",
+          "indexer-query",
           "utxo-by-address",
           "--from-fellowship",
           fellowshipName,
@@ -392,7 +392,7 @@ trait CommonTxOperations
           "-h",
           HOST,
           "--port",
-          s"$BIFROST_PORT",
+          s"$NODE_PORT",
           "--walletdb",
           c.walletFile,
           "--token",
@@ -411,7 +411,7 @@ trait CommonTxOperations
     Kleisli[IO, WalletKeyConfig, ExitCode]((c: WalletKeyConfig) =>
       Main.run(
         List(
-          "genus-query",
+          "indexer-query",
           "utxo-by-address",
           "--from-fellowship",
           fellowshipName,
@@ -420,7 +420,7 @@ trait CommonTxOperations
           "-h",
           HOST,
           "--port",
-          s"$BIFROST_PORT",
+          s"$NODE_PORT",
           "--walletdb",
           c.walletFile,
           "--token",
@@ -439,7 +439,7 @@ trait CommonTxOperations
     Kleisli[IO, WalletKeyConfig, ExitCode]((c: WalletKeyConfig) =>
       Main.run(
         List(
-          "genus-query",
+          "indexer-query",
           "utxo-by-address",
           "--from-fellowship",
           fellowshipName,
@@ -448,7 +448,7 @@ trait CommonTxOperations
           "-h",
           HOST,
           "--port",
-          s"$BIFROST_PORT",
+          s"$NODE_PORT",
           "--walletdb",
           c.walletFile,
           "--token",
@@ -468,7 +468,7 @@ trait CommonTxOperations
     Kleisli[IO, WalletKeyConfig, ExitCode]((c: WalletKeyConfig) =>
       Main.run(
         List(
-          "genus-query",
+          "indexer-query",
           "utxo-by-address",
           "--from-fellowship",
           fellowshipName,
@@ -477,7 +477,7 @@ trait CommonTxOperations
           "-h",
           HOST,
           "--port",
-          s"$BIFROST_PORT",
+          s"$NODE_PORT",
           "--walletdb",
           c.walletFile,
           "--token",
@@ -497,7 +497,7 @@ trait CommonTxOperations
     Kleisli[IO, WalletKeyConfig, ExitCode]((c: WalletKeyConfig) =>
       Main.run(
         List(
-          "genus-query",
+          "indexer-query",
           "utxo-by-address",
           "--from-fellowship",
           fellowshipName,
@@ -506,7 +506,7 @@ trait CommonTxOperations
           "-h",
           HOST,
           "--port",
-          s"$BIFROST_PORT",
+          s"$NODE_PORT",
           "--walletdb",
           c.walletFile,
           "--token",
@@ -735,11 +735,11 @@ trait CommonTxOperations
       )
     )
 
-  val genusQueryAlgebra = GenusQueryAlgebra
+  val indexerQueryAlgebra = IndexerQueryAlgebra
     .make[IO](
       channelResource(
         HOST,
-        BIFROST_PORT,
+        NODE_PORT,
         false
       )
     )
@@ -751,7 +751,7 @@ trait CommonTxOperations
     walletManagementUtils,
     walletApi,
     walletAlgebra(walletFile),
-    genusQueryAlgebra
+    indexerQueryAlgebra
   )
 
   def broadcastSimpleTx(provedTx: String, secure: Boolean = false) = Main.run(
@@ -765,7 +765,7 @@ trait CommonTxOperations
       "-h",
       HOST,
       "--port",
-      s"$BIFROST_PORT"
+      s"$NODE_PORT"
     ) ++ (if (secure) List("--secure", "true") else List.empty)
   )
 }

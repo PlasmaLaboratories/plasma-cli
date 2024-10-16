@@ -151,9 +151,9 @@ lazy val cli = project
       )
     ),
     libraryDependencies ++= List(
-      bramblSdk,
-      bramblCrypto,
-      bramblServiceKit,
+      strataSdk,
+      sdkCrypto,
+      sdkServiceKit,
       scopt,
       munit,
       fs2Core,
