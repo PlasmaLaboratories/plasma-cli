@@ -1,12 +1,12 @@
-package xyz.stratalab.strata.cli.modules
+package org.plasmalabs.strata.cli.modules
 
 import cats.effect.IO
-import xyz.stratalab.strata.cli.controllers.FellowshipsController
-import xyz.stratalab.sdk.servicekit.{FellowshipStorageApi, WalletStateResource}
-import xyz.stratalab.strata.cli.StrataCliSubCmd
-import xyz.stratalab.strata.cli.StrataCliParams
+import org.plasmalabs.strata.cli.controllers.FellowshipsController
+import org.plasmalabs.sdk.servicekit.{FellowshipStorageApi, WalletStateResource}
+import org.plasmalabs.strata.cli.StrataCliSubCmd
+import org.plasmalabs.strata.cli.StrataCliParams
 import scopt.OParser
-import xyz.stratalab.strata.cli.StrataCliParamsParserModule
+import org.plasmalabs.strata.cli.StrataCliParamsParserModule
 
 trait FellowshipsModeModule extends WalletStateResource {
   def fellowshipsModeSubcmds(

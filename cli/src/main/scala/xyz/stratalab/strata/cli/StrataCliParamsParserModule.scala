@@ -1,11 +1,11 @@
-package xyz.stratalab.strata.cli
+package org.plasmalabs.strata.cli
 
-import xyz.stratalab.sdk.codecs.AddressCodecs
-import xyz.stratalab.sdk.constants.NetworkConstants
-import xyz.stratalab.sdk.models.GroupId
-import xyz.stratalab.sdk.models.LockAddress
-import xyz.stratalab.sdk.models.SeriesId
-import xyz.stratalab.sdk.utils.Encoding
+import org.plasmalabs.sdk.codecs.AddressCodecs
+import org.plasmalabs.sdk.constants.NetworkConstants
+import org.plasmalabs.sdk.models.GroupId
+import org.plasmalabs.sdk.models.LockAddress
+import org.plasmalabs.sdk.models.SeriesId
+import org.plasmalabs.sdk.utils.Encoding
 import com.google.protobuf.ByteString
 import scopt.OParser
 

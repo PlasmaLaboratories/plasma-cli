@@ -1,4 +1,4 @@
-package xyz.stratalab.strata.cli.impl
+package org.plasmalabs.strata.cli.impl
 
 import com.google.protobuf.struct.ListValue
 import com.google.protobuf.struct.NullValue
@@ -7,7 +7,6 @@ import com.google.protobuf.struct.Value
 import io.circe.Json
 
 trait CommonTxOps {
-
 
   def toStruct(json: Json): Value =
     json.fold[Value](

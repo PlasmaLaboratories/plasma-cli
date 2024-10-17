@@ -1,4 +1,4 @@
-package xyz.stratalab.app
+package org.plasmalabs.app
 
 import com.raquo.laminar.api.L._
 
@@ -44,7 +44,12 @@ case class ToSectionComponent(
     )
       h4(
         s"Send ",
-        span(cls := "badge bg-secondary", amount, " ", assetLabel(currentAsset.now())),
+        span(
+          cls := "badge bg-secondary",
+          amount,
+          " ",
+          assetLabel(currentAsset.now())
+        ),
         " to ",
         span(cls := "badge bg-secondary", address)
       )

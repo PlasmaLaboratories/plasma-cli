@@ -1,4 +1,4 @@
-package xyz.stratalab.strata.cli
+package org.plasmalabs.strata.cli
 
 import munit.CatsEffectSuite
 

@@ -1,9 +1,9 @@
-package xyz.stratalab.strata.cli.impl
+package org.plasmalabs.strata.cli.impl
 
-import xyz.stratalab.sdk.dataApi.WalletStateAlgebra
+import org.plasmalabs.sdk.dataApi.WalletStateAlgebra
 import cats.Monad
-import xyz.stratalab.sdk.models.Indices
-import xyz.stratalab.sdk.models.box.Lock
+import org.plasmalabs.sdk.models.Indices
+import org.plasmalabs.sdk.models.box.Lock
 
 trait WalletApiHelpers[F[_]] {
 

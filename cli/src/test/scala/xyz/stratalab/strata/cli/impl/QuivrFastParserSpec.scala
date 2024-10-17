@@ -1,7 +1,7 @@
-package xyz.stratalab.strata.cli.impl
+package org.plasmalabs.strata.cli.impl
 
 import cats.Id
-import xyz.stratalab.strata.cli.views.WalletModelDisplayOps
+import org.plasmalabs.strata.cli.views.WalletModelDisplayOps
 
 class QuivrFastParserSpec extends munit.FunSuite {
 
@@ -65,7 +65,8 @@ class QuivrFastParserSpec extends munit.FunSuite {
     assertEquals(actual, input)
   }
   test("Parser should parse locked blake2b digest") {
-    val input = "threshold(1, blake2b(a28f43e7ba06f79b31b189cfee16e160fba1c0ea8f2c4cc8ca38fa567fbca2e3))"
+    val input =
+      "threshold(1, blake2b(a28f43e7ba06f79b31b189cfee16e160fba1c0ea8f2c4cc8ca38fa567fbca2e3))"
     val actual =
       WalletModelDisplayOps.serialize(
         QuivrFastParser.make[Id].parseQuivr(input).toOption.get
@@ -73,7 +74,8 @@ class QuivrFastParserSpec extends munit.FunSuite {
     assertEquals(actual, input)
   }
   test("Parser should parse locked sha256 digest") {
-    val input = "threshold(1, sha256(b39f7e1305cd9107ed9af824fcb0729ce9888bbb7f219cc0b6731332105675dc))"
+    val input =
+      "threshold(1, sha256(b39f7e1305cd9107ed9af824fcb0729ce9888bbb7f219cc0b6731332105675dc))"
     val actual =
       WalletModelDisplayOps.serialize(
         QuivrFastParser.make[Id].parseQuivr(input).toOption.get

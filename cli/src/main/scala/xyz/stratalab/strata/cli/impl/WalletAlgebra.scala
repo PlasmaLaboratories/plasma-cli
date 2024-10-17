@@ -1,9 +1,9 @@
-package xyz.stratalab.strata.cli.impl
+package org.plasmalabs.strata.cli.impl
 
 import cats.effect.kernel.Sync
-import xyz.stratalab.sdk.dataApi.WalletStateAlgebra
-import xyz.stratalab.sdk.wallet.WalletApi
-import xyz.stratalab.crypto.encryption.VaultStore
+import org.plasmalabs.sdk.dataApi.WalletStateAlgebra
+import org.plasmalabs.sdk.wallet.WalletApi
+import org.plasmalabs.crypto.encryption.VaultStore
 import quivr.models.KeyPair
 import cats.effect.std
 
@@ -110,7 +110,7 @@ object WalletAlgebra {
         someMnemonicFile: Option[String]
     ) = {
       import io.circe.syntax._
-      import xyz.stratalab.crypto.encryption.VaultStore.Codecs._
+      import org.plasmalabs.crypto.encryption.VaultStore.Codecs._
 
       for {
         wallet <- createNewWallet(password, somePassphrase)
@@ -150,7 +150,7 @@ object WalletAlgebra {
         someOutputFile: Option[String]
     ) = {
       import io.circe.syntax._
-      import xyz.stratalab.crypto.encryption.VaultStore.Codecs._
+      import org.plasmalabs.crypto.encryption.VaultStore.Codecs._
 
       for {
         wallet <- recoverWalletKey(mnemonic, password, somePassphrase)

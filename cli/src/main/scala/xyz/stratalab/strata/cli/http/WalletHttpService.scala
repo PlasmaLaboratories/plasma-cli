@@ -1,21 +1,21 @@
-package xyz.stratalab.strata.cli.http
+package org.plasmalabs.strata.cli.http
 import cats.Id
 import cats.effect.IO
 import cats.effect._
-import xyz.stratalab.strata.cli.impl.WalletModeHelper
-import xyz.stratalab.sdk.dataApi.IndexerQueryAlgebra
-import xyz.stratalab.sdk.dataApi.WalletStateAlgebra
-import xyz.stratalab.sdk.servicekit.FellowshipStorageApi
-import xyz.stratalab.sdk.servicekit.TemplateStorageApi
-import xyz.stratalab.shared.models.AssetTokenBalanceDTO
-import xyz.stratalab.shared.models.BalanceRequestDTO
-import xyz.stratalab.shared.models.BalanceResponseDTO
-import xyz.stratalab.shared.models.FellowshipDTO
-import xyz.stratalab.shared.models.GroupTokenBalanceDTO
-import xyz.stratalab.shared.models.LvlBalance
-import xyz.stratalab.shared.models.SeriesTokenBalanceDTO
-import xyz.stratalab.shared.models.SimpleErrorDTO
-import xyz.stratalab.shared.models.TemplateDTO
+import org.plasmalabs.strata.cli.impl.WalletModeHelper
+import org.plasmalabs.sdk.dataApi.IndexerQueryAlgebra
+import org.plasmalabs.sdk.dataApi.WalletStateAlgebra
+import org.plasmalabs.sdk.servicekit.FellowshipStorageApi
+import org.plasmalabs.sdk.servicekit.TemplateStorageApi
+import org.plasmalabs.shared.models.AssetTokenBalanceDTO
+import org.plasmalabs.shared.models.BalanceRequestDTO
+import org.plasmalabs.shared.models.BalanceResponseDTO
+import org.plasmalabs.shared.models.FellowshipDTO
+import org.plasmalabs.shared.models.GroupTokenBalanceDTO
+import org.plasmalabs.shared.models.LvlBalance
+import org.plasmalabs.shared.models.SeriesTokenBalanceDTO
+import org.plasmalabs.shared.models.SimpleErrorDTO
+import org.plasmalabs.shared.models.TemplateDTO
 import io.circe.generic.auto._
 import io.circe.syntax._
 import io.grpc.ManagedChannel
@@ -25,8 +25,8 @@ import org.http4s.circe._
 import org.http4s.dsl.io._
 
 import java.sql.Connection
-import xyz.stratalab.shared.models.NetworkResponseDTO
-import xyz.stratalab.sdk.utils.Encoding
+import org.plasmalabs.shared.models.NetworkResponseDTO
+import org.plasmalabs.sdk.utils.Encoding
 
 case class WalletHttpService(
     walletStateAlgebra: WalletStateAlgebra[IO],
@@ -116,9 +116,9 @@ case class WalletHttpService(
         val templateStorageAlgebra = TemplateStorageApi.make[IO](
           walletResource
         )
-        import xyz.stratalab.strata.cli.views.WalletModelDisplayOps._
+        import org.plasmalabs.strata.cli.views.WalletModelDisplayOps._
         import io.circe.parser.parse
-        import xyz.stratalab.sdk.codecs.LockTemplateCodecs._
+        import org.plasmalabs.sdk.codecs.LockTemplateCodecs._
         import cats.implicits._
         for {
           templates <- templateStorageAlgebra.findTemplates()

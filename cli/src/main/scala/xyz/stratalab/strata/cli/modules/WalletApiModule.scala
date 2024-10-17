@@ -1,6 +1,6 @@
-package xyz.stratalab.strata.cli.modules
+package org.plasmalabs.strata.cli.modules
 
-import xyz.stratalab.sdk.wallet.WalletApi
+import org.plasmalabs.sdk.wallet.WalletApi
 
 trait WalletApiModule extends WalletKeyApiModule {
   val walletApi = WalletApi.make(walletKeyApi)

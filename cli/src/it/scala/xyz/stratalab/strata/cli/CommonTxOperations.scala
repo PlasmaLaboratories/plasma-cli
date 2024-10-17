@@ -1,14 +1,14 @@
-package xyz.stratalab.strata.cli
+package org.plasmalabs.strata.cli
 
 import cats.data.Kleisli
 import cats.effect.ExitCode
 import cats.effect.IO
-import xyz.stratalab.strata.cli.controllers.WalletController
-import xyz.stratalab.strata.cli.modules.TransactionBuilderApiModule
-import xyz.stratalab.strata.cli.modules.WalletAlgebraModule
-import xyz.stratalab.strata.cli.modules.WalletManagementUtilsModule
-import xyz.stratalab.strata.cli.modules.WalletStateAlgebraModule
-import xyz.stratalab.sdk.dataApi.{IndexerQueryAlgebra, RpcChannelResource}
+import org.plasmalabs.strata.cli.controllers.WalletController
+import org.plasmalabs.strata.cli.modules.TransactionBuilderApiModule
+import org.plasmalabs.strata.cli.modules.WalletAlgebraModule
+import org.plasmalabs.strata.cli.modules.WalletManagementUtilsModule
+import org.plasmalabs.strata.cli.modules.WalletStateAlgebraModule
+import org.plasmalabs.sdk.dataApi.{IndexerQueryAlgebra, RpcChannelResource}
 
 trait CommonTxOperations
     extends TransactionBuilderApiModule

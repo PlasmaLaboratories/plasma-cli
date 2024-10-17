@@ -1,12 +1,12 @@
-package xyz.stratalab.strata.cli.controllers
+package org.plasmalabs.strata.cli.controllers
 
 import cats.effect.kernel.Sync
-import xyz.stratalab.strata.cli.views.BlockDisplayOps
-import xyz.stratalab.sdk.dataApi.NodeQueryAlgebra
-import xyz.stratalab.sdk.display.DisplayOps.DisplayTOps
-import xyz.stratalab.sdk.models.TransactionId
-import xyz.stratalab.sdk.utils.Encoding
-import xyz.stratalab.consensus.models.BlockId
+import org.plasmalabs.strata.cli.views.BlockDisplayOps
+import org.plasmalabs.sdk.dataApi.NodeQueryAlgebra
+import org.plasmalabs.sdk.display.DisplayOps.DisplayTOps
+import org.plasmalabs.sdk.models.TransactionId
+import org.plasmalabs.sdk.utils.Encoding
+import org.plasmalabs.consensus.models.BlockId
 import com.google.protobuf.ByteString
 
 class NodeQueryController[F[_]: Sync](

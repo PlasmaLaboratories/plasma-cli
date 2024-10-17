@@ -1,4 +1,4 @@
-package xyz.stratalab.strata.cli
+package org.plasmalabs.strata.cli
 
 import cats.effect.ExitCode
 import cats.effect.IO
@@ -42,7 +42,11 @@ trait CommonFunctions extends PolicyTemplates {
           .iterateUntil(_ == ExitCode.Success),
         240.seconds
       )
-      ALICE_TO_ADDRESS <- walletController(ALICE_WALLET).currentaddress("self", "default", None)
+      ALICE_TO_ADDRESS <- walletController(ALICE_WALLET).currentaddress(
+        "self",
+        "default",
+        None
+      )
       _ <- IO.println(s"Alice's address is $ALICE_TO_ADDRESS")
       _ <- IO.println("Moving funds from genesis to alice")
       _ <- assertIO(
@@ -78,7 +82,9 @@ trait CommonFunctions extends PolicyTemplates {
       _ <- IO.println("Check alice's address (is contained in the change)")
       res <- IO.asyncForIO.timeout(
         (for {
-          queryRes <- queryAccount("self", "default", None, secure).run(aliceContext)
+          queryRes <- queryAccount("self", "default", None, secure).run(
+            aliceContext
+          )
           _ <- IO.sleep(5.seconds)
         } yield queryRes)
           .iterateUntil(_ == ExitCode.Success),

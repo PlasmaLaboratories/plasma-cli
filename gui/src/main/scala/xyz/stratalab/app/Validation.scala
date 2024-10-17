@@ -1,4 +1,4 @@
-package xyz.stratalab.app
+package org.plasmalabs.app
 
 import scala.util.Try
 import scala.util.Success

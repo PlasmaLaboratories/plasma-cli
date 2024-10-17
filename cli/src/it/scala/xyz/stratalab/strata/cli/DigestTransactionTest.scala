@@ -1,4 +1,4 @@
-package xyz.stratalab.strata.cli
+package org.plasmalabs.strata.cli
 
 import cats.effect.ExitCode
 import cats.effect.IO
@@ -44,7 +44,9 @@ class DigestTransactionTest
         )
         _ <- IO.println("Importing VK to bob's wallet")
         _ <- assertIO(
-          exportVk("bob_digest_fellowship", "digest_template", EMPTY_VK).run(bobContext),
+          exportVk("bob_digest_fellowship", "digest_template", EMPTY_VK).run(
+            bobContext
+          ),
           ExitCode.Success
         )
         _ <- assertIO(
@@ -93,7 +95,8 @@ class DigestTransactionTest
         res <- IO.asyncForIO.timeout(
           (for {
             _ <- IO.println("Querying bob's digest")
-            queryRes <- queryAccount("bob_digest_fellowship", "digest_template").run(bobContext)
+            queryRes <- queryAccount("bob_digest_fellowship", "digest_template")
+              .run(bobContext)
             _ <- IO.sleep(5.seconds)
           } yield queryRes)
             .iterateUntil(_ == ExitCode.Success),

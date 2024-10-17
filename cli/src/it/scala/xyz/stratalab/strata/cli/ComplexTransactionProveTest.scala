@@ -1,4 +1,4 @@
-package xyz.stratalab.strata.cli
+package org.plasmalabs.strata.cli
 
 import cats.effect.ExitCode
 import cats.effect.IO
@@ -63,7 +63,7 @@ class ComplexTransactionProveTest
         _ <- assertIO(
           exportVk("alice_bob_0", "or_sign", BOB_VK).run(bobContext),
           ExitCode.Success
-          )
+        )
         _ <- IO.println("Importing VK to alice's wallet")
         _ <- assertIO(
           importVk("alice_bob_0", "or_sign", ALICE_VK, BOB_VK).run(bobContext),
@@ -71,7 +71,9 @@ class ComplexTransactionProveTest
         )
         _ <- IO.println("Importing VK to bob's wallet")
         _ <- assertIO(
-          importVk("alice_bob_0", "or_sign", ALICE_VK, BOB_VK).run(aliceContext),
+          importVk("alice_bob_0", "or_sign", ALICE_VK, BOB_VK).run(
+            aliceContext
+          ),
           ExitCode.Success
         )
         _ <- IO.println("Moving funds (500 LVLs) from alice to shared account")
@@ -154,12 +156,16 @@ class ComplexTransactionProveTest
         )
         _ <- IO.println("Importing VK to alice's wallet")
         _ <- assertIO(
-          importVk("alice_bob_0", "and_sign", ALICE_VK_AND, BOB_VK_AND).run(bobContext),
+          importVk("alice_bob_0", "and_sign", ALICE_VK_AND, BOB_VK_AND).run(
+            bobContext
+          ),
           ExitCode.Success
         )
         _ <- IO.println("Importing VK to bob's wallet")
         _ <- assertIO(
-          importVk("alice_bob_0", "and_sign", ALICE_VK_AND, BOB_VK_AND).run(aliceContext),
+          importVk("alice_bob_0", "and_sign", ALICE_VK_AND, BOB_VK_AND).run(
+            aliceContext
+          ),
           ExitCode.Success
         )
         _ <- IO.println(
@@ -225,7 +231,8 @@ class ComplexTransactionProveTest
         _ <- IO.println("Address for Alice: " + sharedAddressForAlice)
         _ <- IO.println("Address for Bob: " + sharedAddressForBob)
         _ <- IO.println("Moving funds (200 LVLs) from shared account to alice")
-        ALICE_TO_ADDRESS <- walletController(ALICE_WALLET).currentaddress("self", "default", None)
+        ALICE_TO_ADDRESS <- walletController(ALICE_WALLET)
+          .currentaddress("self", "default", None)
         _ <- IO.println(s"Alice's address is $ALICE_TO_ADDRESS")
         _ <- assertIO(
           createSimpleTransactionToAddress(
@@ -297,7 +304,8 @@ class ComplexTransactionProveTest
         _ <- IO.println(
           "Moving funds (100 LVLs) from shared and account to alice"
         )
-        ALICE_TO_ADDRESS <- walletController(ALICE_WALLET).currentaddress("self", "default", None)
+        ALICE_TO_ADDRESS <- walletController(ALICE_WALLET)
+          .currentaddress("self", "default", None)
         _ <- IO.println(s"Alice's address is $ALICE_TO_ADDRESS")
         _ <- assertIO(
           createSimpleTransactionToAddress(

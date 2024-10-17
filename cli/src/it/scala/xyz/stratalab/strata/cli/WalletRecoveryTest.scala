@@ -1,4 +1,4 @@
-package xyz.stratalab.strata.cli
+package org.plasmalabs.strata.cli
 
 import cats.effect.{ExitCode, IO}
 import munit.CatsEffectSuite
@@ -44,7 +44,8 @@ class WalletRecoveryTest
             .iterateUntil(_ == ExitCode.Success),
           240.seconds
         )
-        next_address <- walletController(WALLET).currentaddress("self", "default", None)
+        next_address <- walletController(WALLET)
+          .currentaddress("self", "default", None)
         _ <- IO.println(s"Next address is $next_address")
         _ <- IO.println("Moving funds from genesis")
         _ <- assertIO(
@@ -114,7 +115,8 @@ class WalletRecoveryTest
           ),
           ExitCode.Success
         )
-        next_address <- walletController(WALLET).currentaddress("self", "default", None)
+        next_address <- walletController(WALLET)
+          .currentaddress("self", "default", None)
         _ <- IO.println(s"Next address is $next_address")
         _ <- IO.println("Spend funds (500 LVLs) using new key")
         _ <- assertIO(

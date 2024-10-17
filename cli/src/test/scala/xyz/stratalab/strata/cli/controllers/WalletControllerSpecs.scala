@@ -1,27 +1,27 @@
-package xyz.stratalab.strata.cli.controllers
+package org.plasmalabs.strata.cli.controllers
 
 import cats.data.EitherT
 import cats.effect.IO
-import xyz.stratalab.strata.cli.mockbase.BaseIndexerQueryAlgebra
-import xyz.stratalab.strata.cli.mockbase.BaseWalletAlgebra
-import xyz.stratalab.strata.cli.mockbase.BaseWalletApi
-import xyz.stratalab.strata.cli.mockbase.BaseWalletManagementUtils
-import xyz.stratalab.strata.cli.mockbase.BaseWalletStateAlgebra
-import xyz.stratalab.strata.cli.modules.WalletKeyApiModule
-import xyz.stratalab.sdk.models.Indices
-import xyz.stratalab.sdk.utils.Encoding
-import xyz.stratalab.sdk.wallet.WalletApi
+import org.plasmalabs.strata.cli.mockbase.BaseIndexerQueryAlgebra
+import org.plasmalabs.strata.cli.mockbase.BaseWalletAlgebra
+import org.plasmalabs.strata.cli.mockbase.BaseWalletApi
+import org.plasmalabs.strata.cli.mockbase.BaseWalletManagementUtils
+import org.plasmalabs.strata.cli.mockbase.BaseWalletStateAlgebra
+import org.plasmalabs.strata.cli.modules.WalletKeyApiModule
+import org.plasmalabs.sdk.models.Indices
+import org.plasmalabs.sdk.utils.Encoding
+import org.plasmalabs.sdk.wallet.WalletApi
 import munit.CatsEffectSuite
 import quivr.models.KeyPair
 
 import java.nio.file.Files
 import java.nio.file.Paths
 import scala.io.Source
-import xyz.stratalab.strata.cli.Sha256
+import org.plasmalabs.strata.cli.Sha256
 import quivr.models.Proposition
 import quivr.models.Preimage
 import com.google.protobuf.ByteString
-import xyz.stratalab.strata.cli.Blake2b
+import org.plasmalabs.strata.cli.Blake2b
 
 class WalletControllerSpecs extends CatsEffectSuite with WalletKeyApiModule {
 

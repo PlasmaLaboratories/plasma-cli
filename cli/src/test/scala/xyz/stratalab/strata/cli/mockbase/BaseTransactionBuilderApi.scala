@@ -1,25 +1,25 @@
-package xyz.stratalab.strata.cli.mockbase
+package org.plasmalabs.strata.cli.mockbase
 
-import xyz.stratalab.sdk.builders.BuilderError
-import xyz.stratalab.sdk.builders.TransactionBuilderApi
-import xyz.stratalab.sdk.models.Datum
-import xyz.stratalab.sdk.models.Event.{GroupPolicy, SeriesPolicy}
-import xyz.stratalab.sdk.models.GroupId
-import xyz.stratalab.sdk.models.LockAddress
-import xyz.stratalab.sdk.models.SeriesId
-import xyz.stratalab.sdk.models.box.AssetMintingStatement
-import xyz.stratalab.sdk.models.box.Attestation
-import xyz.stratalab.sdk.models.box.FungibilityType
-import xyz.stratalab.sdk.models.box.Lock
-import xyz.stratalab.sdk.models.box.QuantityDescriptorType
-import xyz.stratalab.sdk.models.transaction.IoTransaction
-import xyz.stratalab.sdk.models.transaction.UnspentTransactionOutput
-import xyz.stratalab.sdk.syntax.ValueTypeIdentifier
-import xyz.stratalab.indexer.services.Txo
+import org.plasmalabs.sdk.builders.BuilderError
+import org.plasmalabs.sdk.builders.TransactionBuilderApi
+import org.plasmalabs.sdk.models.Datum
+import org.plasmalabs.sdk.models.Event.{GroupPolicy, SeriesPolicy}
+import org.plasmalabs.sdk.models.GroupId
+import org.plasmalabs.sdk.models.LockAddress
+import org.plasmalabs.sdk.models.SeriesId
+import org.plasmalabs.sdk.models.box.AssetMintingStatement
+import org.plasmalabs.sdk.models.box.Attestation
+import org.plasmalabs.sdk.models.box.FungibilityType
+import org.plasmalabs.sdk.models.box.Lock
+import org.plasmalabs.sdk.models.box.QuantityDescriptorType
+import org.plasmalabs.sdk.models.transaction.IoTransaction
+import org.plasmalabs.sdk.models.transaction.UnspentTransactionOutput
+import org.plasmalabs.sdk.syntax.ValueTypeIdentifier
+import org.plasmalabs.indexer.services.Txo
 import com.google.protobuf.ByteString
 import com.google.protobuf.struct.Struct
 import quivr.models.Int128
-import xyz.stratalab.sdk.models.TransactionOutputAddress
+import org.plasmalabs.sdk.models.TransactionOutputAddress
 
 class BaseTransactionBuilderApi[F[_]] extends TransactionBuilderApi[F] {
 

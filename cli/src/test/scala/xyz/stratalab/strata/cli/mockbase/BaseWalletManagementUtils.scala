@@ -1,8 +1,8 @@
-package xyz.stratalab.strata.cli.mockbase
+package org.plasmalabs.strata.cli.mockbase
 
-import xyz.stratalab.strata.cli.impl.WalletManagementUtils
+import org.plasmalabs.strata.cli.impl.WalletManagementUtils
 import cats.effect.kernel.Sync
-import xyz.stratalab.crypto.encryption.VaultStore
+import org.plasmalabs.crypto.encryption.VaultStore
 import quivr.models.KeyPair
 
 class BaseWalletManagementUtils[F[_]: Sync]

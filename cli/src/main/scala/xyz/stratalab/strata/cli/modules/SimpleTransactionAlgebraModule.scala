@@ -1,8 +1,8 @@
-package xyz.stratalab.strata.cli.modules
+package org.plasmalabs.strata.cli.modules
 
-import xyz.stratalab.sdk.constants.NetworkConstants
+import org.plasmalabs.sdk.constants.NetworkConstants
 import cats.effect.IO
-import xyz.stratalab.strata.cli.impl.SimpleTransactionAlgebra
+import org.plasmalabs.strata.cli.impl.SimpleTransactionAlgebra
 
 trait SimpleTransactionAlgebraModule
     extends WalletStateAlgebraModule

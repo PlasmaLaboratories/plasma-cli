@@ -1,10 +1,10 @@
-package xyz.stratalab.strata.cli.mockbase
+package org.plasmalabs.strata.cli.mockbase
 
 import cats.data.ValidatedNel
-import xyz.stratalab.sdk.builders.locks.LockTemplate
-import xyz.stratalab.sdk.dataApi.WalletStateAlgebra
-import xyz.stratalab.sdk.models.Indices
-import xyz.stratalab.sdk.models.box.Lock
+import org.plasmalabs.sdk.builders.locks.LockTemplate
+import org.plasmalabs.sdk.dataApi.WalletStateAlgebra
+import org.plasmalabs.sdk.models.Indices
+import org.plasmalabs.sdk.models.box.Lock
 import quivr.models.{KeyPair, Preimage, Proposition}
 
 class BaseWalletStateAlgebra[F[_]] extends WalletStateAlgebra[F] {

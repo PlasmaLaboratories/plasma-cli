@@ -1,16 +1,16 @@
-package xyz.stratalab.strata.cli.impl
+package org.plasmalabs.strata.cli.impl
 
 import cats.effect.kernel.Resource
 import cats.effect.kernel.Sync
-import xyz.stratalab.sdk.builders.TransactionBuilderApi
-import xyz.stratalab.sdk.dataApi.WalletStateAlgebra
-import xyz.stratalab.sdk.models.Indices
-import xyz.stratalab.sdk.models.LockAddress
-import xyz.stratalab.sdk.models.box.AssetMintingStatement
-import xyz.stratalab.sdk.models.box.Lock
-import xyz.stratalab.sdk.utils.Encoding
-import xyz.stratalab.sdk.wallet.WalletApi
-import xyz.stratalab.indexer.services.Txo
+import org.plasmalabs.sdk.builders.TransactionBuilderApi
+import org.plasmalabs.sdk.dataApi.WalletStateAlgebra
+import org.plasmalabs.sdk.models.Indices
+import org.plasmalabs.sdk.models.LockAddress
+import org.plasmalabs.sdk.models.box.AssetMintingStatement
+import org.plasmalabs.sdk.models.box.Lock
+import org.plasmalabs.sdk.utils.Encoding
+import org.plasmalabs.sdk.wallet.WalletApi
+import org.plasmalabs.indexer.services.Txo
 import com.google.protobuf.ByteString
 import com.google.protobuf.struct.Struct
 import quivr.models.KeyPair

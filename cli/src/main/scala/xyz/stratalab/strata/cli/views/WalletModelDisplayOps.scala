@@ -1,11 +1,11 @@
-package xyz.stratalab.strata.cli.views
+package org.plasmalabs.strata.cli.views
 
 import cats.Id
-import xyz.stratalab.sdk.builders.locks.LockTemplate
-import xyz.stratalab.sdk.builders.locks.PropositionTemplate
-import xyz.stratalab.sdk.dataApi.WalletFellowship
-import xyz.stratalab.sdk.dataApi.WalletTemplate
-import xyz.stratalab.sdk.utils.Encoding
+import org.plasmalabs.sdk.builders.locks.LockTemplate
+import org.plasmalabs.sdk.builders.locks.PropositionTemplate
+import org.plasmalabs.sdk.dataApi.WalletFellowship
+import org.plasmalabs.sdk.dataApi.WalletTemplate
+import org.plasmalabs.sdk.utils.Encoding
 import io.circe.parser.parse
 
 object WalletModelDisplayOps {
@@ -81,7 +81,7 @@ object WalletModelDisplayOps {
   }
 
   def display(walletTemplate: WalletTemplate): String = {
-    import xyz.stratalab.sdk.codecs.LockTemplateCodecs.decodeLockTemplate
+    import org.plasmalabs.sdk.codecs.LockTemplateCodecs.decodeLockTemplate
     (for {
       json <- Id(parse(walletTemplate.lockTemplate))
       decoded <- decodeLockTemplate[Id](json)

@@ -1,4 +1,4 @@
-package xyz.stratalab.strata.cli
+package org.plasmalabs.strata.cli
 
 import cats.effect.kernel.Resource
 import cats.effect.IO
@@ -43,20 +43,22 @@ trait ComplexTransactionTemplates {
       changeAddress: String,
       address: String
   ) = {
-    Resource.make(IO(new PrintWriter(fileName)))(f => IO(f.flush()) >> IO(f.close)).use { file =>
-      IO(
-        file.write(
-          genesisToAddressTxTemplate(
-            genesisBlockAddresses,
-            genesisAmount,
-            changeAmount,
-            feeAmount,
-            changeAddress,
-            address
+    Resource
+      .make(IO(new PrintWriter(fileName)))(f => IO(f.flush()) >> IO(f.close))
+      .use { file =>
+        IO(
+          file.write(
+            genesisToAddressTxTemplate(
+              genesisBlockAddresses,
+              genesisAmount,
+              changeAmount,
+              feeAmount,
+              changeAddress,
+              address
+            )
           )
         )
-      )
-    }
+      }
   }
 
   def createComplexTxFileFromAliceToAliceBobAndOr(
@@ -68,20 +70,22 @@ trait ComplexTransactionTemplates {
       addressAliceBobAnd: String,
       addressAliceEveAnd: String
   ) = {
-    Resource.make(IO(new PrintWriter(fileName)))(f => IO(f.flush()) >> IO(f.close)).use { file =>
-      IO(
-        file.write(
-          aliceToSharedTxTemplate(
-            aliceUtxoAddress,
-            aliceKey,
-            initialAmount,
-            addressAliceChange,
-            addressAliceBobAnd,
-            addressAliceEveAnd
+    Resource
+      .make(IO(new PrintWriter(fileName)))(f => IO(f.flush()) >> IO(f.close))
+      .use { file =>
+        IO(
+          file.write(
+            aliceToSharedTxTemplate(
+              aliceUtxoAddress,
+              aliceKey,
+              initialAmount,
+              addressAliceChange,
+              addressAliceBobAnd,
+              addressAliceEveAnd
+            )
           )
         )
-      )
-    }
+      }
   }
 
   def aliceToSharedTxTemplate(
@@ -125,23 +129,25 @@ trait ComplexTransactionTemplates {
       orAmount: Long,
       addressBob: String
   ) = {
-    Resource.make(IO(new PrintWriter(fileName)))(f => IO(f.flush()) >> IO(f.close)).use { file =>
-      IO(
-        file.write(
-          sharedTemplatesToBob(
-            andUtxoAddress,
-            orUtxoAddress,
-            aliceAndKey,
-            bobAndKey,
-            aliceOrKey,
-            bobOrKey,
-            andAmount,
-            orAmount,
-            addressBob
+    Resource
+      .make(IO(new PrintWriter(fileName)))(f => IO(f.flush()) >> IO(f.close))
+      .use { file =>
+        IO(
+          file.write(
+            sharedTemplatesToBob(
+              andUtxoAddress,
+              orUtxoAddress,
+              aliceAndKey,
+              bobAndKey,
+              aliceOrKey,
+              bobOrKey,
+              andAmount,
+              orAmount,
+              addressBob
+            )
           )
         )
-      )
-    }
+      }
   }
 
   def sharedTemplatesToBob(

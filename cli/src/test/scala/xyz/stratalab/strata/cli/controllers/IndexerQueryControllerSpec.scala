@@ -1,13 +1,13 @@
-package xyz.stratalab.strata.cli.controllers
+package org.plasmalabs.strata.cli.controllers
 
 import cats.Monad
 import cats.effect.IO
-import xyz.stratalab.strata.cli.mockbase.BaseWalletStateAlgebra
-import xyz.stratalab.strata.cli.modules.DummyObjects
-import xyz.stratalab.sdk.dataApi.IndexerQueryAlgebra
-import xyz.stratalab.sdk.display.DisplayOps.DisplayTOps
-import xyz.stratalab.sdk.models.LockAddress
-import xyz.stratalab.indexer.services.{Txo, TxoState}
+import org.plasmalabs.strata.cli.mockbase.BaseWalletStateAlgebra
+import org.plasmalabs.strata.cli.modules.DummyObjects
+import org.plasmalabs.sdk.dataApi.IndexerQueryAlgebra
+import org.plasmalabs.sdk.display.DisplayOps.DisplayTOps
+import org.plasmalabs.sdk.models.LockAddress
+import org.plasmalabs.indexer.services.{Txo, TxoState}
 import munit.CatsEffectSuite
 
 class IndexerQueryControllerSpec extends CatsEffectSuite with DummyObjects {

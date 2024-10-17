@@ -1,16 +1,16 @@
-package xyz.stratalab.strata.cli.controllers
+package org.plasmalabs.strata.cli.controllers
 
 import cats.effect.IO
-import xyz.stratalab.strata.cli.mockbase.BaseNodeQueryAlgebra
-import xyz.stratalab.sdk.models.transaction.IoTransaction
-import xyz.stratalab.consensus.models.BlockId
-import xyz.stratalab.node.models.BlockBody
+import org.plasmalabs.strata.cli.mockbase.BaseNodeQueryAlgebra
+import org.plasmalabs.sdk.models.transaction.IoTransaction
+import org.plasmalabs.consensus.models.BlockId
+import org.plasmalabs.node.models.BlockBody
 import munit.CatsEffectSuite
-import xyz.stratalab.strata.cli.modules.DummyObjects
-import xyz.stratalab.strata.cli.views.BlockDisplayOps
-import xyz.stratalab.sdk.display.DisplayOps.DisplayTOps
-import xyz.stratalab.sdk.models.TransactionId
-import xyz.stratalab.consensus.models.BlockHeader
+import org.plasmalabs.strata.cli.modules.DummyObjects
+import org.plasmalabs.strata.cli.views.BlockDisplayOps
+import org.plasmalabs.sdk.display.DisplayOps.DisplayTOps
+import org.plasmalabs.sdk.models.TransactionId
+import org.plasmalabs.consensus.models.BlockHeader
 
 class NodeQueryControllerSpec extends CatsEffectSuite with DummyObjects {
 

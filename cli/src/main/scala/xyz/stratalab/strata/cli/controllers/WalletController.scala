@@ -1,27 +1,27 @@
-package xyz.stratalab.strata.cli.controllers
+package org.plasmalabs.strata.cli.controllers
 
 import cats.data.OptionT
 import cats.effect.kernel.Resource
 import cats.effect.kernel.Sync
-import xyz.stratalab.sdk.builders.TransactionBuilderApi
-import xyz.stratalab.strata.cli.StrataCliParams
-import xyz.stratalab.strata.cli.impl.WalletAlgebra
-import xyz.stratalab.strata.cli.impl.WalletManagementUtils
-import xyz.stratalab.strata.cli.impl.WalletModeHelper
-import xyz.stratalab.sdk.codecs.AddressCodecs
-import xyz.stratalab.sdk.constants.NetworkConstants
-import xyz.stratalab.sdk.dataApi
-import xyz.stratalab.sdk.models.Indices
-import xyz.stratalab.sdk.models.LockAddress
-import xyz.stratalab.sdk.models.LockId
-import xyz.stratalab.sdk.utils.Encoding
-import xyz.stratalab.sdk.wallet.WalletApi
-import xyz.stratalab.indexer.services.Txo
-import xyz.stratalab.indexer.services.TxoState
-import xyz.stratalab.shared.models.AssetTokenBalanceDTO
-import xyz.stratalab.shared.models.GroupTokenBalanceDTO
-import xyz.stratalab.shared.models.LvlBalance
-import xyz.stratalab.shared.models.SeriesTokenBalanceDTO
+import org.plasmalabs.sdk.builders.TransactionBuilderApi
+import org.plasmalabs.strata.cli.StrataCliParams
+import org.plasmalabs.strata.cli.impl.WalletAlgebra
+import org.plasmalabs.strata.cli.impl.WalletManagementUtils
+import org.plasmalabs.strata.cli.impl.WalletModeHelper
+import org.plasmalabs.sdk.codecs.AddressCodecs
+import org.plasmalabs.sdk.constants.NetworkConstants
+import org.plasmalabs.sdk.dataApi
+import org.plasmalabs.sdk.models.Indices
+import org.plasmalabs.sdk.models.LockAddress
+import org.plasmalabs.sdk.models.LockId
+import org.plasmalabs.sdk.utils.Encoding
+import org.plasmalabs.sdk.wallet.WalletApi
+import org.plasmalabs.indexer.services.Txo
+import org.plasmalabs.indexer.services.TxoState
+import org.plasmalabs.shared.models.AssetTokenBalanceDTO
+import org.plasmalabs.shared.models.GroupTokenBalanceDTO
+import org.plasmalabs.shared.models.LvlBalance
+import org.plasmalabs.shared.models.SeriesTokenBalanceDTO
 import quivr.models.VerificationKey
 
 import java.io.File
@@ -29,10 +29,10 @@ import java.io.PrintWriter
 import quivr.models.Preimage
 import com.google.protobuf.ByteString
 import quivr.models.Proposition
-import xyz.stratalab.strata.cli.DigestType
+import org.plasmalabs.strata.cli.DigestType
 import quivr.models.Digest
-import xyz.stratalab.strata.cli.Sha256
-import xyz.stratalab.crypto.hash.Blake2b256
+import org.plasmalabs.strata.cli.Sha256
+import org.plasmalabs.crypto.hash.Blake2b256
 
 class WalletController[F[_]: Sync](
     walletStateAlgebra: dataApi.WalletStateAlgebra[F],
@@ -46,7 +46,7 @@ class WalletController[F[_]: Sync](
       secretTxt: String,
       digest: DigestType
   ): F[Either[String, String]] = {
-    import xyz.stratalab.crypto.hash.implicits.sha256Hash
+    import org.plasmalabs.crypto.hash.implicits.sha256Hash
     import cats.implicits._
     val paddedSecret = secretTxt.getBytes() ++ Array
       .fill(32 - secretTxt.getBytes().length)(0.toByte)
@@ -132,8 +132,8 @@ class WalletController[F[_]: Sync](
   ): F[Either[String, String]] = {
     import cats.implicits._
     import TransactionBuilderApi.implicits._
-    import xyz.stratalab.sdk.common.ContainsEvidence.Ops
-    import xyz.stratalab.sdk.common.ContainsImmutable.instances._
+    import org.plasmalabs.sdk.common.ContainsEvidence.Ops
+    import org.plasmalabs.sdk.common.ContainsImmutable.instances._
     for {
       keyAndEncodedKeys <- (inputVks
         .map { file =>
@@ -390,8 +390,8 @@ class WalletController[F[_]: Sync](
   ): F[Either[String, String]] = {
     import cats.implicits._
     import TransactionBuilderApi.implicits._
-    import xyz.stratalab.sdk.common.ContainsEvidence.Ops
-    import xyz.stratalab.sdk.common.ContainsImmutable.instances._
+    import org.plasmalabs.sdk.common.ContainsEvidence.Ops
+    import org.plasmalabs.sdk.common.ContainsImmutable.instances._
     (for {
       // current indices
       someIndices <- walletStateAlgebra.getCurrentIndicesForFunds(

@@ -1,6 +1,6 @@
-package xyz.stratalab.strata.cli.modules
+package org.plasmalabs.strata.cli.modules
 
-import xyz.stratalab.strata.cli.impl.WalletAlgebra
+import org.plasmalabs.strata.cli.impl.WalletAlgebra
 
 trait WalletAlgebraModule
     extends WalletStateAlgebraModule

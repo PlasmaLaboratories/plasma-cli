@@ -1,4 +1,4 @@
-package xyz.stratalab.strata.cli
+package org.plasmalabs.strata.cli
 
 trait AliceConstants extends BaseConstants {
 
@@ -10,15 +10,18 @@ trait AliceConstants extends BaseConstants {
 
   val ALICE_TRANSFER_GROUP_TX_RAW = s"$TMP_DIR/alice_transfer_group_tx.pbuf"
 
-  val ALICE_TRANSFER_GROUP_TX_PROVED = s"$TMP_DIR/alice_transfer_group_tx_proved.pbuf"
+  val ALICE_TRANSFER_GROUP_TX_PROVED =
+    s"$TMP_DIR/alice_transfer_group_tx_proved.pbuf"
 
   val ALICE_TRANSFER_SERIES_TX_RAW = s"$TMP_DIR/alice_transfer_series_tx.pbuf"
 
   val ALICE_TRANSFER_ASSET_TX_RAW = s"$TMP_DIR/alice_transfer_asset_tx.pbuf"
 
-  val ALICE_TRANSFER_SERIES_TX_PROVED = s"$TMP_DIR/alice_transfer_series_tx_proved.pbuf"
+  val ALICE_TRANSFER_SERIES_TX_PROVED =
+    s"$TMP_DIR/alice_transfer_series_tx_proved.pbuf"
 
-  val ALICE_TRANSFER_ASSET_TX_PROVED = s"$TMP_DIR/alice_transfer_asset_tx_proved.pbuf"
+  val ALICE_TRANSFER_ASSET_TX_PROVED =
+    s"$TMP_DIR/alice_transfer_asset_tx_proved.pbuf"
 
   val ALICE_FIRST_TX_RAW = s"$TMP_DIR/alice_first_tx.pbuf"
 
@@ -28,33 +31,42 @@ trait AliceConstants extends BaseConstants {
 
   val ALICE_FIRST_SERIES_POLICY = s"$TMP_DIR/alice_first_series_policy.yaml"
 
-  val ALICE_FIRST_ASSET_MINTING_STATEMENT = s"$TMP_DIR/alice_first_am_statement.yaml"
+  val ALICE_FIRST_ASSET_MINTING_STATEMENT =
+    s"$TMP_DIR/alice_first_am_statement.yaml"
 
-  val ALICE_FIRST_GROUP_MINTING_TX = s"$TMP_DIR/alice_first_group_minting_tx.pbuf"
+  val ALICE_FIRST_GROUP_MINTING_TX =
+    s"$TMP_DIR/alice_first_group_minting_tx.pbuf"
 
-  val ALICE_FIRST_SERIES_MINTING_TX = s"$TMP_DIR/alice_first_series_minting_tx.pbuf"
+  val ALICE_FIRST_SERIES_MINTING_TX =
+    s"$TMP_DIR/alice_first_series_minting_tx.pbuf"
 
-  val ALICE_FIRST_ASSET_MINTING_TX = s"$TMP_DIR/alice_first_asset_minting_tx.pbuf"
+  val ALICE_FIRST_ASSET_MINTING_TX =
+    s"$TMP_DIR/alice_first_asset_minting_tx.pbuf"
 
-  val ALICE_FIRST_ASSET_MINTING_METADATA = s"$TMP_DIR/alice_first_asset_minting_metadata.json"
+  val ALICE_FIRST_ASSET_MINTING_METADATA =
+    s"$TMP_DIR/alice_first_asset_minting_metadata.json"
 
-  val ALICE_FIRST_GROUP_MINTING_TX_PROVED = s"$TMP_DIR/alice_first_group_minting_tx_proved.pbuf"
+  val ALICE_FIRST_GROUP_MINTING_TX_PROVED =
+    s"$TMP_DIR/alice_first_group_minting_tx_proved.pbuf"
 
-  val ALICE_FIRST_SERIES_MINTING_TX_PROVED = s"$TMP_DIR/alice_first_series_minting_tx_proved.pbuf"
+  val ALICE_FIRST_SERIES_MINTING_TX_PROVED =
+    s"$TMP_DIR/alice_first_series_minting_tx_proved.pbuf"
 
-  val ALICE_FIRST_ASSET_MINTING_TX_PROVED = s"$TMP_DIR/alice_first_asset_minting_tx_proved.pbuf"
+  val ALICE_FIRST_ASSET_MINTING_TX_PROVED =
+    s"$TMP_DIR/alice_first_asset_minting_tx_proved.pbuf"
 
   val ALICE_SECOND_COMPLEX_TX = s"$TMP_DIR/alice_second_complex_tx.yaml"
 
   val ALICE_THIRD_COMPLEX_TX = s"$TMP_DIR/alice_third_complex_tx.yaml"
 
   val ALICE_FIRST_COMPLEX_TX_RAW = s"$TMP_DIR/alice_first_complex_tx.pbuf"
-  
+
   val ALICE_SECOND_COMPLEX_TX_RAW = s"$TMP_DIR/alice_second_complex_tx.pbuf"
 
   val ALICE_THIRD_COMPLEX_TX_RAW = s"$TMP_DIR/alice_third_complex_tx.pbuf"
 
-  val ALICE_FIRST_COMPLEX_TX_PROVED = s"$TMP_DIR/alice_first_complex_tx_proved.pbuf"
+  val ALICE_FIRST_COMPLEX_TX_PROVED =
+    s"$TMP_DIR/alice_first_complex_tx_proved.pbuf"
 
   val ALICE_FIRST_TX_PROVED = s"$TMP_DIR/alice_first_tx_proved.pbuf"
 
@@ -80,11 +92,14 @@ trait AliceConstants extends BaseConstants {
 
   val ALICE_SECOND_TX_PROVED = s"$TMP_DIR/alice_second_tx_proved.pbuf"
 
-  val ALICE_SECOND_COMPLEX_TX_PROVED = s"$TMP_DIR/alice_second_complex_tx_proved.pbuf"
+  val ALICE_SECOND_COMPLEX_TX_PROVED =
+    s"$TMP_DIR/alice_second_complex_tx_proved.pbuf"
 
-  val ALICE_THIRD_COMPLEX_TX_PROVED = s"$TMP_DIR/alice_third_complex_tx_proved.pbuf"
+  val ALICE_THIRD_COMPLEX_TX_PROVED =
+    s"$TMP_DIR/alice_third_complex_tx_proved.pbuf"
 
-  val ALICE_THIRD_COMPLEX_TX_PROVED_BY_BOTH = s"$TMP_DIR/alice_third_complex_tx_proved_by_both.pbuf"
+  val ALICE_THIRD_COMPLEX_TX_PROVED_BY_BOTH =
+    s"$TMP_DIR/alice_third_complex_tx_proved_by_both.pbuf"
 
   val ALICE_THIRD_TX_PROVED = s"$TMP_DIR/alice_third_tx_proved.pbuf"
 

@@ -1,18 +1,18 @@
-package xyz.stratalab.strata.cli.controllers
+package org.plasmalabs.strata.cli.controllers
 
 import cats.Monad
 import cats.data.Validated
 import cats.effect.kernel.Sync
-import xyz.stratalab.strata.cli.TokenType
-import xyz.stratalab.strata.cli.impl.SimpleTransactionAlgebra
-import xyz.stratalab.sdk.dataApi.WalletStateAlgebra
-import xyz.stratalab.sdk.models.GroupId
-import xyz.stratalab.sdk.models.LockAddress
-import xyz.stratalab.sdk.models.SeriesId
-import xyz.stratalab.sdk.syntax.AssetType
-import xyz.stratalab.sdk.syntax.GroupType
-import xyz.stratalab.sdk.syntax.LvlType
-import xyz.stratalab.sdk.syntax.SeriesType
+import org.plasmalabs.strata.cli.TokenType
+import org.plasmalabs.strata.cli.impl.SimpleTransactionAlgebra
+import org.plasmalabs.sdk.dataApi.WalletStateAlgebra
+import org.plasmalabs.sdk.models.GroupId
+import org.plasmalabs.sdk.models.LockAddress
+import org.plasmalabs.sdk.models.SeriesId
+import org.plasmalabs.sdk.syntax.AssetType
+import org.plasmalabs.sdk.syntax.GroupType
+import org.plasmalabs.sdk.syntax.LvlType
+import org.plasmalabs.sdk.syntax.SeriesType
 
 class SimpleTransactionController[F[_]: Sync](
     walletStateAlgebra: WalletStateAlgebra[F],

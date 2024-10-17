@@ -1,42 +1,42 @@
-package xyz.stratalab.strata.cli.modules
+package org.plasmalabs.strata.cli.modules
 
 import cats.Monad
-import xyz.stratalab.sdk.codecs.AddressCodecs
-import xyz.stratalab.sdk.dataApi.IndexerQueryAlgebra
-import xyz.stratalab.sdk.models.Datum
-import xyz.stratalab.sdk.models.GroupId
-import xyz.stratalab.sdk.models.LockAddress
-import xyz.stratalab.sdk.models.SeriesId
-import xyz.stratalab.sdk.models.TransactionId
-import xyz.stratalab.sdk.models.TransactionOutputAddress
-import xyz.stratalab.sdk.models.box.Attestation
-import xyz.stratalab.sdk.models.box.Challenge
-import xyz.stratalab.sdk.models.box.FungibilityType
-import xyz.stratalab.sdk.models.box.Lock
-import xyz.stratalab.sdk.models.box.QuantityDescriptorType
-import xyz.stratalab.sdk.models.box.Value
-import xyz.stratalab.sdk.models.transaction.SpentTransactionOutput
-import xyz.stratalab.sdk.models.transaction.UnspentTransactionOutput
-import xyz.stratalab.sdk.utils.Encoding
-import xyz.stratalab.consensus.models.BlockId
-import xyz.stratalab.indexer.services.Txo
-import xyz.stratalab.indexer.services.TxoState
-import xyz.stratalab.node.models.BlockBody
+import org.plasmalabs.sdk.codecs.AddressCodecs
+import org.plasmalabs.sdk.dataApi.IndexerQueryAlgebra
+import org.plasmalabs.sdk.models.Datum
+import org.plasmalabs.sdk.models.GroupId
+import org.plasmalabs.sdk.models.LockAddress
+import org.plasmalabs.sdk.models.SeriesId
+import org.plasmalabs.sdk.models.TransactionId
+import org.plasmalabs.sdk.models.TransactionOutputAddress
+import org.plasmalabs.sdk.models.box.Attestation
+import org.plasmalabs.sdk.models.box.Challenge
+import org.plasmalabs.sdk.models.box.FungibilityType
+import org.plasmalabs.sdk.models.box.Lock
+import org.plasmalabs.sdk.models.box.QuantityDescriptorType
+import org.plasmalabs.sdk.models.box.Value
+import org.plasmalabs.sdk.models.transaction.SpentTransactionOutput
+import org.plasmalabs.sdk.models.transaction.UnspentTransactionOutput
+import org.plasmalabs.sdk.utils.Encoding
+import org.plasmalabs.consensus.models.BlockId
+import org.plasmalabs.indexer.services.Txo
+import org.plasmalabs.indexer.services.TxoState
+import org.plasmalabs.node.models.BlockBody
 import com.google.protobuf.ByteString
 import quivr.models.Int128
 import quivr.models.Proposition
-import xyz.stratalab.consensus.models.BlockHeader
-import xyz.stratalab.consensus.models.EligibilityCertificate
-import xyz.stratalab.consensus.models.OperationalCertificate
-import xyz.stratalab.consensus.models.StakingAddress
-import xyz.stratalab.consensus.models.ProtocolVersion
-import xyz.stratalab.consensus.models.VerificationKeyKesProduct
-import xyz.stratalab.consensus.models.SignatureKesProduct
-import xyz.stratalab.consensus.models.SignatureKesSum
+import org.plasmalabs.consensus.models.BlockHeader
+import org.plasmalabs.consensus.models.EligibilityCertificate
+import org.plasmalabs.consensus.models.OperationalCertificate
+import org.plasmalabs.consensus.models.StakingAddress
+import org.plasmalabs.consensus.models.ProtocolVersion
+import org.plasmalabs.consensus.models.VerificationKeyKesProduct
+import org.plasmalabs.consensus.models.SignatureKesProduct
+import org.plasmalabs.consensus.models.SignatureKesSum
 
 trait DummyObjects {
 
-  import xyz.stratalab.sdk.syntax._
+  import org.plasmalabs.sdk.syntax._
 
   lazy val transactionId01 = TransactionId(
     ByteString.copyFrom(
@@ -169,7 +169,7 @@ trait DummyObjects {
       lockAddress01,
       lvlValue01
     ),
-    xyz.stratalab.indexer.services.TxoState.UNSPENT,
+    org.plasmalabs.indexer.services.TxoState.UNSPENT,
     transactionOutputAddress01
   )
 
@@ -178,7 +178,7 @@ trait DummyObjects {
       lockAddress01,
       groupValue01
     ),
-    xyz.stratalab.indexer.services.TxoState.UNSPENT,
+    org.plasmalabs.indexer.services.TxoState.UNSPENT,
     transactionOutputAddress02
   )
 
@@ -187,7 +187,7 @@ trait DummyObjects {
       lockAddress01,
       seriesValue01
     ),
-    xyz.stratalab.indexer.services.TxoState.UNSPENT,
+    org.plasmalabs.indexer.services.TxoState.UNSPENT,
     transactionOutputAddress03
   )
 
@@ -196,7 +196,7 @@ trait DummyObjects {
       lockAddress01,
       assetValue01
     ),
-    xyz.stratalab.indexer.services.TxoState.UNSPENT,
+    org.plasmalabs.indexer.services.TxoState.UNSPENT,
     transactionOutputAddress03
   )
 
@@ -256,7 +256,7 @@ trait DummyObjects {
     lvlValue01
   )
 
-  lazy val iotransaction01 = xyz.stratalab.sdk.models.transaction
+  lazy val iotransaction01 = org.plasmalabs.sdk.models.transaction
     .IoTransaction(
       Some(transactionId01),
       Seq(stxo01),

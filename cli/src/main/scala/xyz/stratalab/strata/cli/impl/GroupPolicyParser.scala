@@ -1,12 +1,12 @@
-package xyz.stratalab.strata.cli.impl
+package org.plasmalabs.strata.cli.impl
 
 import cats.effect.kernel.Sync
 import cats.effect.kernel.Resource
 import scala.io.BufferedSource
-import xyz.stratalab.sdk.models.Event
-import xyz.stratalab.sdk.utils.Encoding
+import org.plasmalabs.sdk.models.Event
+import org.plasmalabs.sdk.utils.Encoding
 import com.google.protobuf.ByteString
-import xyz.stratalab.sdk.models.SeriesId
+import org.plasmalabs.sdk.models.SeriesId
 
 case class GroupPolicy(
     label: String,

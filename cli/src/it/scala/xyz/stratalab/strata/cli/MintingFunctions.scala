@@ -1,9 +1,9 @@
-package xyz.stratalab.strata.cli
+package org.plasmalabs.strata.cli
 
 import cats.effect.ExitCode
 import cats.effect.IO
-import xyz.stratalab.sdk.codecs.AddressCodecs.decodeAddress
-import xyz.stratalab.sdk.utils.Encoding
+import org.plasmalabs.sdk.codecs.AddressCodecs.decodeAddress
+import org.plasmalabs.sdk.utils.Encoding
 import munit.CatsEffectSuite
 
 trait MintingFunctions extends PolicyTemplates {

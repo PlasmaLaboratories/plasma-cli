@@ -1,6 +1,6 @@
-package xyz.stratalab.strata.cli.mockbase
+package org.plasmalabs.strata.cli.mockbase
 
-import xyz.stratalab.strata.cli.impl.WalletAlgebra
+import org.plasmalabs.strata.cli.impl.WalletAlgebra
 
 class BaseWalletAlgebra[F[_]] extends WalletAlgebra[F] {
 

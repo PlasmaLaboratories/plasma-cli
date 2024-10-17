@@ -1,4 +1,4 @@
-package xyz.stratalab.strata.cli
+package org.plasmalabs.strata.cli
 
 case class WalletKeyConfig(
     walletFile: String,
@@ -15,7 +15,7 @@ trait BaseConstants {
 
   val BASE_FEE = 10
 
-  val HOST = "localhost"//"testnet.topl.co"
+  val HOST = "localhost" // "testnet.topl.co"
 
   val NODE_PORT = 9084 // 443
 

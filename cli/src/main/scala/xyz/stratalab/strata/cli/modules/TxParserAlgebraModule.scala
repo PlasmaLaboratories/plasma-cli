@@ -1,7 +1,7 @@
-package xyz.stratalab.strata.cli.modules
+package org.plasmalabs.strata.cli.modules
 
 import cats.effect.IO
-import xyz.stratalab.strata.cli.impl.TxParserAlgebra
+import org.plasmalabs.strata.cli.impl.TxParserAlgebra
 
 trait TxParserAlgebraModule extends TransactionBuilderApiModule {
 

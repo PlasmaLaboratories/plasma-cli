@@ -1,12 +1,12 @@
-package xyz.stratalab.strata.cli.modules
+package org.plasmalabs.strata.cli.modules
 
 import cats.effect.IO
-import xyz.stratalab.strata.cli.StrataCliParams
-import xyz.stratalab.strata.cli.StrataCliSubCmd
-import xyz.stratalab.strata.cli.controllers.WalletController
-import xyz.stratalab.sdk.dataApi.{IndexerQueryAlgebra, RpcChannelResource}
+import org.plasmalabs.strata.cli.StrataCliParams
+import org.plasmalabs.strata.cli.StrataCliSubCmd
+import org.plasmalabs.strata.cli.controllers.WalletController
+import org.plasmalabs.sdk.dataApi.{IndexerQueryAlgebra, RpcChannelResource}
 import scopt.OParser
-import xyz.stratalab.strata.cli.StrataCliParamsParserModule
+import org.plasmalabs.strata.cli.StrataCliParamsParserModule
 
 trait WalletModeModule
     extends WalletStateAlgebraModule

@@ -1,10 +1,10 @@
-package xyz.stratalab.strata.cli
+package org.plasmalabs.strata.cli
 
 import cats.effect.ExitCode
 import munit.CatsEffectSuite
 import cats.effect.IO
-import xyz.stratalab.sdk.codecs.AddressCodecs.decodeAddress
-import xyz.stratalab.sdk.utils.Encoding
+import org.plasmalabs.sdk.codecs.AddressCodecs.decodeAddress
+import org.plasmalabs.sdk.utils.Encoding
 import scala.concurrent.duration.Duration
 
 class GeneralTransferTests

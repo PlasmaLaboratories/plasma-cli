@@ -1,7 +1,7 @@
-package xyz.stratalab.strata.cli.modules
+package org.plasmalabs.strata.cli.modules
 
 import cats.effect.IO
-import xyz.stratalab.sdk.builders.TransactionBuilderApi
+import org.plasmalabs.sdk.builders.TransactionBuilderApi
 
 trait TransactionBuilderApiModule {
   def transactionBuilderApi(networkId: Int, ledgerId: Int) =

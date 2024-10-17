@@ -1,4 +1,4 @@
-package xyz.stratalab.shared.models
+package org.plasmalabs.shared.models
 
 case class TxRequest(
     fromFellowship: String,

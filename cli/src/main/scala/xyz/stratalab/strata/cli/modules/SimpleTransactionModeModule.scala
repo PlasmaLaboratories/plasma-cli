@@ -1,11 +1,11 @@
-package xyz.stratalab.strata.cli.modules
+package org.plasmalabs.strata.cli.modules
 
 import cats.effect.IO
-import xyz.stratalab.strata.cli.StrataCliSubCmd
-import xyz.stratalab.strata.cli.controllers.SimpleTransactionController
-import xyz.stratalab.strata.cli.StrataCliParams
+import org.plasmalabs.strata.cli.StrataCliSubCmd
+import org.plasmalabs.strata.cli.controllers.SimpleTransactionController
+import org.plasmalabs.strata.cli.StrataCliParams
 import scopt.OParser
-import xyz.stratalab.strata.cli.StrataCliParamsParserModule
+import org.plasmalabs.strata.cli.StrataCliParamsParserModule
 
 trait SimpleTransactionModeModule
     extends SimpleTransactionAlgebraModule
@@ -15,13 +15,13 @@ trait SimpleTransactionModeModule
       validateParams: StrataCliParams
   ): IO[Either[String, String]] = validateParams.subcmd match {
     case StrataCliSubCmd.invalid =>
-        IO.pure(
-          Left(
-            OParser.usage(
-              StrataCliParamsParserModule.simpleTransactionMode
-            ) + "\nA subcommand needs to be specified"
-          )
+      IO.pure(
+        Left(
+          OParser.usage(
+            StrataCliParamsParserModule.simpleTransactionMode
+          ) + "\nA subcommand needs to be specified"
         )
+      )
     case StrataCliSubCmd.create =>
       new SimpleTransactionController(
         walletStateAlgebra(

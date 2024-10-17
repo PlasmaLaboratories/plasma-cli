@@ -1,9 +1,9 @@
-package xyz.stratalab.strata.cli.impl
+package org.plasmalabs.strata.cli.impl
 
 import cats.effect.kernel.Sync
-import xyz.stratalab.sdk.dataApi.WalletKeyApiAlgebra
-import xyz.stratalab.sdk.wallet.WalletApi
-import xyz.stratalab.crypto.encryption.VaultStore
+import org.plasmalabs.sdk.dataApi.WalletKeyApiAlgebra
+import org.plasmalabs.sdk.wallet.WalletApi
+import org.plasmalabs.crypto.encryption.VaultStore
 import quivr.models.KeyPair
 
 class WalletManagementUtils[F[_]: Sync](

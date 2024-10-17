@@ -1,7 +1,7 @@
-package xyz.stratalab.app
+package org.plasmalabs.app
 
 import com.raquo.laminar.api.L._
-import xyz.stratalab.shared.models.NetworkResponseDTO
+import org.plasmalabs.shared.models.NetworkResponseDTO
 
 sealed trait TxSection
 
@@ -17,7 +17,9 @@ class TxComponent(networkVar: Var[String]) {
 
   lazy val fromTemplate = Var("")
 
-  lazy val availableAssets: Var[List[(Option[String], Option[String])]] = Var(List())
+  lazy val availableAssets: Var[List[(Option[String], Option[String])]] = Var(
+    List()
+  )
 
   lazy val currentAsset: Var[String] = Var("LVL")
 
@@ -56,8 +58,7 @@ class TxComponent(networkVar: Var[String]) {
         })
     } --> { x =>
     networkVar.update(_ => x.map(_.networkId).get)
-  } 
-
+  }
 
   lazy val component = {
     div(

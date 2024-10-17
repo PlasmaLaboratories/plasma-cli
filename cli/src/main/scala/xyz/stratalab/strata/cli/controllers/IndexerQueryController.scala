@@ -1,11 +1,11 @@
-package xyz.stratalab.strata.cli.controllers
+package org.plasmalabs.strata.cli.controllers
 
 import cats.Monad
 import cats.effect.kernel.Sync
-import xyz.stratalab.strata.cli.TokenType
-import xyz.stratalab.sdk.codecs.AddressCodecs
-import xyz.stratalab.sdk.dataApi.{IndexerQueryAlgebra, WalletStateAlgebra}
-import xyz.stratalab.sdk.display.DisplayOps.DisplayTOps
+import org.plasmalabs.strata.cli.TokenType
+import org.plasmalabs.sdk.codecs.AddressCodecs
+import org.plasmalabs.sdk.dataApi.{IndexerQueryAlgebra, WalletStateAlgebra}
+import org.plasmalabs.sdk.display.DisplayOps.DisplayTOps
 
 class IndexerQueryController[F[_]: Sync](
     walletStateAlgebra: WalletStateAlgebra[F],

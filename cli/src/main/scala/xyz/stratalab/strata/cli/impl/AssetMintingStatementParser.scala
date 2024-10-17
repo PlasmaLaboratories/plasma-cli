@@ -1,8 +1,8 @@
-package xyz.stratalab.strata.cli.impl
+package org.plasmalabs.strata.cli.impl
 
 import cats.effect.kernel.Resource
 import cats.effect.kernel.Sync
-import xyz.stratalab.sdk.models.box.{
+import org.plasmalabs.sdk.models.box.{
   AssetMintingStatement => PBAssetMintingStatement
 }
 import io.circe.Json
@@ -31,7 +31,7 @@ object AssetMintingStatementParser {
     import cats.implicits._
     import io.circe.generic.auto._
     import io.circe.yaml
-    import xyz.stratalab.sdk.syntax._
+    import org.plasmalabs.sdk.syntax._
 
     private def assetMintingStatementToPBAMS(
         assetMintingStatement: AssetMintingStatement

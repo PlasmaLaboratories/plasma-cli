@@ -9,7 +9,7 @@ lazy val shared = crossProject(JSPlatform, JVMPlatform)
   .enablePlugins(BuildInfoPlugin)
   .settings(commonSettings)
   .settings(
-    organization := "xyz.stratalab",
+    organization := "org.plasmalabs",
     // sbt-BuildInfo plugin can write any (simple) data available in sbt at
     // compile time to a `case class BuildInfo` that it makes available at runtime.
     buildInfoKeys := Seq[BuildInfoKey](
@@ -20,7 +20,7 @@ lazy val shared = crossProject(JSPlatform, JVMPlatform)
     // The BuildInfo case class is located in target/scala<version>/src_managed,
     // and with this setting, you'll need to `import com.raquo.buildinfo.BuildInfo`
     // to use it.
-    buildInfoPackage := "xyz.stratalab.buildinfo",
+    buildInfoPackage := "org.plasmalabs.buildinfo",
     // Because we add BuildInfo to the `shared` project, this will be available
     // on both the client and the server, but you can also make it e.g. server-only.
     homepage := Some(url("https://github.com/Stratalab/strata-cli")),
@@ -101,7 +101,7 @@ lazy val gui = project
 lazy val root = project
   .in(file("."))
   .settings(
-    organization := "xyz.stratalab",
+    organization := "org.plasmalabs",
     name := "strata-cli-umbrella"
   )
   .settings(noPublish)
@@ -113,7 +113,7 @@ lazy val cli = project
   .settings(Defaults.itSettings)
   .settings(commonSettings)
   .settings(
-    organization := "xyz.stratalab",
+    organization := "org.plasmalabs",
     name := "strata-cli",
     fork := true,
     javaOptions += "-Dport=9000",
@@ -175,7 +175,7 @@ lazy val cli = project
     )
   )
   .settings(
-    assembly / mainClass := Some("xyz.stratalab.strata.cli.Main"),
+    assembly / mainClass := Some("org.plasmalabs.strata.cli.Main"),
     assembly / assemblyJarName := "stratacli.jar",
 
     // Gets rid of "(server / assembly) deduplicate: different file contents found in the following" errors

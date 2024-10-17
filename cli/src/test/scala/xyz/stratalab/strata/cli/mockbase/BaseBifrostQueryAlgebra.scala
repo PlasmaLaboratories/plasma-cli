@@ -1,12 +1,12 @@
-package xyz.stratalab.strata.cli.mockbase
+package org.plasmalabs.strata.cli.mockbase
 
-import xyz.stratalab.sdk.dataApi.NodeQueryAlgebra
-import xyz.stratalab.sdk.models.TransactionId
-import xyz.stratalab.sdk.models.transaction.IoTransaction
-import xyz.stratalab.consensus.models.BlockId
-import xyz.stratalab.node.models.BlockBody
-import xyz.stratalab.consensus.models.BlockHeader
-import xyz.stratalab.node.services.SynchronizationTraversalRes
+import org.plasmalabs.sdk.dataApi.NodeQueryAlgebra
+import org.plasmalabs.sdk.models.TransactionId
+import org.plasmalabs.sdk.models.transaction.IoTransaction
+import org.plasmalabs.consensus.models.BlockId
+import org.plasmalabs.node.models.BlockBody
+import org.plasmalabs.consensus.models.BlockHeader
+import org.plasmalabs.node.services.SynchronizationTraversalRes
 
 abstract class BaseNodeQueryAlgebra[F[_]] extends NodeQueryAlgebra[F] {
 

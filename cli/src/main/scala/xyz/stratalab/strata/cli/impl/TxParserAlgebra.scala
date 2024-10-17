@@ -1,15 +1,15 @@
-package xyz.stratalab.strata.cli.impl
+package org.plasmalabs.strata.cli.impl
 
 import cats.data.Validated
 import cats.effect.kernel.Resource
 import cats.effect.kernel.Sync
-import xyz.stratalab.sdk.builders.TransactionBuilderApi
-import xyz.stratalab.sdk.builders.locks.LockTemplate
-import xyz.stratalab.strata.cli.NetworkIdentifiers
-import xyz.stratalab.sdk.models.box.Value
-import xyz.stratalab.sdk.models.transaction.IoTransaction
-import xyz.stratalab.sdk.models.transaction.SpentTransactionOutput
-import xyz.stratalab.sdk.utils.Encoding
+import org.plasmalabs.sdk.builders.TransactionBuilderApi
+import org.plasmalabs.sdk.builders.locks.LockTemplate
+import org.plasmalabs.strata.cli.NetworkIdentifiers
+import org.plasmalabs.sdk.models.box.Value
+import org.plasmalabs.sdk.models.transaction.IoTransaction
+import org.plasmalabs.sdk.models.transaction.SpentTransactionOutput
+import org.plasmalabs.sdk.utils.Encoding
 import com.google.protobuf.ByteString
 import quivr.models.Int128
 import quivr.models.VerificationKey

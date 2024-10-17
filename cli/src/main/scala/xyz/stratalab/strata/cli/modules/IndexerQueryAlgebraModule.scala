@@ -1,6 +1,6 @@
-package xyz.stratalab.strata.cli.modules
+package org.plasmalabs.strata.cli.modules
 
-import xyz.stratalab.sdk.dataApi.{IndexerQueryAlgebra, RpcChannelResource}
+import org.plasmalabs.sdk.dataApi.{IndexerQueryAlgebra, RpcChannelResource}
 import cats.effect.IO
 
 trait IndexerQueryAlgebraModule extends RpcChannelResource {

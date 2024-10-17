@@ -1,21 +1,21 @@
-package xyz.stratalab.strata.cli.controllers
+package org.plasmalabs.strata.cli.controllers
 
 import cats.effect.IO
 import cats.effect.kernel.Sync
-import xyz.stratalab.strata.cli.impl.AssetStatementParserModule
-import xyz.stratalab.strata.cli.impl.GroupPolicyParserModule
-import xyz.stratalab.strata.cli.impl.SeriesPolicyParserModule
-import xyz.stratalab.strata.cli.impl.SimpleMintingAlgebra
-import xyz.stratalab.strata.cli.modules.DummyObjects
-import xyz.stratalab.strata.cli.modules.SimpleMintingAlgebraModule
-import xyz.stratalab.sdk.constants.NetworkConstants
+import org.plasmalabs.strata.cli.impl.AssetStatementParserModule
+import org.plasmalabs.strata.cli.impl.GroupPolicyParserModule
+import org.plasmalabs.strata.cli.impl.SeriesPolicyParserModule
+import org.plasmalabs.strata.cli.impl.SimpleMintingAlgebra
+import org.plasmalabs.strata.cli.modules.DummyObjects
+import org.plasmalabs.strata.cli.modules.SimpleMintingAlgebraModule
+import org.plasmalabs.sdk.constants.NetworkConstants
 import munit.CatsEffectSuite
 import java.io.File
 import cats.Monad
-import xyz.stratalab.strata.cli.mockbase.BaseWalletStateAlgebra
-import xyz.stratalab.sdk.models.Indices
-import xyz.stratalab.sdk.models.box.Lock
-import xyz.stratalab.sdk.models.box.Challenge
+import org.plasmalabs.strata.cli.mockbase.BaseWalletStateAlgebra
+import org.plasmalabs.sdk.models.Indices
+import org.plasmalabs.sdk.models.box.Lock
+import org.plasmalabs.sdk.models.box.Challenge
 import quivr.models.Proposition
 import quivr.models.KeyPair
 

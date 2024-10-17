@@ -1,4 +1,4 @@
-package xyz.stratalab.strata.cli
+package org.plasmalabs.strata.cli
 
 import munit.FunSuite
 import scopt.OParser
@@ -109,7 +109,7 @@ class ParamsWalletModuleTest extends FunSuite {
       "wallet",
       "export-vk",
       "--walletdb",
-      "wallet.db",
+      "wallet.db"
     )
     assert(
       OParser
@@ -122,7 +122,7 @@ class ParamsWalletModuleTest extends FunSuite {
       "fellowships",
       "add",
       "--walletdb",
-      "wallet.db",
+      "wallet.db"
     )
     assert(
       OParser

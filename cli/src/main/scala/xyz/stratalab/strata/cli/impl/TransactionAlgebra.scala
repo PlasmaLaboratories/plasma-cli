@@ -1,25 +1,25 @@
-package xyz.stratalab.strata.cli.impl
+package org.plasmalabs.strata.cli.impl
 
 import cats.effect.kernel.Resource
 import cats.effect.kernel.Sync
-import xyz.stratalab.sdk.Context
-import xyz.stratalab.sdk.dataApi.NodeQueryAlgebra
-import xyz.stratalab.sdk.dataApi.WalletStateAlgebra
-import xyz.stratalab.sdk.models.Datum
-import xyz.stratalab.sdk.models.Event
-import xyz.stratalab.sdk.models.transaction.IoTransaction
-import xyz.stratalab.sdk.syntax.cryptoToPbKeyPair
-import xyz.stratalab.sdk.utils.Encoding
-import xyz.stratalab.sdk.validation.TransactionAuthorizationError
-import xyz.stratalab.sdk.validation.TransactionSyntaxError
-import xyz.stratalab.sdk.validation.TransactionSyntaxError.EmptyInputs
-import xyz.stratalab.sdk.validation.TransactionSyntaxError.InvalidDataLength
-import xyz.stratalab.sdk.validation.TransactionSyntaxInterpreter
-import xyz.stratalab.sdk.wallet.CredentiallerInterpreter
-import xyz.stratalab.sdk.wallet.WalletApi
-import xyz.stratalab.crypto.signing.ExtendedEd25519
-import xyz.stratalab.quivr.runtime.QuivrRuntimeError
-import xyz.stratalab.quivr.runtime.QuivrRuntimeErrors
+import org.plasmalabs.sdk.Context
+import org.plasmalabs.sdk.dataApi.NodeQueryAlgebra
+import org.plasmalabs.sdk.dataApi.WalletStateAlgebra
+import org.plasmalabs.sdk.models.Datum
+import org.plasmalabs.sdk.models.Event
+import org.plasmalabs.sdk.models.transaction.IoTransaction
+import org.plasmalabs.sdk.syntax.cryptoToPbKeyPair
+import org.plasmalabs.sdk.utils.Encoding
+import org.plasmalabs.sdk.validation.TransactionAuthorizationError
+import org.plasmalabs.sdk.validation.TransactionSyntaxError
+import org.plasmalabs.sdk.validation.TransactionSyntaxError.EmptyInputs
+import org.plasmalabs.sdk.validation.TransactionSyntaxError.InvalidDataLength
+import org.plasmalabs.sdk.validation.TransactionSyntaxInterpreter
+import org.plasmalabs.sdk.wallet.CredentiallerInterpreter
+import org.plasmalabs.sdk.wallet.WalletApi
+import org.plasmalabs.crypto.signing.ExtendedEd25519
+import org.plasmalabs.quivr.runtime.QuivrRuntimeError
+import org.plasmalabs.quivr.runtime.QuivrRuntimeErrors
 import io.grpc.ManagedChannel
 import quivr.models.KeyPair
 
@@ -69,7 +69,7 @@ object TransactionAlgebra {
       override def broadcastSimpleTransactionFromParams(
           provedTxFile: String
       ): F[Either[SimpleTransactionAlgebraError, String]] = {
-        import xyz.stratalab.sdk.models.transaction.IoTransaction
+        import org.plasmalabs.sdk.models.transaction.IoTransaction
         import cats.implicits._
         val inputRes = Resource
           .make {
@@ -114,7 +114,7 @@ object TransactionAlgebra {
         } yield response).attempt.map(e =>
           e match {
             case Right(tx) =>
-              import xyz.stratalab.sdk.syntax._
+              import org.plasmalabs.sdk.syntax._
               Encoding.encodeToBase58(tx.id.value.toByteArray()).asRight
             case Left(e: SimpleTransactionAlgebraError) => e.asLeft
             case Left(e) => UnexpectedError(e.getMessage()).asLeft
@@ -213,7 +213,7 @@ object TransactionAlgebra {
           password: String,
           outputRes: Resource[F, FileOutputStream]
       ): F[Either[SimpleTransactionAlgebraError, Unit]] = {
-        import xyz.stratalab.sdk.models.transaction.IoTransaction
+        import org.plasmalabs.sdk.models.transaction.IoTransaction
         import cats.implicits._
 
         (for {

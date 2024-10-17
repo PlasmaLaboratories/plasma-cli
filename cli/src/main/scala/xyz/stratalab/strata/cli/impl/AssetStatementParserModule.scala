@@ -1,9 +1,9 @@
-package xyz.stratalab.strata.cli.impl
+package org.plasmalabs.strata.cli.impl
 
 import cats.effect.IO
 
 trait AssetStatementParserModule {
-    def assetMintingStatementParserAlgebra(networkId: Int) =
+  def assetMintingStatementParserAlgebra(networkId: Int) =
     AssetMintingStatementParser.make[IO](networkId)
 
 }

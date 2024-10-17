@@ -1,7 +1,7 @@
-package xyz.stratalab.strata.cli.controllers
+package org.plasmalabs.strata.cli.controllers
 
 import cats.Applicative
-import xyz.stratalab.sdk.dataApi.{FellowshipStorageAlgebra, WalletFellowship}
+import org.plasmalabs.sdk.dataApi.{FellowshipStorageAlgebra, WalletFellowship}
 
 class FellowshipsController[F[_]: Applicative](
     fellowshipStorageAlgebra: FellowshipStorageAlgebra[F]
@@ -17,7 +17,7 @@ class FellowshipsController[F[_]: Applicative](
   }
 
   def listFellowships(): F[Either[String, String]] = {
-    import xyz.stratalab.strata.cli.views.WalletModelDisplayOps._
+    import org.plasmalabs.strata.cli.views.WalletModelDisplayOps._
     import cats.implicits._
     fellowshipStorageAlgebra
       .findFellowships()

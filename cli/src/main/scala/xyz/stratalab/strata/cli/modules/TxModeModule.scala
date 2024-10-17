@@ -1,12 +1,12 @@
-package xyz.stratalab.strata.cli.modules
+package org.plasmalabs.strata.cli.modules
 
 import cats.effect.IO
-import xyz.stratalab.strata.cli.StrataCliParams
-import xyz.stratalab.strata.cli.StrataCliSubCmd
-import xyz.stratalab.strata.cli.controllers.TxController
-import xyz.stratalab.sdk.constants.NetworkConstants
+import org.plasmalabs.strata.cli.StrataCliParams
+import org.plasmalabs.strata.cli.StrataCliSubCmd
+import org.plasmalabs.strata.cli.controllers.TxController
+import org.plasmalabs.sdk.constants.NetworkConstants
 import scopt.OParser
-import xyz.stratalab.strata.cli.StrataCliParamsParserModule
+import org.plasmalabs.strata.cli.StrataCliParamsParserModule
 
 trait TxModeModule extends TxParserAlgebraModule with TransactionAlgebraModule {
 

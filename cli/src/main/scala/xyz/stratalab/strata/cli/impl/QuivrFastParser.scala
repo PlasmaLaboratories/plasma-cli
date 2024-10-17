@@ -1,10 +1,10 @@
-package xyz.stratalab.strata.cli.impl
+package org.plasmalabs.strata.cli.impl
 
 import cats.Monad
 import cats.data.ValidatedNel
-import xyz.stratalab.sdk.builders.locks.LockTemplate
-import xyz.stratalab.sdk.builders.locks.PropositionTemplate
-import xyz.stratalab.sdk.utils.Encoding
+import org.plasmalabs.sdk.builders.locks.LockTemplate
+import org.plasmalabs.sdk.builders.locks.PropositionTemplate
+import org.plasmalabs.sdk.utils.Encoding
 import com.google.protobuf.ByteString
 import quivr.models.Data
 import quivr.models
@@ -62,7 +62,7 @@ object TemplateAST {
   def compilePredicate[F[_]: Monad](
       template: ThresholdPredicate
   ): ValidationStateM[ValidatedNel[ParseError, LockTemplate[F]]] = {
-    import xyz.stratalab.sdk.builders.locks._
+    import org.plasmalabs.sdk.builders.locks._
     import cats.implicits._
     template match {
       case ThresholdPredicate(threshold, innerPropositions) =>

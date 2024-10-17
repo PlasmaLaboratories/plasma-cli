@@ -1,4 +1,4 @@
-package xyz.stratalab.strata.cli
+package org.plasmalabs.strata.cli
 
 import cats.effect.ExitCode
 import munit.CatsEffectSuite
@@ -45,6 +45,5 @@ class MintingTests
       ExitCode.Success
     )
   }
-
 
 }

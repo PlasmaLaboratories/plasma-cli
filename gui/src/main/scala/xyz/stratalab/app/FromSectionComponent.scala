@@ -1,10 +1,10 @@
-package xyz.stratalab.app
+package org.plasmalabs.app
 
-import xyz.stratalab.shared.models.BalanceRequestDTO
-import xyz.stratalab.shared.models.BalanceResponseDTO
-import xyz.stratalab.shared.models.FellowshipDTO
-import xyz.stratalab.shared.models.SimpleErrorDTO
-import xyz.stratalab.shared.models.TemplateDTO
+import org.plasmalabs.shared.models.BalanceRequestDTO
+import org.plasmalabs.shared.models.BalanceResponseDTO
+import org.plasmalabs.shared.models.FellowshipDTO
+import org.plasmalabs.shared.models.SimpleErrorDTO
+import org.plasmalabs.shared.models.TemplateDTO
 import com.raquo.laminar.api.L._
 import io.circe.Json
 import io.circe.generic.auto._

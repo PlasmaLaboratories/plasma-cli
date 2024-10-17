@@ -1,16 +1,16 @@
-package xyz.stratalab.strata.cli.modules
+package org.plasmalabs.strata.cli.modules
 
 import cats.effect.IO
-import xyz.stratalab.strata.cli.StrataCliParams
-import xyz.stratalab.strata.cli.StrataCliSubCmd
-import xyz.stratalab.strata.cli.TokenType
-import xyz.stratalab.strata.cli.controllers.SimpleMintingController
-import xyz.stratalab.strata.cli.impl.GroupPolicyParserModule
-import xyz.stratalab.strata.cli.impl.SeriesPolicyParserModule
-import xyz.stratalab.sdk.constants.NetworkConstants
-import xyz.stratalab.strata.cli.impl.AssetStatementParserModule
+import org.plasmalabs.strata.cli.StrataCliParams
+import org.plasmalabs.strata.cli.StrataCliSubCmd
+import org.plasmalabs.strata.cli.TokenType
+import org.plasmalabs.strata.cli.controllers.SimpleMintingController
+import org.plasmalabs.strata.cli.impl.GroupPolicyParserModule
+import org.plasmalabs.strata.cli.impl.SeriesPolicyParserModule
+import org.plasmalabs.sdk.constants.NetworkConstants
+import org.plasmalabs.strata.cli.impl.AssetStatementParserModule
 import scopt.OParser
-import xyz.stratalab.strata.cli.StrataCliParamsParserModule
+import org.plasmalabs.strata.cli.StrataCliParamsParserModule
 
 trait SimpleMintingModeModule
     extends GroupPolicyParserModule

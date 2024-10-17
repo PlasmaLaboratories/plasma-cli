@@ -1,9 +1,9 @@
-package xyz.stratalab.strata.cli.mockbase
+package org.plasmalabs.strata.cli.mockbase
 
-import xyz.stratalab.sdk.models.Indices
-import xyz.stratalab.sdk.wallet.WalletApi
-import xyz.stratalab.crypto.encryption.VaultStore
-import xyz.stratalab.crypto.generation.mnemonic.MnemonicSize
+import org.plasmalabs.sdk.models.Indices
+import org.plasmalabs.sdk.wallet.WalletApi
+import org.plasmalabs.crypto.encryption.VaultStore
+import org.plasmalabs.crypto.generation.mnemonic.MnemonicSize
 import quivr.models.KeyPair
 import quivr.models.VerificationKey
 

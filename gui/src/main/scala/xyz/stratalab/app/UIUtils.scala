@@ -1,4 +1,4 @@
-package xyz.stratalab.app
+package org.plasmalabs.app
 
 import com.raquo.laminar.api.L._
 

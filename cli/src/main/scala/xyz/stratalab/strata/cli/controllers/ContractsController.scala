@@ -1,11 +1,11 @@
-package xyz.stratalab.strata.cli.controllers
+package org.plasmalabs.strata.cli.controllers
 
 import cats.Id
 import cats.data.Validated
 import cats.effect.kernel.Sync
-import xyz.stratalab.sdk.dataApi.{TemplateStorageAlgebra, WalletTemplate}
-import xyz.stratalab.strata.cli.impl.QuivrFastParser
-import xyz.stratalab.sdk.codecs.LockTemplateCodecs
+import org.plasmalabs.sdk.dataApi.{TemplateStorageAlgebra, WalletTemplate}
+import org.plasmalabs.strata.cli.impl.QuivrFastParser
+import org.plasmalabs.sdk.codecs.LockTemplateCodecs
 
 class TemplatesController[F[_]: Sync](
     templateStorageAlgebra: TemplateStorageAlgebra[F]
@@ -46,7 +46,7 @@ class TemplatesController[F[_]: Sync](
   }
 
   def listTemplates(): F[Either[String, String]] = {
-    import xyz.stratalab.strata.cli.views.WalletModelDisplayOps._
+    import org.plasmalabs.strata.cli.views.WalletModelDisplayOps._
     import cats.implicits._
 
     templateStorageAlgebra

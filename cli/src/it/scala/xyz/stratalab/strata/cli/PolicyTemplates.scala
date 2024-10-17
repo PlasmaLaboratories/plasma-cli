@@ -1,4 +1,4 @@
-package xyz.stratalab.strata.cli
+package org.plasmalabs.strata.cli
 
 import cats.effect.kernel.Resource
 import java.io.PrintWriter
@@ -57,16 +57,18 @@ trait PolicyTemplates {
       label: String,
       utxo: String
   ) = {
-    Resource.make(IO(new PrintWriter(fileName)))(f => IO(f.flush()) >>  IO(f.close)).use { file =>
-      IO(
-        file.write(
-          basicGroupPolicyTemplate(
-            label,
-            utxo
+    Resource
+      .make(IO(new PrintWriter(fileName)))(f => IO(f.flush()) >> IO(f.close))
+      .use { file =>
+        IO(
+          file.write(
+            basicGroupPolicyTemplate(
+              label,
+              utxo
+            )
           )
         )
-      )
-    }
+      }
   }
   def createAliceSeriesPolicy(
       fileName: String,
@@ -75,18 +77,20 @@ trait PolicyTemplates {
       quantityDescriptor: String,
       utxo: String
   ) = {
-    Resource.make(IO(new PrintWriter(fileName)))(f => IO(f.flush()) >> IO(f.close)).use { file =>
-      IO(
-        file.write(
-          basicSeriesPolicyTemplate(
-            label,
-            utxo,
-            fungibility,
-            quantityDescriptor
+    Resource
+      .make(IO(new PrintWriter(fileName)))(f => IO(f.flush()) >> IO(f.close))
+      .use { file =>
+        IO(
+          file.write(
+            basicSeriesPolicyTemplate(
+              label,
+              utxo,
+              fungibility,
+              quantityDescriptor
+            )
           )
         )
-      )
-    }
+      }
   }
 
   def createAliceAssetMintingStatement(
@@ -95,36 +99,40 @@ trait PolicyTemplates {
       seriesTokenUtxo: String,
       quantity: Long
   ) = {
-    Resource.make(IO(new PrintWriter(fileName)))(f => IO(f.flush()) >> IO(f.close)).use { file =>
-      IO(
-        file.write(
-          basicAssetMintingStatementTemplate(
-            groupTokenUtxo,
-            seriesTokenUtxo,
-            quantity
+    Resource
+      .make(IO(new PrintWriter(fileName)))(f => IO(f.flush()) >> IO(f.close))
+      .use { file =>
+        IO(
+          file.write(
+            basicAssetMintingStatementTemplate(
+              groupTokenUtxo,
+              seriesTokenUtxo,
+              quantity
+            )
           )
         )
-      )
-    }
+      }
   }
 
   def createAliceEphemeralMetadata(
-    fileName: String,
-    url: String,
-    image: String,
-    number: Int
+      fileName: String,
+      url: String,
+      image: String,
+      number: Int
   ) = {
-    Resource.make(IO(new PrintWriter(fileName)))(f => IO(f.flush()) >> IO(f.close)).use { file =>
-      IO(
-        file.write(
-          s"""{
+    Resource
+      .make(IO(new PrintWriter(fileName)))(f => IO(f.flush()) >> IO(f.close))
+      .use { file =>
+        IO(
+          file.write(
+            s"""{
           |"url": "$url",
           |"image": "$image",
           |"number": $number
           |}""".stripMargin
+          )
         )
-      )
-    }
+      }
   }
 
 }

@@ -1,20 +1,20 @@
-package xyz.stratalab.strata.cli.impl
+package org.plasmalabs.strata.cli.impl
 
 import cats.data.EitherT
 import cats.effect.IO
-import xyz.stratalab.strata.cli.NetworkIdentifiers
-import xyz.stratalab.strata.cli.TokenType
-import xyz.stratalab.strata.cli.controllers.SimpleTransactionController
-import xyz.stratalab.strata.cli.controllers.TxController
-import xyz.stratalab.strata.cli.modules.SimpleTransactionModeModule
-import xyz.stratalab.strata.cli.modules.TxModeModule
-import xyz.stratalab.strata.cli.modules.WalletModeModule
-import xyz.stratalab.sdk.constants.NetworkConstants
-import xyz.stratalab.sdk.models.LockAddress
-import xyz.stratalab.sdk.models.GroupId
-import xyz.stratalab.sdk.utils.Encoding
+import org.plasmalabs.strata.cli.NetworkIdentifiers
+import org.plasmalabs.strata.cli.TokenType
+import org.plasmalabs.strata.cli.controllers.SimpleTransactionController
+import org.plasmalabs.strata.cli.controllers.TxController
+import org.plasmalabs.strata.cli.modules.SimpleTransactionModeModule
+import org.plasmalabs.strata.cli.modules.TxModeModule
+import org.plasmalabs.strata.cli.modules.WalletModeModule
+import org.plasmalabs.sdk.constants.NetworkConstants
+import org.plasmalabs.sdk.models.LockAddress
+import org.plasmalabs.sdk.models.GroupId
+import org.plasmalabs.sdk.utils.Encoding
 import com.google.protobuf.ByteString
-import xyz.stratalab.sdk.models.SeriesId
+import org.plasmalabs.sdk.models.SeriesId
 
 object FullTxOps
     extends WalletModeModule
