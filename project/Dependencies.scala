@@ -5,7 +5,7 @@ object Dependencies {
   lazy val plasmaOrg = "org.plasmalabs"
 
   lazy val sdkVersion = "0.0.0+253-793b1397-SNAPSHOT"
-  val strataSdk = plasmaOrg %% "strata-sdk" % sdkVersion
+  val plasmaSdk = plasmaOrg %% "plasma-sdk" % sdkVersion
   val circeVersion = "0.15.0-M1"
 
   val monocleCore = "dev.optics" %% "monocle-core" % "3.2.0"

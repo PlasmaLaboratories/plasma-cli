@@ -151,7 +151,7 @@ lazy val cli = project
       )
     ),
     libraryDependencies ++= List(
-      strataSdk,
+      plasmaSdk,
       sdkCrypto,
       sdkServiceKit,
       scopt,
