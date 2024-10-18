@@ -8,7 +8,7 @@ import HomepageFeatures from '@site/src/components/HomepageFeatures';
 import styles from './index.module.css';
 
 function HomepageHeader() {
-  const {siteConfig} = useDocusaurusContext();
+  const { siteConfig } = useDocusaurusContext();
   return (
     <header className={styles.heroBanner}>
       <div className="container">
@@ -18,7 +18,7 @@ function HomepageHeader() {
           <Link
             className={clsx('button button--primary button--lg', styles.heroButton)}
             to="/docs/current/intro">
-            Get Started with brambl-cli - 5min ⏱️
+            Get Started with strata-cli - 5min ⏱️
           </Link>
         </div>
       </div>
@@ -27,11 +27,11 @@ function HomepageHeader() {
 }
 
 export default function Home() {
-  const {siteConfig} = useDocusaurusContext();
+  const { siteConfig } = useDocusaurusContext();
   return (
     <Layout
       title={`Welcome to ${siteConfig.title}`}
-      description="The documentation hub for brambl-cli.">
+      description="The documentation hub for strata-cli.">
       <HomepageHeader />
       <main>
         <HomepageFeatures />

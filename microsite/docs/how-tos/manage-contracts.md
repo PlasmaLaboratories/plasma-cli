@@ -13,7 +13,7 @@ Quivr.
 To add a new template to the wallet run the following command:
 
 ```bash
-brambl-cli templates add --walletdb $WALLET --template-name $LOCK_TEMPLATE_NAME --lock-template $LOCK_TEMPLATE
+strata-cli templates add --walletdb $WALLET --template-name $LOCK_TEMPLATE_NAME --lock-template $LOCK_TEMPLATE
 ```
 
 ## List all templates
@@ -21,5 +21,5 @@ brambl-cli templates add --walletdb $WALLET --template-name $LOCK_TEMPLATE_NAME 
 To list all templates in the wallet run the following command:
 
 ```bash
-brambl-cli templates list --walletdb $WALLET
+strata-cli templates list --walletdb $WALLET
 ```

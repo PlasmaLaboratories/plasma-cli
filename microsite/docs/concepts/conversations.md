@@ -29,9 +29,9 @@ of the address of the interaction.
 If they don't want to spend all the funds in an interaction, they need to put 
 the _change_ of the transaction in a new interaction.
 
-## Conversations in the brambl-cli wallet
+## Conversations in the strata-cli wallet
 
-The brambl-cli wallet is designed to make it easy to create conversations.
+The strata-cli wallet is designed to make it easy to create conversations.
 By default each user has a fellowship with themselves. This fellowship is
 called `self`. In the wallet, each fellowship has a unique name (like `self`) and a
 unique number.
@@ -64,10 +64,10 @@ both the name and the number in Bob's wallet database might be different.
 The same happens with templates and interactions. The wallet database of each
 user will assign different numbers to each template and interaction.
 
-Given a fellowship and a template, `brambl-cli` allows to export a base verification
+Given a fellowship and a template, `strata-cli` allows to export a base verification
 key to be shared with another wallet. This base verification key is used to derive
 the right keys to lock and spend the interactions in the shared fellowships and templates.
 
-`brambl-cli` also allows to import the base verification keys of other fellows
+`strata-cli` also allows to import the base verification keys of other fellows
 in a given fellowship in a new conversation. The conversation is identified 
 by both the name of the fellowship and the name of the template that it uses.

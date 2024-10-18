@@ -16,7 +16,7 @@ export const txFileProved = "genesisTxProved.pbuf";
 
 # Funding Your Wallet
 
-In this tutorial we learn how to fund your wallet using the brambl-cli. We
+In this tutorial we learn how to fund your wallet using the strata-cli. We
 assume here that the wallet is already initialized and the funds are locked
 by a height lock `threshold(1, height(1, 9223372036854775807))`.
 

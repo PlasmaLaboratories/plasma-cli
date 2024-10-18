@@ -20,5 +20,5 @@ Group(0a205542a9a464ba60a155c28d55e9d084ce0b75eb8bd3a2ed5a27ee548e25f86616): 1
 This also supports the `--from address` parameter to check the balance of any address. For example:
 
 ```bash
-brambl-cli wallet balance --from-address $ADDRESS --walletdb $WALLET --host $HOST --port $PORT
+strata-cli wallet balance --from-address $ADDRESS --walletdb $WALLET --host $HOST --port $PORT
 ```

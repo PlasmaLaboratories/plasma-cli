@@ -9,7 +9,7 @@ The Brambl CLI is a command line interface to the Apparatus platform. It is a si
 
 Your system needs to have the following software installed.
 
-- A Java Virtual Machine (JVM).- The brambl-cli is a Java application, and thus Java is needed.
+- A Java Virtual Machine (JVM).- The strata-cli is a Java application, and thus Java is needed.
 - [Coursier](https://get-coursier.io/docs/cli-installation).- A simple command line tool (CLI) to run Java applications without any setup. It is very easy to install.
 - Just go to the [Coursier installation page](https://get-coursier.io/docs/cli-installation) and follow the instructions for your operating system.
 - Once you have it, you can check it like this:
@@ -23,10 +23,10 @@ $ ./cs version
 ## Using the CLI
 
 - There is no need to clone a repository to use the CLI, you can launch a release version of the CLI using coursier directly.
-- You can check releases on [sonatype](https://s01.oss.sonatype.org/content/repositories/releases/co/topl/brambl-cli_2.13/) or at the [releases page](https://github.com/Topl/brambl-cli/releases) on Github.
+- You can check releases on [sonatype](https://s01.oss.sonatype.org/content/repositories/releases/co/topl/strata-cli_2.13/) or at the [releases page](https://github.com/Topl/strata-cli/releases) on Github.
 - Then just launch your coursier application
 
 ```shell
 $ cd csInstallPath
-$ ./cs launch -r https://s01.oss.sonatype.org/content/repositories/releases xyz.stratalab:brambl-cli_2.13:2.0.0-beta0 -- bifrost-query block-by-height --height 1 -h localhost --port 9084  
+$ ./cs launch -r https://s01.oss.sonatype.org/content/repositories/releases org.plasmalabs:strata-cli_2.13:2.0.0-beta0 -- node-query block-by-height --height 1 -h localhost --port 9084  
 ```

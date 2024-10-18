@@ -8,7 +8,7 @@ To create a simple minting transaction of asset tokens we run the following
 command:
 
 ```bash
-brambl-cli simple-minting create --from-fellowship $FELLOWSHIP --from-template $LOCK_TEMPLATE  -h $HOST --port $PORT -n private --keyfile $KEYFILE -w $PASSWORD -o $MINTING_TX -i $AMS --fee $FEE_AMOUNT --walletdb $WALLET_DB --mint-token asset
+strata-cli simple-minting create --from-fellowship $FELLOWSHIP --from-template $LOCK_TEMPLATE  -h $HOST --port $PORT -n private --keyfile $KEYFILE -w $PASSWORD -o $MINTING_TX -i $AMS --fee $FEE_AMOUNT --walletdb $WALLET_DB --mint-token asset
 ```
 
 This will create a minting transaction for the fellowship `$FELLOWSHIP` and template `$LOCK_TEMPLATE` and store the result in the file `$MINTING_TX`. The keyfile `$KEYFILE` is used to derive keys. The password for the wallet is `$PASSWORD`. The asset minting statement file is `$AMS`. The fee amount is `$FEE_AMOUNT`. Please note that the amount of tokens to mint is specified in the asset minting statement file.
@@ -16,7 +16,7 @@ This will create a minting transaction for the fellowship `$FELLOWSHIP` and temp
 The asset minting also supports a commitment and metadata. These can be added to the statement as follows.
 
 ```bash
-brambl-cli simple-minting create --from-fellowship $FELLOWSHIP --from-template $LOCK_TEMPLATE  -h $HOST --port $PORT -n private --keyfile $KEYFILE -w $PASSWORD -o $MINTING_TX -i $AMS --fee $FEE_AMOUNT --walletdb $WALLET_DB --mint-token asset
+strata-cli simple-minting create --from-fellowship $FELLOWSHIP --from-template $LOCK_TEMPLATE  -h $HOST --port $PORT -n private --keyfile $KEYFILE -w $PASSWORD -o $MINTING_TX -i $AMS --fee $FEE_AMOUNT --walletdb $WALLET_DB --mint-token asset
 --commitment $COMMITMENT --ephemeralMetadata $EPHEMERAL_METADATA_FILE
 ```
 

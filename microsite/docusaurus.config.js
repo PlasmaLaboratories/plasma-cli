@@ -6,7 +6,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'brambl-cli',
+  title: 'strata-cli',
   tagline: 'The Swiss Army Knife of the Apparatus Blockchain',
   favicon: 'img/apparatus-favicon.png',
 
@@ -14,12 +14,12 @@ const config = {
   url: 'https://topl.github.io/',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: '/brambl-cli',
+  baseUrl: '/strata-cli',
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
   organizationName: 'Topl', // Usually your GitHub org/user name.
-  projectName: 'brambl-cli', // Usually your repo name.
+  projectName: 'strata-cli', // Usually your repo name.
 
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
@@ -66,17 +66,17 @@ const config = {
           src: 'img/apparatus-logo.svg',
         },
         items: [
-          {to: '/docs/current/intro', label: 'Getting Started', position: 'left'},
-          {to: '/docs/current/category/concepts', label: 'Concepts', position: 'left'},
-          {to: '/docs/current/category/tutorials', label: 'Tutorials', position: 'left'},
-          {to: '/docs/current/category/how-tos', label: 'How Tos', position: 'left'},
-          {to: '/docs/current/category/cli-reference', label: 'CLI Reference', position: 'left'},
+          { to: '/docs/current/intro', label: 'Getting Started', position: 'left' },
+          { to: '/docs/current/category/concepts', label: 'Concepts', position: 'left' },
+          { to: '/docs/current/category/tutorials', label: 'Tutorials', position: 'left' },
+          { to: '/docs/current/category/how-tos', label: 'How Tos', position: 'left' },
+          { to: '/docs/current/category/cli-reference', label: 'CLI Reference', position: 'left' },
           {
-            href: 'https://github.com/Topl/brambl-cli',
+            href: 'https://github.com/Topl/strata-cli',
             label: 'GitHub',
             position: 'right',
           },
-        ], 
+        ],
       },
       footer: {
         style: 'dark',
@@ -124,7 +124,7 @@ const config = {
             items: [
               {
                 label: 'GitHub',
-                href: 'https://github.com/Topl/brambl-cli',
+                href: 'https://github.com/Topl/strata-cli',
               },
             ],
           },
