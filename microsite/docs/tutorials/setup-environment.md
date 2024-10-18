@@ -4,7 +4,7 @@ sidebar_position: 1
 
 # Setup
 
-In this tutorial we learn how to setup your environment to use the brambl-cli.
+In this tutorial we learn how to setup your environment to use the strata-cli.
 This tutorial covers how to setup a wallet and how to launch a private node or
 use a public testnet node.
 
@@ -42,5 +42,5 @@ For example, to check the balance of the address `ptetP7jshHTwEg9Fz9Xa1AmmzhYHDH
 on the testnet you need to run the following command:
 
 ```bash
-brambl-cli wallet balance --from-address ptetP7jshHTwEg9Fz9Xa1AmmzhYHDHo1zZRde7mnw3fddcXPjV14RPcgVgy7 --walletdb $WALLET --host testnet.topl.tech --port 443 -s true
+strata-cli wallet balance --from-address ptetP7jshHTwEg9Fz9Xa1AmmzhYHDHo1zZRde7mnw3fddcXPjV14RPcgVgy7 --walletdb $WALLET --host testnet.topl.tech --port 443 -s true
 ```

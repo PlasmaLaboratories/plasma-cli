@@ -23,7 +23,7 @@ lazy val shared = crossProject(JSPlatform, JVMPlatform)
     buildInfoPackage := "org.plasmalabs.buildinfo",
     // Because we add BuildInfo to the `shared` project, this will be available
     // on both the client and the server, but you can also make it e.g. server-only.
-    homepage := Some(url("https://github.com/Stratalab/strata-cli")),
+    homepage := Some(url("https://github.com/PlasmaLaboratories/plasma-cli")),
     licenses := List("MPL2.0" -> url("https://www.mozilla.org/en-US/MPL/2.0/")),
     ThisBuild / sonatypeCredentialHost := "s01.oss.sonatype.org",
     sonatypeRepository := "https://s01.oss.sonatype.org/service/local",
@@ -126,7 +126,7 @@ lazy val cli = project
       "Bintray" at "https://jcenter.bintray.com/",
       "jitpack" at "https://jitpack.io"
     ),
-    homepage := Some(url("https://github.com/Stratalab/strata-cli")),
+    homepage := Some(url("https://github.com/PlasmaLaboratories/plasma-cli")),
     licenses := List("MPL2.0" -> url("https://www.mozilla.org/en-US/MPL/2.0/")),
     ThisBuild / sonatypeCredentialHost := "s01.oss.sonatype.org",
     sonatypeRepository := "https://s01.oss.sonatype.org/service/local",

@@ -4,7 +4,7 @@ sidebar_position: 4
 
 # Minting an Asset
 
-In this tutorial we are going to mint an asset using the brambl-cli.
+In this tutorial we are going to mint an asset using the strata-cli.
 
 The process of minting a new asset is the following:
 
@@ -44,7 +44,7 @@ the group constructor token can only be registered once. The group contructor
 token identifier is the hash of the group policy file. To get the UTXO from an address we need to run the following command:
 
 ```bash
-brambl-cli indexer-query utxo-by-address --from-fellowship $FELLOWSHIP --from-template $LOCK_TEMPLATE -h $HOST --port $PORT --walletdb $WALLET
+strata-cli indexer-query utxo-by-address --from-fellowship $FELLOWSHIP --from-template $LOCK_TEMPLATE -h $HOST --port $PORT --walletdb $WALLET
 ```
 
 This will query the UXTOs for the address in the indexer node. It uses the wallet to derive the right address to query.
@@ -64,7 +64,7 @@ Once we have the group policy file, we can create the group constructor token
 using the following command:
 
 ```bash
-brambl-cli simple-minting create --from-fellowship $FELLOWSHIP --from-template $LOCK_TEMPLATE  -h $HOST --port $PORT -n private --keyfile $KEYFILE -w $PASSWORD -o $MINTING_TX -i $GROUP_POLICY  -a $AMOUNT_TOKENS_TO_MINT --fee $FEE_AMOUNT --walletdb $WALLET_DB --mint-token group
+strata-cli simple-minting create --from-fellowship $FELLOWSHIP --from-template $LOCK_TEMPLATE  -h $HOST --port $PORT -n private --keyfile $KEYFILE -w $PASSWORD -o $MINTING_TX -i $GROUP_POLICY  -a $AMOUNT_TOKENS_TO_MINT --fee $FEE_AMOUNT --walletdb $WALLET_DB --mint-token group
 ```
 
 Then we need to prove and broadcast the transaction. This is the same procedure
@@ -116,7 +116,7 @@ To create a simple minting transaction of series constructor tokens we run the
 following command:
 
 ```bash
-brambl-cli simple-minting create --from-fellowship $FELLOWSHIP --from-template $LOCK_TEMPLATE  -h 
+strata-cli simple-minting create --from-fellowship $FELLOWSHIP --from-template $LOCK_TEMPLATE  -h 
 $HOST --port $PORT -n private --keyfile $KEYFILE -w $PASSWORD -o $MINTING_TX -i $SERIES_POLICY  -a $AMOUNT_TOKENS_TO_MINT --fee $FEE_AMOUNT --walletdb $WALLET_DB --mint-token series
 ```
 
@@ -152,7 +152,7 @@ To create a simple minting transaction of asset tokens we run the following
 command:
 
 ```bash
-brambl-cli simple-minting create --from-fellowship $FELLOWSHIP --from-template $LOCK_TEMPLATE  -h $HOST --port $PORT -n private --keyfile $KEYFILE -w $PASSWORD -o $MINTING_TX -i $AMS --fee $FEE_AMOUNT --walletdb $WALLET_DB --mint-token asset --commitment $COMMITMENT --ephemeralMetadata $EPHEMERAL_METADATA_FILE
+strata-cli simple-minting create --from-fellowship $FELLOWSHIP --from-template $LOCK_TEMPLATE  -h $HOST --port $PORT -n private --keyfile $KEYFILE -w $PASSWORD -o $MINTING_TX -i $AMS --fee $FEE_AMOUNT --walletdb $WALLET_DB --mint-token asset --commitment $COMMITMENT --ephemeralMetadata $EPHEMERAL_METADATA_FILE
 ```
 
 
@@ -166,7 +166,7 @@ Do not forget to use the `--secure` parameter if you are using the testnet.
 You can check the balance of the address `$TO_ADDRESS` using the following command:
 
 ```bash
-brambl-cli wallet balance --from-address $TO_ADDRESS --walletdb $WALLET_DB --host $HOST --port $PORT
+strata-cli wallet balance --from-address $TO_ADDRESS --walletdb $WALLET_DB --host $HOST --port $PORT
 ```
 
 You will see the asset, the group token and the series token.

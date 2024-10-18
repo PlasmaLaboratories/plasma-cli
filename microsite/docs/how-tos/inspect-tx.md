@@ -7,7 +7,7 @@ sidebar_position: 16
 To inspect a transaction run the following command:
 
 ```bash
-brambl-cli tx inspect -i $TX_FILE
+strata-cli tx inspect -i $TX_FILE
 ```
 
 This will inspect the transaction in the file `$TX_FILE` and output the result to the console. The output will look something like this:
