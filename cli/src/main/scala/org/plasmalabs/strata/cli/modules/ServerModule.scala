@@ -1,12 +1,12 @@
-package org.plasmalabs.strata.cli.modules
+package org.plasmalabs.plasma.cli.modules
 
 import cats.data.Kleisli
 import cats.effect.IO
 import cats.effect._
-import org.plasmalabs.strata.cli.StrataCliParams
-import org.plasmalabs.strata.cli.StrataCliSubCmd
-import org.plasmalabs.strata.cli.http.WalletHttpService
-import org.plasmalabs.strata.cli.impl.FullTxOps
+import org.plasmalabs.plasma.cli.StrataCliParams
+import org.plasmalabs.plasma.cli.StrataCliSubCmd
+import org.plasmalabs.plasma.cli.http.WalletHttpService
+import org.plasmalabs.plasma.cli.impl.FullTxOps
 import org.plasmalabs.sdk.codecs.AddressCodecs
 import org.plasmalabs.shared.models.TxRequest
 import org.plasmalabs.shared.models.TxResponse
@@ -22,7 +22,7 @@ import org.http4s.server.staticcontent.resourceServiceBuilder
 
 import java.nio.file.Files
 import scopt.OParser
-import org.plasmalabs.strata.cli.StrataCliParamsParserModule
+import org.plasmalabs.plasma.cli.StrataCliParamsParserModule
 
 trait ServerModule extends FellowshipsModeModule with WalletModeModule {
 

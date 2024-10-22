@@ -1,10 +1,10 @@
-package org.plasmalabs.strata.cli.controllers
+package org.plasmalabs.plasma.cli.controllers
 
 import cats.effect.kernel.Resource
 import cats.effect.kernel.Sync
-import org.plasmalabs.strata.cli.impl.CommonParserError
-import org.plasmalabs.strata.cli.impl.TransactionAlgebra
-import org.plasmalabs.strata.cli.impl.TxParserAlgebra
+import org.plasmalabs.plasma.cli.impl.CommonParserError
+import org.plasmalabs.plasma.cli.impl.TransactionAlgebra
+import org.plasmalabs.plasma.cli.impl.TxParserAlgebra
 import org.plasmalabs.sdk.display.DisplayOps.DisplayTOps
 import org.plasmalabs.sdk.models.transaction.IoTransaction
 

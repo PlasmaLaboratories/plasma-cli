@@ -1,4 +1,4 @@
-package org.plasmalabs.strata.cli.controllers
+package org.plasmalabs.plasma.cli.controllers
 
 import cats.effect.IO
 import org.plasmalabs.sdk.dataApi.{TemplateStorageAlgebra, WalletTemplate}

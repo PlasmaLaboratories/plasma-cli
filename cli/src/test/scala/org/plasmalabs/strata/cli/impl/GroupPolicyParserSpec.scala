@@ -1,4 +1,4 @@
-package org.plasmalabs.strata.cli.impl
+package org.plasmalabs.plasma.cli.impl
 
 import munit.CatsEffectSuite
 import org.plasmalabs.sdk.constants.NetworkConstants

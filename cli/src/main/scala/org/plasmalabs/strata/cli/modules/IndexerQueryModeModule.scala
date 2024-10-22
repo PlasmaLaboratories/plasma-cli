@@ -1,12 +1,12 @@
-package org.plasmalabs.strata.cli.modules
+package org.plasmalabs.plasma.cli.modules
 
 import cats.effect.IO
-import org.plasmalabs.strata.cli.controllers.IndexerQueryController
+import org.plasmalabs.plasma.cli.controllers.IndexerQueryController
 import org.plasmalabs.sdk.dataApi.{IndexerQueryAlgebra, RpcChannelResource}
-import org.plasmalabs.strata.cli.StrataCliSubCmd
-import org.plasmalabs.strata.cli.StrataCliParams
+import org.plasmalabs.plasma.cli.StrataCliSubCmd
+import org.plasmalabs.plasma.cli.StrataCliParams
 import scopt.OParser
-import org.plasmalabs.strata.cli.StrataCliParamsParserModule
+import org.plasmalabs.plasma.cli.StrataCliParamsParserModule
 
 trait IndexerQueryModeModule
     extends WalletStateAlgebraModule

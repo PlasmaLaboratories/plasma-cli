@@ -1,13 +1,13 @@
-package org.plasmalabs.strata.cli.controllers
+package org.plasmalabs.plasma.cli.controllers
 
 import cats.data.EitherT
 import cats.effect.IO
-import org.plasmalabs.strata.cli.mockbase.BaseIndexerQueryAlgebra
-import org.plasmalabs.strata.cli.mockbase.BaseWalletAlgebra
-import org.plasmalabs.strata.cli.mockbase.BaseWalletApi
-import org.plasmalabs.strata.cli.mockbase.BaseWalletManagementUtils
-import org.plasmalabs.strata.cli.mockbase.BaseWalletStateAlgebra
-import org.plasmalabs.strata.cli.modules.WalletKeyApiModule
+import org.plasmalabs.plasma.cli.mockbase.BaseIndexerQueryAlgebra
+import org.plasmalabs.plasma.cli.mockbase.BaseWalletAlgebra
+import org.plasmalabs.plasma.cli.mockbase.BaseWalletApi
+import org.plasmalabs.plasma.cli.mockbase.BaseWalletManagementUtils
+import org.plasmalabs.plasma.cli.mockbase.BaseWalletStateAlgebra
+import org.plasmalabs.plasma.cli.modules.WalletKeyApiModule
 import org.plasmalabs.sdk.models.Indices
 import org.plasmalabs.sdk.utils.Encoding
 import org.plasmalabs.sdk.wallet.WalletApi
@@ -17,11 +17,11 @@ import quivr.models.KeyPair
 import java.nio.file.Files
 import java.nio.file.Paths
 import scala.io.Source
-import org.plasmalabs.strata.cli.Sha256
+import org.plasmalabs.plasma.cli.Sha256
 import quivr.models.Proposition
 import quivr.models.Preimage
 import com.google.protobuf.ByteString
-import org.plasmalabs.strata.cli.Blake2b
+import org.plasmalabs.plasma.cli.Blake2b
 
 class WalletControllerSpecs extends CatsEffectSuite with WalletKeyApiModule {
 

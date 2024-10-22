@@ -1,4 +1,4 @@
-package org.plasmalabs.strata.cli.controllers
+package org.plasmalabs.plasma.cli.controllers
 
 import cats.Id
 import org.plasmalabs.sdk.dataApi.{FellowshipStorageAlgebra, WalletFellowship}

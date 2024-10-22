@@ -1,7 +1,7 @@
-package org.plasmalabs.strata.cli.modules
+package org.plasmalabs.plasma.cli.modules
 
 import cats.effect.IO
-import org.plasmalabs.strata.cli.impl.SimpleMintingAlgebra
+import org.plasmalabs.plasma.cli.impl.SimpleMintingAlgebra
 import cats.effect.kernel.Sync
 
 trait SimpleMintingAlgebraModule

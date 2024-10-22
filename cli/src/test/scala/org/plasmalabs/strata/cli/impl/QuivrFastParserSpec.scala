@@ -1,7 +1,7 @@
-package org.plasmalabs.strata.cli.impl
+package org.plasmalabs.plasma.cli.impl
 
 import cats.Id
-import org.plasmalabs.strata.cli.views.WalletModelDisplayOps
+import org.plasmalabs.plasma.cli.views.WalletModelDisplayOps
 
 class QuivrFastParserSpec extends munit.FunSuite {
 

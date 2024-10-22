@@ -175,7 +175,7 @@ lazy val cli = project
     )
   )
   .settings(
-    assembly / mainClass := Some("org.plasmalabs.strata.cli.Main"),
+    assembly / mainClass := Some("org.plasmalabs.plasma.cli.Main"),
     assembly / assemblyJarName := "stratacli.jar",
 
     // Gets rid of "(server / assembly) deduplicate: different file contents found in the following" errors

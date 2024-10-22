@@ -1,4 +1,4 @@
-package org.plasmalabs.strata.cli.impl
+package org.plasmalabs.plasma.cli.impl
 
 import com.google.protobuf.struct.ListValue
 import com.google.protobuf.struct.NullValue

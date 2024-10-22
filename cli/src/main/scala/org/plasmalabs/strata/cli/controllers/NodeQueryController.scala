@@ -1,7 +1,7 @@
-package org.plasmalabs.strata.cli.controllers
+package org.plasmalabs.plasma.cli.controllers
 
 import cats.effect.kernel.Sync
-import org.plasmalabs.strata.cli.views.BlockDisplayOps
+import org.plasmalabs.plasma.cli.views.BlockDisplayOps
 import org.plasmalabs.sdk.dataApi.NodeQueryAlgebra
 import org.plasmalabs.sdk.display.DisplayOps.DisplayTOps
 import org.plasmalabs.sdk.models.TransactionId

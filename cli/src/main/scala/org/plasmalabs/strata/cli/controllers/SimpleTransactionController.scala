@@ -1,10 +1,10 @@
-package org.plasmalabs.strata.cli.controllers
+package org.plasmalabs.plasma.cli.controllers
 
 import cats.Monad
 import cats.data.Validated
 import cats.effect.kernel.Sync
-import org.plasmalabs.strata.cli.TokenType
-import org.plasmalabs.strata.cli.impl.SimpleTransactionAlgebra
+import org.plasmalabs.plasma.cli.TokenType
+import org.plasmalabs.plasma.cli.impl.SimpleTransactionAlgebra
 import org.plasmalabs.sdk.dataApi.WalletStateAlgebra
 import org.plasmalabs.sdk.models.GroupId
 import org.plasmalabs.sdk.models.LockAddress

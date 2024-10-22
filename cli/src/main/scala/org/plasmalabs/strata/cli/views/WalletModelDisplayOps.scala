@@ -1,4 +1,4 @@
-package org.plasmalabs.strata.cli.views
+package org.plasmalabs.plasma.cli.views
 
 import cats.Id
 import org.plasmalabs.sdk.builders.locks.LockTemplate

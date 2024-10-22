@@ -1,16 +1,16 @@
-package org.plasmalabs.strata.cli.controllers
+package org.plasmalabs.plasma.cli.controllers
 
 import cats.Monad
 import cats.data.ValidatedNel
 import cats.effect.IO
-import org.plasmalabs.strata.cli.TokenType
-import org.plasmalabs.strata.cli.impl.AssetStatementParserModule
-import org.plasmalabs.strata.cli.impl.GroupPolicyParserModule
-import org.plasmalabs.strata.cli.impl.SeriesPolicyParserModule
-import org.plasmalabs.strata.cli.impl.SimpleTransactionAlgebra
-import org.plasmalabs.strata.cli.mockbase.BaseWalletStateAlgebra
-import org.plasmalabs.strata.cli.modules.DummyObjects
-import org.plasmalabs.strata.cli.modules.SimpleMintingAlgebraModule
+import org.plasmalabs.plasma.cli.TokenType
+import org.plasmalabs.plasma.cli.impl.AssetStatementParserModule
+import org.plasmalabs.plasma.cli.impl.GroupPolicyParserModule
+import org.plasmalabs.plasma.cli.impl.SeriesPolicyParserModule
+import org.plasmalabs.plasma.cli.impl.SimpleTransactionAlgebra
+import org.plasmalabs.plasma.cli.mockbase.BaseWalletStateAlgebra
+import org.plasmalabs.plasma.cli.modules.DummyObjects
+import org.plasmalabs.plasma.cli.modules.SimpleMintingAlgebraModule
 import org.plasmalabs.sdk.codecs.AddressCodecs
 import org.plasmalabs.sdk.constants.NetworkConstants
 import org.plasmalabs.sdk.models.Indices

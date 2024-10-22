@@ -1,18 +1,18 @@
-package org.plasmalabs.strata.cli.controllers
+package org.plasmalabs.plasma.cli.controllers
 
 import cats.effect.IO
 import cats.effect.kernel.Sync
-import org.plasmalabs.strata.cli.impl.AssetStatementParserModule
-import org.plasmalabs.strata.cli.impl.GroupPolicyParserModule
-import org.plasmalabs.strata.cli.impl.SeriesPolicyParserModule
-import org.plasmalabs.strata.cli.impl.SimpleMintingAlgebra
-import org.plasmalabs.strata.cli.modules.DummyObjects
-import org.plasmalabs.strata.cli.modules.SimpleMintingAlgebraModule
+import org.plasmalabs.plasma.cli.impl.AssetStatementParserModule
+import org.plasmalabs.plasma.cli.impl.GroupPolicyParserModule
+import org.plasmalabs.plasma.cli.impl.SeriesPolicyParserModule
+import org.plasmalabs.plasma.cli.impl.SimpleMintingAlgebra
+import org.plasmalabs.plasma.cli.modules.DummyObjects
+import org.plasmalabs.plasma.cli.modules.SimpleMintingAlgebraModule
 import org.plasmalabs.sdk.constants.NetworkConstants
 import munit.CatsEffectSuite
 import java.io.File
 import cats.Monad
-import org.plasmalabs.strata.cli.mockbase.BaseWalletStateAlgebra
+import org.plasmalabs.plasma.cli.mockbase.BaseWalletStateAlgebra
 import org.plasmalabs.sdk.models.Indices
 import org.plasmalabs.sdk.models.box.Lock
 import org.plasmalabs.sdk.models.box.Challenge

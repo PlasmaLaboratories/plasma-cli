@@ -1,4 +1,4 @@
-package org.plasmalabs.strata.cli
+package org.plasmalabs.plasma.cli
 
 case class WalletKeyConfig(
     walletFile: String,

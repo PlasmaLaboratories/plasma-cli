@@ -1,18 +1,18 @@
-package org.plasmalabs.strata.cli
+package org.plasmalabs.plasma.cli
 
 import cats.effect.ExitCode
 import cats.effect.IO
 import cats.effect.IOApp
-import org.plasmalabs.strata.cli.modules.NodeQueryModeModule
-import org.plasmalabs.strata.cli.modules.TemplateModeModule
-import org.plasmalabs.strata.cli.modules.IndexerQueryModeModule
-import org.plasmalabs.strata.cli.modules.FellowshipsModeModule
-import org.plasmalabs.strata.cli.modules.SimpleTransactionModeModule
-import org.plasmalabs.strata.cli.modules.TxModeModule
-import org.plasmalabs.strata.cli.modules.WalletModeModule
+import org.plasmalabs.plasma.cli.modules.NodeQueryModeModule
+import org.plasmalabs.plasma.cli.modules.TemplateModeModule
+import org.plasmalabs.plasma.cli.modules.IndexerQueryModeModule
+import org.plasmalabs.plasma.cli.modules.FellowshipsModeModule
+import org.plasmalabs.plasma.cli.modules.SimpleTransactionModeModule
+import org.plasmalabs.plasma.cli.modules.TxModeModule
+import org.plasmalabs.plasma.cli.modules.WalletModeModule
 import scopt.OParser
-import org.plasmalabs.strata.cli.modules.SimpleMintingModeModule
-import org.plasmalabs.strata.cli.modules.ServerModule
+import org.plasmalabs.plasma.cli.modules.SimpleMintingModeModule
+import org.plasmalabs.plasma.cli.modules.ServerModule
 
 object Main
     extends IOApp

@@ -1,13 +1,13 @@
-package org.plasmalabs.strata.cli.controllers
+package org.plasmalabs.plasma.cli.controllers
 
 import cats.effect.IO
-import org.plasmalabs.strata.cli.mockbase.BaseNodeQueryAlgebra
+import org.plasmalabs.plasma.cli.mockbase.BaseNodeQueryAlgebra
 import org.plasmalabs.sdk.models.transaction.IoTransaction
 import org.plasmalabs.consensus.models.BlockId
 import org.plasmalabs.node.models.BlockBody
 import munit.CatsEffectSuite
-import org.plasmalabs.strata.cli.modules.DummyObjects
-import org.plasmalabs.strata.cli.views.BlockDisplayOps
+import org.plasmalabs.plasma.cli.modules.DummyObjects
+import org.plasmalabs.plasma.cli.views.BlockDisplayOps
 import org.plasmalabs.sdk.display.DisplayOps.DisplayTOps
 import org.plasmalabs.sdk.models.TransactionId
 import org.plasmalabs.consensus.models.BlockHeader

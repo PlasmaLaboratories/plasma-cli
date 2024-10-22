@@ -1,14 +1,14 @@
-package org.plasmalabs.strata.cli.impl
+package org.plasmalabs.plasma.cli.impl
 
 import cats.data.EitherT
 import cats.effect.IO
-import org.plasmalabs.strata.cli.NetworkIdentifiers
-import org.plasmalabs.strata.cli.TokenType
-import org.plasmalabs.strata.cli.controllers.SimpleTransactionController
-import org.plasmalabs.strata.cli.controllers.TxController
-import org.plasmalabs.strata.cli.modules.SimpleTransactionModeModule
-import org.plasmalabs.strata.cli.modules.TxModeModule
-import org.plasmalabs.strata.cli.modules.WalletModeModule
+import org.plasmalabs.plasma.cli.NetworkIdentifiers
+import org.plasmalabs.plasma.cli.TokenType
+import org.plasmalabs.plasma.cli.controllers.SimpleTransactionController
+import org.plasmalabs.plasma.cli.controllers.TxController
+import org.plasmalabs.plasma.cli.modules.SimpleTransactionModeModule
+import org.plasmalabs.plasma.cli.modules.TxModeModule
+import org.plasmalabs.plasma.cli.modules.WalletModeModule
 import org.plasmalabs.sdk.constants.NetworkConstants
 import org.plasmalabs.sdk.models.LockAddress
 import org.plasmalabs.sdk.models.GroupId

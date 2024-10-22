@@ -1,4 +1,4 @@
-package org.plasmalabs.strata.cli
+package org.plasmalabs.plasma.cli
 
 import cats.effect.kernel.Resource
 import java.io.PrintWriter

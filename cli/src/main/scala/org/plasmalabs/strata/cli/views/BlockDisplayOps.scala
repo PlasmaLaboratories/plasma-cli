@@ -1,4 +1,4 @@
-package org.plasmalabs.strata.cli.views
+package org.plasmalabs.plasma.cli.views
 
 import org.plasmalabs.sdk.display.DisplayOps.DisplayTOps
 import org.plasmalabs.sdk.models.transaction.IoTransaction

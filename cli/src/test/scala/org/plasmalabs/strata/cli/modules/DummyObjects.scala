@@ -1,4 +1,4 @@
-package org.plasmalabs.strata.cli.modules
+package org.plasmalabs.plasma.cli.modules
 
 import cats.Monad
 import org.plasmalabs.sdk.codecs.AddressCodecs

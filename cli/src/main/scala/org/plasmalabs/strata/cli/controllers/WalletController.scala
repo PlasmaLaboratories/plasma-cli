@@ -1,13 +1,13 @@
-package org.plasmalabs.strata.cli.controllers
+package org.plasmalabs.plasma.cli.controllers
 
 import cats.data.OptionT
 import cats.effect.kernel.Resource
 import cats.effect.kernel.Sync
 import org.plasmalabs.sdk.builders.TransactionBuilderApi
-import org.plasmalabs.strata.cli.StrataCliParams
-import org.plasmalabs.strata.cli.impl.WalletAlgebra
-import org.plasmalabs.strata.cli.impl.WalletManagementUtils
-import org.plasmalabs.strata.cli.impl.WalletModeHelper
+import org.plasmalabs.plasma.cli.StrataCliParams
+import org.plasmalabs.plasma.cli.impl.WalletAlgebra
+import org.plasmalabs.plasma.cli.impl.WalletManagementUtils
+import org.plasmalabs.plasma.cli.impl.WalletModeHelper
 import org.plasmalabs.sdk.codecs.AddressCodecs
 import org.plasmalabs.sdk.constants.NetworkConstants
 import org.plasmalabs.sdk.dataApi
@@ -29,9 +29,9 @@ import java.io.PrintWriter
 import quivr.models.Preimage
 import com.google.protobuf.ByteString
 import quivr.models.Proposition
-import org.plasmalabs.strata.cli.DigestType
+import org.plasmalabs.plasma.cli.DigestType
 import quivr.models.Digest
-import org.plasmalabs.strata.cli.Sha256
+import org.plasmalabs.plasma.cli.Sha256
 import org.plasmalabs.crypto.hash.Blake2b256
 
 class WalletController[F[_]: Sync](

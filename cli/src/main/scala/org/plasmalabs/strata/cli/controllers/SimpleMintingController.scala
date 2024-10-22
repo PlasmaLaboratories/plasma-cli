@@ -1,13 +1,13 @@
-package org.plasmalabs.strata.cli.controllers
+package org.plasmalabs.plasma.cli.controllers
 
 import cats.effect.kernel.Resource
 import cats.effect.kernel.Sync
-import org.plasmalabs.strata.cli.impl.AssetMintingStatementParser
-import org.plasmalabs.strata.cli.impl.CreateTxError
-import org.plasmalabs.strata.cli.impl.GroupPolicyParser
-import org.plasmalabs.strata.cli.impl.SeriesPolicyParser
-import org.plasmalabs.strata.cli.impl.SimpleMintingAlgebra
-import org.plasmalabs.strata.cli.impl.SimpleTransactionAlgebraError
+import org.plasmalabs.plasma.cli.impl.AssetMintingStatementParser
+import org.plasmalabs.plasma.cli.impl.CreateTxError
+import org.plasmalabs.plasma.cli.impl.GroupPolicyParser
+import org.plasmalabs.plasma.cli.impl.SeriesPolicyParser
+import org.plasmalabs.plasma.cli.impl.SimpleMintingAlgebra
+import org.plasmalabs.plasma.cli.impl.SimpleTransactionAlgebraError
 import org.plasmalabs.sdk.utils.Encoding
 import com.google.protobuf.ByteString
 

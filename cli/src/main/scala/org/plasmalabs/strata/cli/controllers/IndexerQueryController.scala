@@ -1,8 +1,8 @@
-package org.plasmalabs.strata.cli.controllers
+package org.plasmalabs.plasma.cli.controllers
 
 import cats.Monad
 import cats.effect.kernel.Sync
-import org.plasmalabs.strata.cli.TokenType
+import org.plasmalabs.plasma.cli.TokenType
 import org.plasmalabs.sdk.codecs.AddressCodecs
 import org.plasmalabs.sdk.dataApi.{IndexerQueryAlgebra, WalletStateAlgebra}
 import org.plasmalabs.sdk.display.DisplayOps.DisplayTOps

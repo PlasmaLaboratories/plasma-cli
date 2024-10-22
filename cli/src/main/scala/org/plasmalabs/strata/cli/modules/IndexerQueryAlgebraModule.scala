@@ -1,4 +1,4 @@
-package org.plasmalabs.strata.cli.modules
+package org.plasmalabs.plasma.cli.modules
 
 import org.plasmalabs.sdk.dataApi.{IndexerQueryAlgebra, RpcChannelResource}
 import cats.effect.IO

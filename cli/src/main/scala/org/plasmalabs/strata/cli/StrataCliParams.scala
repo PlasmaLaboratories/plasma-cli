@@ -1,4 +1,4 @@
-package org.plasmalabs.strata.cli
+package org.plasmalabs.plasma.cli
 
 import org.plasmalabs.sdk.constants.NetworkConstants
 import org.plasmalabs.sdk.models.LockAddress

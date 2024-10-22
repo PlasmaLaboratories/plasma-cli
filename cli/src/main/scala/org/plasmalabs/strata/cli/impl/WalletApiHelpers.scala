@@ -1,4 +1,4 @@
-package org.plasmalabs.strata.cli.impl
+package org.plasmalabs.plasma.cli.impl
 
 import org.plasmalabs.sdk.dataApi.WalletStateAlgebra
 import cats.Monad

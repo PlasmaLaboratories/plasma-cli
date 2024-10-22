@@ -1,6 +1,6 @@
-package org.plasmalabs.strata.cli.views
+package org.plasmalabs.plasma.cli.views
 
-import org.plasmalabs.strata.cli.modules.DummyObjects
+import org.plasmalabs.plasma.cli.modules.DummyObjects
 import org.plasmalabs.sdk.display.DisplayOps.DisplayTOps
 
 class BlockDisplayOpsSpec extends munit.FunSuite with DummyObjects {

@@ -1,4 +1,4 @@
-package org.plasmalabs.strata.cli.mockbase
+package org.plasmalabs.plasma.cli.mockbase
 
 import cats.data.ValidatedNel
 import org.plasmalabs.sdk.builders.locks.LockTemplate

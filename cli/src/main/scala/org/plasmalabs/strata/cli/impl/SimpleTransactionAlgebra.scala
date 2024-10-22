@@ -1,4 +1,4 @@
-package org.plasmalabs.strata.cli.impl
+package org.plasmalabs.plasma.cli.impl
 
 import cats.effect.kernel.Resource
 import cats.effect.kernel.Sync

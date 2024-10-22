@@ -1,4 +1,4 @@
-package org.plasmalabs.strata.cli.mockbase
+package org.plasmalabs.plasma.cli.mockbase
 
 import org.plasmalabs.sdk.dataApi.NodeQueryAlgebra
 import org.plasmalabs.sdk.models.TransactionId

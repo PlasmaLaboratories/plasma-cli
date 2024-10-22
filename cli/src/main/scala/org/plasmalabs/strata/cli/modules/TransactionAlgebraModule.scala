@@ -1,7 +1,7 @@
-package org.plasmalabs.strata.cli.modules
+package org.plasmalabs.plasma.cli.modules
 
 import cats.effect.IO
-import org.plasmalabs.strata.cli.impl.TransactionAlgebra
+import org.plasmalabs.plasma.cli.impl.TransactionAlgebra
 import org.plasmalabs.sdk.dataApi.RpcChannelResource
 
 trait TransactionAlgebraModule

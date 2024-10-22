@@ -1,6 +1,6 @@
-package org.plasmalabs.strata.cli.mockbase
+package org.plasmalabs.plasma.cli.mockbase
 
-import org.plasmalabs.strata.cli.impl.WalletManagementUtils
+import org.plasmalabs.plasma.cli.impl.WalletManagementUtils
 import cats.effect.kernel.Sync
 import org.plasmalabs.crypto.encryption.VaultStore
 import quivr.models.KeyPair

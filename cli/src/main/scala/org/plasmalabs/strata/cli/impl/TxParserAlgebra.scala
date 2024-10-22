@@ -1,11 +1,11 @@
-package org.plasmalabs.strata.cli.impl
+package org.plasmalabs.plasma.cli.impl
 
 import cats.data.Validated
 import cats.effect.kernel.Resource
 import cats.effect.kernel.Sync
 import org.plasmalabs.sdk.builders.TransactionBuilderApi
 import org.plasmalabs.sdk.builders.locks.LockTemplate
-import org.plasmalabs.strata.cli.NetworkIdentifiers
+import org.plasmalabs.plasma.cli.NetworkIdentifiers
 import org.plasmalabs.sdk.models.box.Value
 import org.plasmalabs.sdk.models.transaction.IoTransaction
 import org.plasmalabs.sdk.models.transaction.SpentTransactionOutput

@@ -1,8 +1,8 @@
-package org.plasmalabs.strata.cli.http
+package org.plasmalabs.plasma.cli.http
 import cats.Id
 import cats.effect.IO
 import cats.effect._
-import org.plasmalabs.strata.cli.impl.WalletModeHelper
+import org.plasmalabs.plasma.cli.impl.WalletModeHelper
 import org.plasmalabs.sdk.dataApi.IndexerQueryAlgebra
 import org.plasmalabs.sdk.dataApi.WalletStateAlgebra
 import org.plasmalabs.sdk.servicekit.FellowshipStorageApi
@@ -116,7 +116,7 @@ case class WalletHttpService(
         val templateStorageAlgebra = TemplateStorageApi.make[IO](
           walletResource
         )
-        import org.plasmalabs.strata.cli.views.WalletModelDisplayOps._
+        import org.plasmalabs.plasma.cli.views.WalletModelDisplayOps._
         import io.circe.parser.parse
         import org.plasmalabs.sdk.codecs.LockTemplateCodecs._
         import cats.implicits._

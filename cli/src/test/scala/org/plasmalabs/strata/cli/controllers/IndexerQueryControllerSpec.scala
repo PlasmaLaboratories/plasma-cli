@@ -1,9 +1,9 @@
-package org.plasmalabs.strata.cli.controllers
+package org.plasmalabs.plasma.cli.controllers
 
 import cats.Monad
 import cats.effect.IO
-import org.plasmalabs.strata.cli.mockbase.BaseWalletStateAlgebra
-import org.plasmalabs.strata.cli.modules.DummyObjects
+import org.plasmalabs.plasma.cli.mockbase.BaseWalletStateAlgebra
+import org.plasmalabs.plasma.cli.modules.DummyObjects
 import org.plasmalabs.sdk.dataApi.IndexerQueryAlgebra
 import org.plasmalabs.sdk.display.DisplayOps.DisplayTOps
 import org.plasmalabs.sdk.models.LockAddress

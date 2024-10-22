@@ -1,4 +1,4 @@
-package org.plasmalabs.strata.cli.modules
+package org.plasmalabs.plasma.cli.modules
 
 import com.comcast.ip4s.{Host, Port}
 

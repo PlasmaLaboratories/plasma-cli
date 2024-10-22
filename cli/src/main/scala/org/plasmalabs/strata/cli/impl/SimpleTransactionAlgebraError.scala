@@ -1,4 +1,4 @@
-package org.plasmalabs.strata.cli.impl
+package org.plasmalabs.plasma.cli.impl
 
 sealed trait SimpleTransactionAlgebraError extends Throwable {
 
