@@ -102,7 +102,7 @@ lazy val root = project
   .in(file("."))
   .settings(
     organization := "org.plasmalabs",
-    name := "strata-cli-umbrella"
+    name := "plasma-cli-umbrella"
   )
   .settings(noPublish)
   .aggregate(gui, cli, shared.jvm)
@@ -114,7 +114,7 @@ lazy val cli = project
   .settings(commonSettings)
   .settings(
     organization := "org.plasmalabs",
-    name := "strata-cli",
+    name := "plasma-cli",
     fork := true,
     javaOptions += "-Dport=9000",
     resolvers ++= Seq(
