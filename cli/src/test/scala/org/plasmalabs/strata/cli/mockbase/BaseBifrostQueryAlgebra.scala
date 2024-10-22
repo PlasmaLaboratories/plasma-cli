@@ -13,7 +13,7 @@ abstract class BaseNodeQueryAlgebra[F[_]] extends NodeQueryAlgebra[F] {
   override def synchronizationTraversal()
       : F[Iterator[SynchronizationTraversalRes]] = ???
 
-  override def makeBlock(nbOfBlocks: Int): F[Unit] = ???
+  override def makeBlocks(nbOfBlocks: Int): F[Unit] = ???
 
   override def blockByHeight(
       height: Long

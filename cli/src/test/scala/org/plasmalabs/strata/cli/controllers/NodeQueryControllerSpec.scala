@@ -125,4 +125,22 @@ class NodeQueryControllerSpec extends CatsEffectSuite with DummyObjects {
       )
   }
 
+  test("makeBlocks should do something") {
+    val nodeQueryController = new NodeQueryController[IO](
+      new BaseNodeQueryAlgebra[IO] {
+
+        override def makeBlocks(
+            nbOfBlocks: Int
+        ): IO[Unit] =
+          IO(Right("Block(s) created successfully"))
+
+      }
+    )
+    nodeQueryController
+      .makeBlocks(1)
+      .assertEquals(
+        Right("Block(s) created successfully")
+      )
+  }
+
 }

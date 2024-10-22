@@ -13,11 +13,11 @@ class NodeQueryController[F[_]: Sync](
     nodeQueryAlgebra: NodeQueryAlgebra[F]
 ) {
 
-  def makeBlock(
+  def makeBlocks(
       nbOfBlocks: Int
   ): F[Either[String, String]] = {
     import cats.implicits._
-    nodeQueryAlgebra.makeBlock(nbOfBlocks).map { _ =>
+    nodeQueryAlgebra.makeBlocks(nbOfBlocks).map { _ =>
       "Block(s) created successfully".asRight[String]
     }
   }

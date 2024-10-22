@@ -31,7 +31,7 @@ trait NodeQueryModeModule extends RpcChannelResource {
         )
       case StrataCliSubCmd.mintblock =>
         new NodeQueryController(nodeQueryAlgebra)
-          .makeBlock(
+          .makeBlocks(
             validateParams.nbOfBlocks
           )
       case StrataCliSubCmd.blockbyheight =>
