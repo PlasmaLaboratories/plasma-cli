@@ -4,7 +4,7 @@ sidebar_position: 3
 
 # Creating Transactions
 
-In this tutorial we are creating a transaction using the brambl-cli and
+In this tutorial we are creating a transaction using the strata-cli and
 sending it to the network.
 
 The process of creating a transaction is the following:
@@ -18,7 +18,7 @@ The process of creating a transaction is the following:
 To create a simple transaction you need to run the following command:
 
 ```bash
-brambl-cli simple-transaction create --from-fellowship $FELLOWSHIP --from-template $LOCK_TEMPLATE --from-interaction $INTERACTION_NR -t $TO_ADDRESS -w $PASSWORD --port $PORT -o $TX_FILE -n $NETWORK -a $SEND_AMOUNT -h $HOST -i $MAIN_KEY --walletdb $WALLET --fee $FEE --transfer-token $TOKEN_TYPE
+strata-cli simple-transaction create --from-fellowship $FELLOWSHIP --from-template $LOCK_TEMPLATE --from-interaction $INTERACTION_NR -t $TO_ADDRESS -w $PASSWORD --port $PORT -o $TX_FILE -n $NETWORK -a $SEND_AMOUNT -h $HOST -i $MAIN_KEY --walletdb $WALLET --fee $FEE --transfer-token $TOKEN_TYPE
 ```
 
 This will create a transaction that spends the interaction `$INTERACTION_NR` of the template `$LOCK_TEMPLATE` of the fellowship `$FELLOWSHIP` and sends `$SEND_AMOUNT` polys to the address `$TO_ADDRESS`. The transaction will be stored in the file `$TX_FILE`.
@@ -31,7 +31,7 @@ The `--from-interaction` parameter is only required if the fellowship is `nofell
 To prove the transaction run the following command:
 
 ```bash
-brambl-cli tx prove -w $PASSWORD --keyfile $MAIN_KEY -n $NETWORK -i $TX_FILE -o $TX_PROVED_FILE --walletdb $WALLET
+strata-cli tx prove -w $PASSWORD --keyfile $MAIN_KEY -n $NETWORK -i $TX_FILE -o $TX_PROVED_FILE --walletdb $WALLET
 ```
 
 This will prove the transaction in the file `$TX_FILE` and store the result in the file `$TX_PROVED_FILE`. The right indexes to derive the keys are taken from the wallet database.
@@ -41,7 +41,7 @@ This will prove the transaction in the file `$TX_FILE` and store the result in t
 To send the transaction to the network you need to run the following command:
 
 ```bash
-brambl-cli tx broadcast -n $NETWORK -i $TX_PROVED_FILE -h $HOST --port $PORT --walletdb $WALLET
+strata-cli tx broadcast -n $NETWORK -i $TX_PROVED_FILE -h $HOST --port $PORT --walletdb $WALLET
 ```
 
 This will broadcast the transaction in the file `$TX_PROVED_FILE` to the network.
@@ -53,7 +53,7 @@ Do not forget to use the `--secure` parameter if you are using the testnet.
 You can check the balance of the address `$TO_ADDRESS` using the following command:
 
 ```bash
-brambl-cli wallet balance --from-address $TO_ADDRESS --walletdb $WALLET_DB --host $HOST --port $PORT
+strata-cli wallet balance --from-address $TO_ADDRESS --walletdb $WALLET_DB --host $HOST --port $PORT
 ```
 
 Do not forget to use the `--secure` parameter if you are using the testnet.

@@ -2,10 +2,9 @@ import sbt._
 
 object Dependencies {
 
-  lazy val strataOrg = "xyz.stratalab"
-
-  lazy val sdkVersion = "0.0.0+264-fceb968c-SNAPSHOT"
-  val strataSdk = strataOrg %% "strata-sdk" % sdkVersion
+  lazy val plasmaOrg = "org.plasmalabs"
+  lazy val sdkVersion = "0.1.0"
+  val plasmaSdk = plasmaOrg %% "plasma-sdk" % sdkVersion
   val circeVersion = "0.15.0-M1"
 
   val monocleCore = "dev.optics" %% "monocle-core" % "3.2.0"
@@ -14,8 +13,8 @@ object Dependencies {
 
   val laminarVersion = "16.0.0"
 
-  val sdkCrypto = strataOrg %% "crypto" % sdkVersion
-  val sdkServiceKit = strataOrg %% "service-kit" % sdkVersion
+  val sdkCrypto = plasmaOrg %% "crypto" % sdkVersion
+  val sdkServiceKit = plasmaOrg %% "service-kit" % sdkVersion
 
   val grpcNetty =
     "io.grpc" % "grpc-netty" % scalapb.compiler.Version.grpcJavaVersion

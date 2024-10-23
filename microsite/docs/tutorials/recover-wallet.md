@@ -13,7 +13,7 @@ error submitting it. This happens for example if you try to submit a
 transaction and it fails at broadcast time or at the node.
 
 When this happens, the wallet might be in a state where the current interaction
-locally is not the same as the current interaction on the node. `brambl-cli`
+locally is not the same as the current interaction on the node. `strata-cli`
 offers several ways to diagnose and recover the wallet.
 
 ## Diagnosing the Problem

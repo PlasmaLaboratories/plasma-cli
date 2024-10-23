@@ -15,7 +15,7 @@ address where to send the funds.
 To export a base verification key run the following command:
 
 ```bash
-brambl-cli wallet export-vk -w $PASSWORD -o $OUTPUT_FILE --walletdb $WALLET --fellowship-name $FELLOWSHIP_NAME --template-name $LOCK_TEMPLATE_NAME --keyfile $KEYFILE -n $NETWORK
+strata-cli wallet export-vk -w $PASSWORD -o $OUTPUT_FILE --walletdb $WALLET --fellowship-name $FELLOWSHIP_NAME --template-name $LOCK_TEMPLATE_NAME --keyfile $KEYFILE -n $NETWORK
 ```
 
 This will export the base verification key for the fellowship `$FELLOWSHIP_NAME` and template `$LOCK_TEMPLATE_NAME` to the file `$OUTPUT_FILE`. The keyfile `$KEYFILE` is used to derive the exported key.
@@ -28,7 +28,7 @@ interaction from which to export the key.
 To import one or many base verification keys run the following command:
 
 ```bash
-brambl-cli wallet import-vks --input-vks $BASE_VK_1,$BASE_VK_2 --fellowship-name $FELLOWSHIP_NAME --template-name $LOCK_TEMPLATE_NAME -n $NETWORK --walletdb $WALLET
+strata-cli wallet import-vks --input-vks $BASE_VK_1,$BASE_VK_2 --fellowship-name $FELLOWSHIP_NAME --template-name $LOCK_TEMPLATE_NAME -n $NETWORK --walletdb $WALLET
 ```
 
 ## Sync the wallet
