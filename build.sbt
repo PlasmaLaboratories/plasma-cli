@@ -2,7 +2,7 @@ import Dependencies._
 import org.scalajs.linker.interface.ModuleSplitStyle
 import scala.sys.process.Process
 
-lazy val scalacVersion = "2.13.12"
+lazy val scalacVersion = "2.13.15"
 
 lazy val shared = crossProject(JSPlatform, JVMPlatform)
   .in(file("./shared"))
