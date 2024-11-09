@@ -36,8 +36,8 @@ object Dependencies {
   lazy val circeGenericJVM = "io.circe" %% "circe-generic" % circeVersion
   lazy val log4cats = "org.typelevel" %% "log4cats-slf4j" % "2.6.0"
 
-  lazy val http4sEmber = "org.http4s" %% "http4s-ember-server" % "0.23.23"
-  lazy val http4sCirce = "org.http4s" %% "http4s-circe" % "0.23.23"
-  lazy val http4sDsl = "org.http4s" %% "http4s-dsl" % "0.23.23"
+  lazy val http4sEmber = "org.http4s" %% "http4s-ember-server" % "0.23.29"
+  lazy val http4sCirce = "org.http4s" %% "http4s-circe" % "0.23.29"
+  lazy val http4sDsl = "org.http4s" %% "http4s-dsl" % "0.23.29"
 
 }
