@@ -72,7 +72,7 @@ lazy val gui = project
   .settings(
     libraryDependencies ++= List(
       "com.raquo" %%% "laminar" % Dependencies.laminarVersion,
-      "com.raquo" %%% "waypoint" % "7.0.0"
+      "com.raquo" %%% "waypoint" % "8.0.1"
     ),
     scalaJSLinkerConfig ~= {
       _.withModuleKind(ModuleKind.ESModule)
