@@ -31,7 +31,7 @@ class ComplexTransactionWithFileTest
     },
     teardown = { _ => () }
   )
-  override val munitTimeout = Duration(180, "s")
+  override val munitIOTimeout = Duration(180, "s")
 
   tmpDirectory.test("Move funds from genesis to alice with complex tx") { _ =>
     import scala.concurrent.duration._
