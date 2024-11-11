@@ -289,7 +289,7 @@ case class FromSectionComponent(
         ),
         fetchFellowships,
         fetchTemplates,
-        fellowShipTemplateInteraction.flatMap { e =>
+        fellowShipTemplateInteraction.flatMapSwitch { e =>
           import io.circe.generic.auto._
           import io.circe.syntax._
           val (fellowship, template, interaction) = e
