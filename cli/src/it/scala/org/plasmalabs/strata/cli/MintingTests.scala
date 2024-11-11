@@ -14,7 +14,7 @@ class MintingTests
     with BobConstants
     with PolicyTemplates {
 
-  override val munitTimeout = Duration(180, "s")
+  override val munitIOTimeout = Duration(180, "s")
 
   val secure = false
 

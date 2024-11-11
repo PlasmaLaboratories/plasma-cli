@@ -15,7 +15,7 @@ class GeneralTransferTests
     with AliceConstants
     with BobConstants {
 
-  override val munitTimeout = Duration(180, "s")
+  override val munitIOTimeout = Duration(180, "s")
 
   tmpDirectory.test("Move funds from genesis to alice") { _ =>
     assertIO(

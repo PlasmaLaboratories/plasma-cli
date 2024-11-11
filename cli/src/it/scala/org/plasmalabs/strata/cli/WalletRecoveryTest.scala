@@ -27,7 +27,7 @@ class WalletRecoveryTest
     teardown = { _ => () }
   )
 
-  override val munitTimeout = Duration(180, "s")
+  override val munitIOTimeout = Duration(180, "s")
 
   tmpDirectory.test("Initialize wallet and Move funds from genesis") { _ =>
     import scala.concurrent.duration._
