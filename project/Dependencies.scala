@@ -32,7 +32,7 @@ object Dependencies {
   lazy val fastparse = "com.lihaoyi" %% "fastparse" % "3.0.2"
   lazy val munitCatsEffects =
     "org.typelevel" %% "munit-cats-effect" % "2.0.0" % "it,test"
-  lazy val circeYaml = "io.circe" %% "circe-yaml-v12" % "0.16.0"
+  lazy val circeYaml = "io.circe" %% "circe-yaml-v12" % "1.15.0"
   lazy val circeGenericJVM = "io.circe" %% "circe-generic" % circeVersion
   lazy val log4cats = "org.typelevel" %% "log4cats-slf4j" % "2.7.0"
 
