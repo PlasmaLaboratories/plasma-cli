@@ -28,7 +28,7 @@ object Dependencies {
   lazy val fs2Core = "co.fs2" %% "fs2-core" % "3.5.0"
   lazy val fs2IO = "co.fs2" %% "fs2-io" % "3.5.0"
   lazy val logback = "ch.qos.logback" % "logback-classic" % "1.4.14"
-  lazy val sqlite = "org.xerial" % "sqlite-jdbc" % "3.45.0.0"
+  lazy val sqlite = "org.xerial" % "sqlite-jdbc" % "3.45.3.0"
   lazy val fastparse = "com.lihaoyi" %% "fastparse" % "3.0.1"
   lazy val munitCatsEffects =
     "org.typelevel" %% "munit-cats-effect" % "2.0.0-M1" % "it,test"
