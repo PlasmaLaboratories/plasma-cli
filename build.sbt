@@ -2,7 +2,7 @@ import Dependencies._
 import org.scalajs.linker.interface.ModuleSplitStyle
 import scala.sys.process.Process
 
-lazy val scalacVersion = "2.13.12"
+lazy val scalacVersion = "2.13.15"
 
 lazy val shared = crossProject(JSPlatform, JVMPlatform)
   .in(file("./shared"))
@@ -72,7 +72,7 @@ lazy val gui = project
   .settings(
     libraryDependencies ++= List(
       "com.raquo" %%% "laminar" % Dependencies.laminarVersion,
-      "com.raquo" %%% "waypoint" % "7.0.0"
+      "com.raquo" %%% "waypoint" % "8.0.1"
     ),
     scalaJSLinkerConfig ~= {
       _.withModuleKind(ModuleKind.ESModule)
