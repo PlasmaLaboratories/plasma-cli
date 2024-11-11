@@ -7,9 +7,9 @@ object Dependencies {
   val plasmaSdk = plasmaOrg %% "plasma-sdk" % sdkVersion
   val circeVersion = "0.15.0-M1"
 
-  val monocleCore = "dev.optics" %% "monocle-core" % "3.2.0"
+  val monocleCore = "dev.optics" %% "monocle-core" % "3.3.0"
 
-  val monocleMacro = "dev.optics" %% "monocle-macro" % "3.2.0"
+  val monocleMacro = "dev.optics" %% "monocle-macro" % "3.3.0"
 
   val laminarVersion = "16.0.0"
 
