@@ -34,7 +34,7 @@ object Dependencies {
     "org.typelevel" %% "munit-cats-effect" % "2.0.0" % "it,test"
   lazy val circeYaml = "io.circe" %% "circe-yaml-v12" % "0.14.3-RC3"
   lazy val circeGenericJVM = "io.circe" %% "circe-generic" % circeVersion
-  lazy val log4cats = "org.typelevel" %% "log4cats-slf4j" % "2.6.0"
+  lazy val log4cats = "org.typelevel" %% "log4cats-slf4j" % "2.7.0"
 
   lazy val http4sEmber = "org.http4s" %% "http4s-ember-server" % "0.23.23"
   lazy val http4sCirce = "org.http4s" %% "http4s-circe" % "0.23.23"
