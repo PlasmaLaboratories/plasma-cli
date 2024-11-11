@@ -29,7 +29,7 @@ object Dependencies {
   lazy val fs2IO = "co.fs2" %% "fs2-io" % "3.11.0"
   lazy val logback = "ch.qos.logback" % "logback-classic" % "1.5.12"
   lazy val sqlite = "org.xerial" % "sqlite-jdbc" % "3.45.3.0"
-  lazy val fastparse = "com.lihaoyi" %% "fastparse" % "3.0.2"
+  lazy val fastparse = "com.lihaoyi" %% "fastparse" % "3.1.1"
   lazy val munitCatsEffects =
     "org.typelevel" %% "munit-cats-effect" % "2.0.0" % "it,test"
   lazy val circeYaml = "io.circe" %% "circe-yaml-v12" % "0.16.0"
