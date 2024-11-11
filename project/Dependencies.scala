@@ -11,7 +11,7 @@ object Dependencies {
 
   val monocleMacro = "dev.optics" %% "monocle-macro" % "3.3.0"
 
-  val laminarVersion = "16.0.0"
+  val laminarVersion = "17.1.0"
 
   val sdkCrypto = plasmaOrg %% "crypto" % sdkVersion
   val sdkServiceKit = plasmaOrg %% "service-kit" % sdkVersion
