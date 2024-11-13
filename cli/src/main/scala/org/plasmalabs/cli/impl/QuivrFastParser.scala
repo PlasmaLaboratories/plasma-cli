@@ -6,8 +6,8 @@ import org.plasmalabs.sdk.builders.locks.LockTemplate
 import org.plasmalabs.sdk.builders.locks.PropositionTemplate
 import org.plasmalabs.sdk.utils.Encoding
 import com.google.protobuf.ByteString
-import quivr.models.Data
-import quivr.models
+import org.plasmalabs.quivr.models.Data
+import org.plasmalabs.quivr.models
 
 sealed trait ParseError {
   val location: Int

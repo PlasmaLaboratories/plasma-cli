@@ -11,8 +11,8 @@ import org.plasmalabs.sdk.models.transaction.IoTransaction
 import org.plasmalabs.sdk.models.transaction.SpentTransactionOutput
 import org.plasmalabs.sdk.utils.Encoding
 import com.google.protobuf.ByteString
-import quivr.models.Int128
-import quivr.models.VerificationKey
+import org.plasmalabs.quivr.models.Int128
+import org.plasmalabs.quivr.models.VerificationKey
 
 import scala.io.BufferedSource
 

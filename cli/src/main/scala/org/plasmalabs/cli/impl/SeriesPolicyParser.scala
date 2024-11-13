@@ -2,7 +2,7 @@ package org.plasmalabs.cli.impl
 
 import cats.effect.kernel.Resource
 import cats.effect.kernel.Sync
-import org.plasmalabs.sdk.models.Event
+import org.plasmalabs.sdk.models._
 import org.plasmalabs.sdk.models.box.FungibilityType
 import org.plasmalabs.sdk.models.box.QuantityDescriptorType
 import com.google.protobuf.struct.Value
@@ -10,7 +10,7 @@ import io.circe.Json
 
 import scala.io.BufferedSource
 
-case class SeriesPolicy(
+case class SeriesPolicyInternal(
     label: String,
     tokenSupply: Option[Int],
     registrationUtxo: String,
@@ -23,7 +23,7 @@ case class SeriesPolicy(
 trait SeriesPolicyParser[F[_]] {
   def parseSeriesPolicy(
       inputFileRes: Resource[F, BufferedSource]
-  ): F[Either[CommonParserError, Event.SeriesPolicy]]
+  ): F[Either[CommonParserError, SeriesPolicy]]
 }
 
 object SeriesPolicyParser {
@@ -37,8 +37,8 @@ object SeriesPolicyParser {
     import io.circe.yaml
 
     private def seriesPolicyToPBSeriesPolicy(
-        seriesPolicy: SeriesPolicy
-    ): F[Event.SeriesPolicy] =
+        seriesPolicy: SeriesPolicyInternal
+    ): F[SeriesPolicy] =
       for {
         label <-
           Sync[F].delay(
@@ -93,7 +93,7 @@ object SeriesPolicyParser {
           })
         )
       } yield {
-        Event.SeriesPolicy(
+        SeriesPolicy(
           label,
           someTokenSupply,
           registrationUtxo,
@@ -106,7 +106,7 @@ object SeriesPolicyParser {
 
     override def parseSeriesPolicy(
         inputFileRes: Resource[F, BufferedSource]
-    ): F[Either[CommonParserError, Event.SeriesPolicy]] = (for {
+    ): F[Either[CommonParserError, SeriesPolicy]] = (for {
       inputString <- inputFileRes.use(file =>
         Sync[F].blocking(file.getLines().mkString("\n"))
       )
@@ -114,7 +114,7 @@ object SeriesPolicyParser {
         Sync[F].fromEither(
           yaml.v12.parser
             .parse(inputString)
-            .flatMap(tx => tx.as[SeriesPolicy])
+            .flatMap(tx => tx.as[SeriesPolicyInternal])
             .leftMap { e =>
               InvalidYaml(e)
             }

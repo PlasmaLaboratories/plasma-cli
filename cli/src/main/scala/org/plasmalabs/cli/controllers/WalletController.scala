@@ -22,15 +22,15 @@ import org.plasmalabs.shared.models.AssetTokenBalanceDTO
 import org.plasmalabs.shared.models.GroupTokenBalanceDTO
 import org.plasmalabs.shared.models.LvlBalance
 import org.plasmalabs.shared.models.SeriesTokenBalanceDTO
-import quivr.models.VerificationKey
+import org.plasmalabs.quivr.models.VerificationKey
 
 import java.io.File
 import java.io.PrintWriter
-import quivr.models.Preimage
+import org.plasmalabs.quivr.models.Preimage
 import com.google.protobuf.ByteString
-import quivr.models.Proposition
+import org.plasmalabs.quivr.models.Proposition
 import org.plasmalabs.cli.DigestType
-import quivr.models.Digest
+import org.plasmalabs.quivr.models.Digest
 import org.plasmalabs.cli.Sha256
 import org.plasmalabs.crypto.hash.Blake2b256
 

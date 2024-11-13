@@ -4,14 +4,12 @@ import cats.effect.kernel.Resource
 import cats.effect.kernel.Sync
 import org.plasmalabs.sdk.builders.TransactionBuilderApi
 import org.plasmalabs.sdk.dataApi.WalletStateAlgebra
-import org.plasmalabs.sdk.models.Event
-import org.plasmalabs.sdk.models.Indices
-import org.plasmalabs.sdk.models.LockAddress
+import org.plasmalabs.sdk.models._
 import org.plasmalabs.sdk.models.box.Lock
 import org.plasmalabs.sdk.utils.Encoding
 import org.plasmalabs.sdk.wallet.WalletApi
 import org.plasmalabs.indexer.services.Txo
-import quivr.models.KeyPair
+import org.plasmalabs.quivr.models.KeyPair
 
 import java.io.FileOutputStream
 
@@ -39,7 +37,7 @@ trait SeriesMintingOps[G[_]] extends CommonTxOps {
       someNextIndices: Option[Indices],
       keyPair: KeyPair,
       outputFile: String,
-      seriesPolicy: Event.SeriesPolicy
+      seriesPolicy: SeriesPolicy
   ): G[Unit] =
     for {
       changeAddress <- tba.lockAddress(
@@ -108,7 +106,7 @@ trait SeriesMintingOps[G[_]] extends CommonTxOps {
       someNextIndices: Option[Indices],
       keyPair: KeyPair,
       outputFile: String,
-      seriesPolicy: Event.SeriesPolicy,
+      seriesPolicy: SeriesPolicy,
       changeLock: Option[Lock]
   ) = (if (lvlTxos.isEmpty) {
          Sync[G].raiseError(CreateTxError("No LVL txos found"))

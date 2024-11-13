@@ -12,14 +12,14 @@ import org.plasmalabs.sdk.models.Indices
 import org.plasmalabs.sdk.utils.Encoding
 import org.plasmalabs.sdk.wallet.WalletApi
 import munit.CatsEffectSuite
-import quivr.models.KeyPair
+import org.plasmalabs.quivr.models.KeyPair
 
 import java.nio.file.Files
 import java.nio.file.Paths
 import scala.io.Source
 import org.plasmalabs.cli.Sha256
-import quivr.models.Proposition
-import quivr.models.Preimage
+import org.plasmalabs.quivr.models.Proposition
+import org.plasmalabs.quivr.models.Preimage
 import com.google.protobuf.ByteString
 import org.plasmalabs.cli.Blake2b
 

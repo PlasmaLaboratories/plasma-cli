@@ -8,7 +8,7 @@ import org.plasmalabs.sdk.models.box.Value
 import org.plasmalabs.sdk.models.transaction.UnspentTransactionOutput
 import org.plasmalabs.sdk.utils.Encoding
 import com.google.protobuf.ByteString
-import quivr.models.Int128
+import org.plasmalabs.quivr.models.Int128
 
 import scala.util.Try
 

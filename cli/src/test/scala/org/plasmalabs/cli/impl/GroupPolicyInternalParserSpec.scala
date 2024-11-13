@@ -5,7 +5,7 @@ import org.plasmalabs.sdk.constants.NetworkConstants
 import cats.effect.kernel.Resource
 import cats.effect.IO
 
-class GroupPolicyParserSpec
+class GroupPolicyInternalParserSpec
     extends CatsEffectSuite
     with GroupPolicyParserModule {
 
