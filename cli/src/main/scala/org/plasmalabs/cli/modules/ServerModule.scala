@@ -3,8 +3,8 @@ package org.plasmalabs.cli.modules
 import cats.data.Kleisli
 import cats.effect.IO
 import cats.effect._
-import org.plasmalabs.cli.StrataCliParams
-import org.plasmalabs.cli.StrataCliSubCmd
+import org.plasmalabs.cli.PlasmaCliParams
+import org.plasmalabs.cli.PlasmaCliSubCmd
 import org.plasmalabs.cli.http.WalletHttpService
 import org.plasmalabs.cli.impl.FullTxOps
 import org.plasmalabs.sdk.codecs.AddressCodecs
@@ -22,7 +22,7 @@ import org.http4s.server.staticcontent.resourceServiceBuilder
 
 import java.nio.file.Files
 import scopt.OParser
-import org.plasmalabs.cli.StrataCliParamsParserModule
+import org.plasmalabs.cli.PlasmaCliParamsParserModule
 
 trait ServerModule extends FellowshipsModeModule with WalletModeModule {
 
@@ -49,7 +49,7 @@ trait ServerModule extends FellowshipsModeModule with WalletModeModule {
       TemporaryRedirect(headers.Location(Uri.fromString("/").toOption.get))
   }
 
-  def apiServices(validateParams: StrataCliParams) = HttpRoutes.of[IO] {
+  def apiServices(validateParams: PlasmaCliParams) = HttpRoutes.of[IO] {
     case req @ POST -> Root / "send" =>
       implicit val txReqDecoder: EntityDecoder[IO, TxRequest] =
         jsonOf[IO, TxRequest]
@@ -85,17 +85,17 @@ trait ServerModule extends FellowshipsModeModule with WalletModeModule {
   }
 
   def serverSubcmd(
-      validateParams: StrataCliParams
+      validateParams: PlasmaCliParams
   ): IO[Either[String, String]] = validateParams.subcmd match {
-    case StrataCliSubCmd.invalid =>
+    case PlasmaCliSubCmd.invalid =>
       IO.pure(
         Left(
           OParser.usage(
-            StrataCliParamsParserModule.serverMode
+            PlasmaCliParamsParserModule.serverMode
           ) + "\nA subcommand needs to be specified"
         )
       )
-    case StrataCliSubCmd.init =>
+    case PlasmaCliSubCmd.init =>
       val staticAssetsService = resourceServiceBuilder[IO]("/static").toRoutes
       val logger =
         org.typelevel.log4cats.slf4j.Slf4jLogger.getLoggerFromName[IO]("App")

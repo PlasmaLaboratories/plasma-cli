@@ -13,7 +13,7 @@ import java.io.File
 import java.nio.file.Paths
 import scala.util.Try
 
-object StrataCliParamsParserModule {
+object PlasmaCliParamsParserModule {
 
   implicit val tokenTypeRead: scopt.Read[TokenType.Value] =
     Try(scopt.Read.reads(TokenType.withName)) match {
@@ -24,7 +24,7 @@ object StrataCliParamsParserModule {
         )
     }
 
-  val builder = OParser.builder[StrataCliParams]
+  val builder = OParser.builder[PlasmaCliParams]
 
   import builder._
 
@@ -298,7 +298,7 @@ object StrataCliParamsParserModule {
         .optional(),
       checkConfig(c =>
         if (
-          c.mode == StrataCliMode.simpletransaction && c.subcmd == StrataCliSubCmd.create
+          c.mode == PlasmaCliMode.simpletransaction && c.subcmd == PlasmaCliSubCmd.create
         ) {
           if (c.fromFellowship == "nofellowship") {
             (
@@ -403,11 +403,11 @@ object StrataCliParamsParserModule {
   }
 
   val serverMode = cmd("server")
-    .action((_, c) => c.copy(mode = StrataCliMode.server))
+    .action((_, c) => c.copy(mode = PlasmaCliMode.server))
     .text("Server mode")
     .children(
       cmd("init")
-        .action((_, c) => c.copy(subcmd = StrataCliSubCmd.init))
+        .action((_, c) => c.copy(subcmd = PlasmaCliSubCmd.init))
         .text("Run the server")
         .children(
           (Seq(walletDbArg.required()) ++ Seq(secureArg) ++
@@ -417,17 +417,17 @@ object StrataCliParamsParserModule {
     )
 
   val templatesMode = cmd("templates")
-    .action((_, c) => c.copy(mode = StrataCliMode.templates))
+    .action((_, c) => c.copy(mode = PlasmaCliMode.templates))
     .text("Template mode")
     .children(
       cmd("list")
-        .action((_, c) => c.copy(subcmd = StrataCliSubCmd.list))
+        .action((_, c) => c.copy(subcmd = PlasmaCliSubCmd.list))
         .text("List existing templates")
         .children(
           walletDbArg
         ),
       cmd("add")
-        .action((_, c) => c.copy(subcmd = StrataCliSubCmd.add))
+        .action((_, c) => c.copy(subcmd = PlasmaCliSubCmd.add))
         .text("Add a new templates")
         .children(
           walletDbArg,
@@ -445,17 +445,17 @@ object StrataCliParamsParserModule {
     )
 
   val fellowshipsMode = cmd("fellowships")
-    .action((_, c) => c.copy(mode = StrataCliMode.fellowships))
+    .action((_, c) => c.copy(mode = PlasmaCliMode.fellowships))
     .text("Fellowship mode")
     .children(
       cmd("list")
-        .action((_, c) => c.copy(subcmd = StrataCliSubCmd.list))
+        .action((_, c) => c.copy(subcmd = PlasmaCliSubCmd.list))
         .text("List existing fellowships")
         .children(
           walletDbArg
         ),
       cmd("add")
-        .action((_, c) => c.copy(subcmd = StrataCliSubCmd.add))
+        .action((_, c) => c.copy(subcmd = PlasmaCliSubCmd.add))
         .text("Add a new fellowships")
         .children(
           Seq(
@@ -479,11 +479,11 @@ object StrataCliParamsParserModule {
     )
 
   val indexerQueryMode = cmd("indexer-query")
-    .action((_, c) => c.copy(mode = StrataCliMode.indexerquery))
+    .action((_, c) => c.copy(mode = PlasmaCliMode.indexerquery))
     .text("Indexer query mode")
     .children(
       cmd("utxo-by-address")
-        .action((_, c) => c.copy(subcmd = StrataCliSubCmd.utxobyaddress))
+        .action((_, c) => c.copy(subcmd = PlasmaCliSubCmd.utxobyaddress))
         .text("Query utxo")
         .children(
           (coordinates ++ hostPort ++ Seq(
@@ -494,11 +494,11 @@ object StrataCliParamsParserModule {
         )
     )
   val nodeQueryMode = cmd("node-query")
-    .action((_, c) => c.copy(mode = StrataCliMode.nodequery))
+    .action((_, c) => c.copy(mode = PlasmaCliMode.nodequery))
     .text("Node query mode")
     .children(
       cmd("mint-block")
-        .action((_, c) => c.copy(subcmd = StrataCliSubCmd.mintblock))
+        .action((_, c) => c.copy(subcmd = PlasmaCliSubCmd.mintblock))
         .text("Mint given number of blocks")
         .children(
           (hostPort ++ Seq(
@@ -512,7 +512,7 @@ object StrataCliParamsParserModule {
           )): _*
         ),
       cmd("block-by-height")
-        .action((_, c) => c.copy(subcmd = StrataCliSubCmd.blockbyheight))
+        .action((_, c) => c.copy(subcmd = PlasmaCliSubCmd.blockbyheight))
         .text("Get the block at a given height")
         .children(
           (hostPort ++ Seq(
@@ -526,7 +526,7 @@ object StrataCliParamsParserModule {
           )): _*
         ),
       cmd("block-by-id")
-        .action((_, c) => c.copy(subcmd = StrataCliSubCmd.blockbyid))
+        .action((_, c) => c.copy(subcmd = PlasmaCliSubCmd.blockbyid))
         .text("Get the block with a given id")
         .children(
           (hostPort ++ Seq(
@@ -542,7 +542,7 @@ object StrataCliParamsParserModule {
           )): _*
         ),
       cmd("transaction-by-id")
-        .action((_, c) => c.copy(subcmd = StrataCliSubCmd.transactionbyid))
+        .action((_, c) => c.copy(subcmd = PlasmaCliSubCmd.transactionbyid))
         .text("Get the transaction with a given id")
         .children(
           (hostPort ++ Seq(
@@ -560,11 +560,11 @@ object StrataCliParamsParserModule {
     )
 
   val walletMode = cmd("wallet")
-    .action((_, c) => c.copy(mode = StrataCliMode.wallet))
+    .action((_, c) => c.copy(mode = PlasmaCliMode.wallet))
     .text("Wallet mode")
     .children(
       cmd("balance")
-        .action((_, c) => c.copy(subcmd = StrataCliSubCmd.balance))
+        .action((_, c) => c.copy(subcmd = PlasmaCliSubCmd.balance))
         .text("Get balance of wallet")
         .children(
           (hostPortNetwork ++ coordinates ++ (Seq(
@@ -573,7 +573,7 @@ object StrataCliParamsParserModule {
           ))): _*
         ),
       cmd("set-interaction")
-        .action((_, c) => c.copy(subcmd = StrataCliSubCmd.setinteraction))
+        .action((_, c) => c.copy(subcmd = PlasmaCliSubCmd.setinteraction))
         .text("Set the current interaction")
         .children(
           coordinates.map(_.required()) ++
@@ -582,7 +582,7 @@ object StrataCliParamsParserModule {
             ): _*
         ),
       cmd("list-interactions")
-        .action((_, c) => c.copy(subcmd = StrataCliSubCmd.listinteraction))
+        .action((_, c) => c.copy(subcmd = PlasmaCliSubCmd.listinteraction))
         .text("List the interactions for a given fellowship and template")
         .children(
           fellowshipNameArg,
@@ -590,7 +590,7 @@ object StrataCliParamsParserModule {
           walletDbArg
         ),
       cmd("sync")
-        .action((_, c) => c.copy(subcmd = StrataCliSubCmd.sync))
+        .action((_, c) => c.copy(subcmd = PlasmaCliSubCmd.sync))
         .text("Sync wallet")
         .children(
           (hostPortNetwork ++ keyfileAndPassword ++ (Seq(
@@ -600,7 +600,7 @@ object StrataCliParamsParserModule {
           ))): _*
         ),
       cmd("init")
-        .action((_, c) => c.copy(subcmd = StrataCliSubCmd.init))
+        .action((_, c) => c.copy(subcmd = PlasmaCliSubCmd.init))
         .text("Initialize wallet")
         .children(
           (
@@ -627,7 +627,7 @@ object StrataCliParamsParserModule {
           ): _*
         ),
       cmd("recover-keys")
-        .action((_, c) => c.copy(subcmd = StrataCliSubCmd.recoverkeys))
+        .action((_, c) => c.copy(subcmd = PlasmaCliSubCmd.recoverkeys))
         .text("Recover Wallet Main Key")
         .children(
           (
@@ -648,13 +648,13 @@ object StrataCliParamsParserModule {
           ): _*
         ),
       cmd("current-address")
-        .action((_, c) => c.copy(subcmd = StrataCliSubCmd.currentaddress))
+        .action((_, c) => c.copy(subcmd = PlasmaCliSubCmd.currentaddress))
         .text("Obtain current address")
         .children(
           (Seq(walletDbArg) ++ coordinates): _*
         ),
       cmd("export-vk")
-        .action((_, c) => c.copy(subcmd = StrataCliSubCmd.exportvk))
+        .action((_, c) => c.copy(subcmd = PlasmaCliSubCmd.exportvk))
         .text("Export verification key")
         .children(
           (keyfileAndPassword ++ Seq(
@@ -668,7 +668,7 @@ object StrataCliParamsParserModule {
           )): _*
         ),
       cmd("add-secret")
-        .action((_, c) => c.copy(subcmd = StrataCliSubCmd.addsecret))
+        .action((_, c) => c.copy(subcmd = PlasmaCliSubCmd.addsecret))
         .text("Add a secret to the wallet")
         .children(
           walletDbArg,
@@ -676,7 +676,7 @@ object StrataCliParamsParserModule {
           digestArg
         ),
       cmd("get-preimage")
-        .action((_, c) => c.copy(subcmd = StrataCliSubCmd.getpreimage))
+        .action((_, c) => c.copy(subcmd = PlasmaCliSubCmd.getpreimage))
         .text("Get a preimage from the wallet")
         .children(
           walletDbArg,
@@ -684,7 +684,7 @@ object StrataCliParamsParserModule {
           digestArg
         ),
       cmd("import-vks")
-        .action((_, c) => c.copy(subcmd = StrataCliSubCmd.importvks))
+        .action((_, c) => c.copy(subcmd = PlasmaCliSubCmd.importvks))
         .text("Import verification key")
         .children(
           (keyfileAndPassword ++ Seq(
@@ -699,17 +699,17 @@ object StrataCliParamsParserModule {
     )
 
   val transactionMode = cmd("tx")
-    .action((_, c) => c.copy(mode = StrataCliMode.tx))
+    .action((_, c) => c.copy(mode = PlasmaCliMode.tx))
     .text("Transaction mode")
     .children(
       cmd("inspect")
-        .action((_, c) => c.copy(subcmd = StrataCliSubCmd.inspect))
+        .action((_, c) => c.copy(subcmd = PlasmaCliSubCmd.inspect))
         .text("Inspect transaction")
         .children(
           inputFileArg
         ),
       cmd("broadcast")
-        .action((_, c) => c.copy(subcmd = StrataCliSubCmd.broadcast))
+        .action((_, c) => c.copy(subcmd = PlasmaCliSubCmd.broadcast))
         .text("Broadcast transaction")
         .children(
           ((hostPortNetwork ++ Seq(
@@ -717,7 +717,7 @@ object StrataCliParamsParserModule {
           ))): _*
         ),
       cmd("prove")
-        .action((_, c) => c.copy(subcmd = StrataCliSubCmd.prove))
+        .action((_, c) => c.copy(subcmd = PlasmaCliSubCmd.prove))
         .text("Prove transaction")
         .children(
           ((keyfileAndPassword ++ Seq(
@@ -727,7 +727,7 @@ object StrataCliParamsParserModule {
           ))): _*
         ),
       cmd("create")
-        .action((_, c) => c.copy(subcmd = StrataCliSubCmd.create))
+        .action((_, c) => c.copy(subcmd = PlasmaCliSubCmd.create))
         .text("Create transaction")
         .children(
           ((hostPortNetwork ++ Seq(
@@ -738,11 +738,11 @@ object StrataCliParamsParserModule {
     )
 
   val simpleMintingMode = cmd("simple-minting")
-    .action((_, c) => c.copy(mode = StrataCliMode.simpleminting))
+    .action((_, c) => c.copy(mode = PlasmaCliMode.simpleminting))
     .text("Simple minting mode")
     .children(
       cmd("create")
-        .action((_, c) => c.copy(subcmd = StrataCliSubCmd.create))
+        .action((_, c) => c.copy(subcmd = PlasmaCliSubCmd.create))
         .text("Create minting transaction")
         .children(
           ((coordinates ++ hostPortNetwork ++ keyfileAndPassword ++ Seq(
@@ -778,8 +778,8 @@ object StrataCliParamsParserModule {
             mintTokenType.required(),
             checkConfig(c =>
               if (
-                c.mode == StrataCliMode.simpleminting &&
-                c.subcmd == StrataCliSubCmd.create &&
+                c.mode == PlasmaCliMode.simpleminting &&
+                c.subcmd == PlasmaCliSubCmd.create &&
                 c.tokenType != TokenType.group &&
                 c.tokenType != TokenType.series &&
                 c.tokenType != TokenType.asset
@@ -789,8 +789,8 @@ object StrataCliParamsParserModule {
                 )
               else {
                 if (
-                  c.mode == StrataCliMode.simpleminting &&
-                  c.subcmd == StrataCliSubCmd.create
+                  c.mode == PlasmaCliMode.simpleminting &&
+                  c.subcmd == PlasmaCliSubCmd.create
                 ) {
                   if (c.fromAddress.isDefined) {
                     failure(
@@ -822,11 +822,11 @@ object StrataCliParamsParserModule {
     )
 
   val simpleTransactionMode = cmd("simple-transaction")
-    .action((_, c) => c.copy(mode = StrataCliMode.simpletransaction))
+    .action((_, c) => c.copy(mode = PlasmaCliMode.simpletransaction))
     .text("Simple transaction mode")
     .children(
       cmd("create")
-        .action((_, c) => c.copy(subcmd = StrataCliSubCmd.create))
+        .action((_, c) => c.copy(subcmd = PlasmaCliSubCmd.create))
         .text("Create transaction")
         .children(
           ((coordinates ++ changeCoordinates ++ hostPortNetwork ++ keyfileAndPassword ++ Seq(
@@ -856,7 +856,7 @@ object StrataCliParamsParserModule {
               seriesId,
               checkConfig { c =>
                 if (
-                  c.mode == StrataCliMode.simpletransaction && c.subcmd == StrataCliSubCmd.create
+                  c.mode == PlasmaCliMode.simpletransaction && c.subcmd == PlasmaCliSubCmd.create
                 )
                   if (c.fromAddress.isDefined) {
                     failure(

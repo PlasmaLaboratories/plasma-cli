@@ -5,7 +5,7 @@ import scopt.OParser
 
 class ParamsIndexerQueryTest extends FunSuite {
 
-  import StrataCliParamsParserModule._
+  import PlasmaCliParamsParserModule._
 
   test("Test from-fellowship transactions require index (UTXO query)") {
     val args0 = List(
@@ -24,7 +24,7 @@ class ParamsIndexerQueryTest extends FunSuite {
       "--walletdb",
       "src/test/resources/wallet.db"
     )
-    assert(OParser.parse(paramParser, args0, StrataCliParams()).isDefined)
+    assert(OParser.parse(paramParser, args0, PlasmaCliParams()).isDefined)
   }
 
 }

@@ -1,28 +1,28 @@
 package org.plasmalabs.cli.modules
 
 import cats.effect.IO
-import org.plasmalabs.cli.StrataCliParams
-import org.plasmalabs.cli.StrataCliSubCmd
+import org.plasmalabs.cli.PlasmaCliParams
+import org.plasmalabs.cli.PlasmaCliSubCmd
 import org.plasmalabs.cli.controllers.TxController
 import org.plasmalabs.sdk.constants.NetworkConstants
 import scopt.OParser
-import org.plasmalabs.cli.StrataCliParamsParserModule
+import org.plasmalabs.cli.PlasmaCliParamsParserModule
 
 trait TxModeModule extends TxParserAlgebraModule with TransactionAlgebraModule {
 
   def txModeSubcmds(
-      validateParams: StrataCliParams
+      validateParams: PlasmaCliParams
   ): IO[Either[String, String]] = {
     validateParams.subcmd match {
-      case StrataCliSubCmd.invalid =>
+      case PlasmaCliSubCmd.invalid =>
         IO.pure(
           Left(
             OParser.usage(
-              StrataCliParamsParserModule.transactionMode
+              PlasmaCliParamsParserModule.transactionMode
             ) + "\nA subcommand needs to be specified"
           )
         )
-      case StrataCliSubCmd.broadcast =>
+      case PlasmaCliSubCmd.broadcast =>
         new TxController(
           txParserAlgebra(
             validateParams.network.networkId,
@@ -35,7 +35,7 @@ trait TxModeModule extends TxParserAlgebraModule with TransactionAlgebraModule {
             validateParams.secureConnection
           )
         ).broadcastSimpleTransactionFromParams(validateParams.someInputFile.get)
-      case StrataCliSubCmd.prove =>
+      case PlasmaCliSubCmd.prove =>
         new TxController(
           txParserAlgebra(
             validateParams.network.networkId,
@@ -53,7 +53,7 @@ trait TxModeModule extends TxParserAlgebraModule with TransactionAlgebraModule {
           validateParams.password,
           validateParams.someOutputFile.get
         )
-      case StrataCliSubCmd.inspect =>
+      case PlasmaCliSubCmd.inspect =>
         new TxController(
           txParserAlgebra(
             validateParams.network.networkId,
@@ -66,7 +66,7 @@ trait TxModeModule extends TxParserAlgebraModule with TransactionAlgebraModule {
             validateParams.secureConnection
           )
         ).inspectTransaction(validateParams.someInputFile.get)
-      case StrataCliSubCmd.create =>
+      case PlasmaCliSubCmd.create =>
         new TxController(
           txParserAlgebra(
             validateParams.network.networkId,

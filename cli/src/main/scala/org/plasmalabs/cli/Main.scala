@@ -26,30 +26,30 @@ object Main
     with SimpleMintingModeModule
     with ServerModule {
 
-  import StrataCliParamsParserModule._
+  import PlasmaCliParamsParserModule._
 
   override def run(args: List[String]): IO[ExitCode] = {
-    OParser.runParser(paramParser, args, StrataCliParams()) match {
+    OParser.runParser(paramParser, args, PlasmaCliParams()) match {
       case (Some(params), effects) =>
         val op: IO[Either[String, String]] =
           params.mode match {
-            case StrataCliMode.tx =>
+            case PlasmaCliMode.tx =>
               txModeSubcmds(params)
-            case StrataCliMode.templates =>
+            case PlasmaCliMode.templates =>
               templateModeSubcmds(params)
-            case StrataCliMode.fellowships =>
+            case PlasmaCliMode.fellowships =>
               fellowshipsModeSubcmds(params)
-            case StrataCliMode.wallet =>
+            case PlasmaCliMode.wallet =>
               walletModeSubcmds(params)
-            case StrataCliMode.simpletransaction =>
+            case PlasmaCliMode.simpletransaction =>
               simpleTransactionSubcmds(params)
-            case StrataCliMode.simpleminting =>
+            case PlasmaCliMode.simpleminting =>
               simpleMintingSubcmds(params)
-            case StrataCliMode.indexerquery =>
+            case PlasmaCliMode.indexerquery =>
               indexerQuerySubcmd(params)
-            case StrataCliMode.nodequery =>
+            case PlasmaCliMode.nodequery =>
               nodeQuerySubcmd(params)
-            case StrataCliMode.server =>
+            case PlasmaCliMode.server =>
               serverSubcmd(params)
             case _ =>
               IO(OParser.runEffects(effects)) >> IO.pure(Left("Invalid mode"))

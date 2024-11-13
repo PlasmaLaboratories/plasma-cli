@@ -2,16 +2,16 @@ package org.plasmalabs.cli.modules
 
 import cats.effect.IO
 import org.plasmalabs.cli.controllers.NodeQueryController
-import org.plasmalabs.cli.StrataCliSubCmd
+import org.plasmalabs.cli.PlasmaCliSubCmd
 import org.plasmalabs.sdk.dataApi.{NodeQueryAlgebra, RpcChannelResource}
-import org.plasmalabs.cli.StrataCliParams
+import org.plasmalabs.cli.PlasmaCliParams
 import scopt.OParser
-import org.plasmalabs.cli.StrataCliParamsParserModule
+import org.plasmalabs.cli.PlasmaCliParamsParserModule
 
 trait NodeQueryModeModule extends RpcChannelResource {
 
   def nodeQuerySubcmd(
-      validateParams: StrataCliParams
+      validateParams: PlasmaCliParams
   ): IO[Either[String, String]] = {
     val nodeQueryAlgebra = NodeQueryAlgebra.make[IO](
       channelResource(
@@ -21,28 +21,28 @@ trait NodeQueryModeModule extends RpcChannelResource {
       )
     )
     validateParams.subcmd match {
-      case StrataCliSubCmd.invalid =>
+      case PlasmaCliSubCmd.invalid =>
         IO.pure(
           Left(
             OParser.usage(
-              StrataCliParamsParserModule.nodeQueryMode
+              PlasmaCliParamsParserModule.nodeQueryMode
             ) + "\nA subcommand needs to be specified"
           )
         )
-      case StrataCliSubCmd.mintblock =>
+      case PlasmaCliSubCmd.mintblock =>
         new NodeQueryController(nodeQueryAlgebra)
           .makeBlocks(
             validateParams.nbOfBlocks
           )
-      case StrataCliSubCmd.blockbyheight =>
+      case PlasmaCliSubCmd.blockbyheight =>
         new NodeQueryController(
           nodeQueryAlgebra
         ).blockByHeight(validateParams.height)
-      case StrataCliSubCmd.blockbyid =>
+      case PlasmaCliSubCmd.blockbyid =>
         new NodeQueryController(
           nodeQueryAlgebra
         ).blockById(validateParams.blockId)
-      case StrataCliSubCmd.transactionbyid =>
+      case PlasmaCliSubCmd.transactionbyid =>
         new NodeQueryController(
           nodeQueryAlgebra
         ).fetchTransaction(validateParams.transactionId)
