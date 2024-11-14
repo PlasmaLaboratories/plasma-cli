@@ -4,7 +4,7 @@ import cats.data.OptionT
 import cats.effect.kernel.Resource
 import cats.effect.kernel.Sync
 import org.plasmalabs.sdk.builders.TransactionBuilderApi
-import org.plasmalabs.cli.StrataCliParams
+import org.plasmalabs.cli.PlasmaCliParams
 import org.plasmalabs.cli.impl.WalletAlgebra
 import org.plasmalabs.cli.impl.WalletManagementUtils
 import org.plasmalabs.cli.impl.WalletModeHelper
@@ -22,15 +22,15 @@ import org.plasmalabs.shared.models.AssetTokenBalanceDTO
 import org.plasmalabs.shared.models.GroupTokenBalanceDTO
 import org.plasmalabs.shared.models.LvlBalance
 import org.plasmalabs.shared.models.SeriesTokenBalanceDTO
-import quivr.models.VerificationKey
+import org.plasmalabs.quivr.models.VerificationKey
 
 import java.io.File
 import java.io.PrintWriter
-import quivr.models.Preimage
+import org.plasmalabs.quivr.models.Preimage
 import com.google.protobuf.ByteString
-import quivr.models.Proposition
+import org.plasmalabs.quivr.models.Proposition
 import org.plasmalabs.cli.DigestType
-import quivr.models.Digest
+import org.plasmalabs.quivr.models.Digest
 import org.plasmalabs.cli.Sha256
 import org.plasmalabs.crypto.hash.Blake2b256
 
@@ -296,7 +296,7 @@ class WalletController[F[_]: Sync](
   }
 
   def createWalletFromParams(
-      params: StrataCliParams
+      params: PlasmaCliParams
   ): F[Either[String, String]] = {
     import cats.implicits._
     walletAlgebra
@@ -350,7 +350,7 @@ class WalletController[F[_]: Sync](
       })
   }
   def recoverKeysFromParams(
-      params: StrataCliParams
+      params: PlasmaCliParams
   ): F[Either[String, String]] = {
     import cats.implicits._
     walletAlgebra
@@ -365,7 +365,7 @@ class WalletController[F[_]: Sync](
       .map(_ => Right("Wallet Main Key Recovered"))
   }
 
-  def currentaddress(params: StrataCliParams): F[Either[String, String]] = {
+  def currentaddress(params: PlasmaCliParams): F[Either[String, String]] = {
     import cats.implicits._
     params.fromAddress
       .map(x => Sync[F].point(Some(x)))

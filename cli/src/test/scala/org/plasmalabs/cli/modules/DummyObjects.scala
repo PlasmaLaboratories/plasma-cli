@@ -23,8 +23,8 @@ import org.plasmalabs.indexer.services.Txo
 import org.plasmalabs.indexer.services.TxoState
 import org.plasmalabs.node.models.BlockBody
 import com.google.protobuf.ByteString
-import quivr.models.Int128
-import quivr.models.Proposition
+import org.plasmalabs.quivr.models.Int128
+import org.plasmalabs.quivr.models.Proposition
 import org.plasmalabs.consensus.models.BlockHeader
 import org.plasmalabs.consensus.models.EligibilityCertificate
 import org.plasmalabs.consensus.models.OperationalCertificate

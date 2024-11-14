@@ -3,33 +3,33 @@ package org.plasmalabs.cli.modules
 import cats.effect.IO
 import org.plasmalabs.cli.controllers.TemplatesController
 import org.plasmalabs.sdk.servicekit.{TemplateStorageApi, WalletStateResource}
-import org.plasmalabs.cli.StrataCliSubCmd
-import org.plasmalabs.cli.StrataCliParams
+import org.plasmalabs.cli.PlasmaCliSubCmd
+import org.plasmalabs.cli.PlasmaCliParams
 import scopt.OParser
-import org.plasmalabs.cli.StrataCliParamsParserModule
+import org.plasmalabs.cli.PlasmaCliParamsParserModule
 
 trait TemplateModeModule extends WalletStateResource {
   def templateModeSubcmds(
-      validateParams: StrataCliParams
+      validateParams: PlasmaCliParams
   ): IO[Either[String, String]] = {
     val templateStorageAlgebra = TemplateStorageApi.make[IO](
       walletResource(validateParams.walletFile)
     )
     validateParams.subcmd match {
-      case StrataCliSubCmd.invalid =>
+      case PlasmaCliSubCmd.invalid =>
         IO.pure(
           Left(
             OParser.usage(
-              StrataCliParamsParserModule.templatesMode
+              PlasmaCliParamsParserModule.templatesMode
             ) + "\nA subcommand needs to be specified"
           )
         )
-      case StrataCliSubCmd.list =>
+      case PlasmaCliSubCmd.list =>
         new TemplatesController(
           templateStorageAlgebra
         )
           .listTemplates()
-      case StrataCliSubCmd.add =>
+      case PlasmaCliSubCmd.add =>
         new TemplatesController(
           templateStorageAlgebra
         )

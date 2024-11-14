@@ -2,12 +2,7 @@ package org.plasmalabs.cli.mockbase
 
 import org.plasmalabs.sdk.builders.BuilderError
 import org.plasmalabs.sdk.builders.TransactionBuilderApi
-import org.plasmalabs.sdk.models.Datum
-import org.plasmalabs.sdk.models.Event.{GroupPolicy, SeriesPolicy}
-import org.plasmalabs.sdk.models.GroupId
-import org.plasmalabs.sdk.models.LockAddress
-import org.plasmalabs.sdk.models.SeriesId
-import org.plasmalabs.sdk.models.box.AssetMintingStatement
+import org.plasmalabs.sdk.models._
 import org.plasmalabs.sdk.models.box.Attestation
 import org.plasmalabs.sdk.models.box.FungibilityType
 import org.plasmalabs.sdk.models.box.Lock
@@ -18,7 +13,7 @@ import org.plasmalabs.sdk.syntax.ValueTypeIdentifier
 import org.plasmalabs.indexer.services.Txo
 import com.google.protobuf.ByteString
 import com.google.protobuf.struct.Struct
-import quivr.models.Int128
+import org.plasmalabs.quivr.models.Int128
 import org.plasmalabs.sdk.models.TransactionOutputAddress
 
 class BaseTransactionBuilderApi[F[_]] extends TransactionBuilderApi[F] {
@@ -127,7 +122,13 @@ class BaseTransactionBuilderApi[F[_]] extends TransactionBuilderApi[F] {
       amount: Int128
   ): F[UnspentTransactionOutput] = ???
 
-  override def datum(): F[Datum.IoTransaction] = ???
+  override def datum(
+      groupPolicies: Seq[GroupPolicy],
+      seriesPolicies: Seq[SeriesPolicy],
+      mintingStatements: Seq[AssetMintingStatement],
+      mergingStatements: Seq[AssetMergingStatement],
+      splittingStatements: Seq[AssetSplittingStatement]
+  ): F[Datum.IoTransaction] = ???
 
   override def buildSimpleLvlTransaction(
       lvlTxos: Seq[Txo],

@@ -2,7 +2,7 @@ package org.plasmalabs.cli.impl
 
 import cats.effect.kernel.Resource
 import cats.effect.kernel.Sync
-import org.plasmalabs.sdk.models.box.{
+import org.plasmalabs.sdk.models.{
   AssetMintingStatement => PBAssetMintingStatement
 }
 import io.circe.Json

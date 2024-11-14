@@ -3,12 +3,12 @@ package org.plasmalabs.cli.impl
 import cats.effect.kernel.Sync
 import cats.effect.kernel.Resource
 import scala.io.BufferedSource
-import org.plasmalabs.sdk.models.Event
+import org.plasmalabs.sdk.models._
 import org.plasmalabs.sdk.utils.Encoding
 import com.google.protobuf.ByteString
 import org.plasmalabs.sdk.models.SeriesId
 
-case class GroupPolicy(
+case class GroupPolicyInternal(
     label: String,
     fixedSeries: Option[String],
     registrationUtxo: String
@@ -17,7 +17,7 @@ case class GroupPolicy(
 trait GroupPolicyParser[F[_]] {
   def parseGroupPolicy(
       inputFileRes: Resource[F, BufferedSource]
-  ): F[Either[CommonParserError, Event.GroupPolicy]]
+  ): F[Either[CommonParserError, GroupPolicy]]
 }
 
 object GroupPolicyParser {
@@ -30,8 +30,8 @@ object GroupPolicyParser {
     import io.circe.yaml
 
     private def groupPolicyToPBGroupPolicy(
-        groupPolicy: GroupPolicy
-    ): F[Event.GroupPolicy] =
+        groupPolicy: GroupPolicyInternal
+    ): F[GroupPolicy] =
       for {
         label <-
           Sync[F].delay(
@@ -64,7 +64,7 @@ object GroupPolicyParser {
             else Sync[F].point(())
           )
           .getOrElse(Sync[F].point(()))
-      } yield Event.GroupPolicy(
+      } yield GroupPolicy(
         label,
         registrationUtxo,
         someSeriesId.map(s => SeriesId(ByteString.copyFrom(s)))
@@ -72,7 +72,7 @@ object GroupPolicyParser {
 
     def parseGroupPolicy(
         inputFileRes: Resource[F, BufferedSource]
-    ): F[Either[CommonParserError, Event.GroupPolicy]] = (for {
+    ): F[Either[CommonParserError, GroupPolicy]] = (for {
       inputString <- inputFileRes.use(file =>
         Sync[F].blocking(file.getLines().mkString("\n"))
       )
@@ -80,7 +80,7 @@ object GroupPolicyParser {
         Sync[F].fromEither(
           yaml.v12.parser
             .parse(inputString)
-            .flatMap(tx => tx.as[GroupPolicy])
+            .flatMap(tx => tx.as[GroupPolicyInternal])
             .leftMap { e =>
               InvalidYaml(e)
             }
@@ -88,8 +88,8 @@ object GroupPolicyParser {
       gp <- groupPolicyToPBGroupPolicy(groupPolicy)
     } yield gp).attempt.map(_ match {
       case Right(tx)                  => tx.asRight[CommonParserError]
-      case Left(e: CommonParserError) => e.asLeft[Event.GroupPolicy]
-      case Left(e) => UnknownError(e).asLeft[Event.GroupPolicy]
+      case Left(e: CommonParserError) => e.asLeft[GroupPolicy]
+      case Left(e) => UnknownError(e).asLeft[GroupPolicy]
     })
 
   }

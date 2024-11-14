@@ -8,7 +8,7 @@ import java.nio.file.Paths
 
 class ParamsWalletModuleTest extends FunSuite {
 
-  import StrataCliParamsParserModule._
+  import PlasmaCliParamsParserModule._
 
   val tmpWallet = FunFixture[(String, String)](
     setup = { _ =>
@@ -40,7 +40,7 @@ class ParamsWalletModuleTest extends FunSuite {
       "--mnemonicfile",
       mnemonic
     )
-    assert(OParser.parse(paramParser, args0, StrataCliParams()).isDefined)
+    assert(OParser.parse(paramParser, args0, PlasmaCliParams()).isDefined)
     val args1 = List(
       "wallet",
       "init",
@@ -55,7 +55,7 @@ class ParamsWalletModuleTest extends FunSuite {
       "--mnemonicfile",
       "mnemonic.txt"
     )
-    assert(OParser.parse(paramParser, args1, StrataCliParams()).isDefined)
+    assert(OParser.parse(paramParser, args1, PlasmaCliParams()).isDefined)
     val args2 = List(
       "wallet",
       "init",
@@ -70,14 +70,14 @@ class ParamsWalletModuleTest extends FunSuite {
       "--mnemonicfile",
       "mnemonic.txt"
     )
-    assert(OParser.parse(paramParser, args2, StrataCliParams()).isDefined)
+    assert(OParser.parse(paramParser, args2, PlasmaCliParams()).isDefined)
   }
 
   test("Test invalid key create") {
     val args0 = List("wallet", "init")
     assert(
       OParser
-        .parse(paramParser, args0, StrataCliParams())
+        .parse(paramParser, args0, PlasmaCliParams())
         .isEmpty
     )
   }
@@ -100,7 +100,7 @@ class ParamsWalletModuleTest extends FunSuite {
     )
     assert(
       OParser
-        .parse(paramParser, args0, StrataCliParams())
+        .parse(paramParser, args0, PlasmaCliParams())
         .isDefined
     )
   }
@@ -113,7 +113,7 @@ class ParamsWalletModuleTest extends FunSuite {
     )
     assert(
       OParser
-        .parse(paramParser, args0, StrataCliParams())
+        .parse(paramParser, args0, PlasmaCliParams())
         .isEmpty
     )
   }
@@ -126,7 +126,7 @@ class ParamsWalletModuleTest extends FunSuite {
     )
     assert(
       OParser
-        .parse(paramParser, args0, StrataCliParams())
+        .parse(paramParser, args0, PlasmaCliParams())
         .isEmpty
     )
   }

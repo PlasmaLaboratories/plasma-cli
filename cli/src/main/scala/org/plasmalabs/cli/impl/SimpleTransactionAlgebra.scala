@@ -13,7 +13,7 @@ import org.plasmalabs.sdk.syntax.ValueTypeIdentifier
 import org.plasmalabs.sdk.utils.Encoding
 import org.plasmalabs.sdk.wallet.WalletApi
 import org.plasmalabs.indexer.services.Txo
-import quivr.models.KeyPair
+import org.plasmalabs.quivr.models.KeyPair
 
 import java.io.FileOutputStream
 

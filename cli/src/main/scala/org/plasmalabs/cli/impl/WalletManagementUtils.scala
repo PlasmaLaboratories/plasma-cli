@@ -4,7 +4,7 @@ import cats.effect.kernel.Sync
 import org.plasmalabs.sdk.dataApi.WalletKeyApiAlgebra
 import org.plasmalabs.sdk.wallet.WalletApi
 import org.plasmalabs.crypto.encryption.VaultStore
-import quivr.models.KeyPair
+import org.plasmalabs.quivr.models.KeyPair
 
 class WalletManagementUtils[F[_]: Sync](
     walletApi: WalletApi[F],

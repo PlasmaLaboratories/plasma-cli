@@ -5,8 +5,7 @@ import cats.effect.kernel.Sync
 import org.plasmalabs.sdk.builders.TransactionBuilderApi
 import org.plasmalabs.sdk.dataApi.IndexerQueryAlgebra
 import org.plasmalabs.sdk.dataApi.WalletStateAlgebra
-import org.plasmalabs.sdk.models.Event
-import org.plasmalabs.sdk.models.box.AssetMintingStatement
+import org.plasmalabs.sdk.models._
 import org.plasmalabs.sdk.wallet.WalletApi
 import org.plasmalabs.indexer.services.Txo
 import com.google.protobuf.ByteString
@@ -22,7 +21,7 @@ trait SimpleMintingAlgebra[F[_]] {
       amount: Long,
       fee: Long,
       outputFile: String,
-      groupPolicy: Event.GroupPolicy
+      groupPolicy: GroupPolicy
   ): F[Unit]
 
   def createSimpleSeriesMintingTransactionFromParams(
@@ -34,7 +33,7 @@ trait SimpleMintingAlgebra[F[_]] {
       amount: Long,
       fee: Long,
       outputFile: String,
-      seriesPolicy: Event.SeriesPolicy
+      seriesPolicy: SeriesPolicy
   ): F[Unit]
 
   def createSimpleAssetMintingTransactionFromParams(
@@ -120,7 +119,7 @@ object SimpleMintingAlgebra {
         amount: Long,
         fee: Long,
         outputFile: String,
-        groupPolicy: Event.GroupPolicy
+        groupPolicy: GroupPolicy
     ): F[Unit] = for {
       tuple <- sharedOps(
         keyfile,
@@ -178,7 +177,7 @@ object SimpleMintingAlgebra {
         amount: Long,
         fee: Long,
         outputFile: String,
-        seriesPolicy: Event.SeriesPolicy
+        seriesPolicy: SeriesPolicy
     ): F[Unit] = for {
       tuple <- sharedOps(
         keyfile,

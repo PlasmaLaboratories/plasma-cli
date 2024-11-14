@@ -30,7 +30,7 @@ jobs:
       # Label used to access the service container
       node:
         # Docker Hub image
-        image: ghcr.io/plasmalaboratories/plasma-node:0.1.2
+        image: ghcr.io/plasmalaboratories/plasma-node:0.1.3
         #
         ports:
           - 9084:9084 

@@ -6,7 +6,7 @@ import scopt.OParser
 
 class ParamsNodeQueryTest extends FunSuite {
 
-  import StrataCliParamsParserModule._
+  import PlasmaCliParamsParserModule._
 
   test("Block by height") {
     val args0 = List(
@@ -19,7 +19,7 @@ class ParamsNodeQueryTest extends FunSuite {
       "-h",
       "localhost"
     )
-    assert(OParser.parse(paramParser, args0, StrataCliParams()).isDefined)
+    assert(OParser.parse(paramParser, args0, PlasmaCliParams()).isDefined)
   }
   test("Block by id") {
     val args0 = List(
@@ -32,7 +32,7 @@ class ParamsNodeQueryTest extends FunSuite {
       "-h",
       "localhost"
     )
-    assert(OParser.parse(paramParser, args0, StrataCliParams()).isDefined)
+    assert(OParser.parse(paramParser, args0, PlasmaCliParams()).isDefined)
   }
   test("Transaction by id") {
     val args0 = List(
@@ -45,7 +45,7 @@ class ParamsNodeQueryTest extends FunSuite {
       "-h",
       "localhost"
     )
-    assert(OParser.parse(paramParser, args0, StrataCliParams()).isDefined)
+    assert(OParser.parse(paramParser, args0, PlasmaCliParams()).isDefined)
   }
 
 }

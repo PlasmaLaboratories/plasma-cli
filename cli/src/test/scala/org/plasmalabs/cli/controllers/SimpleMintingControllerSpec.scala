@@ -16,8 +16,7 @@ import org.plasmalabs.cli.mockbase.BaseWalletStateAlgebra
 import org.plasmalabs.sdk.models.Indices
 import org.plasmalabs.sdk.models.box.Lock
 import org.plasmalabs.sdk.models.box.Challenge
-import quivr.models.Proposition
-import quivr.models.KeyPair
+import org.plasmalabs.quivr.models.Proposition
 
 class SimpleMintingControllerSpec
     extends CatsEffectSuite

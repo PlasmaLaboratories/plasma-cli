@@ -6,14 +6,14 @@ import org.plasmalabs.sdk.builders.TransactionBuilderApi
 import org.plasmalabs.sdk.dataApi.WalletStateAlgebra
 import org.plasmalabs.sdk.models.Indices
 import org.plasmalabs.sdk.models.LockAddress
-import org.plasmalabs.sdk.models.box.AssetMintingStatement
+import org.plasmalabs.sdk.models.AssetMintingStatement
 import org.plasmalabs.sdk.models.box.Lock
 import org.plasmalabs.sdk.utils.Encoding
 import org.plasmalabs.sdk.wallet.WalletApi
 import org.plasmalabs.indexer.services.Txo
 import com.google.protobuf.ByteString
 import com.google.protobuf.struct.Struct
-import quivr.models.KeyPair
+import org.plasmalabs.quivr.models.KeyPair
 
 import java.io.FileOutputStream
 import TransactionBuilderApi.implicits._

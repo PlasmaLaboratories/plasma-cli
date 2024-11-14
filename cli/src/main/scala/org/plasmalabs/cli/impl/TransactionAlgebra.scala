@@ -21,7 +21,7 @@ import org.plasmalabs.crypto.signing.ExtendedEd25519
 import org.plasmalabs.quivr.runtime.QuivrRuntimeError
 import org.plasmalabs.quivr.runtime.QuivrRuntimeErrors
 import io.grpc.ManagedChannel
-import quivr.models.KeyPair
+import org.plasmalabs.quivr.models.KeyPair
 
 import java.io.FileInputStream
 import java.io.FileOutputStream

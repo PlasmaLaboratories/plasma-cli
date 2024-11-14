@@ -4,8 +4,8 @@ import org.plasmalabs.sdk.models.Indices
 import org.plasmalabs.sdk.wallet.WalletApi
 import org.plasmalabs.crypto.encryption.VaultStore
 import org.plasmalabs.crypto.generation.mnemonic.MnemonicSize
-import quivr.models.KeyPair
-import quivr.models.VerificationKey
+import org.plasmalabs.quivr.models.KeyPair
+import org.plasmalabs.quivr.models.VerificationKey
 
 class BaseWalletApi[F[_]] extends WalletApi[F] {
 

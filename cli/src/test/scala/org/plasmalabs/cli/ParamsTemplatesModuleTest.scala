@@ -10,7 +10,7 @@ import java.nio.file.Path
 
 class ParamsTemplatesModuleTest extends FunSuite {
 
-  import StrataCliParamsParserModule._
+  import PlasmaCliParamsParserModule._
 
   val tmpWallet = FunFixture[Path](
     setup = { _ =>
@@ -37,7 +37,7 @@ class ParamsTemplatesModuleTest extends FunSuite {
     )
     assert(
       OParser
-        .parse(paramParser, args0, StrataCliParams())
+        .parse(paramParser, args0, PlasmaCliParams())
         .isDefined
     )
   }
@@ -51,7 +51,7 @@ class ParamsTemplatesModuleTest extends FunSuite {
     )
     assert(
       OParser
-        .parse(paramParser, args0, StrataCliParams())
+        .parse(paramParser, args0, PlasmaCliParams())
         .isEmpty
     )
   }
