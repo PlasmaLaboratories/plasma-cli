@@ -35,16 +35,16 @@ import org.plasmalabs.cli.Sha256
 import org.plasmalabs.crypto.hash.Blake2b256
 
 class WalletController[F[_]: Sync](
-    walletStateAlgebra: dataApi.WalletStateAlgebra[F],
-    walletManagementUtils: WalletManagementUtils[F],
-    walletApi: WalletApi[F],
-    walletAlgebra: WalletAlgebra[F],
-    indexerQueryAlgebra: dataApi.IndexerQueryAlgebra[F]
+  walletStateAlgebra:    dataApi.WalletStateAlgebra[F],
+  walletManagementUtils: WalletManagementUtils[F],
+  walletApi:             WalletApi[F],
+  walletAlgebra:         WalletAlgebra[F],
+  indexerQueryAlgebra:   dataApi.IndexerQueryAlgebra[F]
 ) {
 
   def addSecret(
-      secretTxt: String,
-      digest: DigestType
+    secretTxt: String,
+    digest:    DigestType
   ): F[Either[String, String]] = {
     import org.plasmalabs.crypto.hash.implicits.sha256Hash
     import cats.implicits._
@@ -96,8 +96,8 @@ class WalletController[F[_]: Sync](
   }
 
   def getPreimage(
-      digest: DigestType,
-      digestTxt: String
+    digest:    DigestType,
+    digestTxt: String
   ): F[Either[String, String]] = {
     import cats.implicits._
     for {
@@ -123,12 +123,12 @@ class WalletController[F[_]: Sync](
   }
 
   def importVk(
-      networkId: Int,
-      inputVks: Seq[File],
-      keyfile: String,
-      password: String,
-      templateName: String,
-      fellowshipName: String
+    networkId:      Int,
+    inputVks:       Seq[File],
+    keyfile:        String,
+    password:       String,
+    templateName:   String,
+    fellowshipName: String
   ): F[Either[String, String]] = {
     import cats.implicits._
     import TransactionBuilderApi.implicits._
@@ -138,9 +138,7 @@ class WalletController[F[_]: Sync](
       keyAndEncodedKeys <- (inputVks
         .map { file =>
           Resource
-            .make(Sync[F].delay(scala.io.Source.fromFile(file)))(file =>
-              Sync[F].delay(file.close())
-            )
+            .make(Sync[F].delay(scala.io.Source.fromFile(file)))(file => Sync[F].delay(file.close()))
             .use { file =>
               Sync[F].blocking(file.getLines().toList.mkString)
             }
@@ -172,7 +170,7 @@ class WalletController[F[_]: Sync](
         fellowshipName,
         templateName
       )
-      keypair <- walletManagementUtils.loadKeys(keyfile, password)
+      keypair        <- walletManagementUtils.loadKeys(keyfile, password)
       deriveChildKey <- walletApi.deriveChildKeys(keypair, indices.get)
       deriveChildKeyBase <- walletApi.deriveChildKeysPartial(
         keypair,
@@ -209,12 +207,12 @@ class WalletController[F[_]: Sync](
   }
 
   def exportFinalVk(
-      keyFile: String,
-      password: String,
-      outputFile: String,
-      fellowshipName: String,
-      templateName: String,
-      interaction: Int
+    keyFile:        String,
+    password:       String,
+    outputFile:     String,
+    fellowshipName: String,
+    templateName:   String,
+    interaction:    Int
   ): F[Either[String, String]] = {
     import cats.implicits._
     (for {
@@ -237,27 +235,25 @@ class WalletController[F[_]: Sync](
             Option(_)
           )
       )
-    } yield {
-      Resource
-        .make(Sync[F].delay(new PrintWriter(outputFile)))(file =>
-          Sync[F].delay(file.flush()) >> Sync[F].delay(file.close())
-        )
-        .use { file =>
-          for {
-            _ <- Sync[F].blocking(
-              file.write(Encoding.encodeToBase58(deriveChildKey.vk.toByteArray))
-            )
-          } yield ()
-        }
-    }).value.map(_.get).flatten.map(_ => Right("Verification key exported"))
+    } yield Resource
+      .make(Sync[F].delay(new PrintWriter(outputFile)))(file =>
+        Sync[F].delay(file.flush()) >> Sync[F].delay(file.close())
+      )
+      .use { file =>
+        for {
+          _ <- Sync[F].blocking(
+            file.write(Encoding.encodeToBase58(deriveChildKey.vk.toByteArray))
+          )
+        } yield ()
+      }).value.map(_.get).flatten.map(_ => Right("Verification key exported"))
   }
 
   def exportVk(
-      keyFile: String,
-      password: String,
-      outputFile: String,
-      fellowshipName: String,
-      templateName: String
+    keyFile:        String,
+    password:       String,
+    outputFile:     String,
+    fellowshipName: String,
+    templateName:   String
   ): F[Either[String, String]] = {
     import cats.implicits._
     (for {
@@ -280,23 +276,21 @@ class WalletController[F[_]: Sync](
             Option(_)
           )
       )
-    } yield {
-      Resource
-        .make(Sync[F].delay(new PrintWriter(outputFile)))(file =>
-          Sync[F].delay(file.flush()) >> Sync[F].delay(file.close())
-        )
-        .use { file =>
-          for {
-            _ <- Sync[F].blocking(
-              file.write(Encoding.encodeToBase58(deriveChildKey.vk.toByteArray))
-            )
-          } yield ()
-        }
-    }).value.map(_.get).flatten.map(_ => Right("Verification key exported"))
+    } yield Resource
+      .make(Sync[F].delay(new PrintWriter(outputFile)))(file =>
+        Sync[F].delay(file.flush()) >> Sync[F].delay(file.close())
+      )
+      .use { file =>
+        for {
+          _ <- Sync[F].blocking(
+            file.write(Encoding.encodeToBase58(deriveChildKey.vk.toByteArray))
+          )
+        } yield ()
+      }).value.map(_.get).flatten.map(_ => Right("Verification key exported"))
   }
 
   def createWalletFromParams(
-      params: PlasmaCliParams
+    params: PlasmaCliParams
   ): F[Either[String, String]] = {
     import cats.implicits._
     walletAlgebra
@@ -312,8 +306,8 @@ class WalletController[F[_]: Sync](
   }
 
   def listInteractions(
-      fromFellowship: String,
-      fromTemplate: String
+    fromFellowship: String,
+    fromTemplate:   String
   ): F[Either[String, String]] = {
     import cats.implicits._
     walletStateAlgebra
@@ -323,9 +317,7 @@ class WalletController[F[_]: Sync](
           Right(
             interactions
               .sortBy(x => (x._1.x, x._1.y, x._1.z))
-              .map(x =>
-                x._1.x.toString + "\t" + x._1.y + "\t" + x._1.z + "\t" + x._2
-              )
+              .map(x => x._1.x.toString + "\t" + x._1.y + "\t" + x._1.z + "\t" + x._2)
               .mkString("\n")
           )
         case None => Left("The fellowship or template does not exist.")
@@ -333,9 +325,9 @@ class WalletController[F[_]: Sync](
   }
 
   def setCurrentInteraction(
-      fromFellowship: String,
-      fromTemplate: String,
-      fromInteraction: Int
+    fromFellowship:  String,
+    fromTemplate:    String,
+    fromInteraction: Int
   ): F[Either[String, String]] = {
     import cats.implicits._
     walletStateAlgebra
@@ -349,8 +341,9 @@ class WalletController[F[_]: Sync](
         case None    => Left("Error setting current interaction")
       })
   }
+
   def recoverKeysFromParams(
-      params: PlasmaCliParams
+    params: PlasmaCliParams
   ): F[Either[String, String]] = {
     import cats.implicits._
     walletAlgebra
@@ -384,9 +377,9 @@ class WalletController[F[_]: Sync](
   }
 
   def sync(
-      networkId: Int,
-      fellowship: String,
-      template: String
+    networkId:  Int,
+    fellowship: String,
+    template:   String
   ): F[Either[String, String]] = {
     import cats.implicits._
     import TransactionBuilderApi.implicits._
@@ -455,23 +448,23 @@ class WalletController[F[_]: Sync](
       Sync[F].delay(txos)
     }).flatten
       .iterateUntil(x => x.isEmpty)
-      .map(_ => {
+      .map { _ =>
         Right("Wallet synced")
-      })
+      }
   }
 
   def currentaddress(
-      fellowship: String,
-      template: String,
-      someInteraction: Option[Int]
+    fellowship:      String,
+    template:        String,
+    someInteraction: Option[Int]
   ): F[Option[String]] =
     walletStateAlgebra.getAddress(fellowship, template, someInteraction)
 
   def getBalance(
-      someAddress: Option[String],
-      someFellowship: Option[String],
-      someTemplate: Option[String],
-      someInteraction: Option[Int]
+    someAddress:     Option[String],
+    someFellowship:  Option[String],
+    someTemplate:    Option[String],
+    someInteraction: Option[Int]
   ): F[Either[String, String]] = {
     import cats.implicits._
     WalletModeHelper[F](

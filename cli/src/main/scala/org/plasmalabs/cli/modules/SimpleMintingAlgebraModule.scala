@@ -11,12 +11,12 @@ trait SimpleMintingAlgebraModule
     with IndexerQueryAlgebraModule {
 
   def simpleMintingAlgebra(
-      walletFile: String,
-      networkId: Int,
-      ledgerId: Int,
-      host: String,
-      nodePort: Int,
-      secureConnection: Boolean
+    walletFile:       String,
+    networkId:        Int,
+    ledgerId:         Int,
+    host:             String,
+    nodePort:         Int,
+    secureConnection: Boolean
   ) = SimpleMintingAlgebra.make[IO](
     Sync[IO],
     walletApi,

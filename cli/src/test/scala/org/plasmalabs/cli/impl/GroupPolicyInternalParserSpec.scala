@@ -5,9 +5,7 @@ import org.plasmalabs.sdk.constants.NetworkConstants
 import cats.effect.kernel.Resource
 import cats.effect.IO
 
-class GroupPolicyInternalParserSpec
-    extends CatsEffectSuite
-    with GroupPolicyParserModule {
+class GroupPolicyInternalParserSpec extends CatsEffectSuite with GroupPolicyParserModule {
 
   test(
     "parseGroupPolicy should support transactions with no fixed series"
@@ -48,6 +46,7 @@ class GroupPolicyInternalParserSpec
       true
     )
   }
+
   test(
     "parseGroupPolicy should fail if fixed seriesl too large"
   ) {
@@ -63,9 +62,9 @@ class GroupPolicyInternalParserSpec
             )
           )(source => IO.delay(source.close()))
         )
-        .map(policy => {
+        .map { policy =>
           policy
-        }),
+        },
       Left(
         InvalidHex(
           "The hex string for the series must be 32 bytes long"

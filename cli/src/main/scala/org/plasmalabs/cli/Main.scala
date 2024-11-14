@@ -28,7 +28,7 @@ object Main
 
   import PlasmaCliParamsParserModule._
 
-  override def run(args: List[String]): IO[ExitCode] = {
+  override def run(args: List[String]): IO[ExitCode] =
     OParser.runParser(paramParser, args, PlasmaCliParams()) match {
       case (Some(params), effects) =>
         val op: IO[Either[String, String]] =
@@ -67,6 +67,5 @@ object Main
           ExitCode.Error
         )
     }
-  }
 
 }

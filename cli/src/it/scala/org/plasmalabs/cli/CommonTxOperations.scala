@@ -19,8 +19,8 @@ trait CommonTxOperations
     with BaseConstants {
 
   def syncWallet(
-      fellowshipName: String,
-      templateName: String
+    fellowshipName: String,
+    templateName:   String
   ) =
     Kleisli[IO, WalletKeyConfig, ExitCode]((c: WalletKeyConfig) =>
       Main.run(
@@ -48,8 +48,8 @@ trait CommonTxOperations
     )
 
   def proveSimpleTransaction(
-      inputTx: String,
-      outputFile: String
+    inputTx:    String,
+    outputFile: String
   ) = Kleisli[IO, WalletKeyConfig, ExitCode]((c: WalletKeyConfig) =>
     Main.run(
       List(
@@ -70,20 +70,20 @@ trait CommonTxOperations
   )
 
   def createSimpleTransactionToCartesianIdx(
-      fromFellowship: String,
-      fromTemplate: String,
-      someFromInteraction: Option[Int],
-      someChangeFellowship: Option[String],
-      someChangeTemplate: Option[String],
-      someChangeInteraction: Option[Int],
-      toFellowship: String,
-      toTemplate: String,
-      amount: Int,
-      fee: Int,
-      outputFile: String,
-      token: TokenType.Value,
-      someGroupId: Option[String],
-      someSeriesId: Option[String]
+    fromFellowship:        String,
+    fromTemplate:          String,
+    someFromInteraction:   Option[Int],
+    someChangeFellowship:  Option[String],
+    someChangeTemplate:    Option[String],
+    someChangeInteraction: Option[Int],
+    toFellowship:          String,
+    toTemplate:            String,
+    amount:                Int,
+    fee:                   Int,
+    outputFile:            String,
+    token:                 TokenType.Value,
+    someGroupId:           Option[String],
+    someSeriesId:          Option[String]
   ) =
     Kleisli[IO, WalletKeyConfig, ExitCode]((c: WalletKeyConfig) =>
       Main.run(
@@ -121,27 +121,27 @@ trait CommonTxOperations
         ) ++ someFromInteraction
           .map(s => List("--from-interaction", s.toString()))
           .getOrElse(List.empty)
-          ++ someGroupId
-            .map(s => List("--group-id", s.toString()))
-            .getOrElse(List.empty)
-          ++ someSeriesId
-            .map(s => List("--series-id", s.toString()))
-            .getOrElse(List.empty)
-          ++ someChangeFellowship
-            .map(s => List("--change-fellowship", s.toString()))
-            .getOrElse(List.empty)
-          ++ someChangeTemplate
-            .map(s => List("--change-template", s.toString()))
-            .getOrElse(List.empty)
-          ++ someChangeInteraction
-            .map(s => List("--change-interaction", s.toString()))
-            .getOrElse(List.empty)
+        ++ someGroupId
+          .map(s => List("--group-id", s.toString()))
+          .getOrElse(List.empty)
+        ++ someSeriesId
+          .map(s => List("--series-id", s.toString()))
+          .getOrElse(List.empty)
+        ++ someChangeFellowship
+          .map(s => List("--change-fellowship", s.toString()))
+          .getOrElse(List.empty)
+        ++ someChangeTemplate
+          .map(s => List("--change-template", s.toString()))
+          .getOrElse(List.empty)
+        ++ someChangeInteraction
+          .map(s => List("--change-interaction", s.toString()))
+          .getOrElse(List.empty)
       )
     )
 
   def createComplexTransactionToAddress(
-      inputFile: String,
-      outputFile: String
+    inputFile:  String,
+    outputFile: String
   ) =
     Kleisli[IO, WalletKeyConfig, ExitCode](_ =>
       Main.run(
@@ -161,21 +161,22 @@ trait CommonTxOperations
         )
       )
     )
+
   def createSimpleTransactionToAddress(
-      fromFellowship: String,
-      fromTemplate: String,
-      someFromInteraction: Option[Int],
-      someChangeFellowship: Option[String],
-      someChangeTemplate: Option[String],
-      someChangeInteraction: Option[Int],
-      aliceAddress: String,
-      amount: Int,
-      fee: Int,
-      outputFile: String,
-      token: TokenType.Value,
-      someGroupId: Option[String],
-      someSeriesId: Option[String],
-      secure: Boolean = false
+    fromFellowship:        String,
+    fromTemplate:          String,
+    someFromInteraction:   Option[Int],
+    someChangeFellowship:  Option[String],
+    someChangeTemplate:    Option[String],
+    someChangeInteraction: Option[Int],
+    aliceAddress:          String,
+    amount:                Int,
+    fee:                   Int,
+    outputFile:            String,
+    token:                 TokenType.Value,
+    someGroupId:           Option[String],
+    someSeriesId:          Option[String],
+    secure:                Boolean = false
   ) =
     Kleisli[IO, WalletKeyConfig, ExitCode] { (c: WalletKeyConfig) =>
       Main.run(
@@ -211,34 +212,34 @@ trait CommonTxOperations
         ) ++ someFromInteraction
           .map(s => List("--from-interaction", s.toString()))
           .getOrElse(List.empty)
-          ++ someGroupId
-            .map(s => List("--group-id", s.toString()))
-            .getOrElse(List.empty)
-          ++ someSeriesId
-            .map(s => List("--series-id", s.toString()))
-            .getOrElse(List.empty)
-          ++ someChangeFellowship
-            .map(s => List("--change-fellowship", s.toString()))
-            .getOrElse(List.empty)
-          ++ someChangeTemplate
-            .map(s => List("--change-template", s.toString()))
-            .getOrElse(List.empty)
-          ++ someChangeInteraction
-            .map(s => List("--change-interaction", s.toString()))
-            .getOrElse(List.empty)
-          ++ (if (secure) List("--secure", "true") else List.empty)
+        ++ someGroupId
+          .map(s => List("--group-id", s.toString()))
+          .getOrElse(List.empty)
+        ++ someSeriesId
+          .map(s => List("--series-id", s.toString()))
+          .getOrElse(List.empty)
+        ++ someChangeFellowship
+          .map(s => List("--change-fellowship", s.toString()))
+          .getOrElse(List.empty)
+        ++ someChangeTemplate
+          .map(s => List("--change-template", s.toString()))
+          .getOrElse(List.empty)
+        ++ someChangeInteraction
+          .map(s => List("--change-interaction", s.toString()))
+          .getOrElse(List.empty)
+        ++ (if (secure) List("--secure", "true") else List.empty)
       )
     }
 
   def createSimpleGroupMintingTransaction(
-      fromFellowship: String,
-      fromTemplate: String,
-      someFromInteraction: Option[Int],
-      amount: Long,
-      fee: Long,
-      groupPolicy: String,
-      outputFile: String,
-      secure: Boolean = false
+    fromFellowship:      String,
+    fromTemplate:        String,
+    someFromInteraction: Option[Int],
+    amount:              Long,
+    fee:                 Long,
+    groupPolicy:         String,
+    outputFile:          String,
+    secure:              Boolean = false
   ) =
     Kleisli[IO, WalletKeyConfig, ExitCode]((c: WalletKeyConfig) =>
       Main.run(
@@ -274,18 +275,19 @@ trait CommonTxOperations
         ) ++ someFromInteraction
           .map(s => List("--from-interaction", s.toString()))
           .getOrElse(List.empty)
-          ++ (if (secure) List("--secure", "true") else List.empty)
+        ++ (if (secure) List("--secure", "true") else List.empty)
       )
     )
+
   def createSimpleSeriesMintingTransaction(
-      fromFellowship: String,
-      fromTemplate: String,
-      someFromInteraction: Option[Int],
-      amount: Long,
-      fee: Long,
-      seriesPolicy: String,
-      outputFile: String,
-      secure: Boolean = false
+    fromFellowship:      String,
+    fromTemplate:        String,
+    someFromInteraction: Option[Int],
+    amount:              Long,
+    fee:                 Long,
+    seriesPolicy:        String,
+    outputFile:          String,
+    secure:              Boolean = false
   ) =
     Kleisli[IO, WalletKeyConfig, ExitCode]((c: WalletKeyConfig) =>
       Main.run(
@@ -321,18 +323,19 @@ trait CommonTxOperations
         ) ++ someFromInteraction
           .map(s => List("--from-interaction", s.toString()))
           .getOrElse(List.empty)
-          ++ (if (secure) List("--secure", "true") else List.empty)
+        ++ (if (secure) List("--secure", "true") else List.empty)
       )
     )
+
   def createSimpleAssetMintingTransaction(
-      fromFellowship: String,
-      fromTemplate: String,
-      someFromInteraction: Option[Int],
-      fee: Long,
-      assetMintingStatement: String,
-      outputFile: String,
-      ephemeralMetadata: String,
-      secure: Boolean = false
+    fromFellowship:        String,
+    fromTemplate:          String,
+    someFromInteraction:   Option[Int],
+    fee:                   Long,
+    assetMintingStatement: String,
+    outputFile:            String,
+    ephemeralMetadata:     String,
+    secure:                Boolean = false
   ) =
     Kleisli[IO, WalletKeyConfig, ExitCode]((c: WalletKeyConfig) =>
       Main.run(
@@ -370,15 +373,15 @@ trait CommonTxOperations
         ) ++ someFromInteraction
           .map(s => List("--from-interaction", s.toString()))
           .getOrElse(List.empty)
-          ++ (if (secure) List("--secure", "true") else List.empty)
+        ++ (if (secure) List("--secure", "true") else List.empty)
       )
     )
 
   def queryAccount(
-      fellowshipName: String,
-      templateName: String,
-      someFromInteraction: Option[Int] = None,
-      secure: Boolean = false
+    fellowshipName:      String,
+    templateName:        String,
+    someFromInteraction: Option[Int] = None,
+    secure:              Boolean = false
   ) =
     Kleisli[IO, WalletKeyConfig, ExitCode]((c: WalletKeyConfig) =>
       Main.run(
@@ -400,13 +403,14 @@ trait CommonTxOperations
         ) ++ someFromInteraction
           .map(s => List("--from-interaction", s.toString()))
           .getOrElse(List.empty)
-          ++ (if (secure) List("--secure", "true") else List.empty)
+        ++ (if (secure) List("--secure", "true") else List.empty)
       )
     )
+
   def queryAccountAllTokens(
-      fellowshipName: String,
-      templateName: String,
-      someFromInteraction: Option[Int] = None
+    fellowshipName:      String,
+    templateName:        String,
+    someFromInteraction: Option[Int] = None
   ) =
     Kleisli[IO, WalletKeyConfig, ExitCode]((c: WalletKeyConfig) =>
       Main.run(
@@ -430,11 +434,12 @@ trait CommonTxOperations
           .getOrElse(List.empty)
       )
     )
+
   def queryAccountGroupTokens(
-      fellowshipName: String,
-      templateName: String,
-      someFromInteraction: Option[Int] = None,
-      secure: Boolean = false
+    fellowshipName:      String,
+    templateName:        String,
+    someFromInteraction: Option[Int] = None,
+    secure:              Boolean = false
   ) =
     Kleisli[IO, WalletKeyConfig, ExitCode]((c: WalletKeyConfig) =>
       Main.run(
@@ -456,14 +461,15 @@ trait CommonTxOperations
         ) ++ someFromInteraction
           .map(s => List("--from-interaction", s.toString()))
           .getOrElse(List.empty)
-          ++ (if (secure) List("--secure", "true") else List.empty)
+        ++ (if (secure) List("--secure", "true") else List.empty)
       )
     )
+
   def queryAccountSeriesTokens(
-      fellowshipName: String,
-      templateName: String,
-      someFromInteraction: Option[Int] = None,
-      secure: Boolean = false
+    fellowshipName:      String,
+    templateName:        String,
+    someFromInteraction: Option[Int] = None,
+    secure:              Boolean = false
   ) =
     Kleisli[IO, WalletKeyConfig, ExitCode]((c: WalletKeyConfig) =>
       Main.run(
@@ -485,14 +491,15 @@ trait CommonTxOperations
         ) ++ someFromInteraction
           .map(s => List("--from-interaction", s.toString()))
           .getOrElse(List.empty)
-          ++ (if (secure) List("--secure", "true") else List.empty)
+        ++ (if (secure) List("--secure", "true") else List.empty)
       )
     )
+
   def queryAccountAssetTokens(
-      fellowshipName: String,
-      templateName: String,
-      someFromInteraction: Option[Int] = None,
-      secure: Boolean = false
+    fellowshipName:      String,
+    templateName:        String,
+    someFromInteraction: Option[Int] = None,
+    secure:              Boolean = false
   ) =
     Kleisli[IO, WalletKeyConfig, ExitCode]((c: WalletKeyConfig) =>
       Main.run(
@@ -514,7 +521,7 @@ trait CommonTxOperations
         ) ++ someFromInteraction
           .map(s => List("--from-interaction", s.toString()))
           .getOrElse(List.empty)
-          ++ (if (secure) List("--secure", "true") else List.empty)
+        ++ (if (secure) List("--secure", "true") else List.empty)
       )
     )
 
@@ -541,10 +548,10 @@ trait CommonTxOperations
     )
 
   def exportFinalVk(
-      fellowshipName: String,
-      templateName: String,
-      interaction: Int,
-      vkFile: String
+    fellowshipName: String,
+    templateName:   String,
+    interaction:    Int,
+    vkFile:         String
   ) =
     Kleisli[IO, WalletKeyConfig, ExitCode]((c: WalletKeyConfig) =>
       Main.run(
@@ -590,11 +597,12 @@ trait CommonTxOperations
         )
       )
     )
+
   def importVk(
-      fellowshipName: String,
-      templateName: String,
-      vkFile0: String,
-      vkFile1: String
+    fellowshipName: String,
+    templateName:   String,
+    vkFile0:        String,
+    vkFile1:        String
   ) =
     Kleisli[IO, WalletKeyConfig, ExitCode]((c: WalletKeyConfig) =>
       Main.run(
@@ -632,8 +640,8 @@ trait CommonTxOperations
     )
 
   def addTemplateToWallet(
-      templateName: String,
-      templateTemplate: String
+    templateName:     String,
+    templateTemplate: String
   ) =
     Kleisli[IO, WalletKeyConfig, ExitCode]((c: WalletKeyConfig) =>
       Main.run(
@@ -685,6 +693,7 @@ trait CommonTxOperations
         )
       )
     )
+
   def addSecret(secret: String, digestAlgorithm: String) =
     Kleisli[IO, WalletKeyConfig, ExitCode]((c: WalletKeyConfig) =>
       Main.run(
@@ -700,6 +709,7 @@ trait CommonTxOperations
         )
       )
     )
+
   def getPreimage(digestText: String, digestAlgorithm: String) =
     Kleisli[IO, WalletKeyConfig, ExitCode]((c: WalletKeyConfig) =>
       Main.run(
@@ -715,6 +725,7 @@ trait CommonTxOperations
         )
       )
     )
+
   def recoverWallet(mnemonic: String) =
     Kleisli[IO, WalletKeyConfig, ExitCode]((c: WalletKeyConfig) =>
       Main.run(

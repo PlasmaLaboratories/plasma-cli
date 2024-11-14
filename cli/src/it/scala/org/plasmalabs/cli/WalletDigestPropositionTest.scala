@@ -7,10 +7,7 @@ import java.nio.file.Path
 import java.nio.file.Paths
 import cats.effect.ExitCode
 
-class WalletDigestPropositionTest
-    extends CatsEffectSuite
-    with WalletConstants
-    with CommonTxOperations {
+class WalletDigestPropositionTest extends CatsEffectSuite with WalletConstants with CommonTxOperations {
 
   val tmpDirectory = FunFixture[Path](
     setup = { _ =>
@@ -46,26 +43,25 @@ class WalletDigestPropositionTest
     } yield ()
   }
 
-  tmpDirectory.test("Initialize wallet and add digest (blake2b) template") {
-    _ =>
-      for {
-        _ <- createWallet().run(walletContext)
-        _ <- assertIO(
-          addTemplate(
-            "blake2bTemplate",
-            "threshold(1, blake2b(b39f7e1305cd9107ed9af824fcb0729ce9888bbb7f219cc0b6731332105675dc))"
-          ).run(walletContext),
-          ExitCode.Success
-        )
-        _ <- importVk("nofellowship", "blake2bTemplate", EMPTY_FILE).run(
-          walletContext
-        )
-        _ <- assertIO(
-          walletController(WALLET)
-            .currentaddress("nofellowship", "blake2bTemplate", None),
-          Some("ptetP7jshHUzFqDR9cjYFnRt5caJAYmUVToDkmjSzvXUjVMFZDtDoEc7tRfT")
-        )
-      } yield ()
+  tmpDirectory.test("Initialize wallet and add digest (blake2b) template") { _ =>
+    for {
+      _ <- createWallet().run(walletContext)
+      _ <- assertIO(
+        addTemplate(
+          "blake2bTemplate",
+          "threshold(1, blake2b(b39f7e1305cd9107ed9af824fcb0729ce9888bbb7f219cc0b6731332105675dc))"
+        ).run(walletContext),
+        ExitCode.Success
+      )
+      _ <- importVk("nofellowship", "blake2bTemplate", EMPTY_FILE).run(
+        walletContext
+      )
+      _ <- assertIO(
+        walletController(WALLET)
+          .currentaddress("nofellowship", "blake2bTemplate", None),
+        Some("ptetP7jshHUzFqDR9cjYFnRt5caJAYmUVToDkmjSzvXUjVMFZDtDoEc7tRfT")
+      )
+    } yield ()
   }
 
   tmpDirectory.test("Initialize wallet and add secret (sha256)") { _ =>

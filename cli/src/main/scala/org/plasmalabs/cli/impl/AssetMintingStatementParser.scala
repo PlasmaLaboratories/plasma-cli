@@ -2,31 +2,29 @@ package org.plasmalabs.cli.impl
 
 import cats.effect.kernel.Resource
 import cats.effect.kernel.Sync
-import org.plasmalabs.sdk.models.{
-  AssetMintingStatement => PBAssetMintingStatement
-}
+import org.plasmalabs.sdk.models.{AssetMintingStatement => PBAssetMintingStatement}
 import io.circe.Json
 import com.google.protobuf.struct.Value
 
 import scala.io.BufferedSource
 
 case class AssetMintingStatement(
-    groupTokenUtxo: String,
-    seriesTokenUtxo: String,
-    quantity: Long,
-    permanentMetadata: Option[Json]
+  groupTokenUtxo:    String,
+  seriesTokenUtxo:   String,
+  quantity:          Long,
+  permanentMetadata: Option[Json]
 )
 
 trait AssetMintingStatementParser[F[_]] {
+
   def parseAssetMintingStatement(
-      inputFileRes: Resource[F, BufferedSource]
+    inputFileRes: Resource[F, BufferedSource]
   ): F[Either[CommonParserError, PBAssetMintingStatement]]
 }
 
 object AssetMintingStatementParser {
 
-  def make[F[_]: Sync](networkId: Int) = new AssetMintingStatementParser[F]
-    with CommonTxOps {
+  def make[F[_]: Sync](networkId: Int) = new AssetMintingStatementParser[F] with CommonTxOps {
 
     import cats.implicits._
     import io.circe.generic.auto._
@@ -34,7 +32,7 @@ object AssetMintingStatementParser {
     import org.plasmalabs.sdk.syntax._
 
     private def assetMintingStatementToPBAMS(
-        assetMintingStatement: AssetMintingStatement
+      assetMintingStatement: AssetMintingStatement
     ): F[PBAssetMintingStatement] = for {
       groupTokenUtxo <- Sync[F].fromEither(
         CommonParsingOps.parseTransactionOuputAddress(
@@ -67,11 +65,9 @@ object AssetMintingStatementParser {
     )
 
     override def parseAssetMintingStatement(
-        inputFileRes: Resource[F, BufferedSource]
+      inputFileRes: Resource[F, BufferedSource]
     ): F[Either[CommonParserError, PBAssetMintingStatement]] = (for {
-      inputString <- inputFileRes.use(file =>
-        Sync[F].blocking(file.getLines().mkString("\n"))
-      )
+      inputString <- inputFileRes.use(file => Sync[F].blocking(file.getLines().mkString("\n")))
       assetMintingStatement <-
         Sync[F].fromEither(
           yaml.v12.parser

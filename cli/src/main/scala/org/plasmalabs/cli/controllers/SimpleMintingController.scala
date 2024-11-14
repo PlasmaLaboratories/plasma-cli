@@ -14,24 +14,24 @@ import com.google.protobuf.ByteString
 import java.io.File
 
 class SimpleMintingController[F[_]: Sync](
-    groupPolicyParserAlgebra: GroupPolicyParser[F],
-    seriesPolicyParserAlgebra: SeriesPolicyParser[F],
-    assetMintingStatementParserAlgebra: AssetMintingStatementParser[F],
-    simpleMintingOps: SimpleMintingAlgebra[F]
+  groupPolicyParserAlgebra:           GroupPolicyParser[F],
+  seriesPolicyParserAlgebra:          SeriesPolicyParser[F],
+  assetMintingStatementParserAlgebra: AssetMintingStatementParser[F],
+  simpleMintingOps:                   SimpleMintingAlgebra[F]
 ) {
 
   import cats.implicits._
 
   def createSimpleGroupMintingTransactionFromParams(
-      inputFile: String,
-      keyFile: String,
-      password: String,
-      fromFellowship: String,
-      fromTemplate: String,
-      someFromInteraction: Option[Int],
-      amount: Long,
-      fee: Long,
-      outputFile: String
+    inputFile:           String,
+    keyFile:             String,
+    password:            String,
+    fromFellowship:      String,
+    fromTemplate:        String,
+    someFromInteraction: Option[Int],
+    amount:              Long,
+    fee:                 Long,
+    outputFile:          String
   ): F[Either[String, String]] =
     (for {
       gp <- groupPolicyParserAlgebra
@@ -41,9 +41,7 @@ class SimpleMintingController[F[_]: Sync](
           )(source => Sync[F].delay(source.close()))
         )
         .map(
-          _.leftMap(e =>
-            CreateTxError("Error parsing group policy: " + e.description)
-          )
+          _.leftMap(e => CreateTxError("Error parsing group policy: " + e.description))
         )
       policy <- Sync[F].fromEither(gp)
       _ <- simpleMintingOps
@@ -67,15 +65,15 @@ class SimpleMintingController[F[_]: Sync](
       })
 
   def createSimpleSeriesMintingTransactionFromParams(
-      inputFile: String,
-      keyFile: String,
-      password: String,
-      fromFellowship: String,
-      fromTemplate: String,
-      someFromInteraction: Option[Int],
-      amount: Long,
-      fee: Long,
-      outputFile: String
+    inputFile:           String,
+    keyFile:             String,
+    password:            String,
+    fromFellowship:      String,
+    fromTemplate:        String,
+    someFromInteraction: Option[Int],
+    amount:              Long,
+    fee:                 Long,
+    outputFile:          String
   ): F[Either[String, String]] =
     (for {
       gp <- seriesPolicyParserAlgebra
@@ -85,9 +83,7 @@ class SimpleMintingController[F[_]: Sync](
           )(source => Sync[F].delay(source.close()))
         )
         .map(
-          _.leftMap(e =>
-            CreateTxError("Error parsing series policy: " + e.description)
-          )
+          _.leftMap(e => CreateTxError("Error parsing series policy: " + e.description))
         )
       policy <- Sync[F].fromEither(gp)
       _ <- simpleMintingOps
@@ -119,9 +115,7 @@ class SimpleMintingController[F[_]: Sync](
           )
       )(source => Sync[F].delay(source.close()))
       for {
-        jsonInput <- inputRes.use(source =>
-          Sync[F].delay(source.getLines().mkString)
-        )
+        jsonInput <- inputRes.use(source => Sync[F].delay(source.getLines().mkString))
         json <- Sync[F].fromEither {
           import io.circe.parser.parse
           parse(jsonInput).leftMap(e => CreateTxError(e.toString()))
@@ -130,16 +124,16 @@ class SimpleMintingController[F[_]: Sync](
     }).sequence
 
   def createSimpleAssetMintingTransactionFromParams(
-      inputFile: String,
-      keyFile: String,
-      password: String,
-      fromFellowship: String,
-      fromTemplate: String,
-      someFromInteraction: Option[Int],
-      fee: Long,
-      ephemeralMetadata: Option[File],
-      someCommitment: Option[String],
-      outputFile: String
+    inputFile:           String,
+    keyFile:             String,
+    password:            String,
+    fromFellowship:      String,
+    fromTemplate:        String,
+    someFromInteraction: Option[Int],
+    fee:                 Long,
+    ephemeralMetadata:   Option[File],
+    someCommitment:      Option[String],
+    outputFile:          String
   ): F[Either[String, String]] =
     (for {
       ams <- assetMintingStatementParserAlgebra
@@ -156,11 +150,9 @@ class SimpleMintingController[F[_]: Sync](
           )
         )
       json <- loadJsonMetadata(ephemeralMetadata)
-      eitherCommitment = someCommitment.map(x =>
-        Sync[F].fromEither(Encoding.decodeFromHex(x))
-      )
+      eitherCommitment = someCommitment.map(x => Sync[F].fromEither(Encoding.decodeFromHex(x)))
       commitment <- eitherCommitment.map(Some(_)).getOrElse(None).sequence
-      statement <- Sync[F].fromEither(ams)
+      statement  <- Sync[F].fromEither(ams)
       _ <- simpleMintingOps
         .createSimpleAssetMintingTransactionFromParams(
           keyFile,

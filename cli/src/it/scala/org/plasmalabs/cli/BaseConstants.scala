@@ -1,10 +1,10 @@
 package org.plasmalabs.cli
 
 case class WalletKeyConfig(
-    walletFile: String,
-    keyFile: String,
-    password: String,
-    mnemonicFile: String
+  walletFile:   String,
+  keyFile:      String,
+  password:     String,
+  mnemonicFile: String
 )
 
 trait BaseConstants {

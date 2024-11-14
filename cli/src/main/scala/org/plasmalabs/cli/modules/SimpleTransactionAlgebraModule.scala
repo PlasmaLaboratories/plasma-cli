@@ -10,11 +10,11 @@ trait SimpleTransactionAlgebraModule
     with IndexerQueryAlgebraModule {
 
   def simplTransactionOps(
-      walletFile: String,
-      networkId: Int,
-      host: String,
-      nodePort: Int,
-      secureConnection: Boolean
+    walletFile:       String,
+    networkId:        Int,
+    host:             String,
+    nodePort:         Int,
+    secureConnection: Boolean
   ) = SimpleTransactionAlgebra
     .make[IO](
       walletApi,

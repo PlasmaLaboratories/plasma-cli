@@ -4,9 +4,8 @@ import com.raquo.laminar.api.L._
 
 object UIUtils {
 
-  def hexToInt(s: String): Int = {
+  def hexToInt(s: String): Int =
     BigInt(Validation.decodeFromHex(s).toOption.get).toInt
-  }
 
   def isAmount(amount: String): Boolean =
     amount.matches("^[1-9]+([0-9]+)?$")

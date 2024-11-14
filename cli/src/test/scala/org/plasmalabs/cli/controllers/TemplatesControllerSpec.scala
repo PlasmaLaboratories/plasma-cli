@@ -11,7 +11,7 @@ class TemplatesControllerSpec extends CatsEffectSuite {
     val simpleController = new TemplatesController[IO](
       new TemplateStorageAlgebra[IO] {
         override def addTemplate(
-            walletTemplate: WalletTemplate
+          walletTemplate: WalletTemplate
         ): IO[Int] = IO { addedTemplate = walletTemplate.lockTemplate } *> IO(1)
 
         override def findTemplates(): IO[List[WalletTemplate]] =
@@ -42,7 +42,7 @@ class TemplatesControllerSpec extends CatsEffectSuite {
     val simpleController = new TemplatesController[IO](
       new TemplateStorageAlgebra[IO] {
         override def addTemplate(
-            walletTemplate: WalletTemplate
+          walletTemplate: WalletTemplate
         ): IO[Int] = IO { addedTemplate = walletTemplate.lockTemplate } *> IO(1)
 
         override def findTemplates(): IO[List[WalletTemplate]] =
@@ -73,7 +73,7 @@ class TemplatesControllerSpec extends CatsEffectSuite {
     val simpleController = new TemplatesController[IO](
       new TemplateStorageAlgebra[IO] {
         override def addTemplate(
-            walletTemplate: WalletTemplate
+          walletTemplate: WalletTemplate
         ): IO[Int] = IO { addedTemplate = walletTemplate.lockTemplate } *> IO(1)
 
         override def findTemplates(): IO[List[WalletTemplate]] =
@@ -99,12 +99,13 @@ class TemplatesControllerSpec extends CatsEffectSuite {
       )
 
   }
+
   test("Add lock template empty") {
     var addedTemplate = ""
     val simpleController = new TemplatesController[IO](
       new TemplateStorageAlgebra[IO] {
         override def addTemplate(
-            walletTemplate: WalletTemplate
+          walletTemplate: WalletTemplate
         ): IO[Int] = IO { addedTemplate = walletTemplate.lockTemplate } *> IO(1)
 
         override def findTemplates(): IO[List[WalletTemplate]] =
@@ -135,7 +136,7 @@ class TemplatesControllerSpec extends CatsEffectSuite {
     val simpleController = new TemplatesController[IO](
       new TemplateStorageAlgebra[IO] {
         override def addTemplate(
-            walletTemplate: WalletTemplate
+          walletTemplate: WalletTemplate
         ): IO[Int] = IO { addedTemplate = walletTemplate.lockTemplate } *> IO(1)
 
         override def findTemplates(): IO[List[WalletTemplate]] =
@@ -166,7 +167,7 @@ class TemplatesControllerSpec extends CatsEffectSuite {
     val simpleController = new TemplatesController[IO](
       new TemplateStorageAlgebra[IO] {
         override def addTemplate(
-            walletTemplate: WalletTemplate
+          walletTemplate: WalletTemplate
         ): IO[Int] = IO { addedTemplate = walletTemplate.lockTemplate } *> IO(1)
 
         override def findTemplates(): IO[List[WalletTemplate]] =
@@ -191,12 +192,13 @@ class TemplatesControllerSpec extends CatsEffectSuite {
         """{"threshold":1,"innerTemplates":[{"chain":"header","min":1,"max":1000,"type":"height"}],"type":"predicate"}"""
       )
   }
+
   test("Add tick template") {
     var addedTemplate = ""
     val simpleController = new TemplatesController[IO](
       new TemplateStorageAlgebra[IO] {
         override def addTemplate(
-            walletTemplate: WalletTemplate
+          walletTemplate: WalletTemplate
         ): IO[Int] = IO { addedTemplate = walletTemplate.lockTemplate } *> IO(1)
 
         override def findTemplates(): IO[List[WalletTemplate]] =
@@ -227,7 +229,7 @@ class TemplatesControllerSpec extends CatsEffectSuite {
     val simpleController = new TemplatesController[IO](
       new TemplateStorageAlgebra[IO] {
         override def addTemplate(
-            walletTemplate: WalletTemplate
+          walletTemplate: WalletTemplate
         ): IO[Int] = IO { addedTemplate = walletTemplate.lockTemplate } *> IO(1)
 
         override def findTemplates(): IO[List[WalletTemplate]] =
@@ -258,7 +260,7 @@ class TemplatesControllerSpec extends CatsEffectSuite {
     val simpleController = new TemplatesController[IO](
       new TemplateStorageAlgebra[IO] {
         override def addTemplate(
-            walletTemplate: WalletTemplate
+          walletTemplate: WalletTemplate
         ): IO[Int] = IO { addedTemplate = walletTemplate.lockTemplate } *> IO(1)
 
         override def findTemplates(): IO[List[WalletTemplate]] =
@@ -288,7 +290,7 @@ class TemplatesControllerSpec extends CatsEffectSuite {
     val simpleController = new TemplatesController[IO](
       new TemplateStorageAlgebra[IO] {
         override def addTemplate(
-            walletTemplate: WalletTemplate
+          walletTemplate: WalletTemplate
         ): IO[Int] = IO(1)
 
         override def findTemplates(): IO[List[WalletTemplate]] =
@@ -328,11 +330,11 @@ class TemplatesControllerSpec extends CatsEffectSuite {
       .assertEquals(
         Right(
           "Y Coordinate\tTemplate Name\tLock Template\n" +
-            "1\t\tsign\t\t" + """threshold(1, sign(0))""" + "\n" +
-            "2\t\tor\t\t" + """threshold(1, sign(0) or sign(1))""" + "\n" +
-            "3\t\tand\t\t" + """threshold(1, sign(0) and sign(1))""" + "\n" +
-            "4\t\tdigestSha256\t\t" + """threshold(1, sha256(b39f7e1305cd9107ed9af824fcb0729ce9888bbb7f219cc0b6731332105675dc))""" + "\n" +
-            "5\t\tdigestBlake2b\t\t" + """threshold(1, blake2b(b39f7e1305cd9107ed9af824fcb0729ce9888bbb7f219cc0b6731332105675dc))"""
+          "1\t\tsign\t\t" + """threshold(1, sign(0))""" + "\n" +
+          "2\t\tor\t\t" + """threshold(1, sign(0) or sign(1))""" + "\n" +
+          "3\t\tand\t\t" + """threshold(1, sign(0) and sign(1))""" + "\n" +
+          "4\t\tdigestSha256\t\t" + """threshold(1, sha256(b39f7e1305cd9107ed9af824fcb0729ce9888bbb7f219cc0b6731332105675dc))""" + "\n" +
+          "5\t\tdigestBlake2b\t\t" + """threshold(1, blake2b(b39f7e1305cd9107ed9af824fcb0729ce9888bbb7f219cc0b6731332105675dc))"""
         )
       )
   }

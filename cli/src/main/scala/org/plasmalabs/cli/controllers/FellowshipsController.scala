@@ -4,7 +4,7 @@ import cats.Applicative
 import org.plasmalabs.sdk.dataApi.{FellowshipStorageAlgebra, WalletFellowship}
 
 class FellowshipsController[F[_]: Applicative](
-    fellowshipStorageAlgebra: FellowshipStorageAlgebra[F]
+  fellowshipStorageAlgebra: FellowshipStorageAlgebra[F]
 ) {
 
   def addFellowship(name: String): F[Either[String, String]] = {

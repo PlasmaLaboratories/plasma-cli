@@ -112,9 +112,9 @@ class ComplexTransactionProveTest
         )
         res <- IO.asyncForIO.timeout(
           (for {
-            _ <- IO.println("Querying alice's shared account")
+            _        <- IO.println("Querying alice's shared account")
             queryRes <- queryAccount("alice_bob_0", "or_sign").run(aliceContext)
-            _ <- IO.sleep(5.seconds)
+            _        <- IO.sleep(5.seconds)
           } yield queryRes)
             .iterateUntil(_ == ExitCode.Success),
           240.seconds
@@ -268,9 +268,9 @@ class ComplexTransactionProveTest
         )
         _ <- IO.asyncForIO.timeout(
           (for {
-            _ <- IO.println("Querying bob's shared account")
+            _        <- IO.println("Querying bob's shared account")
             queryRes <- queryAccount("alice_bob_0", "or_sign").run(bobContext)
-            _ <- IO.sleep(5.seconds)
+            _        <- IO.sleep(5.seconds)
           } yield queryRes)
             .iterateUntil(_ == ExitCode.Success),
           240.seconds
@@ -279,9 +279,9 @@ class ComplexTransactionProveTest
         _ <- syncWallet("alice_bob_0", "or_sign").run(aliceContext)
         res <- IO.asyncForIO.timeout(
           (for {
-            _ <- IO.println("Querying alice's shared account")
+            _        <- IO.println("Querying alice's shared account")
             queryRes <- queryAccount("alice_bob_0", "or_sign").run(aliceContext)
-            _ <- IO.sleep(5.seconds)
+            _        <- IO.sleep(5.seconds)
           } yield queryRes)
             .iterateUntil(_ == ExitCode.Success),
           240.seconds
@@ -350,9 +350,9 @@ class ComplexTransactionProveTest
         )
         _ <- IO.asyncForIO.timeout(
           (for {
-            _ <- IO.println("Querying bob's and shared account")
+            _        <- IO.println("Querying bob's and shared account")
             queryRes <- queryAccount("alice_bob_0", "and_sign").run(bobContext)
-            _ <- IO.sleep(5.seconds)
+            _        <- IO.sleep(5.seconds)
           } yield queryRes)
             .iterateUntil(_ == ExitCode.Success),
           240.seconds

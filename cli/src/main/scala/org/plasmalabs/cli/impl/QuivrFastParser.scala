@@ -24,24 +24,21 @@ sealed trait TemplateAST {
 case class Sign(location: Int, idx: Int) extends TemplateAST
 
 case class ThresholdPredicate(
-    threshold: Int,
-    innerPropositions: Seq[TemplateAST]
+  threshold:         Int,
+  innerPropositions: Seq[TemplateAST]
 )
 
 case class Threshold(
-    location: Int,
-    threshold: Int,
-    innerPropositions: Seq[TemplateAST]
+  location:          Int,
+  threshold:         Int,
+  innerPropositions: Seq[TemplateAST]
 ) extends TemplateAST
 
-case class And(location: Int, left: TemplateAST, right: TemplateAST)
-    extends TemplateAST
+case class And(location: Int, left: TemplateAST, right: TemplateAST) extends TemplateAST
 
-case class Or(location: Int, left: TemplateAST, right: TemplateAST)
-    extends TemplateAST
+case class Or(location: Int, left: TemplateAST, right: TemplateAST) extends TemplateAST
 
-case class Height(location: Int, minHeight: Long, maxHeight: Long)
-    extends TemplateAST
+case class Height(location: Int, minHeight: Long, maxHeight: Long) extends TemplateAST
 
 case class Locked(location: Int, someData: Option[String]) extends TemplateAST
 
@@ -60,7 +57,7 @@ object TemplateAST {
   type ValidationStateM[A] = State[ValidationState, A]
 
   def compilePredicate[F[_]: Monad](
-      template: ThresholdPredicate
+    template: ThresholdPredicate
   ): ValidationStateM[ValidatedNel[ParseError, LockTemplate[F]]] = {
     import org.plasmalabs.sdk.builders.locks._
     import cats.implicits._
@@ -93,8 +90,9 @@ object TemplateAST {
         }
     }
   }
+
   def compile[F[_]: Monad](
-      template: TemplateAST
+    template: TemplateAST
   ): ValidationStateM[ValidatedNel[ParseError, PropositionTemplate[F]]] = {
     import cats.implicits._
     template match {
@@ -133,27 +131,26 @@ object TemplateAST {
           )
         }
       case Threshold(location, threshold, innerPropositions) =>
-        innerPropositions.map(x => compile[F](x)).sequence.map {
-          innerPropositions =>
-            if (threshold > innerPropositions.length)
-              InvalidQuivrTemplate(
-                location,
-                "Threshold cannot be greater than the number of inner propositions"
-              ).invalidNel
-            else if (threshold < 1)
-              InvalidQuivrTemplate(
-                location,
-                "Threshold cannot be less than 1"
-              ).invalidNel
-            else {
-              innerPropositions.sequence.map { innerProps =>
-                PropositionTemplate
-                  .ThresholdTemplate[F](
-                    innerProps,
-                    threshold
-                  )
-              }
+        innerPropositions.map(x => compile[F](x)).sequence.map { innerPropositions =>
+          if (threshold > innerPropositions.length)
+            InvalidQuivrTemplate(
+              location,
+              "Threshold cannot be greater than the number of inner propositions"
+            ).invalidNel
+          else if (threshold < 1)
+            InvalidQuivrTemplate(
+              location,
+              "Threshold cannot be less than 1"
+            ).invalidNel
+          else {
+            innerPropositions.sequence.map { innerProps =>
+              PropositionTemplate
+                .ThresholdTemplate[F](
+                  innerProps,
+                  threshold
+                )
             }
+          }
         }
       case And(_, left, right) =>
         (compile[F](left), compile[F](right)).mapN((l, r) =>
@@ -291,9 +288,8 @@ trait QuivrFastParser[F[_]] {
   def parseQuivr(input: String): ValidatedNel[ParseError, LockTemplate[F]]
 
   def thresholdPredicate[$: P]: P[ThresholdPredicate] =
-    P(P("threshold") ~ P("(") ~ decimal ~ P(",") ~ exprSeq ~ P(")")).map {
-      case (threshold, innerPropositions) =>
-        ThresholdPredicate(threshold.toInt, innerPropositions)
+    P(P("threshold") ~ P("(") ~ decimal ~ P(",") ~ exprSeq ~ P(")")).map { case (threshold, innerPropositions) =>
+      ThresholdPredicate(threshold.toInt, innerPropositions)
     }
 
   def threshold[$: P]: P[TemplateAST] =
@@ -313,36 +309,34 @@ trait QuivrFastParser[F[_]] {
   def atomicExpr[$: P]: P[TemplateAST] = P(
     threshold | signature | parenthesisExpr | locked | height | tick | digest
   )
+
   def booleanExpr[$: P]: P[TemplateAST] =
-    P(Index ~ atomicExpr ~ (P(P("and") | P("or")).! ~/ atomicExpr).rep).map {
-      case (location, z, l) =>
-        l.foldLeft(z) { case (left, opAndRight) =>
-          val (operator, right) = opAndRight
-          if (operator == "or")
-            Or(location, left, right)
-          else
-            And(location, left, right)
-        }
+    P(Index ~ atomicExpr ~ (P(P("and") | P("or")).! ~/ atomicExpr).rep).map { case (location, z, l) =>
+      l.foldLeft(z) { case (left, opAndRight) =>
+        val (operator, right) = opAndRight
+        if (operator == "or")
+          Or(location, left, right)
+        else
+          And(location, left, right)
+      }
     }
 
   def digest[$: P]: P[TemplateAST] =
     sha256 | blake2b
 
   def sha256[$: P]: P[TemplateAST] =
-    P(Index ~ P("sha256") ~ P("(") ~ hexChars ~ P(")")).map {
-      case (location, hex) =>
-        Sha256Digest(location, hex)
+    P(Index ~ P("sha256") ~ P("(") ~ hexChars ~ P(")")).map { case (location, hex) =>
+      Sha256Digest(location, hex)
     }
+
   def blake2b[$: P]: P[TemplateAST] =
-    P(Index ~ P("blake2b") ~ P("(") ~ hexChars ~ P(")")).map {
-      case (location, hex) =>
-        Blake2bDigest(location, hex)
+    P(Index ~ P("blake2b") ~ P("(") ~ hexChars ~ P(")")).map { case (location, hex) =>
+      Blake2bDigest(location, hex)
     }
 
   def locked[$: P]: P[TemplateAST] =
-    P(Index ~ P("locked") ~ P("(") ~ base58CharsOrEmpty ~ P(")")).map {
-      case (location, hex) =>
-        Locked(location, if (hex.trim().isEmpty()) None else Some(hex))
+    P(Index ~ P("locked") ~ P("(") ~ base58CharsOrEmpty ~ P(")")).map { case (location, hex) =>
+      Locked(location, if (hex.trim().isEmpty()) None else Some(hex))
     }
 
   def hexChar[$: P] = P(
@@ -356,6 +350,7 @@ trait QuivrFastParser[F[_]] {
       "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz"
     )
   )
+
   def base58CharsOrEmpty[$: P]: P[String] =
     base58Char.rep.!
 
@@ -366,16 +361,17 @@ trait QuivrFastParser[F[_]] {
     hexChar.rep(1).!
 
   def signature[$: P]: P[TemplateAST] =
-    P(Index ~ P("sign") ~ P("(") ~ decimal ~ P(")")).map {
-      case (location, idx) =>
-        Sign(location, idx)
+    P(Index ~ P("sign") ~ P("(") ~ decimal ~ P(")")).map { case (location, idx) =>
+      Sign(location, idx)
     }
+
   def height[$: P]: P[TemplateAST] =
     P(
       Index ~ P("height") ~ P("(") ~ decimalLong ~ P(",") ~ decimalLong ~ P(")")
     ).map { case (location, min, max) =>
       Height(location, min, max)
     }
+
   def tick[$: P]: P[TemplateAST] =
     P(
       Index ~ P("tick") ~ P("(") ~ decimalLong ~ P(",") ~ decimalLong ~ P(")")
@@ -397,7 +393,7 @@ object QuivrFastParser {
   def make[F[_]: Monad]: QuivrFastParser[F] = new QuivrFastParser[F] {
 
     def parseQuivr(
-        input: String
+      input: String
     ): ValidatedNel[ParseError, LockTemplate[F]] = {
       import cats.implicits._
       parse(input, thresholdPredicate(_)) match {

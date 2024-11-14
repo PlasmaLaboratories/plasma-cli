@@ -81,6 +81,7 @@ class ParamsWalletModuleTest extends FunSuite {
         .isEmpty
     )
   }
+
   tmpWallet.test("Test valid key recovery") { _ =>
     val args0 = List(
       "wallet",
@@ -104,6 +105,7 @@ class ParamsWalletModuleTest extends FunSuite {
         .isDefined
     )
   }
+
   tmpWallet.test("Test export-vk (TSDK-760)") { _ =>
     val args0 = List(
       "wallet",
@@ -117,6 +119,7 @@ class ParamsWalletModuleTest extends FunSuite {
         .isEmpty
     )
   }
+
   tmpWallet.test("Test fellowships add (TSDK-760)") { _ =>
     val args0 = List(
       "fellowships",

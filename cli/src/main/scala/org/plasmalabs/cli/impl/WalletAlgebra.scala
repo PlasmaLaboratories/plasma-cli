@@ -10,35 +10,36 @@ import cats.effect.std
 trait WalletAlgebra[F[_]] {
 
   def createWalletFromParams(
-      networkId: Int,
-      ledgerId: Int,
-      password: String,
-      somePassphrase: Option[String],
-      someOutputFile: Option[String],
-      someMnemonicFile: Option[String]
+    networkId:        Int,
+    ledgerId:         Int,
+    password:         String,
+    somePassphrase:   Option[String],
+    someOutputFile:   Option[String],
+    someMnemonicFile: Option[String]
   ): F[Unit]
 
   def recoverKeysFromParams(
-      mnemonic: IndexedSeq[String],
-      password: String,
-      networkId: Int,
-      ledgerId: Int,
-      somePassphrase: Option[String],
-      someOutputFile: Option[String]
+    mnemonic:       IndexedSeq[String],
+    password:       String,
+    networkId:      Int,
+    ledgerId:       Int,
+    somePassphrase: Option[String],
+    someOutputFile: Option[String]
   ): F[Unit]
 
 }
 
 object WalletAlgebra {
+
   def make[F[_]: Sync: std.Console](
-      walletApi: WalletApi[F],
-      walletStateApi: WalletStateAlgebra[F]
+    walletApi:      WalletApi[F],
+    walletStateApi: WalletStateAlgebra[F]
   ) = new WalletAlgebra[F] {
     import cats.implicits._
 
     private def createNewWallet(
-        password: String,
-        somePassphrase: Option[String]
+      password:       String,
+      somePassphrase: Option[String]
     ) = walletApi
       .createNewWallet(
         password.getBytes(),
@@ -47,9 +48,9 @@ object WalletAlgebra {
       .map(_.fold(throw _, identity))
 
     private def recoverWalletKey(
-        mnemonic: IndexedSeq[String],
-        password: String,
-        somePassphrase: Option[String]
+      mnemonic:       IndexedSeq[String],
+      password:       String,
+      somePassphrase: Option[String]
     ) = walletApi
       .importWallet(
         mnemonic,
@@ -59,8 +60,8 @@ object WalletAlgebra {
       .map(_.fold(throw _, identity))
 
     private def extractMainKey(
-        wallet: VaultStore[F],
-        password: String
+      wallet:   VaultStore[F],
+      password: String
     ): F[KeyPair] =
       walletApi
         .extractMainKey(
@@ -78,42 +79,40 @@ object WalletAlgebra {
         )
 
     private def saveWallet(
-        wallet: VaultStore[F],
-        outputFile: String
-    ) = {
+      wallet:     VaultStore[F],
+      outputFile: String
+    ) =
       walletApi
         .saveWallet(
           wallet,
           outputFile
         )
         .map(_.fold(throw _, identity))
-    }
 
     private def saveMnemonic(
-        mnemonic: IndexedSeq[String],
-        mnemonicFile: String
-    ) = {
+      mnemonic:     IndexedSeq[String],
+      mnemonicFile: String
+    ) =
       walletApi
         .saveMnemonic(
           mnemonic,
           mnemonicFile
         )
         .map(_.fold(throw _, identity))
-    }
 
     def createWalletFromParams(
-        networkId: Int,
-        ledgerId: Int,
-        password: String,
-        somePassphrase: Option[String],
-        someOutputFile: Option[String],
-        someMnemonicFile: Option[String]
+      networkId:        Int,
+      ledgerId:         Int,
+      password:         String,
+      somePassphrase:   Option[String],
+      someOutputFile:   Option[String],
+      someMnemonicFile: Option[String]
     ) = {
       import io.circe.syntax._
       import org.plasmalabs.crypto.encryption.VaultStore.Codecs._
 
       for {
-        wallet <- createNewWallet(password, somePassphrase)
+        wallet  <- createNewWallet(password, somePassphrase)
         keyPair <- extractMainKey(wallet.mainKeyVaultStore, password)
         _ <- someOutputFile
           .map { outputFile =>
@@ -142,20 +141,20 @@ object WalletAlgebra {
 
     }
     def recoverKeysFromParams(
-        mnemonic: IndexedSeq[String],
-        password: String,
-        networkId: Int,
-        ledgerId: Int,
-        somePassphrase: Option[String],
-        someOutputFile: Option[String]
+      mnemonic:       IndexedSeq[String],
+      password:       String,
+      networkId:      Int,
+      ledgerId:       Int,
+      somePassphrase: Option[String],
+      someOutputFile: Option[String]
     ) = {
       import io.circe.syntax._
       import org.plasmalabs.crypto.encryption.VaultStore.Codecs._
 
       for {
-        wallet <- recoverWalletKey(mnemonic, password, somePassphrase)
+        wallet  <- recoverWalletKey(mnemonic, password, somePassphrase)
         keyPair <- extractMainKey(wallet, password)
-        _ <- walletStateApi.initWalletState(networkId, ledgerId, keyPair)
+        _       <- walletStateApi.initWalletState(networkId, ledgerId, keyPair)
         _ <- someOutputFile
           .map { outputFile =>
             saveWallet(

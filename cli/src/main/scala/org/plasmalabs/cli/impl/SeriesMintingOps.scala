@@ -28,16 +28,16 @@ trait SeriesMintingOps[G[_]] extends CommonTxOps {
   val wa: WalletApi[G]
 
   private def buildSeriesTransaction(
-      txos: Seq[Txo],
-      predicateFundsToUnlock: Lock.Predicate,
-      lockForChange: Lock,
-      recipientLockAddress: LockAddress,
-      amount: Long,
-      fee: Long,
-      someNextIndices: Option[Indices],
-      keyPair: KeyPair,
-      outputFile: String,
-      seriesPolicy: SeriesPolicy
+    txos:                   Seq[Txo],
+    predicateFundsToUnlock: Lock.Predicate,
+    lockForChange:          Lock,
+    recipientLockAddress:   LockAddress,
+    amount:                 Long,
+    fee:                    Long,
+    someNextIndices:        Option[Indices],
+    keyPair:                KeyPair,
+    outputFile:             String,
+    seriesPolicy:           SeriesPolicy
   ): G[Unit] =
     for {
       changeAddress <- tba.lockAddress(
@@ -98,16 +98,16 @@ trait SeriesMintingOps[G[_]] extends CommonTxOps {
     } yield ()
 
   def buildSeriesTxAux(
-      lvlTxos: Seq[Txo],
-      nonLvlTxos: Seq[Txo],
-      predicateFundsToUnlock: Lock.Predicate,
-      amount: Long,
-      fee: Long,
-      someNextIndices: Option[Indices],
-      keyPair: KeyPair,
-      outputFile: String,
-      seriesPolicy: SeriesPolicy,
-      changeLock: Option[Lock]
+    lvlTxos:                Seq[Txo],
+    nonLvlTxos:             Seq[Txo],
+    predicateFundsToUnlock: Lock.Predicate,
+    amount:                 Long,
+    fee:                    Long,
+    someNextIndices:        Option[Indices],
+    keyPair:                KeyPair,
+    outputFile:             String,
+    seriesPolicy:           SeriesPolicy,
+    changeLock:             Option[Lock]
   ) = (if (lvlTxos.isEmpty) {
          Sync[G].raiseError(CreateTxError("No LVL txos found"))
        } else {

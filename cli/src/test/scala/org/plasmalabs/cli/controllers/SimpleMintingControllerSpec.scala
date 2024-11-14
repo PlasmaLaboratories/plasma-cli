@@ -30,32 +30,32 @@ class SimpleMintingControllerSpec
     new BaseWalletStateAlgebra[F] {
 
       override def getCurrentIndicesForFunds(
-          fellowship: String,
-          template: String,
-          interaction: Option[Int]
+        fellowship:  String,
+        template:    String,
+        interaction: Option[Int]
       ): F[Option[Indices]] = Monad[F].pure(
         Some(Indices(1, 1, 1))
       )
 
       override def getNextIndicesForFunds(
-          fellowship: String,
-          template: String
+        fellowship: String,
+        template:   String
       ): F[Option[Indices]] = Monad[F].pure(
         Some(Indices(1, 1, 1))
       )
 
       override def updateWalletState(
-          lockPredicate: String,
-          lockAddress: String,
-          routine: Option[String],
-          vk: Option[String],
-          indices: Indices
+        lockPredicate: String,
+        lockAddress:   String,
+        routine:       Option[String],
+        vk:            Option[String],
+        indices:       Indices
       ): F[Unit] = Monad[F].pure(())
 
       override def getLock(
-          fellowship: String,
-          template: String,
-          nextState: Int
+        fellowship: String,
+        template:   String,
+        nextState:  Int
       ): F[Option[Lock]] =
         Monad[F].pure(
           Some(
@@ -153,6 +153,7 @@ class SimpleMintingControllerSpec
       Right("Transaction successfully created")
     )
   }
+
   test(
     "createSimpleAssetMintingTransactionFromParams should create a minting transaction"
   ) {

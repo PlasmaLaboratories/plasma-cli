@@ -27,15 +27,16 @@ import java.io.FileInputStream
 import java.io.FileOutputStream
 
 trait TransactionAlgebra[F[_]] {
+
   def proveSimpleTransactionFromParams(
-      inputRes: Resource[F, FileInputStream],
-      keyFile: String,
-      password: String,
-      outputRes: Resource[F, FileOutputStream]
+    inputRes:  Resource[F, FileInputStream],
+    keyFile:   String,
+    password:  String,
+    outputRes: Resource[F, FileOutputStream]
   ): F[Either[SimpleTransactionAlgebraError, Unit]]
 
   def broadcastSimpleTransactionFromParams(
-      provedTxFile: String
+    provedTxFile: String
   ): F[Either[SimpleTransactionAlgebraError, String]]
 
 }
@@ -43,10 +44,10 @@ trait TransactionAlgebra[F[_]] {
 object TransactionAlgebra {
 
   def make[F[_]: Sync](
-      walletApi: WalletApi[F],
-      walletStateApi: WalletStateAlgebra[F],
-      walletManagementUtils: WalletManagementUtils[F],
-      channelResource: Resource[F, ManagedChannel]
+    walletApi:             WalletApi[F],
+    walletStateApi:        WalletStateAlgebra[F],
+    walletManagementUtils: WalletManagementUtils[F],
+    channelResource:       Resource[F, ManagedChannel]
   ) =
     new TransactionAlgebra[F] {
 
@@ -67,7 +68,7 @@ object TransactionAlgebra {
         }
 
       override def broadcastSimpleTransactionFromParams(
-          provedTxFile: String
+        provedTxFile: String
       ): F[Either[SimpleTransactionAlgebraError, String]] = {
         import org.plasmalabs.sdk.models.transaction.IoTransaction
         import cats.implicits._
@@ -82,11 +83,11 @@ object TransactionAlgebra {
             inputRes.use(fis =>
               Sync[F]
                 .blocking(IoTransaction.parseFrom(fis))
-                .adaptErr({ case _ =>
+                .adaptErr { case _ =>
                   InvalidProtobufFile("Invalid protobuf file")
-                })
+                }
             )
-          _ <- validateTx(provedTransaction)
+          _           <- validateTx(provedTransaction)
           validations <- checkSignatures(provedTransaction)
           _ <- Sync[F]
             .raiseError(
@@ -117,7 +118,7 @@ object TransactionAlgebra {
               import org.plasmalabs.sdk.syntax._
               Encoding.encodeToBase58(tx.id.value.toByteArray()).asRight
             case Left(e: SimpleTransactionAlgebraError) => e.asLeft
-            case Left(e) => UnexpectedError(e.getMessage()).asLeft
+            case Left(e)                                => UnexpectedError(e.getMessage()).asLeft
           }
         )
       }
@@ -208,10 +209,10 @@ object TransactionAlgebra {
       }
 
       override def proveSimpleTransactionFromParams(
-          inputRes: Resource[F, FileInputStream],
-          keyFile: String,
-          password: String,
-          outputRes: Resource[F, FileOutputStream]
+        inputRes:  Resource[F, FileInputStream],
+        keyFile:   String,
+        password:  String,
+        outputRes: Resource[F, FileOutputStream]
       ): F[Either[SimpleTransactionAlgebraError, Unit]] = {
         import org.plasmalabs.sdk.models.transaction.IoTransaction
         import cats.implicits._
@@ -233,7 +234,7 @@ object TransactionAlgebra {
                 .make[F](walletApi, walletStateApi, keyPair)
             )
           provedTransaction <- credentialer.prove(ioTransaction)
-          _ <- validateTx(ioTransaction)
+          _                 <- validateTx(ioTransaction)
           _ <- outputRes.use(fos =>
             Sync[F]
               .delay(provedTransaction.writeTo(fos))
@@ -242,7 +243,7 @@ object TransactionAlgebra {
           e match {
             case Right(_)                               => ().asRight
             case Left(e: SimpleTransactionAlgebraError) => e.asLeft
-            case Left(e) => UnexpectedError(e.getMessage()).asLeft
+            case Left(e)                                => UnexpectedError(e.getMessage()).asLeft
           }
         )
       }

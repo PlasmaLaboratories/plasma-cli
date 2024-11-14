@@ -8,16 +8,16 @@ import io.circe.syntax._
 import org.plasmalabs.shared.models.TxRequest
 
 case class SendTxComponent(
-    currentSection: Var[TxSection],
-    fromFellowshipVar: Var[String],
-    fromTemplateVar: Var[String],
-    fromInteractionVar: Var[String],
-    networkVar: Var[String],
-    addressVar: Var[String],
-    amountVar: Var[String],
-    feeVar: Var[String],
-    currentTokenVar: Var[String],
-    txStatusVar: Var[Option[Either[String, String]]]
+  currentSection:     Var[TxSection],
+  fromFellowshipVar:  Var[String],
+  fromTemplateVar:    Var[String],
+  fromInteractionVar: Var[String],
+  networkVar:         Var[String],
+  addressVar:         Var[String],
+  amountVar:          Var[String],
+  feeVar:             Var[String],
+  currentTokenVar:    Var[String],
+  txStatusVar:        Var[Option[Either[String, String]]]
 ) {
 
   private lazy val networkAndAddressSignal =
@@ -119,16 +119,14 @@ case class SendTxComponent(
                     Map("disabled" -> false)
                   } else {
                     if (UIUtils.isAmount(fromInt)) Map("disabled" -> false)
-                    else Map("disabled" -> true)
+                    else Map("disabled"                           -> true)
                   }
                 } else {
                   Map("disabled" -> true)
                 }
               },
             onClick.preventDefault.mapTo(()) --> { _ =>
-              txStatusVar.update(_ =>
-                Some(Right("Waiting for the transaction..."))
-              )
+              txStatusVar.update(_ => Some(Right("Waiting for the transaction...")))
             },
             onClick.preventDefault.flatMap(_ =>
               FetchStream

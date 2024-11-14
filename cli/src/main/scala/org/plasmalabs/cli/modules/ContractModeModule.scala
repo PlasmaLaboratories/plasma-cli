@@ -9,8 +9,9 @@ import scopt.OParser
 import org.plasmalabs.cli.PlasmaCliParamsParserModule
 
 trait TemplateModeModule extends WalletStateResource {
+
   def templateModeSubcmds(
-      validateParams: PlasmaCliParams
+    validateParams: PlasmaCliParams
   ): IO[Either[String, String]] = {
     val templateStorageAlgebra = TemplateStorageApi.make[IO](
       walletResource(validateParams.walletFile)

@@ -19,13 +19,13 @@ object WalletModelDisplayOps {
   def display(walletEntity: WalletFellowship): String =
     s"""${walletEntity.xIdx}\t${walletEntity.name}"""
 
-  def serialize[F[_]](lockTemplate: LockTemplate[F]): String = {
+  def serialize[F[_]](lockTemplate: LockTemplate[F]): String =
     lockTemplate match {
       case LockTemplate.PredicateTemplate(innerTemplates, threshold) =>
         s"threshold($threshold, ${innerTemplates.map(serialize[F]).mkString(", ")})"
     }
-  }
-  private def serialize[F[_]](lockTemplate: PropositionTemplate[F]): String = {
+
+  private def serialize[F[_]](lockTemplate: PropositionTemplate[F]): String =
     lockTemplate match {
       case PropositionTemplate.OrTemplate(leftTemplate, rightTemplate) =>
         val left = leftTemplate match {
@@ -78,12 +78,11 @@ object WalletModelDisplayOps {
       case PropositionTemplate.DigestTemplate("Blake2b256", digest) =>
         s"blake2b(${Encoding.encodeToHex(digest.value.toByteArray())})"
     }
-  }
 
   def display(walletTemplate: WalletTemplate): String = {
     import org.plasmalabs.sdk.codecs.LockTemplateCodecs.decodeLockTemplate
     (for {
-      json <- Id(parse(walletTemplate.lockTemplate))
+      json    <- Id(parse(walletTemplate.lockTemplate))
       decoded <- decodeLockTemplate[Id](json)
     } yield s"""${walletTemplate.yIdx}\t\t${walletTemplate.name}\t\t${serialize(
         decoded

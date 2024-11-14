@@ -19,7 +19,7 @@ class NodeQueryControllerSpec extends CatsEffectSuite with DummyObjects {
       new BaseNodeQueryAlgebra[IO] {
 
         override def blockByHeight(
-            height: Long
+          height: Long
         ): IO[Option[(BlockId, BlockHeader, BlockBody, Seq[IoTransaction])]] =
           IO(None)
 
@@ -31,12 +31,13 @@ class NodeQueryControllerSpec extends CatsEffectSuite with DummyObjects {
         Left("No blocks found at that height")
       )
   }
+
   test("blockByHeight should display a block when it is there") {
     val nodeQueryController = new NodeQueryController[IO](
       new BaseNodeQueryAlgebra[IO] {
 
         override def blockByHeight(
-            height: Long
+          height: Long
         ): IO[Option[(BlockId, BlockHeader, BlockBody, Seq[IoTransaction])]] =
           IO(
             Some((blockId01, blockHeader01, blockBody01, Seq(iotransaction01)))
@@ -56,7 +57,7 @@ class NodeQueryControllerSpec extends CatsEffectSuite with DummyObjects {
       new BaseNodeQueryAlgebra[IO] {
 
         override def blockById(
-            blockId: BlockId
+          blockId: BlockId
         ): IO[Option[(BlockId, BlockHeader, BlockBody, Seq[IoTransaction])]] =
           IO(None)
 
@@ -74,7 +75,7 @@ class NodeQueryControllerSpec extends CatsEffectSuite with DummyObjects {
       new BaseNodeQueryAlgebra[IO] {
 
         override def blockById(
-            blockId: BlockId
+          blockId: BlockId
         ): IO[Option[(BlockId, BlockHeader, BlockBody, Seq[IoTransaction])]] =
           IO(
             Some((blockId01, blockHeader01, blockBody01, Seq(iotransaction01)))
@@ -94,7 +95,7 @@ class NodeQueryControllerSpec extends CatsEffectSuite with DummyObjects {
       new BaseNodeQueryAlgebra[IO] {
 
         override def fetchTransaction(
-            txId: TransactionId
+          txId: TransactionId
         ): IO[Option[IoTransaction]] = IO(None)
 
       }
@@ -113,7 +114,7 @@ class NodeQueryControllerSpec extends CatsEffectSuite with DummyObjects {
       new BaseNodeQueryAlgebra[IO] {
 
         override def fetchTransaction(
-            txId: TransactionId
+          txId: TransactionId
         ): IO[Option[IoTransaction]] = IO(Some(iotransaction01))
 
       }
@@ -130,7 +131,7 @@ class NodeQueryControllerSpec extends CatsEffectSuite with DummyObjects {
       new BaseNodeQueryAlgebra[IO] {
 
         override def makeBlocks(
-            nbOfBlocks: Int
+          nbOfBlocks: Int
         ): IO[Unit] =
           IO(Right("Block(s) created successfully"))
 

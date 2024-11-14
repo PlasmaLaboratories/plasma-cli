@@ -299,6 +299,7 @@ class ParamsSimpleTransactionTest extends FunSuite {
     )
     assert(OParser.parse(paramParser, args0, PlasmaCliParams()).isEmpty)
   }
+
   test(
     "Test invalid transaction create with no toAddress, toFellowship or toTemplate"
   ) {
@@ -325,6 +326,7 @@ class ParamsSimpleTransactionTest extends FunSuite {
     assert(OParser.parse(paramParser, args0, PlasmaCliParams()).isEmpty)
 
   }
+
   test(
     "Test invalid transaction create with only one of toFellowship or toTemplate"
   ) {

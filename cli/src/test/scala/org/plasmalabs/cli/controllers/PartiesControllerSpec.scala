@@ -10,7 +10,7 @@ class FellowshipsControllerSpec extends FunSuite {
     val controller = new FellowshipsController[Id](
       new FellowshipStorageAlgebra[Id] {
         override def addFellowship(
-            walletEntity: WalletFellowship
+          walletEntity: WalletFellowship
         ): Id[Int] = 1
 
         override def findFellowships(): Id[List[WalletFellowship]] =
@@ -27,7 +27,7 @@ class FellowshipsControllerSpec extends FunSuite {
     val controller = new FellowshipsController[Id](
       new FellowshipStorageAlgebra[Id] {
         override def addFellowship(
-            walletEntity: WalletFellowship
+          walletEntity: WalletFellowship
         ): Id[Int] = 1
 
         override def findFellowships(): Id[List[WalletFellowship]] =
@@ -41,8 +41,8 @@ class FellowshipsControllerSpec extends FunSuite {
       controller.listFellowships(),
       Right(
         "X Coordinate\tFellowship Name\n" +
-          "1\tfellowship1\n" +
-          "2\tfellowship2".stripMargin
+        "1\tfellowship1\n" +
+        "2\tfellowship2".stripMargin
       )
     )
   }

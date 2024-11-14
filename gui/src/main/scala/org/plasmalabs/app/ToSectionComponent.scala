@@ -3,14 +3,14 @@ package org.plasmalabs.app
 import com.raquo.laminar.api.L._
 
 case class ToSectionComponent(
-    currentSection: Var[TxSection],
-    networkVar: Var[String],
-    addressVar: Var[String],
-    amountVar: Var[String],
-    feeVar: Var[String],
-    txStatusVar: Var[Option[Either[String, String]]],
-    currentAsset: Var[String],
-    availableAssets: Var[List[(Option[String], Option[String])]]
+  currentSection:  Var[TxSection],
+  networkVar:      Var[String],
+  addressVar:      Var[String],
+  amountVar:       Var[String],
+  feeVar:          Var[String],
+  txStatusVar:     Var[Option[Either[String, String]]],
+  currentAsset:    Var[String],
+  availableAssets: Var[List[(Option[String], Option[String])]]
 ) {
 
   private lazy val networkAndAddressSignal =

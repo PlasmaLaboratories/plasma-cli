@@ -8,12 +8,10 @@ import org.plasmalabs.cli.PlasmaCliParams
 import scopt.OParser
 import org.plasmalabs.cli.PlasmaCliParamsParserModule
 
-trait IndexerQueryModeModule
-    extends WalletStateAlgebraModule
-    with RpcChannelResource {
+trait IndexerQueryModeModule extends WalletStateAlgebraModule with RpcChannelResource {
 
   def indexerQuerySubcmd(
-      validateParams: PlasmaCliParams
+    validateParams: PlasmaCliParams
   ): IO[Either[String, String]] = validateParams.subcmd match {
     case PlasmaCliSubCmd.invalid =>
       IO.pure(

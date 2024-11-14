@@ -8,16 +8,16 @@ import org.plasmalabs.sdk.dataApi.{IndexerQueryAlgebra, WalletStateAlgebra}
 import org.plasmalabs.sdk.display.DisplayOps.DisplayTOps
 
 class IndexerQueryController[F[_]: Sync](
-    walletStateAlgebra: WalletStateAlgebra[F],
-    indexerQueryAlgebra: IndexerQueryAlgebra[F]
+  walletStateAlgebra:  WalletStateAlgebra[F],
+  indexerQueryAlgebra: IndexerQueryAlgebra[F]
 ) {
 
   def queryUtxoFromParams(
-      someFromAddress: Option[String],
-      fromFellowship: String,
-      fromTemplate: String,
-      someFromInteraction: Option[Int],
-      tokenType: TokenType.Value = TokenType.all
+    someFromAddress:     Option[String],
+    fromFellowship:      String,
+    fromTemplate:        String,
+    someFromInteraction: Option[Int],
+    tokenType:           TokenType.Value = TokenType.all
   ): F[Either[String, String]] = {
 
     import cats.implicits._

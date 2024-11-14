@@ -33,10 +33,10 @@ class SimpleTransactionControllerSpec
     new BaseWalletStateAlgebra[F] {
 
       override def getAddress(
-          fellowship: String,
-          template: String,
-          interaction: Option[Int]
-      ): F[Option[String]] = {
+        fellowship:  String,
+        template:    String,
+        interaction: Option[Int]
+      ): F[Option[String]] =
         Monad[F].pure(
           Some(
             AddressCodecs.encodeAddress(
@@ -51,35 +51,34 @@ class SimpleTransactionControllerSpec
             )
           )
         )
-      }
 
       override def getCurrentIndicesForFunds(
-          fellowship: String,
-          template: String,
-          interaction: Option[Int]
+        fellowship:  String,
+        template:    String,
+        interaction: Option[Int]
       ): F[Option[Indices]] = Monad[F].pure(
         Some(Indices(1, 1, 1))
       )
 
       override def getNextIndicesForFunds(
-          fellowship: String,
-          template: String
+        fellowship: String,
+        template:   String
       ): F[Option[Indices]] = Monad[F].pure(
         Some(Indices(1, 1, 1))
       )
 
       override def updateWalletState(
-          lockPredicate: String,
-          lockAddress: String,
-          routine: Option[String],
-          vk: Option[String],
-          indices: Indices
+        lockPredicate: String,
+        lockAddress:   String,
+        routine:       Option[String],
+        vk:            Option[String],
+        indices:       Indices
       ): F[Unit] = Monad[F].pure(())
 
       override def getLock(
-          fellowship: String,
-          template: String,
-          nextState: Int
+        fellowship: String,
+        template:   String,
+        nextState:  Int
       ): F[Option[Lock]] =
         Monad[F].pure(
           Some(
@@ -97,9 +96,9 @@ class SimpleTransactionControllerSpec
         )
 
       override def validateCurrentIndicesForFunds(
-          fellowship: String,
-          template: String,
-          someInteraction: Option[Int]
+        fellowship:      String,
+        template:        String,
+        someInteraction: Option[Int]
       ): F[ValidatedNel[String, Indices]] = {
         import cats.implicits._
         Indices(1, 2, 3).validNel.pure[F]
@@ -236,6 +235,7 @@ class SimpleTransactionControllerSpec
       Right("Transaction successfully created")
     )
   }
+
   test(
     "createSimpleTransactionFromParams should create an asset transfer transaction"
   ) {

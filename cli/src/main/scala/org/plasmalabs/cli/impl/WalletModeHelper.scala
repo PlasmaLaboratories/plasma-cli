@@ -9,15 +9,15 @@ import org.plasmalabs.indexer.services.{Txo, TxoState}
 import org.plasmalabs.shared.models._
 
 case class WalletModeHelper[F[_]: Sync](
-    walletStateAlgebra: dataApi.WalletStateAlgebra[F],
-    indexerQueryAlgebra: dataApi.IndexerQueryAlgebra[F]
+  walletStateAlgebra:  dataApi.WalletStateAlgebra[F],
+  indexerQueryAlgebra: dataApi.IndexerQueryAlgebra[F]
 ) {
 
   def getBalance(
-      someAddress: Option[String],
-      someFellowship: Option[String],
-      someTemplate: Option[String],
-      someInteraction: Option[Int]
+    someAddress:     Option[String],
+    someFellowship:  Option[String],
+    someTemplate:    Option[String],
+    someInteraction: Option[Int]
   ) = {
 
     import cats.implicits._
@@ -80,7 +80,7 @@ case class WalletModeHelper[F[_]: Sync](
       )
       val res = assetMap.map { e =>
         val (key, value) = e
-        val result = value.foldl(BigInt(0))((a, c) => {
+        val result = value.foldl(BigInt(0)) { (a, c) =>
           a + (if (c.transactionOutput.value.value.isLvl)
                  BigInt(
                    c.transactionOutput.value.value.lvl.get.quantity.value.toByteArray
@@ -98,7 +98,7 @@ case class WalletModeHelper[F[_]: Sync](
                    c.transactionOutput.value.value.asset.get.quantity.value.toByteArray
                  )
                else BigInt(0))
-        })
+        }
 
         val keyIdentifier: BalanceDTO = key match {
           case LvlType => LvlBalance(result.toString)

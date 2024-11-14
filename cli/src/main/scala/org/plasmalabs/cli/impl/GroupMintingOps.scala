@@ -28,16 +28,16 @@ trait GroupMintingOps[G[_]] extends CommonTxOps {
   val wa: WalletApi[G]
 
   def buildGroupTxAux(
-      lvlTxos: Seq[Txo],
-      nonlvlTxos: Seq[Txo],
-      predicateFundsToUnlock: Lock.Predicate,
-      amount: Long,
-      fee: Long,
-      someNextIndices: Option[Indices],
-      keyPair: KeyPair,
-      outputFile: String,
-      groupPolicy: GroupPolicy,
-      changeLock: Option[Lock]
+    lvlTxos:                Seq[Txo],
+    nonlvlTxos:             Seq[Txo],
+    predicateFundsToUnlock: Lock.Predicate,
+    amount:                 Long,
+    fee:                    Long,
+    someNextIndices:        Option[Indices],
+    keyPair:                KeyPair,
+    outputFile:             String,
+    groupPolicy:            GroupPolicy,
+    changeLock:             Option[Lock]
   ) = (if (lvlTxos.isEmpty) {
          Sync[G].raiseError(CreateTxError("No LVL txos found"))
        } else {
@@ -67,16 +67,16 @@ trait GroupMintingOps[G[_]] extends CommonTxOps {
        })
 
   private def buildGroupTransaction(
-      txos: Seq[Txo],
-      predicateFundsToUnlock: Lock.Predicate,
-      lockForChange: Lock,
-      recipientLockAddress: LockAddress,
-      amount: Long,
-      fee: Long,
-      someNextIndices: Option[Indices],
-      keyPair: KeyPair,
-      outputFile: String,
-      groupPolicy: GroupPolicy
+    txos:                   Seq[Txo],
+    predicateFundsToUnlock: Lock.Predicate,
+    lockForChange:          Lock,
+    recipientLockAddress:   LockAddress,
+    amount:                 Long,
+    fee:                    Long,
+    someNextIndices:        Option[Indices],
+    keyPair:                KeyPair,
+    outputFile:             String,
+    groupPolicy:            GroupPolicy
   ): G[Unit] =
     for {
       changeAddress <- tba.lockAddress(

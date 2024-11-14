@@ -7,8 +7,8 @@ import org.plasmalabs.consensus.models.BlockId
 object BlockDisplayOps {
 
   def display(
-      blockId: BlockId,
-      ioTransactions: Seq[IoTransaction]
+    blockId:        BlockId,
+    ioTransactions: Seq[IoTransaction]
   ): String =
     s"""
 BlockId: ${blockId.display}
