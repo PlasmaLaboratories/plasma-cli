@@ -6,13 +6,8 @@ import cats.effect.kernel.Sync
 import org.plasmalabs.cli.TokenType
 import org.plasmalabs.cli.impl.SimpleTransactionAlgebra
 import org.plasmalabs.sdk.dataApi.WalletStateAlgebra
-import org.plasmalabs.sdk.models.GroupId
-import org.plasmalabs.sdk.models.LockAddress
-import org.plasmalabs.sdk.models.SeriesId
-import org.plasmalabs.sdk.syntax.AssetType
-import org.plasmalabs.sdk.syntax.GroupType
-import org.plasmalabs.sdk.syntax.LvlType
-import org.plasmalabs.sdk.syntax.SeriesType
+import org.plasmalabs.sdk.models.{GroupId, LockAddress, SeriesId}
+import org.plasmalabs.sdk.syntax.{AssetType, GroupType, LvlType, SeriesType}
 
 class SimpleTransactionController[F[_]: Sync](
   walletStateAlgebra:  WalletStateAlgebra[F],

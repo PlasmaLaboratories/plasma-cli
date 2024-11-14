@@ -1,20 +1,14 @@
 package org.plasmalabs.cli.mockbase
 
-import org.plasmalabs.sdk.builders.BuilderError
-import org.plasmalabs.sdk.builders.TransactionBuilderApi
-import org.plasmalabs.sdk.models._
-import org.plasmalabs.sdk.models.box.Attestation
-import org.plasmalabs.sdk.models.box.FungibilityType
-import org.plasmalabs.sdk.models.box.Lock
-import org.plasmalabs.sdk.models.box.QuantityDescriptorType
-import org.plasmalabs.sdk.models.transaction.IoTransaction
-import org.plasmalabs.sdk.models.transaction.UnspentTransactionOutput
-import org.plasmalabs.sdk.syntax.ValueTypeIdentifier
-import org.plasmalabs.indexer.services.Txo
 import com.google.protobuf.ByteString
 import com.google.protobuf.struct.Struct
+import org.plasmalabs.indexer.services.Txo
 import org.plasmalabs.quivr.models.Int128
-import org.plasmalabs.sdk.models.TransactionOutputAddress
+import org.plasmalabs.sdk.builders.{BuilderError, TransactionBuilderApi}
+import org.plasmalabs.sdk.models.box.{Attestation, FungibilityType, Lock, QuantityDescriptorType}
+import org.plasmalabs.sdk.models.transaction.{IoTransaction, UnspentTransactionOutput}
+import org.plasmalabs.sdk.models.{TransactionOutputAddress, _}
+import org.plasmalabs.sdk.syntax.ValueTypeIdentifier
 
 class BaseTransactionBuilderApi[F[_]] extends TransactionBuilderApi[F] {
 

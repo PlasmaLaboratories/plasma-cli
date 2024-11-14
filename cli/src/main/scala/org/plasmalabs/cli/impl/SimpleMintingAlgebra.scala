@@ -2,14 +2,13 @@ package org.plasmalabs.cli.impl
 
 import cats.Monad
 import cats.effect.kernel.Sync
-import org.plasmalabs.sdk.builders.TransactionBuilderApi
-import org.plasmalabs.sdk.dataApi.IndexerQueryAlgebra
-import org.plasmalabs.sdk.dataApi.WalletStateAlgebra
-import org.plasmalabs.sdk.models._
-import org.plasmalabs.sdk.wallet.WalletApi
-import org.plasmalabs.indexer.services.Txo
 import com.google.protobuf.ByteString
 import io.circe.Json
+import org.plasmalabs.indexer.services.Txo
+import org.plasmalabs.sdk.builders.TransactionBuilderApi
+import org.plasmalabs.sdk.dataApi.{IndexerQueryAlgebra, WalletStateAlgebra}
+import org.plasmalabs.sdk.models._
+import org.plasmalabs.sdk.wallet.WalletApi
 
 trait SimpleMintingAlgebra[F[_]] {
 

@@ -1,11 +1,11 @@
 package org.plasmalabs.cli.impl
 
 import cats.effect.kernel.Sync
-import org.plasmalabs.sdk.dataApi.WalletStateAlgebra
-import org.plasmalabs.sdk.wallet.WalletApi
+import cats.effect.std
 import org.plasmalabs.crypto.encryption.VaultStore
 import org.plasmalabs.quivr.models.KeyPair
-import cats.effect.std
+import org.plasmalabs.sdk.dataApi.WalletStateAlgebra
+import org.plasmalabs.sdk.wallet.WalletApi
 
 trait WalletAlgebra[F[_]] {
 

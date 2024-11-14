@@ -1,12 +1,11 @@
 package org.plasmalabs.cli.mockbase
 
+import org.plasmalabs.consensus.models.{BlockHeader, BlockId}
+import org.plasmalabs.node.models.BlockBody
+import org.plasmalabs.node.services.SynchronizationTraversalRes
 import org.plasmalabs.sdk.dataApi.NodeQueryAlgebra
 import org.plasmalabs.sdk.models.TransactionId
 import org.plasmalabs.sdk.models.transaction.IoTransaction
-import org.plasmalabs.consensus.models.BlockId
-import org.plasmalabs.node.models.BlockBody
-import org.plasmalabs.consensus.models.BlockHeader
-import org.plasmalabs.node.services.SynchronizationTraversalRes
 
 abstract class BaseNodeQueryAlgebra[F[_]] extends NodeQueryAlgebra[F] {
 

@@ -1,7 +1,7 @@
 package org.plasmalabs.cli.modules
 
-import org.plasmalabs.sdk.dataApi.{IndexerQueryAlgebra, RpcChannelResource}
 import cats.effect.IO
+import org.plasmalabs.sdk.dataApi.{IndexerQueryAlgebra, RpcChannelResource}
 
 trait IndexerQueryAlgebraModule extends RpcChannelResource {
 

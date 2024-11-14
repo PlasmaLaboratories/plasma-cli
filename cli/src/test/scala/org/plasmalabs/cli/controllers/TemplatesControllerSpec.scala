@@ -1,8 +1,8 @@
 package org.plasmalabs.cli.controllers
 
 import cats.effect.IO
-import org.plasmalabs.sdk.dataApi.{TemplateStorageAlgebra, WalletTemplate}
 import munit.CatsEffectSuite
+import org.plasmalabs.sdk.dataApi.{TemplateStorageAlgebra, WalletTemplate}
 
 class TemplatesControllerSpec extends CatsEffectSuite {
 

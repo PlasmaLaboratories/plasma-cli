@@ -1,14 +1,13 @@
 package org.plasmalabs.cli.impl
 
-import org.plasmalabs.sdk.codecs.AddressCodecs
-import org.plasmalabs.sdk.constants.NetworkConstants
-import org.plasmalabs.sdk.models.TransactionId
-import org.plasmalabs.sdk.models.TransactionOutputAddress
-import org.plasmalabs.sdk.models.box.Value
-import org.plasmalabs.sdk.models.transaction.UnspentTransactionOutput
-import org.plasmalabs.sdk.utils.Encoding
 import com.google.protobuf.ByteString
 import org.plasmalabs.quivr.models.Int128
+import org.plasmalabs.sdk.codecs.AddressCodecs
+import org.plasmalabs.sdk.constants.NetworkConstants
+import org.plasmalabs.sdk.models.box.Value
+import org.plasmalabs.sdk.models.transaction.UnspentTransactionOutput
+import org.plasmalabs.sdk.models.{TransactionId, TransactionOutputAddress}
+import org.plasmalabs.sdk.utils.Encoding
 
 import scala.util.Try
 

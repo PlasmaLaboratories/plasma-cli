@@ -1,12 +1,10 @@
 package org.plasmalabs.cli.modules
 
 import cats.effect.IO
-import org.plasmalabs.cli.PlasmaCliParams
-import org.plasmalabs.cli.PlasmaCliSubCmd
 import org.plasmalabs.cli.controllers.WalletController
+import org.plasmalabs.cli.{PlasmaCliParams, PlasmaCliParamsParserModule, PlasmaCliSubCmd}
 import org.plasmalabs.sdk.dataApi.{IndexerQueryAlgebra, RpcChannelResource}
 import scopt.OParser
-import org.plasmalabs.cli.PlasmaCliParamsParserModule
 
 trait WalletModeModule
     extends WalletStateAlgebraModule

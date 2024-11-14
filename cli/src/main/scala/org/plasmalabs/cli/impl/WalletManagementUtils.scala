@@ -1,10 +1,10 @@
 package org.plasmalabs.cli.impl
 
 import cats.effect.kernel.Sync
-import org.plasmalabs.sdk.dataApi.WalletKeyApiAlgebra
-import org.plasmalabs.sdk.wallet.WalletApi
 import org.plasmalabs.crypto.encryption.VaultStore
 import org.plasmalabs.quivr.models.KeyPair
+import org.plasmalabs.sdk.dataApi.WalletKeyApiAlgebra
+import org.plasmalabs.sdk.wallet.WalletApi
 
 class WalletManagementUtils[F[_]: Sync](
   walletApi: WalletApi[F],

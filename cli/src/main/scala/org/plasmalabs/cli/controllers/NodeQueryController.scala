@@ -1,13 +1,13 @@
 package org.plasmalabs.cli.controllers
 
 import cats.effect.kernel.Sync
+import com.google.protobuf.ByteString
 import org.plasmalabs.cli.views.BlockDisplayOps
+import org.plasmalabs.consensus.models.BlockId
 import org.plasmalabs.sdk.dataApi.NodeQueryAlgebra
 import org.plasmalabs.sdk.display.DisplayOps.DisplayTOps
 import org.plasmalabs.sdk.models.TransactionId
 import org.plasmalabs.sdk.utils.Encoding
-import org.plasmalabs.consensus.models.BlockId
-import com.google.protobuf.ByteString
 
 class NodeQueryController[F[_]: Sync](
   nodeQueryAlgebra: NodeQueryAlgebra[F]

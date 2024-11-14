@@ -1,38 +1,23 @@
 package org.plasmalabs.cli.controllers
 
 import cats.data.OptionT
-import cats.effect.kernel.Resource
-import cats.effect.kernel.Sync
+import cats.effect.kernel.{Resource, Sync}
+import com.google.protobuf.ByteString
+import org.plasmalabs.cli.impl.{WalletAlgebra, WalletManagementUtils, WalletModeHelper}
+import org.plasmalabs.cli.{DigestType, PlasmaCliParams, Sha256}
+import org.plasmalabs.crypto.hash.Blake2b256
+import org.plasmalabs.indexer.services.{Txo, TxoState}
+import org.plasmalabs.quivr.models.{Digest, Preimage, Proposition, VerificationKey}
 import org.plasmalabs.sdk.builders.TransactionBuilderApi
-import org.plasmalabs.cli.PlasmaCliParams
-import org.plasmalabs.cli.impl.WalletAlgebra
-import org.plasmalabs.cli.impl.WalletManagementUtils
-import org.plasmalabs.cli.impl.WalletModeHelper
 import org.plasmalabs.sdk.codecs.AddressCodecs
 import org.plasmalabs.sdk.constants.NetworkConstants
 import org.plasmalabs.sdk.dataApi
-import org.plasmalabs.sdk.models.Indices
-import org.plasmalabs.sdk.models.LockAddress
-import org.plasmalabs.sdk.models.LockId
+import org.plasmalabs.sdk.models.{Indices, LockAddress, LockId}
 import org.plasmalabs.sdk.utils.Encoding
 import org.plasmalabs.sdk.wallet.WalletApi
-import org.plasmalabs.indexer.services.Txo
-import org.plasmalabs.indexer.services.TxoState
-import org.plasmalabs.shared.models.AssetTokenBalanceDTO
-import org.plasmalabs.shared.models.GroupTokenBalanceDTO
-import org.plasmalabs.shared.models.LvlBalance
-import org.plasmalabs.shared.models.SeriesTokenBalanceDTO
-import org.plasmalabs.quivr.models.VerificationKey
+import org.plasmalabs.shared.models.{AssetTokenBalanceDTO, GroupTokenBalanceDTO, LvlBalance, SeriesTokenBalanceDTO}
 
-import java.io.File
-import java.io.PrintWriter
-import org.plasmalabs.quivr.models.Preimage
-import com.google.protobuf.ByteString
-import org.plasmalabs.quivr.models.Proposition
-import org.plasmalabs.cli.DigestType
-import org.plasmalabs.quivr.models.Digest
-import org.plasmalabs.cli.Sha256
-import org.plasmalabs.crypto.hash.Blake2b256
+import java.io.{File, PrintWriter}
 
 class WalletController[F[_]: Sync](
   walletStateAlgebra:    dataApi.WalletStateAlgebra[F],

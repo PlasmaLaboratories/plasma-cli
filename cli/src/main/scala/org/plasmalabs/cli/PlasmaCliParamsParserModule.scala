@@ -1,12 +1,10 @@
 package org.plasmalabs.cli
 
+import com.google.protobuf.ByteString
 import org.plasmalabs.sdk.codecs.AddressCodecs
 import org.plasmalabs.sdk.constants.NetworkConstants
-import org.plasmalabs.sdk.models.GroupId
-import org.plasmalabs.sdk.models.LockAddress
-import org.plasmalabs.sdk.models.SeriesId
+import org.plasmalabs.sdk.models.{GroupId, LockAddress, SeriesId}
 import org.plasmalabs.sdk.utils.Encoding
-import com.google.protobuf.ByteString
 import scopt.OParser
 
 import java.io.File

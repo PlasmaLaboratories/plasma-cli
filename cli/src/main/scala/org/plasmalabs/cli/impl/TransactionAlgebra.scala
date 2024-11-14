@@ -1,30 +1,25 @@
 package org.plasmalabs.cli.impl
 
-import cats.effect.kernel.Resource
-import cats.effect.kernel.Sync
+import cats.effect.kernel.{Resource, Sync}
+import io.grpc.ManagedChannel
+import org.plasmalabs.crypto.signing.ExtendedEd25519
+import org.plasmalabs.quivr.models.KeyPair
+import org.plasmalabs.quivr.runtime.{QuivrRuntimeError, QuivrRuntimeErrors}
 import org.plasmalabs.sdk.Context
-import org.plasmalabs.sdk.dataApi.NodeQueryAlgebra
-import org.plasmalabs.sdk.dataApi.WalletStateAlgebra
-import org.plasmalabs.sdk.models.Datum
-import org.plasmalabs.sdk.models.Event
+import org.plasmalabs.sdk.dataApi.{NodeQueryAlgebra, WalletStateAlgebra}
 import org.plasmalabs.sdk.models.transaction.IoTransaction
+import org.plasmalabs.sdk.models.{Datum, Event}
 import org.plasmalabs.sdk.syntax.cryptoToPbKeyPair
 import org.plasmalabs.sdk.utils.Encoding
-import org.plasmalabs.sdk.validation.TransactionAuthorizationError
-import org.plasmalabs.sdk.validation.TransactionSyntaxError
-import org.plasmalabs.sdk.validation.TransactionSyntaxError.EmptyInputs
-import org.plasmalabs.sdk.validation.TransactionSyntaxError.InvalidDataLength
-import org.plasmalabs.sdk.validation.TransactionSyntaxInterpreter
-import org.plasmalabs.sdk.wallet.CredentiallerInterpreter
-import org.plasmalabs.sdk.wallet.WalletApi
-import org.plasmalabs.crypto.signing.ExtendedEd25519
-import org.plasmalabs.quivr.runtime.QuivrRuntimeError
-import org.plasmalabs.quivr.runtime.QuivrRuntimeErrors
-import io.grpc.ManagedChannel
-import org.plasmalabs.quivr.models.KeyPair
+import org.plasmalabs.sdk.validation.TransactionSyntaxError.{EmptyInputs, InvalidDataLength}
+import org.plasmalabs.sdk.validation.{
+  TransactionAuthorizationError,
+  TransactionSyntaxError,
+  TransactionSyntaxInterpreter
+}
+import org.plasmalabs.sdk.wallet.{CredentiallerInterpreter, WalletApi}
 
-import java.io.FileInputStream
-import java.io.FileOutputStream
+import java.io.{FileInputStream, FileOutputStream}
 
 trait TransactionAlgebra[F[_]] {
 

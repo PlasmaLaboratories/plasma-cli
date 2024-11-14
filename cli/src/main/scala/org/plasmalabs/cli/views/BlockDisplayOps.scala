@@ -1,8 +1,8 @@
 package org.plasmalabs.cli.views
 
+import org.plasmalabs.consensus.models.BlockId
 import org.plasmalabs.sdk.display.DisplayOps.DisplayTOps
 import org.plasmalabs.sdk.models.transaction.IoTransaction
-import org.plasmalabs.consensus.models.BlockId
 
 object BlockDisplayOps {
 

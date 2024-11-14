@@ -1,12 +1,10 @@
 package org.plasmalabs.cli.modules
 
 import cats.effect.IO
-import org.plasmalabs.cli.PlasmaCliParams
-import org.plasmalabs.cli.PlasmaCliSubCmd
 import org.plasmalabs.cli.controllers.TxController
+import org.plasmalabs.cli.{PlasmaCliParams, PlasmaCliParamsParserModule, PlasmaCliSubCmd}
 import org.plasmalabs.sdk.constants.NetworkConstants
 import scopt.OParser
-import org.plasmalabs.cli.PlasmaCliParamsParserModule
 
 trait TxModeModule extends TxParserAlgebraModule with TransactionAlgebraModule {
 

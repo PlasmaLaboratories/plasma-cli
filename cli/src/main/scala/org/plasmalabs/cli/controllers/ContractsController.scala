@@ -3,9 +3,9 @@ package org.plasmalabs.cli.controllers
 import cats.Id
 import cats.data.Validated
 import cats.effect.kernel.Sync
-import org.plasmalabs.sdk.dataApi.{TemplateStorageAlgebra, WalletTemplate}
 import org.plasmalabs.cli.impl.QuivrFastParser
 import org.plasmalabs.sdk.codecs.LockTemplateCodecs
+import org.plasmalabs.sdk.dataApi.{TemplateStorageAlgebra, WalletTemplate}
 
 class TemplatesController[F[_]: Sync](
   templateStorageAlgebra: TemplateStorageAlgebra[F]

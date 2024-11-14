@@ -1,7 +1,6 @@
 package org.plasmalabs.cli
 
 import munit.FunSuite
-
 import scopt.OParser
 
 class ParamsNodeQueryTest extends FunSuite {

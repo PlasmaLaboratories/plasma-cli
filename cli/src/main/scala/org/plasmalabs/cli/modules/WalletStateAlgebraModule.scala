@@ -1,8 +1,7 @@
 package org.plasmalabs.cli.modules
 
 import cats.effect.IO
-import org.plasmalabs.sdk.servicekit.WalletStateApi
-import org.plasmalabs.sdk.servicekit.WalletStateResource
+import org.plasmalabs.sdk.servicekit.{WalletStateApi, WalletStateResource}
 
 trait WalletStateAlgebraModule extends WalletStateResource with WalletApiModule with TransactionBuilderApiModule {
 

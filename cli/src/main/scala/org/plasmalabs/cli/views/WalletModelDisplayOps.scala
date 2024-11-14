@@ -1,12 +1,10 @@
 package org.plasmalabs.cli.views
 
 import cats.Id
-import org.plasmalabs.sdk.builders.locks.LockTemplate
-import org.plasmalabs.sdk.builders.locks.PropositionTemplate
-import org.plasmalabs.sdk.dataApi.WalletFellowship
-import org.plasmalabs.sdk.dataApi.WalletTemplate
-import org.plasmalabs.sdk.utils.Encoding
 import io.circe.parser.parse
+import org.plasmalabs.sdk.builders.locks.{LockTemplate, PropositionTemplate}
+import org.plasmalabs.sdk.dataApi.{WalletFellowship, WalletTemplate}
+import org.plasmalabs.sdk.utils.Encoding
 
 object WalletModelDisplayOps {
 

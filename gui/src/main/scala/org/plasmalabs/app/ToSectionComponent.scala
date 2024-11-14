@@ -43,7 +43,7 @@ case class ToSectionComponent(
       UIUtils.isAmount(amount)
     )
       h4(
-        s"Send ",
+        "Send ",
         span(
           cls := "badge bg-secondary",
           amount,
@@ -58,11 +58,11 @@ case class ToSectionComponent(
         .decodeAddress(address, UIUtils.hexToInt(network))
         .isRight
     )
-      h4(s"Please provide a valid amount")
+      h4("Please provide a valid amount")
     else if (UIUtils.isAmount(amount))
-      h4(s"Please provide a valid address")
+      h4("Please provide a valid address")
     else
-      h4(s"Please provide a valid address and amount")
+      h4("Please provide a valid address and amount")
 
   lazy val component = div(
     cls := "accordion-item",

@@ -1,12 +1,10 @@
 package org.plasmalabs.cli
 
 import org.plasmalabs.sdk.constants.NetworkConstants
-import org.plasmalabs.sdk.models.LockAddress
+import org.plasmalabs.sdk.models.{GroupId, LockAddress, SeriesId}
 
 import java.io.File
 import scala.collection.immutable.IndexedSeq
-import org.plasmalabs.sdk.models.GroupId
-import org.plasmalabs.sdk.models.SeriesId
 
 object PlasmaCliMode extends Enumeration {
   type PlasmaCliMode = Value

@@ -1,22 +1,23 @@
 package org.plasmalabs.cli.controllers
 
+import cats.Monad
 import cats.effect.IO
 import cats.effect.kernel.Sync
-import org.plasmalabs.cli.impl.AssetStatementParserModule
-import org.plasmalabs.cli.impl.GroupPolicyParserModule
-import org.plasmalabs.cli.impl.SeriesPolicyParserModule
-import org.plasmalabs.cli.impl.SimpleMintingAlgebra
-import org.plasmalabs.cli.modules.DummyObjects
-import org.plasmalabs.cli.modules.SimpleMintingAlgebraModule
-import org.plasmalabs.sdk.constants.NetworkConstants
 import munit.CatsEffectSuite
-import java.io.File
-import cats.Monad
+import org.plasmalabs.cli.impl.{
+  AssetStatementParserModule,
+  GroupPolicyParserModule,
+  SeriesPolicyParserModule,
+  SimpleMintingAlgebra
+}
 import org.plasmalabs.cli.mockbase.BaseWalletStateAlgebra
-import org.plasmalabs.sdk.models.Indices
-import org.plasmalabs.sdk.models.box.Lock
-import org.plasmalabs.sdk.models.box.Challenge
+import org.plasmalabs.cli.modules.{DummyObjects, SimpleMintingAlgebraModule}
 import org.plasmalabs.quivr.models.Proposition
+import org.plasmalabs.sdk.constants.NetworkConstants
+import org.plasmalabs.sdk.models.Indices
+import org.plasmalabs.sdk.models.box.{Challenge, Lock}
+
+import java.io.File
 
 class SimpleMintingControllerSpec
     extends CatsEffectSuite
