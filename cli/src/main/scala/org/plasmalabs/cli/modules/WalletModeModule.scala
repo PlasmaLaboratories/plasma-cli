@@ -17,7 +17,7 @@ trait WalletModeModule
     with RpcChannelResource {
 
   def walletModeSubcmds(
-      validateParams: PlasmaCliParams
+    validateParams: PlasmaCliParams
   ): IO[Either[String, String]] = {
     val walletController = new WalletController(
       walletStateAlgebra(

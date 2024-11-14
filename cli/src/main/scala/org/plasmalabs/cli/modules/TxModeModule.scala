@@ -11,8 +11,8 @@ import org.plasmalabs.cli.PlasmaCliParamsParserModule
 trait TxModeModule extends TxParserAlgebraModule with TransactionAlgebraModule {
 
   def txModeSubcmds(
-      validateParams: PlasmaCliParams
-  ): IO[Either[String, String]] = {
+    validateParams: PlasmaCliParams
+  ): IO[Either[String, String]] =
     validateParams.subcmd match {
       case PlasmaCliSubCmd.invalid =>
         IO.pure(
@@ -84,6 +84,5 @@ trait TxModeModule extends TxParserAlgebraModule with TransactionAlgebraModule {
             validateParams.someOutputFile.get
           )
     }
-  }
 
 }

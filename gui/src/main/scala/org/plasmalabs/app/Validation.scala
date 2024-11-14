@@ -25,8 +25,8 @@ object Validation {
     }
 
   def decodeAddress(
-      address: String,
-      expectedNetwork: Int
+    address:         String,
+    expectedNetwork: Int
   ): Either[EncodingError, String] =
     for {
       byteArray <- decodeFromBase58Check(address)
@@ -46,7 +46,7 @@ object Validation {
 
   def decodeFromBase58Check(b58: String): Either[EncodingError, Array[Byte]] =
     for {
-      _ <- Either.cond(b58.length > 0, (), InvalidInputString)
+      _       <- Either.cond(b58.length > 0, (), InvalidInputString)
       decoded <- decodeFromBase58(b58)
       (payload, _) = decoded.splitAt(decoded.length - 4)
     } yield payload
@@ -55,13 +55,13 @@ object Validation {
     Try({
       val zeroCount = b58.takeWhile(_ == '1').length
       Array.fill(zeroCount)(0.toByte) ++
-        b58
-          .drop(zeroCount)
-          .map(charToIdxBase58)
-          .toList
-          .foldLeft(BigInt(0))((acc, x) => acc * 58 + x)
-          .toByteArray
-          .dropWhile(_ == 0.toByte)
+      b58
+        .drop(zeroCount)
+        .map(charToIdxBase58)
+        .toList
+        .foldLeft(BigInt(0))((acc, x) => acc * 58 + x)
+        .toByteArray
+        .dropWhile(_ == 0.toByte)
     }) match {
       case Success(value) => Right(value)
       case Failure(_)     => Left(InvalidInputString)

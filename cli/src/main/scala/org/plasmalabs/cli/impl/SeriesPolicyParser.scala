@@ -11,25 +11,26 @@ import io.circe.Json
 import scala.io.BufferedSource
 
 case class SeriesPolicyInternal(
-    label: String,
-    tokenSupply: Option[Int],
-    registrationUtxo: String,
-    fungibility: String,
-    quantityDescriptor: String,
-    ephemeralMetadataScheme: Option[Json],
-    permanentMetadataScheme: Option[Json]
+  label:                   String,
+  tokenSupply:             Option[Int],
+  registrationUtxo:        String,
+  fungibility:             String,
+  quantityDescriptor:      String,
+  ephemeralMetadataScheme: Option[Json],
+  permanentMetadataScheme: Option[Json]
 )
 
 trait SeriesPolicyParser[F[_]] {
+
   def parseSeriesPolicy(
-      inputFileRes: Resource[F, BufferedSource]
+    inputFileRes: Resource[F, BufferedSource]
   ): F[Either[CommonParserError, SeriesPolicy]]
 }
 
 object SeriesPolicyParser {
 
   def make[F[_]: Sync](
-      networkId: Int
+    networkId: Int
   ) = new SeriesPolicyParser[F] with CommonTxOps {
 
     import cats.implicits._
@@ -37,7 +38,7 @@ object SeriesPolicyParser {
     import io.circe.yaml
 
     private def seriesPolicyToPBSeriesPolicy(
-        seriesPolicy: SeriesPolicyInternal
+      seriesPolicy: SeriesPolicyInternal
     ): F[SeriesPolicy] =
       for {
         label <-
@@ -92,24 +93,20 @@ object SeriesPolicyParser {
               )
           })
         )
-      } yield {
-        SeriesPolicy(
-          label,
-          someTokenSupply,
-          registrationUtxo,
-          quantityDescriptor,
-          fungibility,
-          ephemeralMetadataScheme,
-          permanentMetadataScheme
-        )
-      }
+      } yield SeriesPolicy(
+        label,
+        someTokenSupply,
+        registrationUtxo,
+        quantityDescriptor,
+        fungibility,
+        ephemeralMetadataScheme,
+        permanentMetadataScheme
+      )
 
     override def parseSeriesPolicy(
-        inputFileRes: Resource[F, BufferedSource]
+      inputFileRes: Resource[F, BufferedSource]
     ): F[Either[CommonParserError, SeriesPolicy]] = (for {
-      inputString <- inputFileRes.use(file =>
-        Sync[F].blocking(file.getLines().mkString("\n"))
-      )
+      inputString <- inputFileRes.use(file => Sync[F].blocking(file.getLines().mkString("\n")))
       seriesPolicy <-
         Sync[F].fromEither(
           yaml.v12.parser

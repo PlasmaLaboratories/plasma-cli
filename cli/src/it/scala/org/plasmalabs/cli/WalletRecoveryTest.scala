@@ -10,10 +10,7 @@ import cats.effect.kernel.{Resource, Sync}
 
 import java.io.FileInputStream
 
-class WalletRecoveryTest
-    extends CatsEffectSuite
-    with WalletConstants
-    with CommonTxOperations {
+class WalletRecoveryTest extends CatsEffectSuite with WalletConstants with CommonTxOperations {
 
   val tmpDirectory = FunFixture[Path](
     setup = { _ =>
@@ -81,7 +78,7 @@ class WalletRecoveryTest
         res <- IO.asyncForIO.timeout(
           (for {
             queryRes <- queryAccount("self", "default").run(walletContext)
-            _ <- IO.sleep(5.seconds)
+            _        <- IO.sleep(5.seconds)
           } yield queryRes)
             .iterateUntil(_ == ExitCode.Success),
           240.seconds
@@ -106,9 +103,9 @@ class WalletRecoveryTest
     import scala.concurrent.duration._
     assertIO(
       for {
-        _ <- IO.println("Recover wallet key")
+        _        <- IO.println("Recover wallet key")
         mnemonic <- extractMnemonic(WALLET_MNEMONIC)
-        _ <- IO(Files.deleteIfExists(Paths.get(WALLET)))
+        _        <- IO(Files.deleteIfExists(Paths.get(WALLET)))
         _ <- assertIO(
           recoverWallet(mnemonic).run(
             walletContext.copy(keyFile = WALLET_MAIN_KEY_RECOVERED)

@@ -14,9 +14,9 @@ trait WalletApiHelpers[F[_]] {
   implicit val m: Monad[F]
 
   def getCurrentIndices(
-      fromFellowship: String,
-      fromTemplate: String,
-      someFromInteraction: Option[Int]
+    fromFellowship:      String,
+    fromTemplate:        String,
+    someFromInteraction: Option[Int]
   ) = wsa.getCurrentIndicesForFunds(
     fromFellowship,
     fromTemplate,
@@ -30,8 +30,8 @@ trait WalletApiHelpers[F[_]] {
       .map(_.flatten.map(Lock().withPredicate(_)))
 
   def getNextIndices(
-      fromFellowship: String,
-      fromTemplate: String
+    fromFellowship: String,
+    fromTemplate:   String
   ) =
     wsa.getNextIndicesForFunds(
       if (fromFellowship == "nofellowship") "self" else fromFellowship,
@@ -40,9 +40,9 @@ trait WalletApiHelpers[F[_]] {
     )
 
   def getChangeLockPredicate(
-      someNextIndices: Option[Indices],
-      fromFellowship: String,
-      fromTemplate: String
+    someNextIndices: Option[Indices],
+    fromFellowship:  String,
+    fromTemplate:    String
   ) =
     someNextIndices
       .map(idx =>

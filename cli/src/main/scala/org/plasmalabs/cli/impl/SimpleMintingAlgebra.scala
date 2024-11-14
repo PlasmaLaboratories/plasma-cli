@@ -12,41 +12,42 @@ import com.google.protobuf.ByteString
 import io.circe.Json
 
 trait SimpleMintingAlgebra[F[_]] {
+
   def createSimpleGroupMintingTransactionFromParams(
-      keyFile: String,
-      password: String,
-      fromFellowship: String,
-      fromTemplate: String,
-      someFromInteraction: Option[Int],
-      amount: Long,
-      fee: Long,
-      outputFile: String,
-      groupPolicy: GroupPolicy
+    keyFile:             String,
+    password:            String,
+    fromFellowship:      String,
+    fromTemplate:        String,
+    someFromInteraction: Option[Int],
+    amount:              Long,
+    fee:                 Long,
+    outputFile:          String,
+    groupPolicy:         GroupPolicy
   ): F[Unit]
 
   def createSimpleSeriesMintingTransactionFromParams(
-      keyFile: String,
-      password: String,
-      fromFellowship: String,
-      fromTemplate: String,
-      someFromInteraction: Option[Int],
-      amount: Long,
-      fee: Long,
-      outputFile: String,
-      seriesPolicy: SeriesPolicy
+    keyFile:             String,
+    password:            String,
+    fromFellowship:      String,
+    fromTemplate:        String,
+    someFromInteraction: Option[Int],
+    amount:              Long,
+    fee:                 Long,
+    outputFile:          String,
+    seriesPolicy:        SeriesPolicy
   ): F[Unit]
 
   def createSimpleAssetMintingTransactionFromParams(
-      keyfile: String,
-      password: String,
-      fromFellowship: String,
-      fromTemplate: String,
-      someFromInteraction: Option[Int],
-      fee: Long,
-      outputFile: String,
-      ephemeralMetadata: Option[Json],
-      commitment: Option[ByteString],
-      assetMintingStatement: AssetMintingStatement
+    keyfile:               String,
+    password:              String,
+    fromFellowship:        String,
+    fromTemplate:          String,
+    someFromInteraction:   Option[Int],
+    fee:                   Long,
+    outputFile:            String,
+    ephemeralMetadata:     Option[Json],
+    commitment:            Option[ByteString],
+    assetMintingStatement: AssetMintingStatement
   ): F[Unit]
 }
 
@@ -55,19 +56,19 @@ object SimpleMintingAlgebra {
   import cats.implicits._
 
   def make[F[_]](
-      psync: Sync[F],
-      walletApi: WalletApi[F],
-      walletStateApi: WalletStateAlgebra[F],
-      walletManagementUtils: WalletManagementUtils[F],
-      transactionBuilderApi: TransactionBuilderApi[F],
-      utxoAlgebra: IndexerQueryAlgebra[F]
+    psync:                 Sync[F],
+    walletApi:             WalletApi[F],
+    walletStateApi:        WalletStateAlgebra[F],
+    walletManagementUtils: WalletManagementUtils[F],
+    transactionBuilderApi: TransactionBuilderApi[F],
+    utxoAlgebra:           IndexerQueryAlgebra[F]
   ): SimpleMintingAlgebra[F] = new SimpleMintingAlgebra[F]
     with WalletApiHelpers[F]
     with GroupMintingOps[F]
     with SeriesMintingOps[F]
     with AssetMintingOps[F] {
 
-    override implicit val sync: cats.effect.kernel.Sync[F] = psync
+    implicit override val sync: cats.effect.kernel.Sync[F] = psync
 
     implicit val m: Monad[F] = sync
 
@@ -78,11 +79,11 @@ object SimpleMintingAlgebra {
     val wa = walletApi
 
     private def sharedOps(
-        keyfile: String,
-        password: String,
-        fromFellowship: String,
-        fromTemplate: String,
-        someFromInteraction: Option[Int]
+      keyfile:             String,
+      password:            String,
+      fromFellowship:      String,
+      fromTemplate:        String,
+      someFromInteraction: Option[Int]
     ) = for {
       keyPair <-
         walletManagementUtils
@@ -96,7 +97,7 @@ object SimpleMintingAlgebra {
         someFromInteraction
       )
       predicateFundsToUnlock <- getPredicateFundsToUnlock(someCurrentIndices)
-      someNextIndices <- getNextIndices(fromFellowship, fromTemplate)
+      someNextIndices        <- getNextIndices(fromFellowship, fromTemplate)
       changeLock <- getChangeLockPredicate(
         someNextIndices,
         fromFellowship,
@@ -111,15 +112,15 @@ object SimpleMintingAlgebra {
     )
 
     override def createSimpleGroupMintingTransactionFromParams(
-        keyfile: String,
-        password: String,
-        fromFellowship: String,
-        fromTemplate: String,
-        someFromInteraction: Option[Int],
-        amount: Long,
-        fee: Long,
-        outputFile: String,
-        groupPolicy: GroupPolicy
+      keyfile:             String,
+      password:            String,
+      fromFellowship:      String,
+      fromTemplate:        String,
+      someFromInteraction: Option[Int],
+      amount:              Long,
+      fee:                 Long,
+      outputFile:          String,
+      groupPolicy:         GroupPolicy
     ): F[Unit] = for {
       tuple <- sharedOps(
         keyfile,
@@ -169,15 +170,15 @@ object SimpleMintingAlgebra {
     } yield ()
 
     override def createSimpleSeriesMintingTransactionFromParams(
-        keyfile: String,
-        password: String,
-        fromFellowship: String,
-        fromTemplate: String,
-        someFromInteraction: Option[Int],
-        amount: Long,
-        fee: Long,
-        outputFile: String,
-        seriesPolicy: SeriesPolicy
+      keyfile:             String,
+      password:            String,
+      fromFellowship:      String,
+      fromTemplate:        String,
+      someFromInteraction: Option[Int],
+      amount:              Long,
+      fee:                 Long,
+      outputFile:          String,
+      seriesPolicy:        SeriesPolicy
     ): F[Unit] = for {
       tuple <- sharedOps(
         keyfile,
@@ -227,16 +228,16 @@ object SimpleMintingAlgebra {
     } yield ()
 
     def createSimpleAssetMintingTransactionFromParams(
-        keyfile: String,
-        password: String,
-        fromFellowship: String,
-        fromTemplate: String,
-        someFromInteraction: Option[Int],
-        fee: Long,
-        outputFile: String,
-        ephemeralMetadata: Option[Json],
-        commitment: Option[ByteString],
-        assetMintingStatement: AssetMintingStatement
+      keyfile:               String,
+      password:              String,
+      fromFellowship:        String,
+      fromTemplate:          String,
+      someFromInteraction:   Option[Int],
+      fee:                   Long,
+      outputFile:            String,
+      ephemeralMetadata:     Option[Json],
+      commitment:            Option[ByteString],
+      assetMintingStatement: AssetMintingStatement
     ): F[Unit] = for {
       tuple <- sharedOps(
         keyfile,
@@ -273,8 +274,8 @@ object SimpleMintingAlgebra {
       nonLvlTxos = response.filter(x =>
         (
           !x.transactionOutput.value.value.isLvl &&
-            x.outputAddress != assetMintingStatement.groupTokenUtxo &&
-            x.outputAddress != assetMintingStatement.seriesTokenUtxo
+          x.outputAddress != assetMintingStatement.groupTokenUtxo &&
+          x.outputAddress != assetMintingStatement.seriesTokenUtxo
         )
       )
       groupTxo <- response

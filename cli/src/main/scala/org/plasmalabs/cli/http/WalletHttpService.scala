@@ -1,4 +1,5 @@
 package org.plasmalabs.cli.http
+
 import cats.Id
 import cats.effect.IO
 import cats.effect._
@@ -29,9 +30,9 @@ import org.plasmalabs.shared.models.NetworkResponseDTO
 import org.plasmalabs.sdk.utils.Encoding
 
 case class WalletHttpService(
-    walletStateAlgebra: WalletStateAlgebra[IO],
-    channelResource: Resource[IO, ManagedChannel],
-    walletResource: Resource[IO, Connection]
+  walletStateAlgebra: WalletStateAlgebra[IO],
+  channelResource:    Resource[IO, ManagedChannel],
+  walletResource:     Resource[IO, Connection]
 ) {
 
   def walletService(networkName: String, networkId: String) =
@@ -72,13 +73,9 @@ case class WalletHttpService(
                 (x: @unchecked) match { // we have filtered out Unknown tokens
                   case LvlBalance(b) => acc.copy(lvlBalance = b)
                   case GroupTokenBalanceDTO(g, b) =>
-                    acc.copy(groupBalances =
-                      acc.groupBalances :+ GroupTokenBalanceDTO(g, b)
-                    )
+                    acc.copy(groupBalances = acc.groupBalances :+ GroupTokenBalanceDTO(g, b))
                   case SeriesTokenBalanceDTO(id, balance) =>
-                    acc.copy(seriesBalances =
-                      acc.seriesBalances :+ SeriesTokenBalanceDTO(id, balance)
-                    )
+                    acc.copy(seriesBalances = acc.seriesBalances :+ SeriesTokenBalanceDTO(id, balance))
                   case AssetTokenBalanceDTO(group, series, balance) =>
                     acc.copy(assetBalances =
                       acc.assetBalances :+ AssetTokenBalanceDTO(
@@ -125,7 +122,7 @@ case class WalletHttpService(
           resTemplates <- templates.traverse { x =>
             IO(
               (for {
-                json <- parse(x.lockTemplate)
+                json    <- parse(x.lockTemplate)
                 decoded <- decodeLockTemplate[Id](json)
               } yield TemplateDTO(
                 x.yIdx,

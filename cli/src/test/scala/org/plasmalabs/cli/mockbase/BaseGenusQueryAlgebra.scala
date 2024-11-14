@@ -7,8 +7,8 @@ import org.plasmalabs.indexer.services.{Txo, TxoState}
 class BaseIndexerQueryAlgebra[F[_]] extends IndexerQueryAlgebra[F] {
 
   override def queryUtxo(
-      fromAddress: LockAddress,
-      txoState: TxoState
+    fromAddress: LockAddress,
+    txoState:    TxoState
   ): F[Seq[Txo]] = ???
 
 }

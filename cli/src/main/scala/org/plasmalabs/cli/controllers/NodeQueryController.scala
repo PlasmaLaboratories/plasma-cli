@@ -10,11 +10,11 @@ import org.plasmalabs.consensus.models.BlockId
 import com.google.protobuf.ByteString
 
 class NodeQueryController[F[_]: Sync](
-    nodeQueryAlgebra: NodeQueryAlgebra[F]
+  nodeQueryAlgebra: NodeQueryAlgebra[F]
 ) {
 
   def makeBlocks(
-      nbOfBlocks: Int
+    nbOfBlocks: Int
   ): F[Either[String, String]] = {
     import cats.implicits._
     nodeQueryAlgebra.makeBlocks(nbOfBlocks).map { _ =>
@@ -23,7 +23,7 @@ class NodeQueryController[F[_]: Sync](
   }
 
   def blockByHeight(
-      height: Long
+    height: Long
   ): F[Either[String, String]] = {
     import cats.implicits._
     nodeQueryAlgebra
@@ -50,7 +50,7 @@ class NodeQueryController[F[_]: Sync](
   }
 
   def blockById(
-      pBlockId: String
+    pBlockId: String
   ): F[Either[String, String]] = {
     import cats.implicits._
     nodeQueryAlgebra

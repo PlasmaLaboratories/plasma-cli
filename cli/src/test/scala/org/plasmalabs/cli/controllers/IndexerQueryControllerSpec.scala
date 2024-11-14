@@ -15,18 +15,19 @@ class IndexerQueryControllerSpec extends CatsEffectSuite with DummyObjects {
   def makeWalletStateAlgebraMock[F[_]: Monad] = new BaseWalletStateAlgebra[F] {
 
     override def getAddress(
-        fellowship: String,
-        template: String,
-        interaction: Option[Int]
+      fellowship:  String,
+      template:    String,
+      interaction: Option[Int]
     ): F[Option[String]] = Monad[F].pure(None)
   }
+
   def makeWalletStateAlgebraMockWithAddress[F[_]: Monad] =
     new BaseWalletStateAlgebra[F] {
 
       override def getAddress(
-          fellowship: String,
-          template: String,
-          interaction: Option[Int]
+        fellowship:  String,
+        template:    String,
+        interaction: Option[Int]
       ): F[Option[String]] = Monad[F].pure(
         Some("ptetP7jshHVrEKqDRdKAZtuybPZoMWTKKM2ngaJ7L5iZnxP5BprDB3hGJEFr")
       )
@@ -35,8 +36,8 @@ class IndexerQueryControllerSpec extends CatsEffectSuite with DummyObjects {
   def makeIndexerQueryAlgebraMock[F[_]: Monad] = new IndexerQueryAlgebra[F] {
 
     override def queryUtxo(
-        fromAddress: LockAddress,
-        txoState: TxoState
+      fromAddress: LockAddress,
+      txoState:    TxoState
     ): F[Seq[Txo]] = Monad[F].pure(Seq.empty)
 
   }

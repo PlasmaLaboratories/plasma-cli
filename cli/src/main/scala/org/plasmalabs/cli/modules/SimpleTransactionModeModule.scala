@@ -7,12 +7,10 @@ import org.plasmalabs.cli.PlasmaCliParams
 import scopt.OParser
 import org.plasmalabs.cli.PlasmaCliParamsParserModule
 
-trait SimpleTransactionModeModule
-    extends SimpleTransactionAlgebraModule
-    with WalletStateAlgebraModule {
+trait SimpleTransactionModeModule extends SimpleTransactionAlgebraModule with WalletStateAlgebraModule {
 
   def simpleTransactionSubcmds(
-      validateParams: PlasmaCliParams
+    validateParams: PlasmaCliParams
   ): IO[Either[String, String]] = validateParams.subcmd match {
     case PlasmaCliSubCmd.invalid =>
       IO.pure(

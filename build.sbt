@@ -234,3 +234,6 @@ buildClient := {
       (cli / baseDirectory).value / "src" / "main" / "resources" / "static"
   )
 }
+
+addCommandAlias("checkPR", s"; scalafmtCheckAll; test")
+addCommandAlias("preparePR", s"; scalafmtAll; test")

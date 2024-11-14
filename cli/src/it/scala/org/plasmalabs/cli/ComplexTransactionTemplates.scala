@@ -15,12 +15,12 @@ trait ComplexTransactionTemplates {
         """)
 
   def genesisToAddressTxTemplate(
-      genesisBlockAddresses: List[(String, Long)],
-      genesisAmount: Long,
-      changeAmount: Long,
-      feeAmount: Long,
-      changeAddress: String,
-      address: String
+    genesisBlockAddresses: List[(String, Long)],
+    genesisAmount:         Long,
+    changeAmount:          Long,
+    feeAmount:             Long,
+    changeAddress:         String,
+    address:               String
   ) =
     s"""|network: private
         |
@@ -35,14 +35,14 @@ trait ComplexTransactionTemplates {
         |    value: $changeAmount""".stripMargin
 
   def createComplexTxFileFromGenesisToAlice(
-      fileName: String,
-      genesisBlockAddresses: List[(String, Long)],
-      genesisAmount: Long,
-      changeAmount: Long,
-      feeAmount: Long,
-      changeAddress: String,
-      address: String
-  ) = {
+    fileName:              String,
+    genesisBlockAddresses: List[(String, Long)],
+    genesisAmount:         Long,
+    changeAmount:          Long,
+    feeAmount:             Long,
+    changeAddress:         String,
+    address:               String
+  ) =
     Resource
       .make(IO(new PrintWriter(fileName)))(f => IO(f.flush()) >> IO(f.close))
       .use { file =>
@@ -59,17 +59,16 @@ trait ComplexTransactionTemplates {
           )
         )
       }
-  }
 
   def createComplexTxFileFromAliceToAliceBobAndOr(
-      fileName: String,
-      aliceUtxoAddress: String,
-      aliceKey: String,
-      initialAmount: Long,
-      addressAliceChange: String,
-      addressAliceBobAnd: String,
-      addressAliceEveAnd: String
-  ) = {
+    fileName:           String,
+    aliceUtxoAddress:   String,
+    aliceKey:           String,
+    initialAmount:      Long,
+    addressAliceChange: String,
+    addressAliceBobAnd: String,
+    addressAliceEveAnd: String
+  ) =
     Resource
       .make(IO(new PrintWriter(fileName)))(f => IO(f.flush()) >> IO(f.close))
       .use { file =>
@@ -86,15 +85,14 @@ trait ComplexTransactionTemplates {
           )
         )
       }
-  }
 
   def aliceToSharedTxTemplate(
-      aliceUtxoAddress: String,
-      aliceKey: String,
-      genesisAmount: Long,
-      addressAliceChange: String,
-      addressAliceBobOr: String,
-      addressAliceBobAnd: String
+    aliceUtxoAddress:   String,
+    aliceKey:           String,
+    genesisAmount:      Long,
+    addressAliceChange: String,
+    addressAliceBobOr:  String,
+    addressAliceBobAnd: String
   ) =
     s"""|network: private
         |
@@ -118,17 +116,17 @@ trait ComplexTransactionTemplates {
         |    value: 1000""".stripMargin
 
   def createSharedTemplatesToBob(
-      fileName: String,
-      andUtxoAddress: String,
-      orUtxoAddress: String,
-      aliceAndKey: String,
-      bobAndKey: String,
-      aliceOrKey: String,
-      bobOrKey: String,
-      andAmount: Long,
-      orAmount: Long,
-      addressBob: String
-  ) = {
+    fileName:       String,
+    andUtxoAddress: String,
+    orUtxoAddress:  String,
+    aliceAndKey:    String,
+    bobAndKey:      String,
+    aliceOrKey:     String,
+    bobOrKey:       String,
+    andAmount:      Long,
+    orAmount:       Long,
+    addressBob:     String
+  ) =
     Resource
       .make(IO(new PrintWriter(fileName)))(f => IO(f.flush()) >> IO(f.close))
       .use { file =>
@@ -148,18 +146,17 @@ trait ComplexTransactionTemplates {
           )
         )
       }
-  }
 
   def sharedTemplatesToBob(
-      andUtxoAddress: String,
-      orUtxoAddress: String,
-      aliceAndKey: String,
-      bobAndKey: String,
-      aliceOrKey: String,
-      bobOrKey: String,
-      andAmount: Long,
-      orAmount: Long,
-      addressBob: String
+    andUtxoAddress: String,
+    orUtxoAddress:  String,
+    aliceAndKey:    String,
+    bobAndKey:      String,
+    aliceOrKey:     String,
+    bobOrKey:       String,
+    andAmount:      Long,
+    orAmount:       Long,
+    addressBob:     String
   ) =
     s"""|network: private
         |

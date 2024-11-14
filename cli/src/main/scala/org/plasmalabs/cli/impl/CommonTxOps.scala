@@ -14,12 +14,11 @@ trait CommonTxOps {
       jsonBoolean = b => Value(Value.Kind.BoolValue(b)),
       jsonNumber = n => Value(Value.Kind.NumberValue(n.toDouble)),
       jsonString = s => Value(Value.Kind.StringValue(s)),
-      jsonArray =
-        l => Value(Value.Kind.ListValue(ListValue(l.map(toStruct(_))))),
+      jsonArray = l => Value(Value.Kind.ListValue(ListValue(l.map(toStruct(_))))),
       jsonObject = jo =>
-        Value(Value.Kind.StructValue(Struct(jo.toMap.map({ case (k, v) =>
+        Value(Value.Kind.StructValue(Struct(jo.toMap.map { case (k, v) =>
           k -> toStruct(v)
-        }))))
+        })))
     )
 
 }

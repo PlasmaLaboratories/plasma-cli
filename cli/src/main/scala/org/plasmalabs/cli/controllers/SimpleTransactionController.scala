@@ -15,24 +15,24 @@ import org.plasmalabs.sdk.syntax.LvlType
 import org.plasmalabs.sdk.syntax.SeriesType
 
 class SimpleTransactionController[F[_]: Sync](
-    walletStateAlgebra: WalletStateAlgebra[F],
-    simplTransactionOps: SimpleTransactionAlgebra[F]
+  walletStateAlgebra:  WalletStateAlgebra[F],
+  simplTransactionOps: SimpleTransactionAlgebra[F]
 ) {
 
   def createSimpleTransactionFromParams(
-      keyfile: String,
-      password: String,
-      fromCoordinates: (String, String, Option[Int]),
-      changeCoordinates: (Option[String], Option[String], Option[Int]),
-      someToAddress: Option[LockAddress],
-      someToFellowship: Option[String],
-      someToTemplate: Option[String],
-      amount: Long,
-      fee: Long,
-      outputFile: String,
-      tokenType: TokenType.Value,
-      groupId: Option[GroupId],
-      seriesId: Option[SeriesId]
+    keyfile:           String,
+    password:          String,
+    fromCoordinates:   (String, String, Option[Int]),
+    changeCoordinates: (Option[String], Option[String], Option[Int]),
+    someToAddress:     Option[LockAddress],
+    someToFellowship:  Option[String],
+    someToTemplate:    Option[String],
+    amount:            Long,
+    fee:               Long,
+    outputFile:        String,
+    tokenType:         TokenType.Value,
+    groupId:           Option[GroupId],
+    seriesId:          Option[SeriesId]
   ): F[Either[String, String]] = {
     import cats.implicits._
     val (fromFellowship, fromTemplate, someFromInteraction) = fromCoordinates

@@ -11,11 +11,11 @@ import io.circe.generic.auto._
 import io.circe.parser.parse
 
 case class FromSectionComponent(
-    currentSection: Var[TxSection],
-    fromFellowship: Var[String],
-    fromTemplate: Var[String],
-    fromInteraction: Var[String],
-    availableAssets: Var[List[(Option[String], Option[String])]]
+  currentSection:  Var[TxSection],
+  fromFellowship:  Var[String],
+  fromTemplate:    Var[String],
+  fromInteraction: Var[String],
+  availableAssets: Var[List[(Option[String], Option[String])]]
 ) {
 
   private val fellowshipOptions: Var[Seq[Node]] = Var(
@@ -26,6 +26,7 @@ case class FromSectionComponent(
       )
     )
   )
+
   private val templateOptions: Var[Seq[Node]] = Var(
     Seq(
       option(
@@ -124,9 +125,9 @@ case class FromSectionComponent(
     .combineWith(fromInteraction.signal)
 
   private def getHeader(
-      txSection: TxSection,
-      fromFellowship: String,
-      fromTemplate: String
+    txSection:      TxSection,
+    fromFellowship: String,
+    fromTemplate:   String
   ) =
     txSection match {
       case FromSection =>
@@ -343,25 +344,25 @@ case class FromSectionComponent(
 
                   assetBalance.update(_ =>
                     tr(td(x.lvlBalance), td("LVL")) ::
-                      x.groupBalances.map(y =>
-                        tr(
-                          td(y.balance),
-                          td("Group Token [" + y.id + "]")
-                        )
-                      ) ++ x.seriesBalances.map(y =>
-                        tr(
-                          td(y.balance),
-                          td("Series Token [" + y.id + "]")
-                        )
-                      ) ++
-                      x.assetBalances.map(y =>
-                        tr(
-                          td(y.balance),
-                          td(
-                            "Asset [" + y.group + ":" + y.series + " " + "]"
-                          )
+                    x.groupBalances.map(y =>
+                      tr(
+                        td(y.balance),
+                        td("Group Token [" + y.id + "]")
+                      )
+                    ) ++ x.seriesBalances.map(y =>
+                      tr(
+                        td(y.balance),
+                        td("Series Token [" + y.id + "]")
+                      )
+                    ) ++
+                    x.assetBalances.map(y =>
+                      tr(
+                        td(y.balance),
+                        td(
+                          "Asset [" + y.group + ":" + y.series + " " + "]"
                         )
                       )
+                    )
                   )
                   lvlBalance.update(_ => Right(x.lvlBalance))
                 case None =>

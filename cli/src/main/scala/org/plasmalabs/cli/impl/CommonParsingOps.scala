@@ -17,8 +17,8 @@ object CommonParsingOps {
   import cats.implicits._
 
   def parseUnspentTransactionOutput(
-      lockAddressString: String,
-      value: Long
+    lockAddressString: String,
+    value:             Long
   ): Either[CommonParserError, UnspentTransactionOutput] =
     for {
       lockAddress <-
@@ -41,13 +41,11 @@ object CommonParsingOps {
     )
 
   def parseTransactionOuputAddress(
-      networkId: Int,
-      address: String
+    networkId: Int,
+    address:   String
   ) = for {
-    sp <- Right(address.split("#"))
-    idx <- Try(sp(1).toInt).toEither.leftMap(_ =>
-      InvalidAddress("Invalid index for address: " + address)
-    )
+    sp  <- Right(address.split("#"))
+    idx <- Try(sp(1).toInt).toEither.leftMap(_ => InvalidAddress("Invalid index for address: " + address))
     txIdByteArray <- Encoding
       .decodeFromBase58(sp(0))
       .leftMap(_ => InvalidAddress("Invalid transaction id for: " + sp(0)))

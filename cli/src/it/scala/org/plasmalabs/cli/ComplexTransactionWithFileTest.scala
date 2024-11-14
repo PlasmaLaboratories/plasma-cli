@@ -109,7 +109,7 @@ class ComplexTransactionWithFileTest
         res <- IO.asyncForIO.timeout(
           (for {
             queryRes <- queryAccount("self", "default").run(aliceContext)
-            _ <- IO.sleep(5.seconds)
+            _        <- IO.sleep(5.seconds)
           } yield queryRes)
             .iterateUntil(_ == ExitCode.Success),
           240.seconds
@@ -306,9 +306,9 @@ class ComplexTransactionWithFileTest
         )
         _ <- IO.asyncForIO.timeout(
           (for {
-            _ <- IO.println("Querying alice's shared or account")
+            _        <- IO.println("Querying alice's shared or account")
             queryRes <- queryAccount("alice_bob_0", "or_sign").run(aliceContext)
-            _ <- IO.sleep(5.seconds)
+            _        <- IO.sleep(5.seconds)
           } yield queryRes)
             .iterateUntil(_ == ExitCode.Success),
           240.seconds
@@ -450,9 +450,9 @@ class ComplexTransactionWithFileTest
         )
         res <- IO.asyncForIO.timeout(
           (for {
-            _ <- IO.println("Querying bob's shared or account")
+            _        <- IO.println("Querying bob's shared or account")
             queryRes <- queryAccount("self", "default").run(bobContext)
-            _ <- IO.sleep(5.seconds)
+            _        <- IO.sleep(5.seconds)
           } yield queryRes)
             .iterateUntil(_ == ExitCode.Success),
           240.seconds

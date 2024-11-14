@@ -20,9 +20,9 @@ class GeneralTransferTests
   tmpDirectory.test("Move funds from genesis to alice") { _ =>
     assertIO(
       for {
-        _ <- moveFundsFromGenesisToAlice()
-        _ <- mintGroup()
-        _ <- mintSeries()
+        _   <- moveFundsFromGenesisToAlice()
+        _   <- mintGroup()
+        _   <- mintSeries()
         res <- mintAsset()
       } yield res,
       ExitCode.Success
@@ -183,13 +183,9 @@ class GeneralTransferTests
             ALICE_TRANSFER_ASSET_TX_RAW,
             TokenType.asset,
             utxos.head.transactionOutput.value.value.asset
-              .map(x =>
-                Encoding.encodeToHex(x.groupId.get.value.toByteArray())
-              ),
+              .map(x => Encoding.encodeToHex(x.groupId.get.value.toByteArray())),
             utxos.head.transactionOutput.value.value.asset
-              .map(x =>
-                Encoding.encodeToHex(x.seriesId.get.value.toByteArray())
-              )
+              .map(x => Encoding.encodeToHex(x.seriesId.get.value.toByteArray()))
           ).run(aliceContext),
           ExitCode.Success
         )

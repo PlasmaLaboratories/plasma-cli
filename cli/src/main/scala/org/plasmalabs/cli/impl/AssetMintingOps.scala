@@ -32,20 +32,20 @@ trait AssetMintingOps[G[_]] extends CommonTxOps {
   val wa: WalletApi[G]
 
   def buildAssetTxAux(
-      keyPair: KeyPair,
-      outputFile: String,
-      lvlTxos: Seq[Txo],
-      nonLvlTxos: Seq[Txo],
-      groupTxo: Txo,
-      seriesTxo: Txo,
-      lockAddrToUnlock: LockAddress,
-      lockPredicateFrom: Lock.Predicate,
-      fee: Long,
-      someNextIndices: Option[Indices],
-      assetMintingStatement: AssetMintingStatement,
-      ephemeralMetadata: Option[Json],
-      commitment: Option[ByteString],
-      changeLock: Option[Lock]
+    keyPair:               KeyPair,
+    outputFile:            String,
+    lvlTxos:               Seq[Txo],
+    nonLvlTxos:            Seq[Txo],
+    groupTxo:              Txo,
+    seriesTxo:             Txo,
+    lockAddrToUnlock:      LockAddress,
+    lockPredicateFrom:     Lock.Predicate,
+    fee:                   Long,
+    someNextIndices:       Option[Indices],
+    assetMintingStatement: AssetMintingStatement,
+    ephemeralMetadata:     Option[Json],
+    commitment:            Option[ByteString],
+    changeLock:            Option[Lock]
   ) = (if (lvlTxos.isEmpty) {
          Sync[G].raiseError(CreateTxError("No LVL txos found"))
        } else {
@@ -76,17 +76,17 @@ trait AssetMintingOps[G[_]] extends CommonTxOps {
        })
 
   private def buildAssetTransaction(
-      keyPair: KeyPair,
-      outputFile: String,
-      txos: Seq[Txo],
-      lockPredicateFrom: Map[LockAddress, Lock.Predicate],
-      lockForChange: Lock,
-      recipientLockAddress: LockAddress,
-      fee: Long,
-      assetMintingStatement: AssetMintingStatement,
-      ephemeralMetadata: Option[Struct],
-      commitment: Option[ByteString],
-      someNextIndices: Option[Indices]
+    keyPair:               KeyPair,
+    outputFile:            String,
+    txos:                  Seq[Txo],
+    lockPredicateFrom:     Map[LockAddress, Lock.Predicate],
+    lockForChange:         Lock,
+    recipientLockAddress:  LockAddress,
+    fee:                   Long,
+    assetMintingStatement: AssetMintingStatement,
+    ephemeralMetadata:     Option[Struct],
+    commitment:            Option[ByteString],
+    someNextIndices:       Option[Indices]
   ): G[Unit] =
     for {
       changeAddress <- tba.lockAddress(

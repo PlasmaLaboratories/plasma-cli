@@ -9,8 +9,9 @@ import scopt.OParser
 import org.plasmalabs.cli.PlasmaCliParamsParserModule
 
 trait FellowshipsModeModule extends WalletStateResource {
+
   def fellowshipsModeSubcmds(
-      validateParams: PlasmaCliParams
+    validateParams: PlasmaCliParams
   ): IO[Either[String, String]] = {
     val fellowshipStorageAlgebra = FellowshipStorageApi.make[IO](
       walletResource(validateParams.walletFile)

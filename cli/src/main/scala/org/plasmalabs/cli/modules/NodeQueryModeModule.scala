@@ -11,7 +11,7 @@ import org.plasmalabs.cli.PlasmaCliParamsParserModule
 trait NodeQueryModeModule extends RpcChannelResource {
 
   def nodeQuerySubcmd(
-      validateParams: PlasmaCliParams
+    validateParams: PlasmaCliParams
   ): IO[Either[String, String]] = {
     val nodeQueryAlgebra = NodeQueryAlgebra.make[IO](
       channelResource(

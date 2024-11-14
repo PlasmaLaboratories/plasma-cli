@@ -10,60 +10,60 @@ import org.plasmalabs.quivr.models.VerificationKey
 class BaseWalletApi[F[_]] extends WalletApi[F] {
 
   override def saveWallet(
-      vaultStore: VaultStore[F],
-      name: String
+    vaultStore: VaultStore[F],
+    name:       String
   ): F[Either[WalletApi.WalletApiFailure, Unit]] = ???
 
   override def loadWallet(
-      name: String
+    name: String
   ): F[Either[WalletApi.WalletApiFailure, VaultStore[F]]] = ???
 
   override def updateWallet(
-      newWallet: VaultStore[F],
-      name: String
+    newWallet: VaultStore[F],
+    name:      String
   ): F[Either[WalletApi.WalletApiFailure, Unit]] = ???
 
   override def deleteWallet(
-      name: String
+    name: String
   ): F[Either[WalletApi.WalletApiFailure, Unit]] = ???
 
   override def buildMainKeyVaultStore(
-      mainKey: Array[Byte],
-      password: Array[Byte]
+    mainKey:  Array[Byte],
+    password: Array[Byte]
   ): F[VaultStore[F]] = ???
 
   override def createNewWallet(
-      password: Array[Byte],
-      passphrase: Option[String],
-      mLen: MnemonicSize
+    password:   Array[Byte],
+    passphrase: Option[String],
+    mLen:       MnemonicSize
   ): F[Either[WalletApi.WalletApiFailure, WalletApi.NewWalletResult[F]]] = ???
 
   override def extractMainKey(
-      vaultStore: VaultStore[F],
-      password: Array[Byte]
+    vaultStore: VaultStore[F],
+    password:   Array[Byte]
   ): F[Either[WalletApi.WalletApiFailure, KeyPair]] = ???
 
   override def deriveChildKeys(keyPair: KeyPair, idx: Indices): F[KeyPair] = ???
 
   override def deriveChildKeysPartial(
-      keyPair: KeyPair,
-      xFellowship: Int,
-      yTemplate: Int
+    keyPair:     KeyPair,
+    xFellowship: Int,
+    yTemplate:   Int
   ): F[KeyPair] = ???
 
   override def deriveChildVerificationKey(
-      vk: VerificationKey,
-      idx: Int
+    vk:  VerificationKey,
+    idx: Int
   ): F[VerificationKey] = ???
 
   override def importWallet(
-      mnemonic: IndexedSeq[String],
-      password: Array[Byte],
-      passphrase: Option[String]
+    mnemonic:   IndexedSeq[String],
+    password:   Array[Byte],
+    passphrase: Option[String]
   ): F[Either[WalletApi.WalletApiFailure, VaultStore[F]]] = ???
 
   override def saveMnemonic(
-      mnemonic: IndexedSeq[String],
-      mnemonicName: String
+    mnemonic:     IndexedSeq[String],
+    mnemonicName: String
   ): F[Either[WalletApi.WalletApiFailure, Unit]] = ???
 }

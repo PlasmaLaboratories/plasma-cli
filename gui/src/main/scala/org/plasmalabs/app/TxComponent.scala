@@ -60,7 +60,7 @@ class TxComponent(networkVar: Var[String]) {
     networkVar.update(_ => x.map(_.networkId).get)
   }
 
-  lazy val component = {
+  lazy val component =
     div(
       cls := "container-fluid",
       h1(
@@ -102,5 +102,4 @@ class TxComponent(networkVar: Var[String]) {
       ),
       fetchNetwork
     )
-  }
 }

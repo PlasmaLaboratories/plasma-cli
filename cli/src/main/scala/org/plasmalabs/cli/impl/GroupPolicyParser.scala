@@ -9,28 +9,29 @@ import com.google.protobuf.ByteString
 import org.plasmalabs.sdk.models.SeriesId
 
 case class GroupPolicyInternal(
-    label: String,
-    fixedSeries: Option[String],
-    registrationUtxo: String
+  label:            String,
+  fixedSeries:      Option[String],
+  registrationUtxo: String
 )
 
 trait GroupPolicyParser[F[_]] {
+
   def parseGroupPolicy(
-      inputFileRes: Resource[F, BufferedSource]
+    inputFileRes: Resource[F, BufferedSource]
   ): F[Either[CommonParserError, GroupPolicy]]
 }
 
 object GroupPolicyParser {
 
   def make[F[_]: Sync](
-      networkId: Int
+    networkId: Int
   ): GroupPolicyParser[F] = new GroupPolicyParser[F] {
     import cats.implicits._
     import io.circe.generic.auto._
     import io.circe.yaml
 
     private def groupPolicyToPBGroupPolicy(
-        groupPolicy: GroupPolicyInternal
+      groupPolicy: GroupPolicyInternal
     ): F[GroupPolicy] =
       for {
         label <-
@@ -71,11 +72,9 @@ object GroupPolicyParser {
       )
 
     def parseGroupPolicy(
-        inputFileRes: Resource[F, BufferedSource]
+      inputFileRes: Resource[F, BufferedSource]
     ): F[Either[CommonParserError, GroupPolicy]] = (for {
-      inputString <- inputFileRes.use(file =>
-        Sync[F].blocking(file.getLines().mkString("\n"))
-      )
+      inputString <- inputFileRes.use(file => Sync[F].blocking(file.getLines().mkString("\n")))
       groupPolicy <-
         Sync[F].fromEither(
           yaml.v12.parser
@@ -89,7 +88,7 @@ object GroupPolicyParser {
     } yield gp).attempt.map(_ match {
       case Right(tx)                  => tx.asRight[CommonParserError]
       case Left(e: CommonParserError) => e.asLeft[GroupPolicy]
-      case Left(e) => UnknownError(e).asLeft[GroupPolicy]
+      case Left(e)                    => UnknownError(e).asLeft[GroupPolicy]
     })
 
   }

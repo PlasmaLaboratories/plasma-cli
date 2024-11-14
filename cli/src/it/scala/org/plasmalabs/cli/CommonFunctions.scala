@@ -10,10 +10,7 @@ import java.nio.file.Paths
 
 trait CommonFunctions extends PolicyTemplates {
 
-  self: CatsEffectSuite
-    with CommonTxOperations
-    with AliceConstants
-    with BobConstants =>
+  self: CatsEffectSuite with CommonTxOperations with AliceConstants with BobConstants =>
 
   val tmpDirectory = FunFixture[Path](
     setup = { _ =>
@@ -29,7 +26,7 @@ trait CommonFunctions extends PolicyTemplates {
 
   import scala.concurrent.duration._
 
-  def moveFundsFromGenesisToAlice(secure: Boolean = false) = {
+  def moveFundsFromGenesisToAlice(secure: Boolean = false) =
     for {
       _ <- createWallet().run(aliceContext)
       _ <- IO.asyncForIO.timeout(
@@ -91,6 +88,5 @@ trait CommonFunctions extends PolicyTemplates {
         240.seconds
       )
     } yield res
-  }
 
 }

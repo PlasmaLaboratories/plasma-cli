@@ -21,6 +21,7 @@ class ParamsNodeQueryTest extends FunSuite {
     )
     assert(OParser.parse(paramParser, args0, PlasmaCliParams()).isDefined)
   }
+
   test("Block by id") {
     val args0 = List(
       "node-query",
@@ -34,6 +35,7 @@ class ParamsNodeQueryTest extends FunSuite {
     )
     assert(OParser.parse(paramParser, args0, PlasmaCliParams()).isDefined)
   }
+
   test("Transaction by id") {
     val args0 = List(
       "node-query",
