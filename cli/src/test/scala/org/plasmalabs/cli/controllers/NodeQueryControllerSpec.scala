@@ -1,16 +1,15 @@
 package org.plasmalabs.cli.controllers
 
 import cats.effect.IO
-import org.plasmalabs.cli.mockbase.BaseNodeQueryAlgebra
-import org.plasmalabs.sdk.models.transaction.IoTransaction
-import org.plasmalabs.consensus.models.BlockId
-import org.plasmalabs.node.models.BlockBody
 import munit.CatsEffectSuite
+import org.plasmalabs.cli.mockbase.BaseNodeQueryAlgebra
 import org.plasmalabs.cli.modules.DummyObjects
 import org.plasmalabs.cli.views.BlockDisplayOps
+import org.plasmalabs.consensus.models.{BlockHeader, BlockId}
+import org.plasmalabs.node.models.BlockBody
 import org.plasmalabs.sdk.display.DisplayOps.DisplayTOps
 import org.plasmalabs.sdk.models.TransactionId
-import org.plasmalabs.consensus.models.BlockHeader
+import org.plasmalabs.sdk.models.transaction.IoTransaction
 
 class NodeQueryControllerSpec extends CatsEffectSuite with DummyObjects {
 

@@ -1,8 +1,8 @@
 package org.plasmalabs.cli.modules
 
 import cats.effect.IO
-import org.plasmalabs.cli.impl.SimpleMintingAlgebra
 import cats.effect.kernel.Sync
+import org.plasmalabs.cli.impl.SimpleMintingAlgebra
 
 trait SimpleMintingAlgebraModule
     extends WalletStateAlgebraModule

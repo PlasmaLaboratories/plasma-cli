@@ -1,8 +1,8 @@
 package org.plasmalabs.cli.controllers
 
 import cats.Id
-import org.plasmalabs.sdk.dataApi.{FellowshipStorageAlgebra, WalletFellowship}
 import munit.FunSuite
+import org.plasmalabs.sdk.dataApi.{FellowshipStorageAlgebra, WalletFellowship}
 
 class FellowshipsControllerSpec extends FunSuite {
 

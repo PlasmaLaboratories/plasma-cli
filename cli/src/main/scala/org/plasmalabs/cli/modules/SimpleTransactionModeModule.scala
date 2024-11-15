@@ -1,11 +1,9 @@
 package org.plasmalabs.cli.modules
 
 import cats.effect.IO
-import org.plasmalabs.cli.PlasmaCliSubCmd
 import org.plasmalabs.cli.controllers.SimpleTransactionController
-import org.plasmalabs.cli.PlasmaCliParams
+import org.plasmalabs.cli.{PlasmaCliParams, PlasmaCliParamsParserModule, PlasmaCliSubCmd}
 import scopt.OParser
-import org.plasmalabs.cli.PlasmaCliParamsParserModule
 
 trait SimpleTransactionModeModule extends SimpleTransactionAlgebraModule with WalletStateAlgebraModule {
 

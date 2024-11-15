@@ -1,18 +1,18 @@
 package org.plasmalabs.cli
 
-import cats.effect.ExitCode
-import cats.effect.IO
-import cats.effect.IOApp
-import org.plasmalabs.cli.modules.NodeQueryModeModule
-import org.plasmalabs.cli.modules.TemplateModeModule
-import org.plasmalabs.cli.modules.IndexerQueryModeModule
-import org.plasmalabs.cli.modules.FellowshipsModeModule
-import org.plasmalabs.cli.modules.SimpleTransactionModeModule
-import org.plasmalabs.cli.modules.TxModeModule
-import org.plasmalabs.cli.modules.WalletModeModule
+import cats.effect.{ExitCode, IO, IOApp}
+import org.plasmalabs.cli.modules.{
+  FellowshipsModeModule,
+  IndexerQueryModeModule,
+  NodeQueryModeModule,
+  ServerModule,
+  SimpleMintingModeModule,
+  SimpleTransactionModeModule,
+  TemplateModeModule,
+  TxModeModule,
+  WalletModeModule
+}
 import scopt.OParser
-import org.plasmalabs.cli.modules.SimpleMintingModeModule
-import org.plasmalabs.cli.modules.ServerModule
 
 object Main
     extends IOApp

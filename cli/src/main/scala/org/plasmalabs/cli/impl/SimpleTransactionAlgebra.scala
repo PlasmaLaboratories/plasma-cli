@@ -1,19 +1,16 @@
 package org.plasmalabs.cli.impl
 
-import cats.effect.kernel.Resource
-import cats.effect.kernel.Sync
+import cats.effect.kernel.{Resource, Sync}
+import org.plasmalabs.indexer.services.Txo
+import org.plasmalabs.quivr.models.KeyPair
 import org.plasmalabs.sdk.builders.TransactionBuilderApi
 import org.plasmalabs.sdk.codecs.AddressCodecs
-import org.plasmalabs.sdk.dataApi.IndexerQueryAlgebra
-import org.plasmalabs.sdk.dataApi.WalletStateAlgebra
-import org.plasmalabs.sdk.models.Indices
-import org.plasmalabs.sdk.models.LockAddress
+import org.plasmalabs.sdk.dataApi.{IndexerQueryAlgebra, WalletStateAlgebra}
 import org.plasmalabs.sdk.models.box.Lock
+import org.plasmalabs.sdk.models.{Indices, LockAddress}
 import org.plasmalabs.sdk.syntax.ValueTypeIdentifier
 import org.plasmalabs.sdk.utils.Encoding
 import org.plasmalabs.sdk.wallet.WalletApi
-import org.plasmalabs.indexer.services.Txo
-import org.plasmalabs.quivr.models.KeyPair
 
 import java.io.FileOutputStream
 

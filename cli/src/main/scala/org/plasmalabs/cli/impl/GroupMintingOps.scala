@@ -1,15 +1,14 @@
 package org.plasmalabs.cli.impl
 
-import cats.effect.kernel.Resource
-import cats.effect.kernel.Sync
+import cats.effect.kernel.{Resource, Sync}
+import org.plasmalabs.indexer.services.Txo
+import org.plasmalabs.quivr.models.KeyPair
 import org.plasmalabs.sdk.builders.TransactionBuilderApi
 import org.plasmalabs.sdk.dataApi.WalletStateAlgebra
 import org.plasmalabs.sdk.models._
 import org.plasmalabs.sdk.models.box.Lock
 import org.plasmalabs.sdk.utils.Encoding
 import org.plasmalabs.sdk.wallet.WalletApi
-import org.plasmalabs.indexer.services.Txo
-import org.plasmalabs.quivr.models.KeyPair
 
 import java.io.FileOutputStream
 

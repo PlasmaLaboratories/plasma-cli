@@ -1,8 +1,6 @@
 package org.plasmalabs.app
 
-import scala.util.Try
-import scala.util.Success
-import scala.util.Failure
+import scala.util.{Failure, Success, Try}
 
 sealed abstract trait EncodingError extends Exception
 case object InvalidInputString extends EncodingError

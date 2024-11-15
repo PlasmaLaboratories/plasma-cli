@@ -1,15 +1,16 @@
 package org.plasmalabs.cli.controllers
 
-import cats.effect.kernel.Resource
-import cats.effect.kernel.Sync
-import org.plasmalabs.cli.impl.AssetMintingStatementParser
-import org.plasmalabs.cli.impl.CreateTxError
-import org.plasmalabs.cli.impl.GroupPolicyParser
-import org.plasmalabs.cli.impl.SeriesPolicyParser
-import org.plasmalabs.cli.impl.SimpleMintingAlgebra
-import org.plasmalabs.cli.impl.SimpleTransactionAlgebraError
-import org.plasmalabs.sdk.utils.Encoding
+import cats.effect.kernel.{Resource, Sync}
 import com.google.protobuf.ByteString
+import org.plasmalabs.cli.impl.{
+  AssetMintingStatementParser,
+  CreateTxError,
+  GroupPolicyParser,
+  SeriesPolicyParser,
+  SimpleMintingAlgebra,
+  SimpleTransactionAlgebraError
+}
+import org.plasmalabs.sdk.utils.Encoding
 
 import java.io.File
 

@@ -3,8 +3,7 @@ package org.plasmalabs.cli
 import munit.FunSuite
 import scopt.OParser
 
-import java.nio.file.Files
-import java.nio.file.Paths
+import java.nio.file.{Files, Paths}
 
 class ParamsWalletModuleTest extends FunSuite {
 

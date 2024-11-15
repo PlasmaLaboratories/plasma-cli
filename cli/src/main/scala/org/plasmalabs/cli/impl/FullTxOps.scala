@@ -2,19 +2,13 @@ package org.plasmalabs.cli.impl
 
 import cats.data.EitherT
 import cats.effect.IO
-import org.plasmalabs.cli.NetworkIdentifiers
-import org.plasmalabs.cli.TokenType
-import org.plasmalabs.cli.controllers.SimpleTransactionController
-import org.plasmalabs.cli.controllers.TxController
-import org.plasmalabs.cli.modules.SimpleTransactionModeModule
-import org.plasmalabs.cli.modules.TxModeModule
-import org.plasmalabs.cli.modules.WalletModeModule
-import org.plasmalabs.sdk.constants.NetworkConstants
-import org.plasmalabs.sdk.models.LockAddress
-import org.plasmalabs.sdk.models.GroupId
-import org.plasmalabs.sdk.utils.Encoding
 import com.google.protobuf.ByteString
-import org.plasmalabs.sdk.models.SeriesId
+import org.plasmalabs.cli.controllers.{SimpleTransactionController, TxController}
+import org.plasmalabs.cli.modules.{SimpleTransactionModeModule, TxModeModule, WalletModeModule}
+import org.plasmalabs.cli.{NetworkIdentifiers, TokenType}
+import org.plasmalabs.sdk.constants.NetworkConstants
+import org.plasmalabs.sdk.models.{GroupId, LockAddress, SeriesId}
+import org.plasmalabs.sdk.utils.Encoding
 
 object FullTxOps extends WalletModeModule with SimpleTransactionModeModule with TxModeModule {
 

@@ -1,11 +1,10 @@
 package org.plasmalabs.app
 
-import org.plasmalabs.shared.models.TxResponse
 import com.raquo.laminar.api.L._
 import io.circe.Json
 import io.circe.generic.auto._
 import io.circe.syntax._
-import org.plasmalabs.shared.models.TxRequest
+import org.plasmalabs.shared.models.{TxRequest, TxResponse}
 
 case class SendTxComponent(
   currentSection:     Var[TxSection],

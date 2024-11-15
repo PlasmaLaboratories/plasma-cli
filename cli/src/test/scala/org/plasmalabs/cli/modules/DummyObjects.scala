@@ -1,38 +1,27 @@
 package org.plasmalabs.cli.modules
 
 import cats.Monad
+import com.google.protobuf.ByteString
+import org.plasmalabs.consensus.models.{
+  BlockHeader,
+  BlockId,
+  EligibilityCertificate,
+  OperationalCertificate,
+  ProtocolVersion,
+  SignatureKesProduct,
+  SignatureKesSum,
+  StakingAddress,
+  VerificationKeyKesProduct
+}
+import org.plasmalabs.indexer.services.{Txo, TxoState}
+import org.plasmalabs.node.models.BlockBody
+import org.plasmalabs.quivr.models.{Int128, Proposition}
 import org.plasmalabs.sdk.codecs.AddressCodecs
 import org.plasmalabs.sdk.dataApi.IndexerQueryAlgebra
-import org.plasmalabs.sdk.models.Datum
-import org.plasmalabs.sdk.models.GroupId
-import org.plasmalabs.sdk.models.LockAddress
-import org.plasmalabs.sdk.models.SeriesId
-import org.plasmalabs.sdk.models.TransactionId
-import org.plasmalabs.sdk.models.TransactionOutputAddress
-import org.plasmalabs.sdk.models.box.Attestation
-import org.plasmalabs.sdk.models.box.Challenge
-import org.plasmalabs.sdk.models.box.FungibilityType
-import org.plasmalabs.sdk.models.box.Lock
-import org.plasmalabs.sdk.models.box.QuantityDescriptorType
-import org.plasmalabs.sdk.models.box.Value
-import org.plasmalabs.sdk.models.transaction.SpentTransactionOutput
-import org.plasmalabs.sdk.models.transaction.UnspentTransactionOutput
+import org.plasmalabs.sdk.models.box.{Attestation, Challenge, FungibilityType, Lock, QuantityDescriptorType, Value}
+import org.plasmalabs.sdk.models.transaction.{SpentTransactionOutput, UnspentTransactionOutput}
+import org.plasmalabs.sdk.models.{Datum, GroupId, LockAddress, SeriesId, TransactionId, TransactionOutputAddress}
 import org.plasmalabs.sdk.utils.Encoding
-import org.plasmalabs.consensus.models.BlockId
-import org.plasmalabs.indexer.services.Txo
-import org.plasmalabs.indexer.services.TxoState
-import org.plasmalabs.node.models.BlockBody
-import com.google.protobuf.ByteString
-import org.plasmalabs.quivr.models.Int128
-import org.plasmalabs.quivr.models.Proposition
-import org.plasmalabs.consensus.models.BlockHeader
-import org.plasmalabs.consensus.models.EligibilityCertificate
-import org.plasmalabs.consensus.models.OperationalCertificate
-import org.plasmalabs.consensus.models.StakingAddress
-import org.plasmalabs.consensus.models.ProtocolVersion
-import org.plasmalabs.consensus.models.VerificationKeyKesProduct
-import org.plasmalabs.consensus.models.SignatureKesProduct
-import org.plasmalabs.consensus.models.SignatureKesSum
 
 trait DummyObjects {
 

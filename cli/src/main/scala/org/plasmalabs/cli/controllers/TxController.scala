@@ -1,15 +1,11 @@
 package org.plasmalabs.cli.controllers
 
-import cats.effect.kernel.Resource
-import cats.effect.kernel.Sync
-import org.plasmalabs.cli.impl.CommonParserError
-import org.plasmalabs.cli.impl.TransactionAlgebra
-import org.plasmalabs.cli.impl.TxParserAlgebra
+import cats.effect.kernel.{Resource, Sync}
+import org.plasmalabs.cli.impl.{CommonParserError, TransactionAlgebra, TxParserAlgebra}
 import org.plasmalabs.sdk.display.DisplayOps.DisplayTOps
 import org.plasmalabs.sdk.models.transaction.IoTransaction
 
-import java.io.FileInputStream
-import java.io.FileOutputStream
+import java.io.{FileInputStream, FileOutputStream}
 
 class TxController[F[_]: Sync](
   txParserAlgebra: TxParserAlgebra[F],

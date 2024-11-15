@@ -1,18 +1,15 @@
 package org.plasmalabs.cli.impl
 
 import cats.data.Validated
-import cats.effect.kernel.Resource
-import cats.effect.kernel.Sync
+import cats.effect.kernel.{Resource, Sync}
+import com.google.protobuf.ByteString
+import org.plasmalabs.cli.NetworkIdentifiers
+import org.plasmalabs.quivr.models.{Int128, VerificationKey}
 import org.plasmalabs.sdk.builders.TransactionBuilderApi
 import org.plasmalabs.sdk.builders.locks.LockTemplate
-import org.plasmalabs.cli.NetworkIdentifiers
 import org.plasmalabs.sdk.models.box.Value
-import org.plasmalabs.sdk.models.transaction.IoTransaction
-import org.plasmalabs.sdk.models.transaction.SpentTransactionOutput
+import org.plasmalabs.sdk.models.transaction.{IoTransaction, SpentTransactionOutput}
 import org.plasmalabs.sdk.utils.Encoding
-import com.google.protobuf.ByteString
-import org.plasmalabs.quivr.models.Int128
-import org.plasmalabs.quivr.models.VerificationKey
 
 import scala.io.BufferedSource
 

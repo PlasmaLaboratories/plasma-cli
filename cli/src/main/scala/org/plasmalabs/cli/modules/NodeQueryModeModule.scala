@@ -2,11 +2,9 @@ package org.plasmalabs.cli.modules
 
 import cats.effect.IO
 import org.plasmalabs.cli.controllers.NodeQueryController
-import org.plasmalabs.cli.PlasmaCliSubCmd
+import org.plasmalabs.cli.{PlasmaCliParams, PlasmaCliParamsParserModule, PlasmaCliSubCmd}
 import org.plasmalabs.sdk.dataApi.{NodeQueryAlgebra, RpcChannelResource}
-import org.plasmalabs.cli.PlasmaCliParams
 import scopt.OParser
-import org.plasmalabs.cli.PlasmaCliParamsParserModule
 
 trait NodeQueryModeModule extends RpcChannelResource {
 

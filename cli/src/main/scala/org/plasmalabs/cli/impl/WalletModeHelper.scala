@@ -1,11 +1,11 @@
 package org.plasmalabs.cli.impl
 
 import cats.effect.kernel.Sync
+import org.plasmalabs.indexer.services.{Txo, TxoState}
 import org.plasmalabs.sdk.codecs.AddressCodecs
 import org.plasmalabs.sdk.dataApi
 import org.plasmalabs.sdk.syntax.{AssetType, GroupType, LvlType, SeriesType}
 import org.plasmalabs.sdk.utils.Encoding
-import org.plasmalabs.indexer.services.{Txo, TxoState}
 import org.plasmalabs.shared.models._
 
 case class WalletModeHelper[F[_]: Sync](

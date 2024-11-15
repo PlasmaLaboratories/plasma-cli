@@ -3,10 +3,8 @@ package org.plasmalabs.cli
 import munit.FunSuite
 import scopt.OParser
 
-import java.nio.file.Files
-import java.nio.file.Paths
 import java.io.File
-import java.nio.file.Path
+import java.nio.file.{Files, Path, Paths}
 
 class ParamsFellowshipModuleTest extends FunSuite {
 

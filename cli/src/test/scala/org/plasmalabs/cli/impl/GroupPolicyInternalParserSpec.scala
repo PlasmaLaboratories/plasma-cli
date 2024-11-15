@@ -1,9 +1,9 @@
 package org.plasmalabs.cli.impl
 
+import cats.effect.IO
+import cats.effect.kernel.Resource
 import munit.CatsEffectSuite
 import org.plasmalabs.sdk.constants.NetworkConstants
-import cats.effect.kernel.Resource
-import cats.effect.IO
 
 class GroupPolicyInternalParserSpec extends CatsEffectSuite with GroupPolicyParserModule {
 

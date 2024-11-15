@@ -2,26 +2,24 @@ package org.plasmalabs.cli.controllers
 
 import cats.data.EitherT
 import cats.effect.IO
-import org.plasmalabs.cli.mockbase.BaseIndexerQueryAlgebra
-import org.plasmalabs.cli.mockbase.BaseWalletAlgebra
-import org.plasmalabs.cli.mockbase.BaseWalletApi
-import org.plasmalabs.cli.mockbase.BaseWalletManagementUtils
-import org.plasmalabs.cli.mockbase.BaseWalletStateAlgebra
+import com.google.protobuf.ByteString
+import munit.CatsEffectSuite
+import org.plasmalabs.cli.mockbase.{
+  BaseIndexerQueryAlgebra,
+  BaseWalletAlgebra,
+  BaseWalletApi,
+  BaseWalletManagementUtils,
+  BaseWalletStateAlgebra
+}
 import org.plasmalabs.cli.modules.WalletKeyApiModule
+import org.plasmalabs.cli.{Blake2b, Sha256}
+import org.plasmalabs.quivr.models.{KeyPair, Preimage, Proposition}
 import org.plasmalabs.sdk.models.Indices
 import org.plasmalabs.sdk.utils.Encoding
 import org.plasmalabs.sdk.wallet.WalletApi
-import munit.CatsEffectSuite
-import org.plasmalabs.quivr.models.KeyPair
 
-import java.nio.file.Files
-import java.nio.file.Paths
+import java.nio.file.{Files, Paths}
 import scala.io.Source
-import org.plasmalabs.cli.Sha256
-import org.plasmalabs.quivr.models.Proposition
-import org.plasmalabs.quivr.models.Preimage
-import com.google.protobuf.ByteString
-import org.plasmalabs.cli.Blake2b
 
 class WalletControllerSpecs extends CatsEffectSuite with WalletKeyApiModule {
 
@@ -210,7 +208,7 @@ class WalletControllerSpecs extends CatsEffectSuite with WalletKeyApiModule {
           "default"
         )
       } yield res,
-      Left(s"The fellowship or template does not exist.")
+      Left("The fellowship or template does not exist.")
     )
   }
 

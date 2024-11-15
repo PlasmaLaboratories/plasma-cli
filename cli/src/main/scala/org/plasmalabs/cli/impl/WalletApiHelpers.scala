@@ -1,7 +1,7 @@
 package org.plasmalabs.cli.impl
 
-import org.plasmalabs.sdk.dataApi.WalletStateAlgebra
 import cats.Monad
+import org.plasmalabs.sdk.dataApi.WalletStateAlgebra
 import org.plasmalabs.sdk.models.Indices
 import org.plasmalabs.sdk.models.box.Lock
 

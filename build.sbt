@@ -235,5 +235,5 @@ buildClient := {
   )
 }
 
-addCommandAlias("checkPR", s"; scalafmtCheckAll; test")
-addCommandAlias("preparePR", s"; scalafmtAll; test")
+addCommandAlias("checkPR", s"; scalafixAll --check; scalafmtCheckAll; test")
+addCommandAlias("preparePR", s"; scalafixAll; scalafmtAll; test")

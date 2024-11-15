@@ -1,14 +1,10 @@
 package org.plasmalabs.app
 
-import org.plasmalabs.shared.models.BalanceRequestDTO
-import org.plasmalabs.shared.models.BalanceResponseDTO
-import org.plasmalabs.shared.models.FellowshipDTO
-import org.plasmalabs.shared.models.SimpleErrorDTO
-import org.plasmalabs.shared.models.TemplateDTO
 import com.raquo.laminar.api.L._
 import io.circe.Json
 import io.circe.generic.auto._
 import io.circe.parser.parse
+import org.plasmalabs.shared.models.{BalanceRequestDTO, BalanceResponseDTO, FellowshipDTO, SimpleErrorDTO, TemplateDTO}
 
 case class FromSectionComponent(
   currentSection:  Var[TxSection],
@@ -284,7 +280,7 @@ case class FromSectionComponent(
           child.text <-- lvlBalance.signal.map(x =>
             x match {
               case Left(error) => error
-              case Right(_)    => s"Successfully obtained balance."
+              case Right(_)    => "Successfully obtained balance."
             }
           )
         ),

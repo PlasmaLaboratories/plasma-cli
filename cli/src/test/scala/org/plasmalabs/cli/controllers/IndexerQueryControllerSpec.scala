@@ -2,13 +2,13 @@ package org.plasmalabs.cli.controllers
 
 import cats.Monad
 import cats.effect.IO
+import munit.CatsEffectSuite
 import org.plasmalabs.cli.mockbase.BaseWalletStateAlgebra
 import org.plasmalabs.cli.modules.DummyObjects
+import org.plasmalabs.indexer.services.{Txo, TxoState}
 import org.plasmalabs.sdk.dataApi.IndexerQueryAlgebra
 import org.plasmalabs.sdk.display.DisplayOps.DisplayTOps
 import org.plasmalabs.sdk.models.LockAddress
-import org.plasmalabs.indexer.services.{Txo, TxoState}
-import munit.CatsEffectSuite
 
 class IndexerQueryControllerSpec extends CatsEffectSuite with DummyObjects {
 

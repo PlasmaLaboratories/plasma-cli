@@ -1,7 +1,7 @@
 package org.plasmalabs.cli.mockbase
 
-import org.plasmalabs.cli.impl.WalletManagementUtils
 import cats.effect.kernel.Sync
+import org.plasmalabs.cli.impl.WalletManagementUtils
 import org.plasmalabs.crypto.encryption.VaultStore
 import org.plasmalabs.quivr.models.KeyPair
 

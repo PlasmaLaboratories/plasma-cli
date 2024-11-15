@@ -1,33 +1,31 @@
 package org.plasmalabs.cli.http
 
 import cats.Id
-import cats.effect.IO
-import cats.effect._
-import org.plasmalabs.cli.impl.WalletModeHelper
-import org.plasmalabs.sdk.dataApi.IndexerQueryAlgebra
-import org.plasmalabs.sdk.dataApi.WalletStateAlgebra
-import org.plasmalabs.sdk.servicekit.FellowshipStorageApi
-import org.plasmalabs.sdk.servicekit.TemplateStorageApi
-import org.plasmalabs.shared.models.AssetTokenBalanceDTO
-import org.plasmalabs.shared.models.BalanceRequestDTO
-import org.plasmalabs.shared.models.BalanceResponseDTO
-import org.plasmalabs.shared.models.FellowshipDTO
-import org.plasmalabs.shared.models.GroupTokenBalanceDTO
-import org.plasmalabs.shared.models.LvlBalance
-import org.plasmalabs.shared.models.SeriesTokenBalanceDTO
-import org.plasmalabs.shared.models.SimpleErrorDTO
-import org.plasmalabs.shared.models.TemplateDTO
+import cats.effect.{IO, _}
 import io.circe.generic.auto._
 import io.circe.syntax._
 import io.grpc.ManagedChannel
-import org.http4s.HttpRoutes
-import org.http4s._
 import org.http4s.circe._
 import org.http4s.dsl.io._
+import org.http4s.{HttpRoutes, _}
+import org.plasmalabs.cli.impl.WalletModeHelper
+import org.plasmalabs.sdk.dataApi.{IndexerQueryAlgebra, WalletStateAlgebra}
+import org.plasmalabs.sdk.servicekit.{FellowshipStorageApi, TemplateStorageApi}
+import org.plasmalabs.sdk.utils.Encoding
+import org.plasmalabs.shared.models.{
+  AssetTokenBalanceDTO,
+  BalanceRequestDTO,
+  BalanceResponseDTO,
+  FellowshipDTO,
+  GroupTokenBalanceDTO,
+  LvlBalance,
+  NetworkResponseDTO,
+  SeriesTokenBalanceDTO,
+  SimpleErrorDTO,
+  TemplateDTO
+}
 
 import java.sql.Connection
-import org.plasmalabs.shared.models.NetworkResponseDTO
-import org.plasmalabs.sdk.utils.Encoding
 
 case class WalletHttpService(
   walletStateAlgebra: WalletStateAlgebra[IO],

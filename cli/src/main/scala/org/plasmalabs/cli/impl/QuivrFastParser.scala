@@ -2,12 +2,11 @@ package org.plasmalabs.cli.impl
 
 import cats.Monad
 import cats.data.ValidatedNel
-import org.plasmalabs.sdk.builders.locks.LockTemplate
-import org.plasmalabs.sdk.builders.locks.PropositionTemplate
-import org.plasmalabs.sdk.utils.Encoding
 import com.google.protobuf.ByteString
-import org.plasmalabs.quivr.models.Data
 import org.plasmalabs.quivr.models
+import org.plasmalabs.quivr.models.Data
+import org.plasmalabs.sdk.builders.locks.{LockTemplate, PropositionTemplate}
+import org.plasmalabs.sdk.utils.Encoding
 
 sealed trait ParseError {
   val location: Int

@@ -1,16 +1,11 @@
 package org.plasmalabs.cli.modules
 
 import cats.effect.IO
-import org.plasmalabs.cli.PlasmaCliParams
-import org.plasmalabs.cli.PlasmaCliSubCmd
-import org.plasmalabs.cli.TokenType
 import org.plasmalabs.cli.controllers.SimpleMintingController
-import org.plasmalabs.cli.impl.GroupPolicyParserModule
-import org.plasmalabs.cli.impl.SeriesPolicyParserModule
+import org.plasmalabs.cli.impl.{AssetStatementParserModule, GroupPolicyParserModule, SeriesPolicyParserModule}
+import org.plasmalabs.cli.{PlasmaCliParams, PlasmaCliParamsParserModule, PlasmaCliSubCmd, TokenType}
 import org.plasmalabs.sdk.constants.NetworkConstants
-import org.plasmalabs.cli.impl.AssetStatementParserModule
 import scopt.OParser
-import org.plasmalabs.cli.PlasmaCliParamsParserModule
 
 trait SimpleMintingModeModule
     extends GroupPolicyParserModule

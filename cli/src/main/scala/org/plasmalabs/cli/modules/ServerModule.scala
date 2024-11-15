@@ -1,28 +1,23 @@
 package org.plasmalabs.cli.modules
 
 import cats.data.Kleisli
-import cats.effect.IO
-import cats.effect._
-import org.plasmalabs.cli.PlasmaCliParams
-import org.plasmalabs.cli.PlasmaCliSubCmd
-import org.plasmalabs.cli.http.WalletHttpService
-import org.plasmalabs.cli.impl.FullTxOps
-import org.plasmalabs.sdk.codecs.AddressCodecs
-import org.plasmalabs.shared.models.TxRequest
-import org.plasmalabs.shared.models.TxResponse
+import cats.effect.{IO, _}
 import io.circe.generic.auto._
 import io.circe.syntax._
-import org.http4s.HttpRoutes
-import org.http4s._
 import org.http4s.circe._
 import org.http4s.dsl.io._
 import org.http4s.ember.server.EmberServerBuilder
 import org.http4s.server.Router
 import org.http4s.server.staticcontent.resourceServiceBuilder
+import org.http4s.{HttpRoutes, _}
+import org.plasmalabs.cli.http.WalletHttpService
+import org.plasmalabs.cli.impl.FullTxOps
+import org.plasmalabs.cli.{PlasmaCliParams, PlasmaCliParamsParserModule, PlasmaCliSubCmd}
+import org.plasmalabs.sdk.codecs.AddressCodecs
+import org.plasmalabs.shared.models.{TxRequest, TxResponse}
+import scopt.OParser
 
 import java.nio.file.Files
-import scopt.OParser
-import org.plasmalabs.cli.PlasmaCliParamsParserModule
 
 trait ServerModule extends FellowshipsModeModule with WalletModeModule {
 

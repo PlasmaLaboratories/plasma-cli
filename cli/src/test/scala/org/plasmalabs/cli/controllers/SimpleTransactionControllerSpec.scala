@@ -3,23 +3,22 @@ package org.plasmalabs.cli.controllers
 import cats.Monad
 import cats.data.ValidatedNel
 import cats.effect.IO
+import com.google.protobuf.ByteString
+import munit.CatsEffectSuite
 import org.plasmalabs.cli.TokenType
-import org.plasmalabs.cli.impl.AssetStatementParserModule
-import org.plasmalabs.cli.impl.GroupPolicyParserModule
-import org.plasmalabs.cli.impl.SeriesPolicyParserModule
-import org.plasmalabs.cli.impl.SimpleTransactionAlgebra
+import org.plasmalabs.cli.impl.{
+  AssetStatementParserModule,
+  GroupPolicyParserModule,
+  SeriesPolicyParserModule,
+  SimpleTransactionAlgebra
+}
 import org.plasmalabs.cli.mockbase.BaseWalletStateAlgebra
-import org.plasmalabs.cli.modules.DummyObjects
-import org.plasmalabs.cli.modules.SimpleMintingAlgebraModule
+import org.plasmalabs.cli.modules.{DummyObjects, SimpleMintingAlgebraModule}
 import org.plasmalabs.sdk.codecs.AddressCodecs
 import org.plasmalabs.sdk.constants.NetworkConstants
-import org.plasmalabs.sdk.models.Indices
 import org.plasmalabs.sdk.models.box.Lock
-import munit.CatsEffectSuite
-import com.google.protobuf.ByteString
-import org.plasmalabs.sdk.models.GroupId
+import org.plasmalabs.sdk.models.{GroupId, Indices, SeriesId}
 import org.plasmalabs.sdk.utils.Encoding
-import org.plasmalabs.sdk.models.SeriesId
 
 class SimpleTransactionControllerSpec
     extends CatsEffectSuite

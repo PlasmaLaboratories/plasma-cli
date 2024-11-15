@@ -1,8 +1,8 @@
 package org.plasmalabs.cli.modules
 
-import org.plasmalabs.sdk.constants.NetworkConstants
 import cats.effect.IO
 import org.plasmalabs.cli.impl.SimpleTransactionAlgebra
+import org.plasmalabs.sdk.constants.NetworkConstants
 
 trait SimpleTransactionAlgebraModule
     extends WalletStateAlgebraModule
