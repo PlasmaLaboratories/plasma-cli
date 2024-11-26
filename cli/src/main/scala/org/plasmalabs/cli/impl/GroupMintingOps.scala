@@ -5,14 +5,14 @@ import org.plasmalabs.indexer.services.Txo
 import org.plasmalabs.quivr.models.KeyPair
 import org.plasmalabs.sdk.builders.TransactionBuilderApi
 import org.plasmalabs.sdk.dataApi.WalletStateAlgebra
-import org.plasmalabs.sdk.models._
+import org.plasmalabs.sdk.models.*
 import org.plasmalabs.sdk.models.box.Lock
 import org.plasmalabs.sdk.utils.Encoding
 import org.plasmalabs.sdk.wallet.WalletApi
 
 import java.io.FileOutputStream
 
-import TransactionBuilderApi.implicits._
+import TransactionBuilderApi.implicits.*
 
 trait GroupMintingOps[G[_]] extends CommonTxOps {
 

@@ -3,7 +3,7 @@ package org.plasmalabs.cli.impl
 import cats.effect.kernel.{Resource, Sync}
 import com.google.protobuf.struct.Value
 import io.circe.Json
-import org.plasmalabs.sdk.models._
+import org.plasmalabs.sdk.models.*
 import org.plasmalabs.sdk.models.box.{FungibilityType, QuantityDescriptorType}
 
 import scala.io.BufferedSource

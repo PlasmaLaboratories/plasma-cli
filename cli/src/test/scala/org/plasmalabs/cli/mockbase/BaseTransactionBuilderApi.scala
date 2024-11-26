@@ -7,7 +7,7 @@ import org.plasmalabs.quivr.models.Int128
 import org.plasmalabs.sdk.builders.{BuilderError, TransactionBuilderApi}
 import org.plasmalabs.sdk.models.box.{Attestation, FungibilityType, Lock, QuantityDescriptorType}
 import org.plasmalabs.sdk.models.transaction.{IoTransaction, UnspentTransactionOutput}
-import org.plasmalabs.sdk.models.{TransactionOutputAddress, _}
+import org.plasmalabs.sdk.models.{TransactionOutputAddress, *}
 import org.plasmalabs.sdk.syntax.ValueTypeIdentifier
 
 class BaseTransactionBuilderApi[F[_]] extends TransactionBuilderApi[F] {

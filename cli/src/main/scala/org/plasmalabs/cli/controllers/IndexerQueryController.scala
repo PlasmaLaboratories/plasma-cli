@@ -2,10 +2,12 @@ package org.plasmalabs.cli.controllers
 
 import cats.Monad
 import cats.effect.kernel.Sync
+import cats.syntax.all.*
 import org.plasmalabs.cli.TokenType
 import org.plasmalabs.sdk.codecs.AddressCodecs
 import org.plasmalabs.sdk.dataApi.{IndexerQueryAlgebra, WalletStateAlgebra}
 import org.plasmalabs.sdk.display.DisplayOps.DisplayTOps
+import org.plasmalabs.sdk.display.txoDisplay
 
 class IndexerQueryController[F[_]: Sync](
   walletStateAlgebra:  WalletStateAlgebra[F],
@@ -18,9 +20,7 @@ class IndexerQueryController[F[_]: Sync](
     fromTemplate:        String,
     someFromInteraction: Option[Int],
     tokenType:           TokenType.Value = TokenType.all
-  ): F[Either[String, String]] = {
-
-    import cats.implicits._
+  ): F[Either[String, String]] =
     someFromAddress
       .map(x => Sync[F].point(Some(x)))
       .getOrElse(
@@ -32,18 +32,17 @@ class IndexerQueryController[F[_]: Sync](
           indexerQueryAlgebra
             .queryUtxo(AddressCodecs.decodeAddress(address).toOption.get)
             .map(_.filter { x =>
-              import monocle.macros.syntax.lens._
-              val lens = x.focus(_.transactionOutput.value.value)
+              val value = x.transactionOutput.value.value
               if (tokenType == TokenType.lvl)
-                lens.get.isLvl
+                value.isLvl
               else if (tokenType == TokenType.topl)
-                lens.get.isTopl
+                value.isTopl
               else if (tokenType == TokenType.asset)
-                lens.get.isAsset
+                value.isAsset
               else if (tokenType == TokenType.series)
-                lens.get.isSeries
+                value.isSeries
               else if (tokenType == TokenType.group)
-                lens.get.isGroup
+                value.isGroup
               else
                 true
             })
@@ -62,5 +61,4 @@ class IndexerQueryController[F[_]: Sync](
         case None => Monad[F].pure(Left("Address not found"))
       }
 
-  }
 }

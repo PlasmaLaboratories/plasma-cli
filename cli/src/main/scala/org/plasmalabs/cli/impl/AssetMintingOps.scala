@@ -15,7 +15,7 @@ import org.plasmalabs.sdk.wallet.WalletApi
 
 import java.io.FileOutputStream
 
-import TransactionBuilderApi.implicits._
+import TransactionBuilderApi.implicits.*
 
 trait AssetMintingOps[G[_]] extends CommonTxOps {
 

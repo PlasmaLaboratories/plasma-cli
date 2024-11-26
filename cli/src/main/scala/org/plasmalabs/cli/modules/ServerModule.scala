@@ -1,15 +1,15 @@
 package org.plasmalabs.cli.modules
 
 import cats.data.Kleisli
-import cats.effect.{IO, _}
-import io.circe.generic.auto._
-import io.circe.syntax._
-import org.http4s.circe._
-import org.http4s.dsl.io._
+import cats.effect.{IO, *}
+import io.circe.generic.auto.*
+import io.circe.syntax.*
+import org.http4s.circe.*
+import org.http4s.dsl.io.*
 import org.http4s.ember.server.EmberServerBuilder
 import org.http4s.server.Router
 import org.http4s.server.staticcontent.resourceServiceBuilder
-import org.http4s.{HttpRoutes, _}
+import org.http4s.{HttpRoutes, *}
 import org.plasmalabs.cli.http.WalletHttpService
 import org.plasmalabs.cli.impl.FullTxOps
 import org.plasmalabs.cli.{PlasmaCliParams, PlasmaCliParamsParserModule, PlasmaCliSubCmd}

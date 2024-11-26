@@ -2,7 +2,7 @@ package org.plasmalabs.cli.impl
 
 import cats.effect.kernel.{Resource, Sync}
 import com.google.protobuf.ByteString
-import org.plasmalabs.sdk.models.{SeriesId, _}
+import org.plasmalabs.sdk.models.{SeriesId, *}
 import org.plasmalabs.sdk.utils.Encoding
 
 import scala.io.BufferedSource

@@ -6,7 +6,7 @@ import org.plasmalabs.sdk.codecs.AddressCodecs
 import org.plasmalabs.sdk.dataApi
 import org.plasmalabs.sdk.syntax.{AssetType, GroupType, LvlType, SeriesType}
 import org.plasmalabs.sdk.utils.Encoding
-import org.plasmalabs.shared.models._
+import org.plasmalabs.shared.models.*
 
 case class WalletModeHelper[F[_]: Sync](
   walletStateAlgebra:  dataApi.WalletStateAlgebra[F],

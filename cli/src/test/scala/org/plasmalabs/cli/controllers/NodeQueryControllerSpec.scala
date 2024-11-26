@@ -8,6 +8,7 @@ import org.plasmalabs.cli.views.BlockDisplayOps
 import org.plasmalabs.consensus.models.{BlockHeader, BlockId}
 import org.plasmalabs.node.models.BlockBody
 import org.plasmalabs.sdk.display.DisplayOps.DisplayTOps
+import org.plasmalabs.sdk.display.transactionDisplay
 import org.plasmalabs.sdk.models.TransactionId
 import org.plasmalabs.sdk.models.transaction.IoTransaction
 

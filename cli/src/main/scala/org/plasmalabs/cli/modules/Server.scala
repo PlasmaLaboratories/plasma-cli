@@ -2,7 +2,7 @@ package org.plasmalabs.cli.modules
 
 import com.comcast.ip4s.{Host, Port}
 
-import scala.concurrent.duration._
+import scala.concurrent.duration.*
 import scala.util.Try
 
 object ServerConfig {
