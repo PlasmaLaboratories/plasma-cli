@@ -3,7 +3,7 @@ package org.plasmalabs.cli.impl
 import cats.effect.kernel.{Resource, Sync}
 import com.google.protobuf.struct.Value
 import io.circe.Json
-import org.plasmalabs.sdk.models.{AssetMintingStatement => PBAssetMintingStatement}
+import org.plasmalabs.sdk.models.AssetMintingStatement as PBAssetMintingStatement
 
 import scala.io.BufferedSource
 

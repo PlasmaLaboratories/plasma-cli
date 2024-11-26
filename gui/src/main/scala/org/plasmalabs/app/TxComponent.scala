@@ -1,6 +1,6 @@
 package org.plasmalabs.app
 
-import com.raquo.laminar.api.L._
+import com.raquo.laminar.api.L.*
 import org.plasmalabs.shared.models.NetworkResponseDTO
 
 sealed trait TxSection

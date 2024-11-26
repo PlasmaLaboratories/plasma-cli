@@ -2,7 +2,7 @@ import Dependencies._
 import org.scalajs.linker.interface.ModuleSplitStyle
 import scala.sys.process.Process
 
-lazy val scalacVersion = "2.13.15"
+lazy val scalacVersion = "3.3.4"
 
 lazy val shared = crossProject(JSPlatform, JVMPlatform)
   .in(file("./shared"))
@@ -176,7 +176,7 @@ lazy val cli = project
   )
   .settings(
     assembly / mainClass := Some("org.plasmalabs.plasma.cli.Main"),
-    assembly / assemblyJarName := "stratacli.jar",
+    assembly / assemblyJarName := "plasmacli.jar",
 
     // Gets rid of "(server / assembly) deduplicate: different file contents found in the following" errors
     // https://stackoverflow.com/questions/54834125/sbt-assembly-deduplicate-module-info-class
@@ -200,8 +200,7 @@ lazy val commonSettings = Seq(
   scalaVersion := scalacVersion,
   scalacOptions ++= Seq(
     "-deprecation",
-    "-Ymacro-annotations",
-    "-Ywarn-unused"
+    "-Wunused:imports"
   )
 )
 

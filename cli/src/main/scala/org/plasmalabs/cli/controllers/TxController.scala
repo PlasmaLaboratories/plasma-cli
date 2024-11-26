@@ -3,6 +3,7 @@ package org.plasmalabs.cli.controllers
 import cats.effect.kernel.{Resource, Sync}
 import org.plasmalabs.cli.impl.{CommonParserError, TransactionAlgebra, TxParserAlgebra}
 import org.plasmalabs.sdk.display.DisplayOps.DisplayTOps
+import org.plasmalabs.sdk.display.transactionDisplay
 import org.plasmalabs.sdk.models.transaction.IoTransaction
 
 import java.io.{FileInputStream, FileOutputStream}

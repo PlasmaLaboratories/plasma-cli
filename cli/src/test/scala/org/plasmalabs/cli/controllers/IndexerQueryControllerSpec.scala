@@ -8,6 +8,7 @@ import org.plasmalabs.cli.modules.DummyObjects
 import org.plasmalabs.indexer.services.{Txo, TxoState}
 import org.plasmalabs.sdk.dataApi.IndexerQueryAlgebra
 import org.plasmalabs.sdk.display.DisplayOps.DisplayTOps
+import org.plasmalabs.sdk.display.txoDisplay
 import org.plasmalabs.sdk.models.LockAddress
 
 class IndexerQueryControllerSpec extends CatsEffectSuite with DummyObjects {

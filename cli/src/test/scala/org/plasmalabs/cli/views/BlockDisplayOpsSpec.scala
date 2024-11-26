@@ -2,6 +2,7 @@ package org.plasmalabs.cli.views
 
 import org.plasmalabs.cli.modules.DummyObjects
 import org.plasmalabs.sdk.display.DisplayOps.DisplayTOps
+import org.plasmalabs.sdk.display.txoDisplay
 
 class BlockDisplayOpsSpec extends munit.FunSuite with DummyObjects {
 

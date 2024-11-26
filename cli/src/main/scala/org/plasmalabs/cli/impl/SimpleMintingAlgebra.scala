@@ -7,7 +7,7 @@ import io.circe.Json
 import org.plasmalabs.indexer.services.Txo
 import org.plasmalabs.sdk.builders.TransactionBuilderApi
 import org.plasmalabs.sdk.dataApi.{IndexerQueryAlgebra, WalletStateAlgebra}
-import org.plasmalabs.sdk.models._
+import org.plasmalabs.sdk.models.*
 import org.plasmalabs.sdk.wallet.WalletApi
 
 trait SimpleMintingAlgebra[F[_]] {

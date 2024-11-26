@@ -1,8 +1,8 @@
 package org.plasmalabs.app
 
-import com.raquo.laminar.api.L._
+import com.raquo.laminar.api.L.*
 import io.circe.Json
-import io.circe.generic.auto._
+import io.circe.generic.auto.*
 import io.circe.parser.parse
 import org.plasmalabs.shared.models.{BalanceRequestDTO, BalanceResponseDTO, FellowshipDTO, SimpleErrorDTO, TemplateDTO}
 

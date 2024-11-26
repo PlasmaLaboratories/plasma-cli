@@ -1,13 +1,13 @@
 package org.plasmalabs.cli.http
 
 import cats.Id
-import cats.effect.{IO, _}
-import io.circe.generic.auto._
-import io.circe.syntax._
+import cats.effect.{IO, *}
+import io.circe.generic.auto.*
+import io.circe.syntax.*
 import io.grpc.ManagedChannel
-import org.http4s.circe._
-import org.http4s.dsl.io._
-import org.http4s.{HttpRoutes, _}
+import org.http4s.circe.*
+import org.http4s.dsl.io.*
+import org.http4s.{HttpRoutes, *}
 import org.plasmalabs.cli.impl.WalletModeHelper
 import org.plasmalabs.sdk.dataApi.{IndexerQueryAlgebra, WalletStateAlgebra}
 import org.plasmalabs.sdk.servicekit.{FellowshipStorageApi, TemplateStorageApi}

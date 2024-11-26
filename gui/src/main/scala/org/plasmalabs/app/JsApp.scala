@@ -1,7 +1,7 @@
 package org.plasmalabs.app
 
 // import com.raquo.app.JsRouter.*
-import com.raquo.laminar.api.L._
+import com.raquo.laminar.api.L.*
 import org.scalajs.dom
 
 object JsApp {
