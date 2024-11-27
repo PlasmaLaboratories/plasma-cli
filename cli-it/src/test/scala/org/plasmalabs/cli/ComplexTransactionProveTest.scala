@@ -1,7 +1,6 @@
 package org.plasmalabs.cli
 
-import cats.effect.ExitCode
-import cats.effect.IO
+import cats.effect.{ExitCode, IO}
 import munit.CatsEffectSuite
 
 import scala.concurrent.duration.Duration
@@ -23,7 +22,7 @@ class ComplexTransactionProveTest
   }
 
   test("Move funds from alice to shared or account") {
-    import scala.concurrent.duration._
+    import scala.concurrent.duration.*
     assertIO(
       for {
         _ <- IO.println("Create a wallet for bob")
@@ -125,7 +124,7 @@ class ComplexTransactionProveTest
   }
 
   test("Move funds from alice to shared and account") {
-    import scala.concurrent.duration._
+    import scala.concurrent.duration.*
     assertIO(
       for {
         _ <- IO.println("Add a template to alice's wallet")
@@ -221,7 +220,7 @@ class ComplexTransactionProveTest
   }
 
   test("Move funds from shared or account to bob") {
-    import scala.concurrent.duration._
+    import scala.concurrent.duration.*
     assertIO(
       for {
         sharedAddressForAlice <- walletController(ALICE_WALLET)
@@ -292,7 +291,7 @@ class ComplexTransactionProveTest
   }
 
   test("Move funds from shared and account to bob") {
-    import scala.concurrent.duration._
+    import scala.concurrent.duration.*
     assertIO(
       for {
         sharedAddressForAlice <- walletController(ALICE_WALLET)

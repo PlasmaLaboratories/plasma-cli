@@ -1,14 +1,12 @@
 package org.plasmalabs.cli
 
+import cats.effect.kernel.{Resource, Sync}
 import cats.effect.{ExitCode, IO}
 import munit.CatsEffectSuite
 
+import java.io.FileInputStream
 import java.nio.file.{Files, Path, Paths}
 import scala.concurrent.duration.Duration
-
-import cats.effect.kernel.{Resource, Sync}
-
-import java.io.FileInputStream
 
 class WalletRecoveryTest extends CatsEffectSuite with WalletConstants with CommonTxOperations {
 
@@ -100,7 +98,7 @@ class WalletRecoveryTest extends CatsEffectSuite with WalletConstants with Commo
     }
 
   test("Recover wallet key and Spend Existing Funds") {
-    import scala.concurrent.duration._
+    import scala.concurrent.duration.*
     assertIO(
       for {
         _        <- IO.println("Recover wallet key")

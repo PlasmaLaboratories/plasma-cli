@@ -1,12 +1,9 @@
 package org.plasmalabs.cli
 
-import cats.effect.ExitCode
-import cats.effect.IO
+import cats.effect.{ExitCode, IO}
 import munit.CatsEffectSuite
 
-import java.nio.file.Files
-import java.nio.file.Path
-import java.nio.file.Paths
+import java.nio.file.{Files, Path, Paths}
 
 trait CommonFunctions extends PolicyTemplates {
 
@@ -24,7 +21,7 @@ trait CommonFunctions extends PolicyTemplates {
     teardown = { _ => () }
   )
 
-  import scala.concurrent.duration._
+  import scala.concurrent.duration.*
 
   def moveFundsFromGenesisToAlice(secure: Boolean = false) =
     for {

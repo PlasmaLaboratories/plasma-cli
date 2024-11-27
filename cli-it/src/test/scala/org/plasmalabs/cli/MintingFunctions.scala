@@ -1,16 +1,15 @@
 package org.plasmalabs.cli
 
-import cats.effect.ExitCode
-import cats.effect.IO
+import cats.effect.{ExitCode, IO}
+import munit.CatsEffectSuite
 import org.plasmalabs.sdk.codecs.AddressCodecs.decodeAddress
 import org.plasmalabs.sdk.utils.Encoding
-import munit.CatsEffectSuite
 
 trait MintingFunctions extends PolicyTemplates {
 
   self: CatsEffectSuite with CommonTxOperations with AliceConstants with BobConstants =>
 
-  import scala.concurrent.duration._
+  import scala.concurrent.duration.*
 
   def mintGroup(secure: Boolean = false) = for {
     _ <- IO.println("Crate a group minting policy")

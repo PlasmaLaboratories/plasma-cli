@@ -50,9 +50,9 @@ lazy val shared = crossProject(JSPlatform, JVMPlatform)
   )
   .settings(
     libraryDependencies ++= List(
-      "io.circe" %%% "circe-core" % Dependencies.circeVersion,
+      "io.circe" %%% "circe-core"    % Dependencies.circeVersion,
       "io.circe" %%% "circe-generic" % Dependencies.circeVersion,
-      "io.circe" %%% "circe-parser" % Dependencies.circeVersion
+      "io.circe" %%% "circe-parser"  % Dependencies.circeVersion
     )
   )
   .jvmSettings(
@@ -71,7 +71,7 @@ lazy val gui = project
   .settings(commonSettings)
   .settings(
     libraryDependencies ++= List(
-      "com.raquo" %%% "laminar" % Dependencies.laminarVersion,
+      "com.raquo" %%% "laminar"  % Dependencies.laminarVersion,
       "com.raquo" %%% "waypoint" % "8.0.1"
     ),
     scalaJSLinkerConfig ~= {
@@ -105,18 +105,16 @@ lazy val root = project
     name := "plasma-cli-umbrella"
   )
   .settings(noPublish)
-  .aggregate(gui, cli, shared.jvm)
+  .aggregate(gui, cli, shared.jvm) // Note that cliIT is not here, to not triger it test on test task
 
 lazy val cli = project
   .in(file("./cli"))
-  .configs(IntegrationTest)
-  .settings(Defaults.itSettings)
   .settings(commonSettings)
   .settings(
     organization := "org.plasmalabs",
     name := "plasma-cli",
     fork := true,
-    javaOptions += "-Dport=9000",
+    javaOptions += "-Dport=9000", // TODO why do we need this port, document if it is required
     resolvers ++= Seq(
       Resolver.defaultLocal,
       "Typesafe Repository" at "https://repo.typesafe.com/typesafe/releases/",
@@ -124,8 +122,7 @@ lazy val cli = project
       "Sonatype Snapshots" at "https://s01.oss.sonatype.org/content/repositories/snapshots/",
       "Sonatype Releases" at "https://s01.oss.sonatype.org/content/repositories/releases/",
       "Bintray" at "https://jcenter.bintray.com/",
-      "jitpack" at "https://jitpack.io"
-    ),
+      ),
     homepage := Some(url("https://github.com/PlasmaLaboratories/plasma-cli")),
     licenses := List("MPL2.0" -> url("https://www.mozilla.org/en-US/MPL/2.0/")),
     ThisBuild / sonatypeCredentialHost := "s01.oss.sonatype.org",
@@ -134,13 +131,13 @@ lazy val cli = project
       Developer(
         "mundacho",
         "Edmundo Lopez Bobeda",
-        "e.lopez@topl.me",
+        "el@plasma.to",
         url("https://github.com/mundacho")
       ),
       Developer(
         "DiademShoukralla",
         "Diadem Shoukralla",
-        "d.shoukralla@topl.me",
+        "ds@plasma.to",
         url("https://github.com/DiademShoukralla")
       ),
       Developer(
@@ -150,29 +147,9 @@ lazy val cli = project
         url("https://github.com/scasplte2")
       )
     ),
-    libraryDependencies ++= List(
-      plasmaSdk,
-      sdkCrypto,
-      sdkServiceKit,
-      scopt,
-      munit,
-      fs2Core,
-      fs2IO,
-      logback,
-      grpcNetty,
-      grpcRuntime,
-      sqlite,
-      munitCatsEffects,
-      fastparse,
-      circeYaml,
-      circeGenericJVM,
-      monocleCore,
-      monocleMacro,
-      http4sEmber,
-      http4sCirce,
-      http4sDsl,
-      log4cats
-    )
+    libraryDependencies ++=
+      Dependencies.Cli.sources ++
+      Dependencies.Cli.tests
   )
   .settings(
     assembly / mainClass := Some("org.plasmalabs.plasma.cli.Main"),
@@ -190,6 +167,18 @@ lazy val cli = project
     }
   )
   .dependsOn(shared.jvm)
+
+lazy val cliIt = project
+  .in(file("cli-it"))
+  .settings(
+    name := "cli-it",
+    commonSettings,
+    fork := true,
+    javaOptions += "-Dport=9000", // TODO why do we need this port, document if it is required
+    libraryDependencies ++= Dependencies.CliIt.tests
+  ).dependsOn(
+    cli
+  )
 
 lazy val noPublish = Seq(
   publishLocal / skip := true,
@@ -229,10 +218,9 @@ buildClient := {
   // even after the server is packaged in a fat jar.
   IO.copyDirectory(
     source = (gui / baseDirectory).value / "dist",
-    target =
-      (cli / baseDirectory).value / "src" / "main" / "resources" / "static"
+    target = (cli / baseDirectory).value / "src" / "main" / "resources" / "static"
   )
 }
 
-addCommandAlias("checkPR", s"; scalafixAll --check; scalafmtCheckAll; test")
-addCommandAlias("preparePR", s"; scalafixAll; scalafmtAll; test")
+addCommandAlias("checkPR", s"; scalafixAll --check; scalafmtCheckAll; cliIt/scalafixAll --check; cliIt/scalafmtCheckAll; cli/test")
+addCommandAlias("preparePR", s"; scalafixAll; scalafmtAll; cliIt/scalafixAll; cliIt/scalafmtAll; cli/test")

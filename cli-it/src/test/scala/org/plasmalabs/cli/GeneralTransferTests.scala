@@ -1,10 +1,10 @@
 package org.plasmalabs.cli
 
-import cats.effect.ExitCode
+import cats.effect.{ExitCode, IO}
 import munit.CatsEffectSuite
-import cats.effect.IO
 import org.plasmalabs.sdk.codecs.AddressCodecs.decodeAddress
 import org.plasmalabs.sdk.utils.Encoding
+
 import scala.concurrent.duration.Duration
 
 class GeneralTransferTests
@@ -30,7 +30,7 @@ class GeneralTransferTests
   }
 
   test("Move group asset from alice to bob") {
-    import scala.concurrent.duration._
+    import scala.concurrent.duration.*
     assertIO(
       for {
         _ <- IO.println("Create a wallet for bob")
@@ -95,7 +95,7 @@ class GeneralTransferTests
   }
 
   test("Move series asset from alice to bob") {
-    import scala.concurrent.duration._
+    import scala.concurrent.duration.*
     assertIO(
       for {
         ALICE_CURRENT_ADDRESS <- walletController(ALICE_WALLET)
@@ -157,7 +157,7 @@ class GeneralTransferTests
   }
 
   test("Move asset from alice to bob") {
-    import scala.concurrent.duration._
+    import scala.concurrent.duration.*
     assertIO(
       for {
         ALICE_CURRENT_ADDRESS <- walletController(ALICE_WALLET)

@@ -1,15 +1,12 @@
 package org.plasmalabs.cli
 
-import cats.effect.ExitCode
-import cats.effect.IO
 import cats.effect.kernel.Resource
+import cats.effect.{ExitCode, IO}
+import munit.CatsEffectSuite
 import org.plasmalabs.sdk.codecs.AddressCodecs.decodeAddress
 import org.plasmalabs.sdk.utils.Encoding
-import munit.CatsEffectSuite
 
-import java.nio.file.Files
-import java.nio.file.Path
-import java.nio.file.Paths
+import java.nio.file.{Files, Path, Paths}
 import scala.concurrent.duration.Duration
 import scala.io.Source
 
@@ -34,7 +31,7 @@ class ComplexTransactionWithFileTest
   override val munitIOTimeout = Duration(180, "s")
 
   tmpDirectory.test("Move funds from genesis to alice with complex tx") { _ =>
-    import scala.concurrent.duration._
+    import scala.concurrent.duration.*
     assertIO(
       for {
         _ <- IO.println("Create a wallet for alice")
@@ -120,7 +117,7 @@ class ComplexTransactionWithFileTest
   }
 
   test("Move funds from alice to shared or and and account with complex tx") {
-    import scala.concurrent.duration._
+    import scala.concurrent.duration.*
     assertIO(
       for {
         _ <- IO.println("Create a wallet for bob")
@@ -330,7 +327,7 @@ class ComplexTransactionWithFileTest
   }
 
   test("Move funds from shared or and and account with complex tx") {
-    import scala.concurrent.duration._
+    import scala.concurrent.duration.*
     assertIO(
       for {
         bobAddress <- walletController(BOB_WALLET)

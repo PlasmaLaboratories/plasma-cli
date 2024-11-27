@@ -1,11 +1,9 @@
 package org.plasmalabs.cli
 
+import cats.effect.ExitCode
 import munit.CatsEffectSuite
 
-import java.nio.file.Files
-import java.nio.file.Path
-import java.nio.file.Paths
-import cats.effect.ExitCode
+import java.nio.file.{Files, Path, Paths}
 
 class WalletDigestPropositionTest extends CatsEffectSuite with WalletConstants with CommonTxOperations {
 
