@@ -30,7 +30,7 @@ object Dependencies {
   val fs2Core = "co.fs2" %% "fs2-core" % "3.11.0"
   val fs2IO = "co.fs2" %% "fs2-io" % "3.11.0"
   val logback = "ch.qos.logback" % "logback-classic" % "1.5.12"
-  val sqlite = "org.xerial" % "sqlite-jdbc" % "3.47.0.0"
+  val sqlite = "org.xerial" % "sqlite-jdbc" % "3.47.1.0"
   val fastparse = "com.lihaoyi" %% "fastparse" % "3.1.1"
   val munitCatsEffects ="org.typelevel" %% "munit-cats-effect" % "2.0.0" % "it,test"
   val circeYaml = "io.circe" %% "circe-yaml-v12" % "1.15.0"
