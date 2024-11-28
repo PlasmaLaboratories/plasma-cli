@@ -1,20 +1,20 @@
 package org.plasmalabs.cli
 
-import cats.effect.ExitCode
-import cats.effect.IO
+import cats.effect.{ExitCode, IO}
 import munit.CatsEffectSuite
 
+import java.nio.file.{Files, Paths}
 import scala.concurrent.duration.Duration
-import java.nio.file.Files
-import java.nio.file.Paths
 
 class DigestTransactionTest
     extends CatsEffectSuite
     with CommonFunctions
     with AliceConstants
+    with BobConstants
     with CommonTxOperations
-    with BobConstants {
-  override val munitIOTimeout = Duration(180, "s")
+    with CommonFunFixture {
+
+  override val munitIOTimeout: Duration = Duration(180, "s")
 
   tmpDirectory.test("Move funds from genesis to alice") { _ =>
     assertIO(
@@ -24,7 +24,7 @@ class DigestTransactionTest
   }
 
   test("Move funds from alice to digest locked account") {
-    import scala.concurrent.duration._
+    import scala.concurrent.duration.*
     assertIO(
       for {
         _ <- IO.println("Create a wallet for bob")
@@ -108,7 +108,7 @@ class DigestTransactionTest
   }
 
   test("Move funds from digest locked account to bob's normal account") {
-    import scala.concurrent.duration._
+    import scala.concurrent.duration.*
     assertIO(
       for {
         _ <- assertIO(

@@ -1,33 +1,18 @@
 package org.plasmalabs.cli
 
+import cats.effect.kernel.{Resource, Sync}
 import cats.effect.{ExitCode, IO}
 import munit.CatsEffectSuite
 
-import java.nio.file.{Files, Path, Paths}
-import scala.concurrent.duration.Duration
-
-import cats.effect.kernel.{Resource, Sync}
-
 import java.io.FileInputStream
+import java.nio.file.{Files, Paths}
+import scala.concurrent.duration.*
 
-class WalletRecoveryTest extends CatsEffectSuite with WalletConstants with CommonTxOperations {
+class WalletRecoveryTest extends CatsEffectSuite with WalletConstants with CommonTxOperations with CommonFunFixture {
 
-  val tmpDirectory = FunFixture[Path](
-    setup = { _ =>
-      val tmpDir = Paths.get(TMP_DIR).toFile()
-      if (tmpDir.exists()) {
-        Paths.get(TMP_DIR).toFile().listFiles().map(_.delete()).mkString("\n")
-        Files.deleteIfExists(Paths.get(TMP_DIR))
-      }
-      Files.createDirectory(Paths.get(TMP_DIR))
-    },
-    teardown = { _ => () }
-  )
-
-  override val munitIOTimeout = Duration(180, "s")
+  override val munitIOTimeout: Duration = Duration(180, "s")
 
   tmpDirectory.test("Initialize wallet and Move funds from genesis") { _ =>
-    import scala.concurrent.duration._
     assertIO(
       for {
         _ <- createWallet().run(walletContext)
@@ -100,7 +85,6 @@ class WalletRecoveryTest extends CatsEffectSuite with WalletConstants with Commo
     }
 
   test("Recover wallet key and Spend Existing Funds") {
-    import scala.concurrent.duration._
     assertIO(
       for {
         _        <- IO.println("Recover wallet key")

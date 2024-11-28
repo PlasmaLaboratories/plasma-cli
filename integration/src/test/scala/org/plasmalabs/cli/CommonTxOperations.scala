@@ -1,13 +1,14 @@
 package org.plasmalabs.cli
 
 import cats.data.Kleisli
-import cats.effect.ExitCode
-import cats.effect.IO
+import cats.effect.{ExitCode, IO}
 import org.plasmalabs.cli.controllers.WalletController
-import org.plasmalabs.cli.modules.TransactionBuilderApiModule
-import org.plasmalabs.cli.modules.WalletAlgebraModule
-import org.plasmalabs.cli.modules.WalletManagementUtilsModule
-import org.plasmalabs.cli.modules.WalletStateAlgebraModule
+import org.plasmalabs.cli.modules.{
+  TransactionBuilderApiModule,
+  WalletAlgebraModule,
+  WalletManagementUtilsModule,
+  WalletStateAlgebraModule
+}
 import org.plasmalabs.sdk.dataApi.{IndexerQueryAlgebra, RpcChannelResource}
 
 trait CommonTxOperations

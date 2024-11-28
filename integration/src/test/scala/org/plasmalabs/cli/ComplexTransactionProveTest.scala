@@ -1,7 +1,6 @@
 package org.plasmalabs.cli
 
-import cats.effect.ExitCode
-import cats.effect.IO
+import cats.effect.{ExitCode, IO}
 import munit.CatsEffectSuite
 
 import scala.concurrent.duration.Duration
@@ -10,10 +9,11 @@ class ComplexTransactionProveTest
     extends CatsEffectSuite
     with CommonFunctions
     with AliceConstants
+    with BobConstants
     with CommonTxOperations
-    with BobConstants {
+    with CommonFunFixture {
 
-  override val munitIOTimeout = Duration(180, "s")
+  override val munitIOTimeout: Duration = Duration(180, "s")
 
   tmpDirectory.test("Move funds from genesis to alice") { _ =>
     assertIO(
@@ -23,7 +23,7 @@ class ComplexTransactionProveTest
   }
 
   test("Move funds from alice to shared or account") {
-    import scala.concurrent.duration._
+    import scala.concurrent.duration.*
     assertIO(
       for {
         _ <- IO.println("Create a wallet for bob")
@@ -125,7 +125,7 @@ class ComplexTransactionProveTest
   }
 
   test("Move funds from alice to shared and account") {
-    import scala.concurrent.duration._
+    import scala.concurrent.duration.*
     assertIO(
       for {
         _ <- IO.println("Add a template to alice's wallet")
@@ -221,7 +221,7 @@ class ComplexTransactionProveTest
   }
 
   test("Move funds from shared or account to bob") {
-    import scala.concurrent.duration._
+    import scala.concurrent.duration.*
     assertIO(
       for {
         sharedAddressForAlice <- walletController(ALICE_WALLET)
@@ -292,7 +292,7 @@ class ComplexTransactionProveTest
   }
 
   test("Move funds from shared and account to bob") {
-    import scala.concurrent.duration._
+    import scala.concurrent.duration.*
     assertIO(
       for {
         sharedAddressForAlice <- walletController(ALICE_WALLET)

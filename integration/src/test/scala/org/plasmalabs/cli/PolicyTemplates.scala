@@ -1,8 +1,9 @@
 package org.plasmalabs.cli
 
-import cats.effect.kernel.Resource
-import java.io.PrintWriter
 import cats.effect.IO
+import cats.effect.kernel.Resource
+
+import java.io.PrintWriter
 
 trait PolicyTemplates {
 
