@@ -114,7 +114,7 @@ lazy val cli = project
     organization := "org.plasmalabs",
     name := "plasma-cli",
     fork := true,
-    javaOptions += "-Dport=9000", // TODO why do we need this port, document if it is required
+    javaOptions += "-Dport=9000", // needed for the cli UI
     resolvers ++= Seq(
       Resolver.defaultLocal,
       "Typesafe Repository" at "https://repo.typesafe.com/typesafe/releases/",
@@ -139,12 +139,6 @@ lazy val cli = project
         "Diadem Shoukralla",
         "ds@plasma.to",
         url("https://github.com/DiademShoukralla")
-      ),
-      Developer(
-        "scasplte2",
-        "James Aman",
-        "j.aman@topl.me",
-        url("https://github.com/scasplte2")
       )
     ),
     libraryDependencies ++=
@@ -168,14 +162,14 @@ lazy val cli = project
   )
   .dependsOn(shared.jvm)
 
-lazy val cliIt = project
-  .in(file("cli-it"))
+lazy val integration = project
+  .in(file("./integration"))
   .settings(
-    name := "cli-it",
+    name := "integration",
     commonSettings,
     fork := true,
-    javaOptions += "-Dport=9000", // TODO why do we need this port, document if it is required
-    libraryDependencies ++= Dependencies.CliIt.tests
+    javaOptions += "-Dport=9000", // needed for the cli UI
+    libraryDependencies ++= Dependencies.Inegration.tests
   ).dependsOn(
     cli
   )
@@ -222,5 +216,5 @@ buildClient := {
   )
 }
 
-addCommandAlias("checkPR", s"; scalafixAll --check; scalafmtCheckAll; cliIt/scalafixAll --check; cliIt/scalafmtCheckAll; cli/test")
-addCommandAlias("preparePR", s"; scalafixAll; scalafmtAll; cliIt/scalafixAll; cliIt/scalafmtAll; cli/test")
+addCommandAlias("checkPR", s"; scalafixAll --check; scalafmtCheckAll; integration/scalafixAll --check; integration/scalafmtCheckAll; cli/test")
+addCommandAlias("preparePR", s"; scalafixAll; scalafmtAll; integration/scalafixAll; integration/scalafmtAll; cli/test")

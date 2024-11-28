@@ -7,31 +7,19 @@ import org.plasmalabs.sdk.codecs.AddressCodecs.decodeAddress
 import org.plasmalabs.sdk.utils.Encoding
 
 import java.nio.file.{Files, Path, Paths}
-import scala.concurrent.duration.Duration
+import scala.concurrent.duration.*
 import scala.io.Source
 
 class ComplexTransactionWithFileTest
     extends CatsEffectSuite
-    with CommonTxOperations
+    with CommonFunctions
     with AliceConstants
     with BobConstants
     with ComplexTransactionTemplates {
 
-  val tmpDirectory = FunFixture[Path](
-    setup = { _ =>
-      val tmpDir = Paths.get(TMP_DIR).toFile()
-      if (tmpDir.exists()) {
-        Paths.get(TMP_DIR).toFile().listFiles().map(_.delete()).mkString("\n")
-        Files.deleteIfExists(Paths.get(TMP_DIR))
-      }
-      Files.createDirectory(Paths.get("./tmp"))
-    },
-    teardown = { _ => () }
-  )
   override val munitIOTimeout = Duration(180, "s")
 
   tmpDirectory.test("Move funds from genesis to alice with complex tx") { _ =>
-    import scala.concurrent.duration.*
     assertIO(
       for {
         _ <- IO.println("Create a wallet for alice")
@@ -327,7 +315,6 @@ class ComplexTransactionWithFileTest
   }
 
   test("Move funds from shared or and and account with complex tx") {
-    import scala.concurrent.duration.*
     assertIO(
       for {
         bobAddress <- walletController(BOB_WALLET)

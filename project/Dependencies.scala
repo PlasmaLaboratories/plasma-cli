@@ -67,7 +67,7 @@ object Dependencies {
     val tests: Seq[ModuleID] = Seq(munit, munitCatsEffects).map(_ % Test)
   }
 
-  object CliIt {
+  object Inegration {
     val tests: Seq[ModuleID] = Seq(plasmaSdk, fs2Core, munit, munitCatsEffects).map(_ % Test)
   }
 

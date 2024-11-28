@@ -4,6 +4,7 @@ import cats.effect.{ExitCode, IO}
 import munit.CatsEffectSuite
 
 import java.nio.file.{Files, Path, Paths}
+import scala.concurrent.duration.*
 
 trait CommonFunctions extends PolicyTemplates {
 
@@ -20,8 +21,6 @@ trait CommonFunctions extends PolicyTemplates {
     },
     teardown = { _ => () }
   )
-
-  import scala.concurrent.duration.*
 
   def moveFundsFromGenesisToAlice(secure: Boolean = false) =
     for {
