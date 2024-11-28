@@ -12,9 +12,10 @@ class MintingTests
     with CommonTxOperations
     with AliceConstants
     with BobConstants
-    with PolicyTemplates {
+    with PolicyTemplates
+    with CommonFunFixture {
 
-  override val munitIOTimeout = Duration(180, "s")
+  override val munitIOTimeout: Duration = Duration(180, "s")
 
   val secure = false
 

@@ -9,10 +9,11 @@ class ComplexTransactionProveTest
     extends CatsEffectSuite
     with CommonFunctions
     with AliceConstants
+    with BobConstants
     with CommonTxOperations
-    with BobConstants {
+    with CommonFunFixture {
 
-  override val munitIOTimeout = Duration(180, "s")
+  override val munitIOTimeout: Duration = Duration(180, "s")
 
   tmpDirectory.test("Move funds from genesis to alice") { _ =>
     assertIO(

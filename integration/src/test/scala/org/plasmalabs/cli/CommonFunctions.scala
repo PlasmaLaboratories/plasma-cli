@@ -3,24 +3,11 @@ package org.plasmalabs.cli
 import cats.effect.{ExitCode, IO}
 import munit.CatsEffectSuite
 
-import java.nio.file.{Files, Path, Paths}
 import scala.concurrent.duration.*
 
 trait CommonFunctions extends PolicyTemplates {
 
   self: CatsEffectSuite with CommonTxOperations with AliceConstants with BobConstants =>
-
-  val tmpDirectory = FunFixture[Path](
-    setup = { _ =>
-      val tmpDir = Paths.get(TMP_DIR).toFile()
-      if (tmpDir.exists()) {
-        Paths.get(TMP_DIR).toFile().listFiles().map(_.delete()).mkString("\n")
-        Files.deleteIfExists(Paths.get(TMP_DIR))
-      }
-      Files.createDirectory(Paths.get("./tmp"))
-    },
-    teardown = { _ => () }
-  )
 
   def moveFundsFromGenesisToAlice(secure: Boolean = false) =
     for {

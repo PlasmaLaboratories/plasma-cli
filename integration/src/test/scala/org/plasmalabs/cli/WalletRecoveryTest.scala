@@ -5,15 +5,12 @@ import cats.effect.{ExitCode, IO}
 import munit.CatsEffectSuite
 
 import java.io.FileInputStream
-import java.nio.file.{Files, Path, Paths}
+import java.nio.file.{Files, Paths}
 import scala.concurrent.duration.*
 
-class WalletRecoveryTest
-  extends CatsEffectSuite
-    with WalletConstants
-    with CommonFunctions {
+class WalletRecoveryTest extends CatsEffectSuite with WalletConstants with CommonTxOperations with CommonFunFixture {
 
-  override val munitIOTimeout = Duration(180, "s")
+  override val munitIOTimeout: Duration = Duration(180, "s")
 
   tmpDirectory.test("Initialize wallet and Move funds from genesis") { _ =>
     assertIO(

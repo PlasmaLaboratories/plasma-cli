@@ -6,18 +6,19 @@ import munit.CatsEffectSuite
 import org.plasmalabs.sdk.codecs.AddressCodecs.decodeAddress
 import org.plasmalabs.sdk.utils.Encoding
 
-import java.nio.file.{Files, Path, Paths}
 import scala.concurrent.duration.*
 import scala.io.Source
 
 class ComplexTransactionWithFileTest
     extends CatsEffectSuite
     with CommonFunctions
+    with CommonTxOperations
     with AliceConstants
     with BobConstants
-    with ComplexTransactionTemplates {
+    with ComplexTransactionTemplates
+    with CommonFunFixture {
 
-  override val munitIOTimeout = Duration(180, "s")
+  override val munitIOTimeout: Duration = Duration(180, "s")
 
   tmpDirectory.test("Move funds from genesis to alice with complex tx") { _ =>
     assertIO(
