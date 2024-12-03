@@ -16,9 +16,11 @@ jobs:
           java-version: 21
           cache: sbt
       - uses: sbt/setup-sbt@v1
+        with:
+          sbt-runner-version: 1.10.6
       - name: Run unit tests
         run: sbt "checkPR"
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: unit-test-reports
           path: cli/target/test-reports/
@@ -42,9 +44,11 @@ jobs:
           java-version: 21
           cache: sbt
       - uses: sbt/setup-sbt@v1
+        with:
+          sbt-runner-version: 1.10.6
       - name: Run integration tests
         run: sbt "integration / test"
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v4
         with:
           path: integration/target/test-reports/
           name: unit-test-reports
@@ -68,6 +72,8 @@ jobs:
           java-version: 21
           cache: sbt
       - uses: sbt/setup-sbt@v1
+        with:
+          sbt-runner-version: 1.10.6
       - name: Deploy 
         run: sbt "buildClient; ci-release"
         env:
@@ -99,8 +105,8 @@ jobs:
     needs: [ unit-test, integration-test ]
     if: startsWith(github.ref, 'refs/tags/v')
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: 18
           cache: npm
