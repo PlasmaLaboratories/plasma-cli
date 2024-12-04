@@ -51,8 +51,10 @@ object Main
               nodeQuerySubcmd(params)
             case PlasmaCliMode.server =>
               serverSubcmd(params)
+            case PlasmaCliMode.help =>
+              IO.pure(Right(OParser.usage(PlasmaCliParamsParserModule.helpMode)))
             case _ =>
-              IO(OParser.runEffects(effects)) >> IO.pure(Left("Invalid mode"))
+              IO(OParser.runEffects(effects)) >> IO.pure(Left("Invalid mode, try 'help' for more information"))
           }
         import cats.implicits._
         for {

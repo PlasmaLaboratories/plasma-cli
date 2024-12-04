@@ -9,7 +9,8 @@ import scala.collection.immutable.IndexedSeq
 object PlasmaCliMode extends Enumeration {
   type PlasmaCliMode = Value
 
-  val invalid, wallet, indexerquery, nodequery, simpletransaction, simpleminting, fellowships, templates, tx, server =
+  val invalid, wallet, indexerquery, nodequery, simpletransaction, simpleminting, fellowships, templates, tx, server,
+    help =
     Value
 }
 
@@ -44,20 +45,8 @@ case object NetworkIdentifiers {
 
 case object Mainnet extends NetworkIdentifiers(0, "mainnet", NetworkConstants.MAIN_NETWORK_ID)
 case object Testnet extends NetworkIdentifiers(1, "testnet", NetworkConstants.TEST_NETWORK_ID)
-
-case object Privatenet
-    extends NetworkIdentifiers(
-      2,
-      "private",
-      NetworkConstants.PRIVATE_NETWORK_ID
-    )
-
-case object InvalidNet
-    extends NetworkIdentifiers(
-      -1,
-      "invalid",
-      NetworkConstants.PRIVATE_NETWORK_ID
-    )
+case object Privatenet extends NetworkIdentifiers(2, "private", NetworkConstants.PRIVATE_NETWORK_ID)
+case object InvalidNet extends NetworkIdentifiers(-1, "invalid", NetworkConstants.PRIVATE_NETWORK_ID)
 
 object TokenType extends Enumeration {
   type TokenType = Value
@@ -78,7 +67,7 @@ object DigestType {
 sealed abstract class DigestType(
   val shortName:        String,
   val digestIdentifier: String
-) {}
+)
 
 case object Sha256 extends DigestType("sha256", "Sha256")
 case object Blake2b extends DigestType("blake2b", "Blake2b256")

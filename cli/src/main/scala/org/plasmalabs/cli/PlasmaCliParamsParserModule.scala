@@ -917,6 +917,21 @@ object PlasmaCliParamsParserModule {
         )
     }
 
+  val helpMode: OParser[Unit, PlasmaCliParams] = cmd("help")
+    .action((_, c) => c.copy(mode = PlasmaCliMode.help))
+    .text("""Welcome to Plasma-Cli
+        |Valid modes are:
+        |   - templates: Template mode
+        |   - fellowships: Fellowship mode
+        |   - indexer-query: Indexer query mode
+        |   - node-query: Node query mode
+        |   - wallet: Wallet mode
+        |   - tx: Transaction mode
+        |   - simple-transaction: Simple transaction mode
+        |   - simple-minting: Simple minting mode
+        |   - server: Server mode
+        |""".stripMargin)
+
   val paramParser =
     OParser.sequence(
       templatesMode,
@@ -927,6 +942,7 @@ object PlasmaCliParamsParserModule {
       transactionMode,
       simpleTransactionMode,
       simpleMintingMode,
-      serverMode
+      serverMode,
+      helpMode
     )
 }
