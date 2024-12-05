@@ -146,7 +146,7 @@ lazy val cli = project
       Dependencies.Cli.tests
   )
   .settings(
-    assembly / mainClass := Some("org.plasmalabs.plasma.cli.Main"),
+    assembly / mainClass := Some("org.plasmalabs.cli.Main"),
     assembly / assemblyJarName := "plasmacli.jar",
 
     // Gets rid of "(server / assembly) deduplicate: different file contents found in the following" errors
