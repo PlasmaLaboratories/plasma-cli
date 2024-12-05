@@ -6,7 +6,7 @@ object Dependencies {
   val laminarVersion = "17.1.0"
   val circeVersion = "0.15.0-M1"
   val monocleVersion = "3.3.0"
-  val htt4sVersion = "0.23.29"
+  val htt4sVersion = "0.23.30"
 
   private val monocleCore = "dev.optics"  %% "monocle-core"  % monocleVersion
   private val monocleMacro = "dev.optics" %% "monocle-macro" % monocleVersion
