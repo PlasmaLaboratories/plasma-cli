@@ -4,8 +4,6 @@ target/
 .bloop/
 keyfile.json
 .vscode/
-.bloop/
-target/
 *.db
 *_vk.txt
 vk.txt
@@ -14,6 +12,7 @@ vk.txt
 *.log
 *.worksheet.sc
 tmp/
+bin/
 *.vk
 mnemonic.txt
 grouppolicy.yaml
