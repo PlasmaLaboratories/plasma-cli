@@ -2,7 +2,6 @@ package org.plasmalabs.cli.controllers
 
 import cats.Monad
 import cats.effect.IO
-import cats.effect.kernel.Sync
 import munit.CatsEffectSuite
 import org.plasmalabs.cli.impl.SimpleMintingAlgebra
 import org.plasmalabs.cli.mockbase.BaseWalletStateAlgebra
@@ -101,7 +100,6 @@ class SimpleMintingControllerSpec
 
   private def simpleMintingAlgebra(
   ) = SimpleMintingAlgebra.make[IO](
-    Sync[IO],
     walletApi,
     makeWalletStateAlgebraMockWithAddress[IO],
     walletManagementUtils,

@@ -5,13 +5,11 @@ import org.plasmalabs.sdk.dataApi.WalletStateAlgebra
 import org.plasmalabs.sdk.models.Indices
 import org.plasmalabs.sdk.models.box.Lock
 
-trait WalletApiHelpers[F[_]] {
+trait WalletApiHelpers[F[_]: Monad] {
 
   import cats.implicits._
 
   val wsa: WalletStateAlgebra[F]
-
-  implicit val m: Monad[F]
 
   def getCurrentIndices(
     fromFellowship:      String,

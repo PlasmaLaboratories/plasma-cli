@@ -65,11 +65,11 @@ trait ServerModule extends FellowshipsModeModule with WalletModeModule with Full
         input.amount.toLong,
         input.fee.toLong,
         input.token,
-        Files.createTempFile("txFile", ".pbuf").toAbsolutePath().toString(),
+        Files.createTempFile("txFile", ".pbuf").toAbsolutePath.toString,
         Files
           .createTempFile("provedTxFile", ".pbuf")
-          .toAbsolutePath()
-          .toString(),
+          .toAbsolutePath
+          .toString,
         validateParams.host,
         validateParams.nodePort,
         validateParams.secureConnection

@@ -1,6 +1,5 @@
 package org.plasmalabs.cli.impl
 
-import cats.Monad
 import cats.effect.kernel.Sync
 import com.google.protobuf.ByteString
 import io.circe.Json
@@ -54,8 +53,7 @@ object SimpleMintingAlgebra {
 
   import cats.implicits._
 
-  def make[F[_]](
-    psync:                 Sync[F],
+  def make[F[_]: Sync](
     walletApi:             WalletApi[F],
     walletStateApi:        WalletStateAlgebra[F],
     walletManagementUtils: WalletManagementUtils[F],
@@ -66,10 +64,6 @@ object SimpleMintingAlgebra {
     with GroupMintingOps[F]
     with SeriesMintingOps[F]
     with AssetMintingOps[F] {
-
-    implicit override val sync: cats.effect.kernel.Sync[F] = psync
-
-    implicit val m: Monad[F] = sync
 
     val wsa: WalletStateAlgebra[F] = walletStateApi
 

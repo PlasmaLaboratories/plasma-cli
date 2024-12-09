@@ -5,7 +5,7 @@ import org.plasmalabs.sdk.dataApi.{IndexerQueryAlgebra, RpcChannelResource}
 
 trait IndexerQueryAlgebraModule extends RpcChannelResource {
 
-  def indexerQueryAlgebra(host: String, port: Int, secureConnection: Boolean) =
+  def indexerQueryAlgebra(host: String, port: Int, secureConnection: Boolean): IndexerQueryAlgebra[IO] =
     IndexerQueryAlgebra.make[IO](
       channelResource(
         host,

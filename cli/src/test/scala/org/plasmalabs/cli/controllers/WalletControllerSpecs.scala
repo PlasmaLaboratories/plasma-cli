@@ -11,21 +11,18 @@ import org.plasmalabs.cli.mockbase.{
   BaseWalletManagementUtils,
   BaseWalletStateAlgebra
 }
-import org.plasmalabs.cli.modules.WalletKeyApiModule
+import org.plasmalabs.cli.modules.WalletApiModule
 import org.plasmalabs.cli.params.models.DigestType
 import org.plasmalabs.quivr.models.{KeyPair, Preimage, Proposition}
 import org.plasmalabs.sdk.models.Indices
 import org.plasmalabs.sdk.utils.Encoding
-import org.plasmalabs.sdk.wallet.WalletApi
 
 import java.nio.file.{Files, Paths}
 import scala.io.Source
 
-class WalletControllerSpecs extends CatsEffectSuite with WalletKeyApiModule {
+class WalletControllerSpecs extends CatsEffectSuite with WalletApiModule {
 
-  val walletApi = WalletApi.make[IO](walletKeyApi)
-
-  val keyPair = (for {
+  private val keyPair = (for {
     w <- EitherT(walletApi.createNewWallet("test".getBytes(), None))
     keyPair <- EitherT(
       walletApi.extractMainKey(
@@ -35,7 +32,7 @@ class WalletControllerSpecs extends CatsEffectSuite with WalletKeyApiModule {
     )
   } yield keyPair).value.map(_.toOption.get)
 
-  val tmpDirectory = FunFixture[Boolean](
+  private val tmpDirectory = FunFixture[Boolean](
     setup = { _ =>
       if (Files.exists(Paths.get("test.vk"))) {
         Files.deleteIfExists(Paths.get("test.vk"))

@@ -14,7 +14,7 @@ trait TransactionAlgebraModule
     host:             String,
     port:             Int,
     secureConnection: Boolean
-  ) = TransactionAlgebra
+  ): TransactionAlgebra[IO] = TransactionAlgebra
     .make[IO](
       walletApi,
       walletStateAlgebra(walletFile),
