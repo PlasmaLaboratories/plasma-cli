@@ -2,23 +2,24 @@ package org.plasmalabs.cli.modules
 
 import cats.effect.IO
 import org.plasmalabs.cli.controllers.SimpleTransactionController
-import org.plasmalabs.cli.{PlasmaCliParams, PlasmaCliParamsParserModule, PlasmaCliSubCmd}
+import org.plasmalabs.cli.params.CliParamsParser
+import org.plasmalabs.cli.params.models.*
 import scopt.OParser
 
 trait SimpleTransactionModeModule extends SimpleTransactionAlgebraModule with WalletStateAlgebraModule {
 
   def simpleTransactionSubcmds(
-    validateParams: PlasmaCliParams
+    validateParams: CliParams
   ): IO[Either[String, String]] = validateParams.subcmd match {
-    case PlasmaCliSubCmd.invalid =>
+    case CliSubCmd.invalid =>
       IO.pure(
         Left(
           OParser.usage(
-            PlasmaCliParamsParserModule.simpleTransactionMode
+            CliParamsParser.simpleTransactionMode
           ) + "\nA subcommand needs to be specified"
         )
       )
-    case PlasmaCliSubCmd.create =>
+    case CliSubCmd.create =>
       new SimpleTransactionController(
         walletStateAlgebra(
           validateParams.walletFile

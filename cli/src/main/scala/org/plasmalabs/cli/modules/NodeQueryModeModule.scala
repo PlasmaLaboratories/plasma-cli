@@ -2,14 +2,15 @@ package org.plasmalabs.cli.modules
 
 import cats.effect.IO
 import org.plasmalabs.cli.controllers.NodeQueryController
-import org.plasmalabs.cli.{PlasmaCliParams, PlasmaCliParamsParserModule, PlasmaCliSubCmd}
+import org.plasmalabs.cli.params.CliParamsParser
+import org.plasmalabs.cli.params.models.*
 import org.plasmalabs.sdk.dataApi.{NodeQueryAlgebra, RpcChannelResource}
 import scopt.OParser
 
 trait NodeQueryModeModule extends RpcChannelResource {
 
   def nodeQuerySubcmd(
-    validateParams: PlasmaCliParams
+    validateParams: CliParams
   ): IO[Either[String, String]] = {
     val nodeQueryAlgebra = NodeQueryAlgebra.make[IO](
       channelResource(
@@ -19,28 +20,28 @@ trait NodeQueryModeModule extends RpcChannelResource {
       )
     )
     validateParams.subcmd match {
-      case PlasmaCliSubCmd.invalid =>
+      case CliSubCmd.invalid =>
         IO.pure(
           Left(
             OParser.usage(
-              PlasmaCliParamsParserModule.nodeQueryMode
+              CliParamsParser.nodeQueryMode
             ) + "\nA subcommand needs to be specified"
           )
         )
-      case PlasmaCliSubCmd.mintblock =>
+      case CliSubCmd.mintblock =>
         new NodeQueryController(nodeQueryAlgebra)
           .makeBlocks(
             validateParams.nbOfBlocks
           )
-      case PlasmaCliSubCmd.blockbyheight =>
+      case CliSubCmd.blockbyheight =>
         new NodeQueryController(
           nodeQueryAlgebra
         ).blockByHeight(validateParams.height)
-      case PlasmaCliSubCmd.blockbyid =>
+      case CliSubCmd.blockbyid =>
         new NodeQueryController(
           nodeQueryAlgebra
         ).blockById(validateParams.blockId)
-      case PlasmaCliSubCmd.transactionbyid =>
+      case CliSubCmd.transactionbyid =>
         new NodeQueryController(
           nodeQueryAlgebra
         ).fetchTransaction(validateParams.transactionId)

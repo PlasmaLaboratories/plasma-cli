@@ -3,14 +3,16 @@ package org.plasmalabs.cli.impl
 import cats.effect.IO
 import cats.effect.kernel.Resource
 import munit.CatsEffectSuite
+import org.plasmalabs.cli.modules.ParserModule
+import org.plasmalabs.cli.parsers.InvalidHex
 import org.plasmalabs.sdk.constants.NetworkConstants
 
-class GroupPolicyInternalParserSpec extends CatsEffectSuite with GroupPolicyParserModule {
+class GroupPolicyInternalParserSpec extends CatsEffectSuite with ParserModule.Group {
 
   test(
     "parseGroupPolicy should support transactions with no fixed series"
   ) {
-    val parser = groupPolicyParserAlgebra(NetworkConstants.PRIVATE_NETWORK_ID)
+    val parser = groupPolicyParser(NetworkConstants.PRIVATE_NETWORK_ID)
     assertIO(
       parser
         .parseGroupPolicy(
@@ -30,7 +32,7 @@ class GroupPolicyInternalParserSpec extends CatsEffectSuite with GroupPolicyPars
   test(
     "parseGroupPolicy should support transactions with fixed series"
   ) {
-    val parser = groupPolicyParserAlgebra(NetworkConstants.PRIVATE_NETWORK_ID)
+    val parser = groupPolicyParser(NetworkConstants.PRIVATE_NETWORK_ID)
     assertIO(
       parser
         .parseGroupPolicy(
@@ -50,7 +52,7 @@ class GroupPolicyInternalParserSpec extends CatsEffectSuite with GroupPolicyPars
   test(
     "parseGroupPolicy should fail if fixed seriesl too large"
   ) {
-    val parser = groupPolicyParserAlgebra(NetworkConstants.PRIVATE_NETWORK_ID)
+    val parser = groupPolicyParser(NetworkConstants.PRIVATE_NETWORK_ID)
     assertIO(
       parser
         .parseGroupPolicy(

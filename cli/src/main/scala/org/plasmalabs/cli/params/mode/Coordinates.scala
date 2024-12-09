@@ -1,15 +1,15 @@
 package org.plasmalabs.cli.params.mode
 
-import org.plasmalabs.cli.{PlasmaCliMode, PlasmaCliParams, PlasmaCliSubCmd}
+import org.plasmalabs.cli.params.models.*
 import scopt.{OParser, OParserBuilder}
 
 trait Coordinates extends Args:
 
-  val builder: OParserBuilder[PlasmaCliParams]
+  val builder: OParserBuilder[CliParams]
 
   import builder._
 
-  def coordinates: Seq[OParser[? >: String & Option[Int] <: Serializable, PlasmaCliParams]] =
+  def coordinates: Seq[OParser[? >: String & Option[Int] <: Serializable, CliParams]] =
     Seq(
       opt[String]("from-fellowship")
         .action((x, c) => c.copy(fromFellowship = x))
@@ -30,7 +30,7 @@ trait Coordinates extends Args:
         .text("Interaction from where we are sending the funds from")
     )
 
-  def changeCoordinates: Seq[OParser[? >: Option[String] & Option[Int] & Unit, PlasmaCliParams]] =
+  def changeCoordinates: Seq[OParser[? >: Option[String] & Option[Int] & Unit, CliParams]] =
     Seq(
       opt[Option[String]]("change-fellowship")
         .action((x, c) => c.copy(someChangeFellowship = x))
@@ -45,7 +45,7 @@ trait Coordinates extends Args:
         .text("Interaction where we are sending the change to")
         .optional(),
       checkConfig(c =>
-        if (c.mode == PlasmaCliMode.simpletransaction && c.subcmd == PlasmaCliSubCmd.create) {
+        if (c.mode == CliMode.simpletransaction && c.subcmd == CliSubCmd.create) {
           if (c.fromFellowship == "nofellowship") {
             (
               c.someChangeFellowship,

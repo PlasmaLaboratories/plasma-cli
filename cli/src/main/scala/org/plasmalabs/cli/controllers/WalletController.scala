@@ -4,7 +4,7 @@ import cats.data.OptionT
 import cats.effect.kernel.{Resource, Sync}
 import com.google.protobuf.ByteString
 import org.plasmalabs.cli.impl.{WalletAlgebra, WalletManagementUtils, WalletModeHelper}
-import org.plasmalabs.cli.{DigestType, PlasmaCliParams, Sha256}
+import org.plasmalabs.cli.params.models.{CliParams, DigestType}
 import org.plasmalabs.crypto.hash.Blake2b256
 import org.plasmalabs.indexer.services.{Txo, TxoState}
 import org.plasmalabs.quivr.models.{Digest, Preimage, Proposition, VerificationKey}
@@ -36,7 +36,7 @@ class WalletController[F[_]: Sync](
     val paddedSecret = secretTxt.getBytes() ++ Array
       .fill(32 - secretTxt.getBytes().length)(0.toByte)
     val hashedSecret =
-      if (digest == Sha256)
+      if (digest == DigestType.Sha256)
         sha256Hash
           .hash(
             paddedSecret
@@ -275,7 +275,7 @@ class WalletController[F[_]: Sync](
   }
 
   def createWalletFromParams(
-    params: PlasmaCliParams
+    params: CliParams
   ): F[Either[String, String]] = {
     import cats.implicits._
     walletAlgebra
@@ -297,7 +297,7 @@ class WalletController[F[_]: Sync](
     import cats.implicits._
     walletStateAlgebra
       .getInteractionList(fromFellowship, fromTemplate)
-      .map(_ match {
+      .map {
         case Some(interactions) =>
           Right(
             interactions
@@ -306,7 +306,7 @@ class WalletController[F[_]: Sync](
               .mkString("\n")
           )
         case None => Left("The fellowship or template does not exist.")
-      })
+      }
   }
 
   def setCurrentInteraction(
@@ -321,14 +321,14 @@ class WalletController[F[_]: Sync](
         fromTemplate,
         fromInteraction
       )
-      .map(_ match {
+      .map {
         case Some(_) => Right("Current interaction set")
         case None    => Left("Error setting current interaction")
-      })
+      }
   }
 
   def recoverKeysFromParams(
-    params: PlasmaCliParams
+    params: CliParams
   ): F[Either[String, String]] = {
     import cats.implicits._
     walletAlgebra
@@ -343,7 +343,7 @@ class WalletController[F[_]: Sync](
       .map(_ => Right("Wallet Main Key Recovered"))
   }
 
-  def currentaddress(params: PlasmaCliParams): F[Either[String, String]] = {
+  def currentaddress(params: CliParams): F[Either[String, String]] = {
     import cats.implicits._
     params.fromAddress
       .map(x => Sync[F].point(Some(x)))
@@ -355,10 +355,10 @@ class WalletController[F[_]: Sync](
             params.someFromInteraction
           )
       )
-      .map(_ match {
+      .map {
         case Some(address) => Right(address)
         case None          => Left("No address found")
-      })
+      }
   }
 
   def sync(
@@ -461,24 +461,20 @@ class WalletController[F[_]: Sync](
       someTemplate,
       someInteraction
     ).map {
-      _ match {
-        case Left(error) => Left(error)
-        case Right(balances) =>
-          Right(
-            (balances
-              .collect { x =>
-                x match {
-                  case LvlBalance(b)              => "LVL: " + b
-                  case GroupTokenBalanceDTO(g, b) => "Group(" + g + "): " + b
-                  case SeriesTokenBalanceDTO(id, balance) =>
-                    "Series(" + id + "): " + balance
-                  case AssetTokenBalanceDTO(group, series, balance) =>
-                    "Asset(" + group + ", " + series + "): " + balance
-                }
-              })
-              .mkString("\n")
-          )
-      }
+      case Left(error) => Left(error)
+      case Right(balances) =>
+        Right(
+          (balances
+            .collect {
+              case LvlBalance(b)              => "LVL: " + b
+              case GroupTokenBalanceDTO(g, b) => "Group(" + g + "): " + b
+              case SeriesTokenBalanceDTO(id, balance) =>
+                "Series(" + id + "): " + balance
+              case AssetTokenBalanceDTO(group, series, balance) =>
+                "Asset(" + group + ", " + series + "): " + balance
+            })
+            .mkString("\n")
+        )
     }
   }
 

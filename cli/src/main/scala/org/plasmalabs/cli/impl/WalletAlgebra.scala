@@ -34,7 +34,7 @@ object WalletAlgebra {
   def make[F[_]: Sync: std.Console](
     walletApi:      WalletApi[F],
     walletStateApi: WalletStateAlgebra[F]
-  ) = new WalletAlgebra[F] {
+  ): WalletAlgebra[F] = new WalletAlgebra[F] {
     import cats.implicits._
 
     private def createNewWallet(
@@ -107,7 +107,7 @@ object WalletAlgebra {
       somePassphrase:   Option[String],
       someOutputFile:   Option[String],
       someMnemonicFile: Option[String]
-    ) = {
+    ): F[Unit] = {
       import io.circe.syntax._
       import org.plasmalabs.crypto.encryption.VaultStore.Codecs._
 
@@ -147,7 +147,7 @@ object WalletAlgebra {
       ledgerId:       Int,
       somePassphrase: Option[String],
       someOutputFile: Option[String]
-    ) = {
+    ): F[Unit] = {
       import io.circe.syntax._
       import org.plasmalabs.crypto.encryption.VaultStore.Codecs._
 

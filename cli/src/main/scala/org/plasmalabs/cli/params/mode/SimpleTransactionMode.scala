@@ -1,8 +1,8 @@
 package org.plasmalabs.cli.params.mode
 
-import org.plasmalabs.cli.PlasmaCliParamsParserModule.{hostPortNetwork, keyfileAndPassword, walletDbArg}
+import org.plasmalabs.cli.params.CliParamsParser.{hostPortNetwork, keyfileAndPassword, walletDbArg}
 import org.plasmalabs.cli.params.ReadInstances
-import org.plasmalabs.cli.{DigestType, NetworkIdentifiers, PlasmaCliMode, PlasmaCliParams, PlasmaCliSubCmd, TokenType}
+import org.plasmalabs.cli.params.models.*
 import org.plasmalabs.sdk.constants.NetworkConstants
 import org.plasmalabs.sdk.models.{GroupId, LockAddress, SeriesId}
 import scopt.OParser
@@ -47,12 +47,12 @@ trait SimpleTransactionMode extends Coordinates with Args with ReadInstances:
   def simpleTransactionMode =
     builder
       .cmd("simple-transaction")
-      .action((_, c) => c.copy(mode = PlasmaCliMode.simpletransaction))
+      .action((_, c) => c.copy(mode = CliMode.simpletransaction))
       .text("Simple transaction mode")
       .children(
         builder
           .cmd("create")
-          .action((_, c) => c.copy(subcmd = PlasmaCliSubCmd.create))
+          .action((_, c) => c.copy(subcmd = CliSubCmd.create))
           .text("Create transaction")
           .children(
             ((coordinates ++ changeCoordinates ++ hostPortNetwork ++ keyfileAndPassword ++ Seq(
@@ -84,7 +84,7 @@ trait SimpleTransactionMode extends Coordinates with Args with ReadInstances:
               groupId,
               seriesId,
               builder.checkConfig { c =>
-                if (c.mode == PlasmaCliMode.simpletransaction && c.subcmd == PlasmaCliSubCmd.create)
+                if (c.mode == CliMode.simpletransaction && c.subcmd == CliSubCmd.create)
                   if (c.fromAddress.isDefined) {
                     builder.failure(
                       "From address is not supported for simple transactions"

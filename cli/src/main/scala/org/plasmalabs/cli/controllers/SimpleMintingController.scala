@@ -2,14 +2,8 @@ package org.plasmalabs.cli.controllers
 
 import cats.effect.kernel.{Resource, Sync}
 import com.google.protobuf.ByteString
-import org.plasmalabs.cli.impl.{
-  AssetMintingStatementParser,
-  CreateTxError,
-  GroupPolicyParser,
-  SeriesPolicyParser,
-  SimpleMintingAlgebra,
-  SimpleTransactionAlgebraError
-}
+import org.plasmalabs.cli.impl.{CreateTxError, SimpleMintingAlgebra, SimpleTransactionAlgebraError}
+import org.plasmalabs.cli.parsers.{AssetMintingStatementParser, GroupPolicyParser, SeriesPolicyParser}
 import org.plasmalabs.sdk.utils.Encoding
 
 import java.io.File
@@ -58,12 +52,12 @@ class SimpleMintingController[F[_]: Sync](
           policy
         )
     } yield ()).attempt
-      .map(_ match {
+      .map {
         case Right(_) => Right("Transaction successfully created")
         case Left(value: SimpleTransactionAlgebraError) =>
           Left(value.description)
         case Left(e) => Left(e.toString())
-      })
+      }
 
   def createSimpleSeriesMintingTransactionFromParams(
     inputFile:           String,

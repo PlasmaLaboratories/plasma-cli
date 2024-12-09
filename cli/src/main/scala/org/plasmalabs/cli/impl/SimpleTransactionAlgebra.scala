@@ -44,7 +44,7 @@ object SimpleTransactionAlgebra {
     utxoAlgebra:           IndexerQueryAlgebra[F],
     transactionBuilderApi: TransactionBuilderApi[F],
     walletManagementUtils: WalletManagementUtils[F]
-  ) =
+  ): SimpleTransactionAlgebra[F] =
     new SimpleTransactionAlgebra[F] {
 
       private def buildTransaction(
@@ -215,13 +215,11 @@ object SimpleTransactionAlgebra {
             .queryUtxo(fromAddress)
             .attempt
             .flatMap {
-              _ match {
-                case Left(_) =>
-                  Sync[F].raiseError(
-                    CreateTxError("Problem contacting network")
-                  ): F[Seq[Txo]]
-                case Right(txos) => Sync[F].pure(txos: Seq[Txo])
-              }
+              case Left(_) =>
+                Sync[F].raiseError(
+                  CreateTxError("Problem contacting network")
+                ): F[Seq[Txo]]
+              case Right(txos) => Sync[F].pure(txos: Seq[Txo])
             }
           txos = response
             .filter(x =>
@@ -274,15 +272,13 @@ object SimpleTransactionAlgebra {
                    )
                }
              })
-        } yield ()).attempt.map(e =>
-          e match {
-            case Right(_)                               => ().asRight
-            case Left(e: SimpleTransactionAlgebraError) => e.asLeft
-            case Left(e) =>
-              e.printStackTrace()
-              UnexpectedError(e.getMessage()).asLeft
-          }
-        )
+        } yield ()).attempt.map {
+          case Right(_)                               => ().asRight
+          case Left(e: SimpleTransactionAlgebraError) => e.asLeft
+          case Left(e) =>
+            e.printStackTrace()
+            UnexpectedError(e.getMessage()).asLeft
+        }
 
       }
     }

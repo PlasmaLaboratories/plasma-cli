@@ -1,27 +1,27 @@
 package org.plasmalabs.cli.params.mode
 
-import org.plasmalabs.cli.{PlasmaCliMode, PlasmaCliParams, PlasmaCliSubCmd}
+import org.plasmalabs.cli.params.models.*
 import scopt.{OParser, OParserBuilder}
 
 trait TransactionMode extends Args:
 
-  val builder: OParserBuilder[PlasmaCliParams]
+  val builder: OParserBuilder[CliParams]
 
   import builder._
 
-  def transactionMode: OParser[Unit, PlasmaCliParams] =
+  def transactionMode: OParser[Unit, CliParams] =
     cmd("tx")
-      .action((_, c) => c.copy(mode = PlasmaCliMode.tx))
+      .action((_, c) => c.copy(mode = CliMode.tx))
       .text("Transaction mode")
       .children(
         cmd("inspect")
-          .action((_, c) => c.copy(subcmd = PlasmaCliSubCmd.inspect))
+          .action((_, c) => c.copy(subcmd = CliSubCmd.inspect))
           .text("Inspect transaction")
           .children(
             inputFileArg
           ),
         cmd("broadcast")
-          .action((_, c) => c.copy(subcmd = PlasmaCliSubCmd.broadcast))
+          .action((_, c) => c.copy(subcmd = CliSubCmd.broadcast))
           .text("Broadcast transaction")
           .children(
             ((hostPortNetwork ++ Seq(
@@ -29,7 +29,7 @@ trait TransactionMode extends Args:
             ))): _*
           ),
         cmd("prove")
-          .action((_, c) => c.copy(subcmd = PlasmaCliSubCmd.prove))
+          .action((_, c) => c.copy(subcmd = CliSubCmd.prove))
           .text("Prove transaction")
           .children(
             ((keyfileAndPassword ++ Seq(
@@ -39,7 +39,7 @@ trait TransactionMode extends Args:
             ))): _*
           ),
         cmd("create")
-          .action((_, c) => c.copy(subcmd = PlasmaCliSubCmd.create))
+          .action((_, c) => c.copy(subcmd = CliSubCmd.create))
           .text("Create transaction")
           .children(
             ((hostPortNetwork ++ Seq(

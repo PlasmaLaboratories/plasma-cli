@@ -23,14 +23,14 @@ import java.io.{FileInputStream, FileOutputStream}
 
 trait TransactionAlgebra[F[_]] {
 
-  def proveSimpleTransactionFromParams(
+  def proveTransactionFromParams(
     inputRes:  Resource[F, FileInputStream],
     keyFile:   String,
     password:  String,
     outputRes: Resource[F, FileOutputStream]
   ): F[Either[SimpleTransactionAlgebraError, Unit]]
 
-  def broadcastSimpleTransactionFromParams(
+  def broadcastTransactionFromParams(
     provedTxFile: String
   ): F[Either[SimpleTransactionAlgebraError, String]]
 
@@ -43,7 +43,7 @@ object TransactionAlgebra {
     walletStateApi:        WalletStateAlgebra[F],
     walletManagementUtils: WalletManagementUtils[F],
     channelResource:       Resource[F, ManagedChannel]
-  ) =
+  ): TransactionAlgebra[F] =
     new TransactionAlgebra[F] {
 
       private def quivrErrorToString(qre: QuivrRuntimeError): String =
@@ -62,7 +62,7 @@ object TransactionAlgebra {
           case _: QuivrRuntimeError => "Unknown error: " + qre.toString
         }
 
-      override def broadcastSimpleTransactionFromParams(
+      override def broadcastTransactionFromParams(
         provedTxFile: String
       ): F[Either[SimpleTransactionAlgebraError, String]] = {
         import org.plasmalabs.sdk.models.transaction.IoTransaction
@@ -88,13 +88,13 @@ object TransactionAlgebra {
             .raiseError(
               new IllegalStateException(
                 "Error validating transaction: " + validations
-                  .map(_ match {
+                  .map {
                     case TransactionAuthorizationError
                           .AuthorizationFailed(errors) =>
                       errors.map(quivrErrorToString).mkString(", ")
                     case _ =>
                       "Contextual or permanent error was found."
-                  })
+                  }
                   .mkString(", ")
               )
             )
@@ -107,15 +107,13 @@ object TransactionAlgebra {
               e.printStackTrace()
               NetworkProblem("Problem connecting to node")
             }
-        } yield response).attempt.map(e =>
-          e match {
-            case Right(tx) =>
-              import org.plasmalabs.sdk.syntax._
-              Encoding.encodeToBase58(tx.id.value.toByteArray()).asRight
-            case Left(e: SimpleTransactionAlgebraError) => e.asLeft
-            case Left(e)                                => UnexpectedError(e.getMessage()).asLeft
-          }
-        )
+        } yield response).attempt.map {
+          case Right(tx) =>
+            import org.plasmalabs.sdk.syntax._
+            Encoding.encodeToBase58(tx.id.value.toByteArray).asRight
+          case Left(e: SimpleTransactionAlgebraError) => e.asLeft
+          case Left(e)                                => UnexpectedError(e.getMessage).asLeft
+        }
       }
 
       private def checkSignatures(tx: IoTransaction) = {
@@ -169,7 +167,7 @@ object TransactionAlgebra {
               Sync[F].raiseError(
                 ValidateTxErrpr(
                   "Error validating transaction: " + errors
-                    .map(_ match {
+                    .map {
                       case InvalidDataLength =>
                         "Invalid data length. Transaction too big."
                       case EmptyInputs =>
@@ -193,7 +191,7 @@ object TransactionAlgebra {
                         "There are invalid update proposals in the output."
                       case _ =>
                         "Error."
-                    })
+                    }
                     .toList
                     .mkString(", ")
                 )
@@ -203,7 +201,7 @@ object TransactionAlgebra {
         } yield ()
       }
 
-      override def proveSimpleTransactionFromParams(
+      override def proveTransactionFromParams(
         inputRes:  Resource[F, FileInputStream],
         keyFile:   String,
         password:  String,
@@ -234,13 +232,11 @@ object TransactionAlgebra {
             Sync[F]
               .delay(provedTransaction.writeTo(fos))
           )
-        } yield ()).attempt.map(e =>
-          e match {
-            case Right(_)                               => ().asRight
-            case Left(e: SimpleTransactionAlgebraError) => e.asLeft
-            case Left(e)                                => UnexpectedError(e.getMessage()).asLeft
-          }
-        )
+        } yield ()).attempt.map {
+          case Right(_)                               => ().asRight
+          case Left(e: SimpleTransactionAlgebraError) => e.asLeft
+          case Left(e)                                => UnexpectedError(e.getMessage).asLeft
+        }
       }
 
     }

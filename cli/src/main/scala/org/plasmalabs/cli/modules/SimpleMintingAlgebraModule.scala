@@ -1,7 +1,6 @@
 package org.plasmalabs.cli.modules
 
 import cats.effect.IO
-import cats.effect.kernel.Sync
 import org.plasmalabs.cli.impl.SimpleMintingAlgebra
 
 trait SimpleMintingAlgebraModule
@@ -17,8 +16,7 @@ trait SimpleMintingAlgebraModule
     host:             String,
     nodePort:         Int,
     secureConnection: Boolean
-  ) = SimpleMintingAlgebra.make[IO](
-    Sync[IO],
+  ): SimpleMintingAlgebra[IO] = SimpleMintingAlgebra.make[IO](
     walletApi,
     walletStateAlgebra(walletFile),
     walletManagementUtils,

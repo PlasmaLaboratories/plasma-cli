@@ -1,7 +1,7 @@
 package org.plasmalabs.cli.params
 
 import com.google.protobuf.ByteString
-import org.plasmalabs.cli.{DigestType, NetworkIdentifiers, TokenType}
+import org.plasmalabs.cli.params.models.*
 import org.plasmalabs.sdk.codecs.AddressCodecs
 import org.plasmalabs.sdk.models.{GroupId, LockAddress, SeriesId}
 import org.plasmalabs.sdk.utils.Encoding

@@ -1,6 +1,8 @@
 package org.plasmalabs.cli.impl
 
+import cats.implicits.*
 import com.google.protobuf.ByteString
+import org.plasmalabs.cli.parsers.{CommonParserError, InvalidAddress}
 import org.plasmalabs.quivr.models.Int128
 import org.plasmalabs.sdk.codecs.AddressCodecs
 import org.plasmalabs.sdk.constants.NetworkConstants
@@ -12,8 +14,6 @@ import org.plasmalabs.sdk.utils.Encoding
 import scala.util.Try
 
 object CommonParsingOps {
-
-  import cats.implicits._
 
   def parseUnspentTransactionOutput(
     lockAddressString: String,
@@ -42,7 +42,7 @@ object CommonParsingOps {
   def parseTransactionOuputAddress(
     networkId: Int,
     address:   String
-  ) = for {
+  ): Either[InvalidAddress, TransactionOutputAddress] = for {
     sp  <- Right(address.split("#"))
     idx <- Try(sp(1).toInt).toEither.leftMap(_ => InvalidAddress("Invalid index for address: " + address))
     txIdByteArray <- Encoding

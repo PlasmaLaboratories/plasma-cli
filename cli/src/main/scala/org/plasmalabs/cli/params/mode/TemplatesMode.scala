@@ -1,27 +1,27 @@
 package org.plasmalabs.cli.params.mode
 
-import org.plasmalabs.cli.PlasmaCliParamsParserModule.{templateNameArg, walletDbArg}
-import org.plasmalabs.cli.{PlasmaCliMode, PlasmaCliParams, PlasmaCliSubCmd}
+import org.plasmalabs.cli.params.CliParamsParser.{templateNameArg, walletDbArg}
+import org.plasmalabs.cli.params.models.*
 import scopt.OParser
 
 trait TemplatesMode extends Args:
 
-  def templatesMode: OParser[Unit, PlasmaCliParams] =
+  def templatesMode: OParser[Unit, CliParams] =
     builder
       .cmd("templates")
-      .action((_, c) => c.copy(mode = PlasmaCliMode.templates))
+      .action((_, c) => c.copy(mode = CliMode.templates))
       .text("Template mode")
       .children(
         builder
           .cmd("list")
-          .action((_, c) => c.copy(subcmd = PlasmaCliSubCmd.list))
+          .action((_, c) => c.copy(subcmd = CliSubCmd.list))
           .text("List existing templates")
           .children(
             walletDbArg
           ),
         builder
           .cmd("add")
-          .action((_, c) => c.copy(subcmd = PlasmaCliSubCmd.add))
+          .action((_, c) => c.copy(subcmd = CliSubCmd.add))
           .text("Add a new templates")
           .children(
             walletDbArg,

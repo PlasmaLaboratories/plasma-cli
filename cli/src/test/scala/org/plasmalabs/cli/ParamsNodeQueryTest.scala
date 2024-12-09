@@ -1,11 +1,12 @@
 package org.plasmalabs.cli
 
 import munit.FunSuite
+import org.plasmalabs.cli.params.models.CliParams
 import scopt.OParser
 
 class ParamsNodeQueryTest extends FunSuite {
 
-  import PlasmaCliParamsParserModule._
+  import org.plasmalabs.cli.params.CliParamsParser._
 
   test("Block by height") {
     val args0 = List(
@@ -18,7 +19,7 @@ class ParamsNodeQueryTest extends FunSuite {
       "-h",
       "localhost"
     )
-    assert(OParser.parse(paramParser, args0, PlasmaCliParams()).isDefined)
+    assert(OParser.parse(paramParser, args0, CliParams()).isDefined)
   }
 
   test("Block by id") {
@@ -32,7 +33,7 @@ class ParamsNodeQueryTest extends FunSuite {
       "-h",
       "localhost"
     )
-    assert(OParser.parse(paramParser, args0, PlasmaCliParams()).isDefined)
+    assert(OParser.parse(paramParser, args0, CliParams()).isDefined)
   }
 
   test("Transaction by id") {
@@ -46,7 +47,7 @@ class ParamsNodeQueryTest extends FunSuite {
       "-h",
       "localhost"
     )
-    assert(OParser.parse(paramParser, args0, PlasmaCliParams()).isDefined)
+    assert(OParser.parse(paramParser, args0, CliParams()).isDefined)
   }
 
 }

@@ -3,7 +3,17 @@ package org.plasmalabs.cli.impl
 import cats.data.Validated
 import cats.effect.kernel.{Resource, Sync}
 import com.google.protobuf.ByteString
-import org.plasmalabs.cli.NetworkIdentifiers
+import org.plasmalabs.cli.params.models.NetworkIdentifiers
+import org.plasmalabs.cli.parsers.{
+  CommonParserError,
+  InvalidNetwork,
+  InvalidVerificationKey,
+  InvalidYaml,
+  PropositionInstantationError,
+  PropositionParseError,
+  QuivrFastParser,
+  UnknownError
+}
 import org.plasmalabs.quivr.models.{Int128, VerificationKey}
 import org.plasmalabs.sdk.builders.TransactionBuilderApi
 import org.plasmalabs.sdk.builders.locks.LockTemplate
@@ -12,24 +22,6 @@ import org.plasmalabs.sdk.models.transaction.{IoTransaction, SpentTransactionOut
 import org.plasmalabs.sdk.utils.Encoding
 
 import scala.io.BufferedSource
-
-case class Tx(
-  network: String,
-  keys:    List[GlobalKeyEntry],
-  inputs:  List[Stxo],
-  outputs: List[UtxoAddress]
-)
-
-case class GlobalKeyEntry(id: String, vk: String)
-case class IdxMapping(index: Int, identifier: String)
-
-case class Stxo(
-  address:     String,
-  keyMap:      List[IdxMapping],
-  proposition: String,
-  value:       Long
-)
-case class UtxoAddress(address: String, value: Long)
 
 trait TxParserAlgebra[F[_]] {
 
@@ -41,9 +33,29 @@ trait TxParserAlgebra[F[_]] {
 
 object TxParserAlgebra {
 
+  private case class Tx(
+    network: String,
+    keys:    List[GlobalKeyEntry],
+    inputs:  List[Stxo],
+    outputs: List[UtxoAddress]
+  )
+
+  private case class GlobalKeyEntry(id: String, vk: String)
+
+  private case class IdxMapping(index: Int, identifier: String)
+
+  private case class Stxo(
+    address:     String,
+    keyMap:      List[IdxMapping],
+    proposition: String,
+    value:       Long
+  )
+
+  private case class UtxoAddress(address: String, value: Long)
+
   def make[F[_]: Sync](
     transactionBuilderApi: TransactionBuilderApi[F]
-  ) =
+  ): TxParserAlgebra[F] =
     new TxParserAlgebra[F] {
 
       import io.circe.generic.auto._
@@ -188,11 +200,11 @@ object TxParserAlgebra {
                 .leftMap(e => InvalidYaml(e))
             )
           tx <- txToIoTransaction(txOrFailure)
-        } yield tx).attempt.map(_ match {
+        } yield tx).attempt.map {
           case Right(tx)                      => Right(tx)
           case Left(value: CommonParserError) => Left(value)
           case Left(e)                        => Left(UnknownError(e))
-        })
+        }
       }
     }
 }

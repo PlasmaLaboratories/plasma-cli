@@ -1,10 +1,8 @@
 package org.plasmalabs.cli.controllers
 
 import cats.effect.kernel.{Resource, Sync}
-import org.plasmalabs.cli.impl.{CommonParserError, TransactionAlgebra, TxParserAlgebra}
-import org.plasmalabs.sdk.display.DisplayOps.DisplayTOps
-import org.plasmalabs.sdk.display.transactionDisplay
-import org.plasmalabs.sdk.models.transaction.IoTransaction
+import org.plasmalabs.cli.impl.{TransactionAlgebra, TxParserAlgebra}
+import org.plasmalabs.cli.parsers.CommonParserError
 
 import java.io.{FileInputStream, FileOutputStream}
 
@@ -12,24 +10,6 @@ class TxController[F[_]: Sync](
   txParserAlgebra: TxParserAlgebra[F],
   transactionOps:  TransactionAlgebra[F]
 ) {
-
-  def inspectTransaction(
-    inputFile: String
-  ) = {
-    import cats.implicits._
-    val inputRes = Resource
-      .make(
-        Sync[F]
-          .delay(new FileInputStream(inputFile))
-      )(fos => Sync[F].delay(fos.close()))
-    (for {
-      tx     <- inputRes.use(in => Sync[F].delay(IoTransaction.parseFrom(in)))
-      output <- Sync[F].delay(tx.display)
-    } yield output).attempt.map(_ match {
-      case Right(output) => Right(output)
-      case Left(e)       => Left(e.getMessage())
-    })
-  }
 
   def createComplexTransaction(
     inputFile:  String,
@@ -49,11 +29,11 @@ class TxController[F[_]: Sync](
             .delay(new FileOutputStream(outputFile))
         )(fos => Sync[F].delay(fos.close()))
         .use(fos => Sync[F].delay(tx.writeTo(fos)))
-    } yield "Transaction created").attempt.map(_ match {
+    } yield "Transaction created").attempt.map {
       case Right(_)                       => Right("Transaction created")
       case Left(value: CommonParserError) => Left(value.description)
-      case Left(e)                        => Left(e.getMessage())
-    })
+      case Left(e)                        => Left(e.getMessage)
+    }
   }
 
   def broadcastSimpleTransactionFromParams(
@@ -61,13 +41,13 @@ class TxController[F[_]: Sync](
   ): F[Either[String, String]] = {
     import cats.implicits._
     transactionOps
-      .broadcastSimpleTransactionFromParams(
+      .broadcastTransactionFromParams(
         provedTxFile
       )
-      .map(_ match {
+      .map {
         case Right(s)    => Right(s)
         case Left(value) => Left(value.description)
-      })
+      }
   }
 
   def proveSimpleTransactionFromParams(
@@ -88,16 +68,16 @@ class TxController[F[_]: Sync](
       )(fos => Sync[F].delay(fos.close()))
 
     transactionOps
-      .proveSimpleTransactionFromParams(
+      .proveTransactionFromParams(
         inputRes,
         keyFile,
         password,
         outputRes
       )
-      .map(_ match {
+      .map {
         case Right(_)    => Right("Transaction successfully proved")
         case Left(value) => Left(value.description)
-      })
+      }
   }
 
 }

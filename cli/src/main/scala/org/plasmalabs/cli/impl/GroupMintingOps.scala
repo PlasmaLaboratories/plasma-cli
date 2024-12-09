@@ -14,11 +14,9 @@ import java.io.FileOutputStream
 
 import TransactionBuilderApi.implicits.*
 
-trait GroupMintingOps[G[_]] extends CommonTxOps {
+trait GroupMintingOps[G[_]: Sync] extends CommonTxOps {
 
   import cats.implicits._
-
-  implicit val sync: Sync[G]
 
   val tba: TransactionBuilderApi[G]
 

@@ -1,6 +1,6 @@
 package org.plasmalabs.cli.params.mode
 
-import org.plasmalabs.cli.{PlasmaCliMode, PlasmaCliParams, PlasmaCliSubCmd}
+import org.plasmalabs.cli.params.models.*
 import scopt.{OParser, OParserBuilder}
 
 import java.io.File
@@ -8,17 +8,17 @@ import java.nio.file.Paths
 
 trait WalletMode extends Args with Coordinates:
 
-  val builder: OParserBuilder[PlasmaCliParams]
+  val builder: OParserBuilder[CliParams]
 
   import builder._
 
-  def walletMode: OParser[Unit, PlasmaCliParams] =
+  def walletMode: OParser[Unit, CliParams] =
     cmd("wallet")
-      .action((_, c) => c.copy(mode = PlasmaCliMode.wallet))
+      .action((_, c) => c.copy(mode = CliMode.wallet))
       .text("Wallet mode")
       .children(
         cmd("balance")
-          .action((_, c) => c.copy(subcmd = PlasmaCliSubCmd.balance))
+          .action((_, c) => c.copy(subcmd = CliSubCmd.balance))
           .text("Get balance of wallet")
           .children(
             (hostPortNetwork ++ coordinates ++ (Seq(
@@ -27,7 +27,7 @@ trait WalletMode extends Args with Coordinates:
             ))): _*
           ),
         cmd("set-interaction")
-          .action((_, c) => c.copy(subcmd = PlasmaCliSubCmd.setinteraction))
+          .action((_, c) => c.copy(subcmd = CliSubCmd.setinteraction))
           .text("Set the current interaction")
           .children(
             coordinates.map(_.required()) ++
@@ -36,7 +36,7 @@ trait WalletMode extends Args with Coordinates:
             ): _*
           ),
         cmd("list-interactions")
-          .action((_, c) => c.copy(subcmd = PlasmaCliSubCmd.listinteraction))
+          .action((_, c) => c.copy(subcmd = CliSubCmd.listinteraction))
           .text("List the interactions for a given fellowship and template")
           .children(
             fellowshipNameArg,
@@ -44,7 +44,7 @@ trait WalletMode extends Args with Coordinates:
             walletDbArg
           ),
         cmd("sync")
-          .action((_, c) => c.copy(subcmd = PlasmaCliSubCmd.sync))
+          .action((_, c) => c.copy(subcmd = CliSubCmd.sync))
           .text("Sync wallet")
           .children(
             (hostPortNetwork ++ keyfileAndPassword ++ (Seq(
@@ -54,7 +54,7 @@ trait WalletMode extends Args with Coordinates:
             ))): _*
           ),
         cmd("init")
-          .action((_, c) => c.copy(subcmd = PlasmaCliSubCmd.init))
+          .action((_, c) => c.copy(subcmd = CliSubCmd.init))
           .text("Initialize wallet")
           .children(
             (
@@ -81,7 +81,7 @@ trait WalletMode extends Args with Coordinates:
             ): _*
           ),
         cmd("recover-keys")
-          .action((_, c) => c.copy(subcmd = PlasmaCliSubCmd.recoverkeys))
+          .action((_, c) => c.copy(subcmd = CliSubCmd.recoverkeys))
           .text("Recover Wallet Main Key")
           .children(
             (
@@ -102,13 +102,13 @@ trait WalletMode extends Args with Coordinates:
             ): _*
           ),
         cmd("current-address")
-          .action((_, c) => c.copy(subcmd = PlasmaCliSubCmd.currentaddress))
+          .action((_, c) => c.copy(subcmd = CliSubCmd.currentaddress))
           .text("Obtain current address")
           .children(
             (Seq(walletDbArg) ++ coordinates): _*
           ),
         cmd("export-vk")
-          .action((_, c) => c.copy(subcmd = PlasmaCliSubCmd.exportvk))
+          .action((_, c) => c.copy(subcmd = CliSubCmd.exportvk))
           .text("Export verification key")
           .children(
             (keyfileAndPassword ++ Seq(
@@ -122,7 +122,7 @@ trait WalletMode extends Args with Coordinates:
             )): _*
           ),
         cmd("add-secret")
-          .action((_, c) => c.copy(subcmd = PlasmaCliSubCmd.addsecret))
+          .action((_, c) => c.copy(subcmd = CliSubCmd.addsecret))
           .text("Add a secret to the wallet")
           .children(
             walletDbArg,
@@ -130,7 +130,7 @@ trait WalletMode extends Args with Coordinates:
             digestArg
           ),
         cmd("get-preimage")
-          .action((_, c) => c.copy(subcmd = PlasmaCliSubCmd.getpreimage))
+          .action((_, c) => c.copy(subcmd = CliSubCmd.getpreimage))
           .text("Get a preimage from the wallet")
           .children(
             walletDbArg,
@@ -138,7 +138,7 @@ trait WalletMode extends Args with Coordinates:
             digestArg
           ),
         cmd("import-vks")
-          .action((_, c) => c.copy(subcmd = PlasmaCliSubCmd.importvks))
+          .action((_, c) => c.copy(subcmd = CliSubCmd.importvks))
           .text("Import verification key")
           .children(
             (keyfileAndPassword ++ Seq(

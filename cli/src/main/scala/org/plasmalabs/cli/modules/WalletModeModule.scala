@@ -2,7 +2,8 @@ package org.plasmalabs.cli.modules
 
 import cats.effect.IO
 import org.plasmalabs.cli.controllers.WalletController
-import org.plasmalabs.cli.{PlasmaCliParams, PlasmaCliParamsParserModule, PlasmaCliSubCmd}
+import org.plasmalabs.cli.params.CliParamsParser
+import org.plasmalabs.cli.params.models.*
 import org.plasmalabs.sdk.dataApi.{IndexerQueryAlgebra, RpcChannelResource}
 import scopt.OParser
 
@@ -15,7 +16,7 @@ trait WalletModeModule
     with RpcChannelResource {
 
   def walletModeSubcmds(
-    validateParams: PlasmaCliParams
+    validateParams: CliParams
   ): IO[Either[String, String]] = {
     val walletController = new WalletController(
       walletStateAlgebra(
@@ -36,7 +37,7 @@ trait WalletModeModule
         )
     )
     validateParams.subcmd match {
-      case PlasmaCliSubCmd.balance =>
+      case CliSubCmd.balance =>
         walletController.getBalance(
           validateParams.fromAddress,
           if (validateParams.fromAddress.isEmpty)
@@ -47,22 +48,22 @@ trait WalletModeModule
           else None,
           validateParams.someFromInteraction
         )
-      case PlasmaCliSubCmd.addsecret =>
+      case CliSubCmd.addsecret =>
         walletController.addSecret(validateParams.secret, validateParams.digest)
-      case PlasmaCliSubCmd.getpreimage =>
+      case CliSubCmd.getpreimage =>
         walletController.getPreimage(
           validateParams.digest,
           validateParams.digestText
         )
-      case PlasmaCliSubCmd.invalid =>
+      case CliSubCmd.invalid =>
         IO.pure(
           Left(
             OParser.usage(
-              PlasmaCliParamsParserModule.walletMode
+              CliParamsParser.walletMode
             ) + "\nA subcommand needs to be specified"
           )
         )
-      case PlasmaCliSubCmd.exportvk =>
+      case CliSubCmd.exportvk =>
         validateParams.someFromInteraction
           .map(x =>
             walletController.exportFinalVk(
@@ -83,7 +84,7 @@ trait WalletModeModule
               validateParams.templateName
             )
           )
-      case PlasmaCliSubCmd.importvks =>
+      case CliSubCmd.importvks =>
         walletController.importVk(
           validateParams.network.networkId,
           validateParams.inputVks,
@@ -92,28 +93,28 @@ trait WalletModeModule
           validateParams.templateName,
           validateParams.fellowshipName
         )
-      case PlasmaCliSubCmd.listinteraction =>
+      case CliSubCmd.listinteraction =>
         walletController.listInteractions(
           validateParams.fellowshipName,
           validateParams.templateName
         )
-      case PlasmaCliSubCmd.init =>
+      case CliSubCmd.init =>
         walletController.createWalletFromParams(validateParams)
-      case PlasmaCliSubCmd.recoverkeys =>
+      case CliSubCmd.recoverkeys =>
         walletController.recoverKeysFromParams(validateParams)
-      case PlasmaCliSubCmd.setinteraction =>
+      case CliSubCmd.setinteraction =>
         walletController.setCurrentInteraction(
           validateParams.fromFellowship,
           validateParams.fromTemplate,
           validateParams.someFromInteraction.get
         )
-      case PlasmaCliSubCmd.sync =>
+      case CliSubCmd.sync =>
         walletController.sync(
           validateParams.network.networkId,
           validateParams.fellowshipName,
           validateParams.templateName
         )
-      case PlasmaCliSubCmd.currentaddress =>
+      case CliSubCmd.currentaddress =>
         walletController.currentaddress(
           validateParams
         )

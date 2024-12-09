@@ -1,19 +1,19 @@
 package org.plasmalabs.cli.params.mode
 
-import org.plasmalabs.cli.{PlasmaCliMode, PlasmaCliParams, PlasmaCliSubCmd}
+import org.plasmalabs.cli.params.models.*
 import scopt.OParser
 
 trait ServerMode extends Args:
 
-  def serverMode: OParser[Unit, PlasmaCliParams] =
+  def serverMode: OParser[Unit, CliParams] =
     builder
       .cmd("server")
-      .action((_, c) => c.copy(mode = PlasmaCliMode.server))
+      .action((_, c) => c.copy(mode = CliMode.server))
       .text("Server mode")
       .children(
         builder
           .cmd("init")
-          .action((_, c) => c.copy(subcmd = PlasmaCliSubCmd.init))
+          .action((_, c) => c.copy(subcmd = CliSubCmd.init))
           .text("Run the server")
           .children(
             (Seq(walletDbArg.required()) ++ Seq(secureArg) ++

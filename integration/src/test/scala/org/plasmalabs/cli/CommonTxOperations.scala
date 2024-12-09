@@ -9,6 +9,7 @@ import org.plasmalabs.cli.modules.{
   WalletManagementUtilsModule,
   WalletStateAlgebraModule
 }
+import org.plasmalabs.cli.params.models.*
 import org.plasmalabs.sdk.dataApi.{IndexerQueryAlgebra, RpcChannelResource}
 
 trait CommonTxOperations

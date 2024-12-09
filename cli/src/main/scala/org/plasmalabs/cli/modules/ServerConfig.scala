@@ -7,16 +7,14 @@ import scala.util.Try
 
 object ServerConfig {
 
-  val isProd: Boolean =
-    Option(java.lang.System.getProperty("isProd"))
-      .map { isProdStr =>
-        Try(isProdStr.toBoolean).getOrElse(
-          throw new Exception(
-            s"Bad isProd option: `${isProdStr}`. Expecting a scala boolean."
-          )
+  private val isProd: Boolean =
+    Option(java.lang.System.getProperty("isProd")).exists { isProdStr =>
+      Try(isProdStr.toBoolean).getOrElse(
+        throw new Exception(
+          s"Bad isProd option: `${isProdStr}`. Expecting a scala boolean."
         )
-      }
-      .getOrElse(false)
+      )
+    }
 
   private[modules] val port: Port = {
     val portStr = Option(java.lang.System.getProperty("port")).getOrElse("3000")

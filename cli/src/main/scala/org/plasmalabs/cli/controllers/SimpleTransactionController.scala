@@ -3,8 +3,8 @@ package org.plasmalabs.cli.controllers
 import cats.Monad
 import cats.data.Validated
 import cats.effect.kernel.Sync
-import org.plasmalabs.cli.TokenType
 import org.plasmalabs.cli.impl.SimpleTransactionAlgebra
+import org.plasmalabs.cli.params.models.*
 import org.plasmalabs.sdk.dataApi.WalletStateAlgebra
 import org.plasmalabs.sdk.models.{GroupId, LockAddress, SeriesId}
 import org.plasmalabs.sdk.syntax.{AssetType, GroupType, LvlType, SeriesType}

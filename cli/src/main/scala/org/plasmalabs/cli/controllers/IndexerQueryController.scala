@@ -3,7 +3,7 @@ package org.plasmalabs.cli.controllers
 import cats.Monad
 import cats.effect.kernel.Sync
 import cats.syntax.all.*
-import org.plasmalabs.cli.TokenType
+import org.plasmalabs.cli.params.models.*
 import org.plasmalabs.sdk.codecs.AddressCodecs
 import org.plasmalabs.sdk.dataApi.{IndexerQueryAlgebra, WalletStateAlgebra}
 import org.plasmalabs.sdk.display.DisplayOps.DisplayTOps
@@ -53,10 +53,8 @@ class IndexerQueryController[F[_]: Sync](
             }
             .attempt
             .map {
-              _ match {
-                case Left(_)     => Left("Problem contacting the network.")
-                case Right(txos) => txos
-              }
+              case Left(_)     => Left("Problem contacting the network.")
+              case Right(txos) => txos
             }
         case None => Monad[F].pure(Left("Address not found"))
       }

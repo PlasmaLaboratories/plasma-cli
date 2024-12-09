@@ -12,6 +12,8 @@ import org.plasmalabs.cli.modules.{
   TxModeModule,
   WalletModeModule
 }
+import org.plasmalabs.cli.params.CliParamsParser
+import org.plasmalabs.cli.params.models.*
 import scopt.OParser
 
 object Main
@@ -26,33 +28,33 @@ object Main
     with SimpleMintingModeModule
     with ServerModule {
 
-  import PlasmaCliParamsParserModule._
+  import org.plasmalabs.cli.params.CliParamsParser._
 
   override def run(args: List[String]): IO[ExitCode] =
-    OParser.runParser(paramParser, args, PlasmaCliParams()) match {
+    OParser.runParser(paramParser, args, CliParams()) match {
       case (Some(params), effects) =>
         val op: IO[Either[String, String]] =
           params.mode match {
-            case PlasmaCliMode.tx =>
+            case CliMode.tx =>
               txModeSubcmds(params)
-            case PlasmaCliMode.templates =>
+            case CliMode.templates =>
               templateModeSubcmds(params)
-            case PlasmaCliMode.fellowships =>
+            case CliMode.fellowships =>
               fellowshipsModeSubcmds(params)
-            case PlasmaCliMode.wallet =>
+            case CliMode.wallet =>
               walletModeSubcmds(params)
-            case PlasmaCliMode.simpletransaction =>
+            case CliMode.simpletransaction =>
               simpleTransactionSubcmds(params)
-            case PlasmaCliMode.simpleminting =>
+            case CliMode.simpleminting =>
               simpleMintingSubcmds(params)
-            case PlasmaCliMode.indexerquery =>
+            case CliMode.indexerquery =>
               indexerQuerySubcmd(params)
-            case PlasmaCliMode.nodequery =>
+            case CliMode.nodequery =>
               nodeQuerySubcmd(params)
-            case PlasmaCliMode.server =>
+            case CliMode.server =>
               serverSubcmd(params)
-            case PlasmaCliMode.help =>
-              IO.pure(Right(OParser.usage(PlasmaCliParamsParserModule.helpMode)))
+            case CliMode.help =>
+              IO.pure(Right(OParser.usage(CliParamsParser.helpMode)))
             case _ =>
               IO(OParser.runEffects(effects)) >> IO.pure(Left("Invalid mode, try 'help' for more information"))
           }

@@ -15,7 +15,7 @@ trait SimpleTransactionAlgebraModule
     host:             String,
     nodePort:         Int,
     secureConnection: Boolean
-  ) = SimpleTransactionAlgebra
+  ): SimpleTransactionAlgebra[IO] = SimpleTransactionAlgebra
     .make[IO](
       walletApi,
       walletStateAlgebra(walletFile),

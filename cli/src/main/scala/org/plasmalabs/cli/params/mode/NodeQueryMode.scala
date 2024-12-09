@@ -1,6 +1,6 @@
 package org.plasmalabs.cli.params.mode
 
-import org.plasmalabs.cli.{PlasmaCliMode, PlasmaCliParams, PlasmaCliSubCmd}
+import org.plasmalabs.cli.params.models.*
 import org.plasmalabs.sdk.utils.Encoding
 import scopt.OParser
 
@@ -8,13 +8,13 @@ trait NodeQueryMode extends Args:
 
   import builder._
 
-  def nodeQueryMode: OParser[Unit, PlasmaCliParams] =
+  def nodeQueryMode: OParser[Unit, CliParams] =
     cmd("node-query")
-      .action((_, c) => c.copy(mode = PlasmaCliMode.nodequery))
+      .action((_, c) => c.copy(mode = CliMode.nodequery))
       .text("Node query mode")
       .children(
         cmd("mint-block")
-          .action((_, c) => c.copy(subcmd = PlasmaCliSubCmd.mintblock))
+          .action((_, c) => c.copy(subcmd = CliSubCmd.mintblock))
           .text("Mint given number of blocks")
           .children(
             (hostPort ++ Seq(
@@ -28,7 +28,7 @@ trait NodeQueryMode extends Args:
             )): _*
           ),
         cmd("block-by-height")
-          .action((_, c) => c.copy(subcmd = PlasmaCliSubCmd.blockbyheight))
+          .action((_, c) => c.copy(subcmd = CliSubCmd.blockbyheight))
           .text("Get the block at a given height")
           .children(
             (hostPort ++ Seq(
@@ -42,7 +42,7 @@ trait NodeQueryMode extends Args:
             )): _*
           ),
         cmd("block-by-id")
-          .action((_, c) => c.copy(subcmd = PlasmaCliSubCmd.blockbyid))
+          .action((_, c) => c.copy(subcmd = CliSubCmd.blockbyid))
           .text("Get the block with a given id")
           .children(
             (hostPort ++ Seq(
@@ -58,7 +58,7 @@ trait NodeQueryMode extends Args:
             )): _*
           ),
         cmd("transaction-by-id")
-          .action((_, c) => c.copy(subcmd = PlasmaCliSubCmd.transactionbyid))
+          .action((_, c) => c.copy(subcmd = CliSubCmd.transactionbyid))
           .text("Get the transaction with a given id")
           .children(
             (hostPort ++ Seq(
