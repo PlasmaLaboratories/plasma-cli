@@ -142,13 +142,11 @@ object SimpleMintingAlgebra {
         .queryUtxo(fromAddress)
         .attempt
         .flatMap {
-          _ match {
-            case Left(_) =>
-              Sync[F].raiseError(
-                CreateTxError("Problem contacting network")
-              ): F[Seq[Txo]]
-            case Right(txos) => Sync[F].pure(txos: Seq[Txo])
-          }
+          case Left(_) =>
+            Sync[F].raiseError(
+              CreateTxError("Problem contacting network")
+            ): F[Seq[Txo]]
+          case Right(txos) => Sync[F].pure(txos: Seq[Txo])
         }
       lvlTxos = response.filter(
         _.transactionOutput.value.value.isLvl
@@ -200,13 +198,11 @@ object SimpleMintingAlgebra {
         .queryUtxo(fromAddress)
         .attempt
         .flatMap {
-          _ match {
-            case Left(_) =>
-              Sync[F].raiseError(
-                CreateTxError("Problem contacting network")
-              ): F[Seq[Txo]]
-            case Right(txos) => Sync[F].pure(txos: Seq[Txo])
-          }
+          case Left(_) =>
+            Sync[F].raiseError(
+              CreateTxError("Problem contacting network")
+            ): F[Seq[Txo]]
+          case Right(txos) => Sync[F].pure(txos: Seq[Txo])
         }
       lvlTxos = response.filter(
         _.transactionOutput.value.value.isLvl
@@ -259,13 +255,11 @@ object SimpleMintingAlgebra {
         .queryUtxo(fromAddress)
         .attempt
         .flatMap {
-          _ match {
-            case Left(_) =>
-              Sync[F].raiseError(
-                CreateTxError("Problem contacting network")
-              ): F[Seq[Txo]]
-            case Right(txos) => Sync[F].pure(txos: Seq[Txo])
-          }
+          case Left(_) =>
+            Sync[F].raiseError(
+              CreateTxError("Problem contacting network")
+            ): F[Seq[Txo]]
+          case Right(txos) => Sync[F].pure(txos: Seq[Txo])
         }
       lvlTxos = response.filter(
         _.transactionOutput.value.value.isLvl

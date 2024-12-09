@@ -4,7 +4,7 @@ import cats.effect.IO
 
 trait SeriesPolicyParserModule {
 
-  def seriesPolicyParserAlgebra(networkId: Int) =
+  def seriesPolicyParserAlgebra(networkId: Int): SeriesPolicyParser[IO] & CommonTxOps =
     SeriesPolicyParser.make[IO](networkId)
 
 }

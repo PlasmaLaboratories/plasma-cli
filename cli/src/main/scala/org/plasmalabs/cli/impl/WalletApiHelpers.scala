@@ -17,13 +17,13 @@ trait WalletApiHelpers[F[_]] {
     fromFellowship:      String,
     fromTemplate:        String,
     someFromInteraction: Option[Int]
-  ) = wsa.getCurrentIndicesForFunds(
+  ): F[Option[Indices]] = wsa.getCurrentIndicesForFunds(
     fromFellowship,
     fromTemplate,
     someFromInteraction
   )
 
-  def getPredicateFundsToUnlock(someIndices: Option[Indices]) =
+  def getPredicateFundsToUnlock(someIndices: Option[Indices]): F[Option[Lock]] =
     someIndices
       .map(currentIndices => wsa.getLockByIndex(currentIndices))
       .sequence
@@ -32,7 +32,7 @@ trait WalletApiHelpers[F[_]] {
   def getNextIndices(
     fromFellowship: String,
     fromTemplate:   String
-  ) =
+  ): F[Option[Indices]] =
     wsa.getNextIndicesForFunds(
       if (fromFellowship == "nofellowship") "self" else fromFellowship,
       if (fromFellowship == "nofellowship") "default"
@@ -43,7 +43,7 @@ trait WalletApiHelpers[F[_]] {
     someNextIndices: Option[Indices],
     fromFellowship:  String,
     fromTemplate:    String
-  ) =
+  ): F[Option[Lock]] =
     someNextIndices
       .map(idx =>
         wsa.getLock(

@@ -13,24 +13,6 @@ import org.plasmalabs.sdk.utils.Encoding
 
 import scala.io.BufferedSource
 
-case class Tx(
-  network: String,
-  keys:    List[GlobalKeyEntry],
-  inputs:  List[Stxo],
-  outputs: List[UtxoAddress]
-)
-
-case class GlobalKeyEntry(id: String, vk: String)
-case class IdxMapping(index: Int, identifier: String)
-
-case class Stxo(
-  address:     String,
-  keyMap:      List[IdxMapping],
-  proposition: String,
-  value:       Long
-)
-case class UtxoAddress(address: String, value: Long)
-
 trait TxParserAlgebra[F[_]] {
 
   def parseComplexTransaction(
@@ -40,6 +22,26 @@ trait TxParserAlgebra[F[_]] {
 }
 
 object TxParserAlgebra {
+
+  private case class Tx(
+    network: String,
+    keys:    List[GlobalKeyEntry],
+    inputs:  List[Stxo],
+    outputs: List[UtxoAddress]
+  )
+
+  private case class GlobalKeyEntry(id: String, vk: String)
+
+  private case class IdxMapping(index: Int, identifier: String)
+
+  private case class Stxo(
+    address:     String,
+    keyMap:      List[IdxMapping],
+    proposition: String,
+    value:       Long
+  )
+
+  private case class UtxoAddress(address: String, value: Long)
 
   def make[F[_]: Sync](
     transactionBuilderApi: TransactionBuilderApi[F]

@@ -7,12 +7,6 @@ import org.plasmalabs.sdk.utils.Encoding
 
 import scala.io.BufferedSource
 
-case class GroupPolicyInternal(
-  label:            String,
-  fixedSeries:      Option[String],
-  registrationUtxo: String
-)
-
 trait GroupPolicyParser[F[_]] {
 
   def parseGroupPolicy(
@@ -21,6 +15,12 @@ trait GroupPolicyParser[F[_]] {
 }
 
 object GroupPolicyParser {
+
+  private case class GroupPolicyInternal(
+    label:            String,
+    fixedSeries:      Option[String],
+    registrationUtxo: String
+  )
 
   def make[F[_]: Sync](
     networkId: Int
@@ -84,11 +84,11 @@ object GroupPolicyParser {
             }
         )
       gp <- groupPolicyToPBGroupPolicy(groupPolicy)
-    } yield gp).attempt.map(_ match {
+    } yield gp).attempt.map {
       case Right(tx)                  => tx.asRight[CommonParserError]
       case Left(e: CommonParserError) => e.asLeft[GroupPolicy]
       case Left(e)                    => UnknownError(e).asLeft[GroupPolicy]
-    })
+    }
 
   }
 

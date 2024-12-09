@@ -40,7 +40,7 @@ class TxController[F[_]: Sync](
   ): F[Either[String, String]] = {
     import cats.implicits._
     transactionOps
-      .broadcastSimpleTransactionFromParams(
+      .broadcastTransactionFromParams(
         provedTxFile
       )
       .map {
@@ -67,7 +67,7 @@ class TxController[F[_]: Sync](
       )(fos => Sync[F].delay(fos.close()))
 
     transactionOps
-      .proveSimpleTransactionFromParams(
+      .proveTransactionFromParams(
         inputRes,
         keyFile,
         password,

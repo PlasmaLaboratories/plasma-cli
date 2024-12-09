@@ -23,14 +23,14 @@ import java.io.{FileInputStream, FileOutputStream}
 
 trait TransactionAlgebra[F[_]] {
 
-  def proveSimpleTransactionFromParams(
+  def proveTransactionFromParams(
     inputRes:  Resource[F, FileInputStream],
     keyFile:   String,
     password:  String,
     outputRes: Resource[F, FileOutputStream]
   ): F[Either[SimpleTransactionAlgebraError, Unit]]
 
-  def broadcastSimpleTransactionFromParams(
+  def broadcastTransactionFromParams(
     provedTxFile: String
   ): F[Either[SimpleTransactionAlgebraError, String]]
 
@@ -62,7 +62,7 @@ object TransactionAlgebra {
           case _: QuivrRuntimeError => "Unknown error: " + qre.toString
         }
 
-      override def broadcastSimpleTransactionFromParams(
+      override def broadcastTransactionFromParams(
         provedTxFile: String
       ): F[Either[SimpleTransactionAlgebraError, String]] = {
         import org.plasmalabs.sdk.models.transaction.IoTransaction
@@ -88,13 +88,13 @@ object TransactionAlgebra {
             .raiseError(
               new IllegalStateException(
                 "Error validating transaction: " + validations
-                  .map(_ match {
+                  .map {
                     case TransactionAuthorizationError
                           .AuthorizationFailed(errors) =>
                       errors.map(quivrErrorToString).mkString(", ")
                     case _ =>
                       "Contextual or permanent error was found."
-                  })
+                  }
                   .mkString(", ")
               )
             )
@@ -201,7 +201,7 @@ object TransactionAlgebra {
         } yield ()
       }
 
-      override def proveSimpleTransactionFromParams(
+      override def proveTransactionFromParams(
         inputRes:  Resource[F, FileInputStream],
         keyFile:   String,
         password:  String,
@@ -235,7 +235,7 @@ object TransactionAlgebra {
         } yield ()).attempt.map {
           case Right(_)                               => ().asRight
           case Left(e: SimpleTransactionAlgebraError) => e.asLeft
-          case Left(e)                                => UnexpectedError(e.getMessage()).asLeft
+          case Left(e)                                => UnexpectedError(e.getMessage).asLeft
         }
       }
 
