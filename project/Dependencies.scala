@@ -6,7 +6,7 @@ object Dependencies {
   val laminarVersion = "17.1.0"
   val circeVersion = "0.15.0-M1"
   val monocleVersion = "3.3.0"
-  val htt4sVersion = "0.23.29"
+  val htt4sVersion = "0.23.30"
 
   private val monocleCore = "dev.optics"  %% "monocle-core"  % monocleVersion
   private val monocleMacro = "dev.optics" %% "monocle-macro" % monocleVersion
@@ -24,7 +24,7 @@ object Dependencies {
 
   private val catEffects = "org.typelevel"       %% "cats-effect"       % "3.3.12"
   private val scopt = "com.github.scopt"         %% "scopt"             % "4.1.0"
-  private val munit = "org.scalameta"            %% "munit"             % "1.0.2"
+  private val munit = "org.scalameta"            %% "munit"             % "1.0.3"
   private val fs2Core = "co.fs2"                 %% "fs2-core"          % "3.11.0"
   private val fs2IO = "co.fs2"                   %% "fs2-io"            % "3.11.0"
   private val logback = "ch.qos.logback"          % "logback-classic"   % "1.5.12"
