@@ -3,7 +3,7 @@ package org.plasmalabs.cli.impl
 import cats.data.Validated
 import cats.effect.kernel.{Resource, Sync}
 import com.google.protobuf.ByteString
-import org.plasmalabs.cli.NetworkIdentifiers
+import org.plasmalabs.cli.params.models.NetworkIdentifiers
 import org.plasmalabs.quivr.models.{Int128, VerificationKey}
 import org.plasmalabs.sdk.builders.TransactionBuilderApi
 import org.plasmalabs.sdk.builders.locks.LockTemplate
@@ -43,7 +43,7 @@ object TxParserAlgebra {
 
   def make[F[_]: Sync](
     transactionBuilderApi: TransactionBuilderApi[F]
-  ) =
+  ): TxParserAlgebra[F] =
     new TxParserAlgebra[F] {
 
       import io.circe.generic.auto._
@@ -188,11 +188,11 @@ object TxParserAlgebra {
                 .leftMap(e => InvalidYaml(e))
             )
           tx <- txToIoTransaction(txOrFailure)
-        } yield tx).attempt.map(_ match {
+        } yield tx).attempt.map {
           case Right(tx)                      => Right(tx)
           case Left(value: CommonParserError) => Left(value)
           case Left(e)                        => Left(UnknownError(e))
-        })
+        }
       }
     }
 }

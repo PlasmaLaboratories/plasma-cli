@@ -1,6 +1,6 @@
 package org.plasmalabs.cli.params.mode
 
-import org.plasmalabs.cli.{PlasmaCliMode, PlasmaCliParams, PlasmaCliSubCmd, TokenType}
+import org.plasmalabs.cli.params.models.*
 import org.plasmalabs.sdk.utils.Encoding
 import scopt.{OParser, OParserBuilder}
 
@@ -8,23 +8,23 @@ import java.io.File
 
 trait SimpleMintingMode extends Args with Coordinates:
 
-  val builder: OParserBuilder[PlasmaCliParams]
+  val builder: OParserBuilder[CliParams]
 
   import builder._
 
-  def simpleMintingMode: OParser[Unit, PlasmaCliParams] =
+  def simpleMintingMode: OParser[Unit, CliParams] =
     cmd("simple-minting")
-      .action((_, c) => c.copy(mode = PlasmaCliMode.simpleminting))
+      .action((_, c) => c.copy(mode = CliMode.simpleminting))
       .text("Simple minting mode")
       .children(
         cmd("create")
-          .action((_, c) => c.copy(subcmd = PlasmaCliSubCmd.create))
+          .action((_, c) => c.copy(subcmd = CliSubCmd.create))
           .text("Create minting transaction")
           .children(
             ((coordinates ++ hostPortNetwork ++ keyfileAndPassword ++ Seq(
               walletDbArg,
               outputArg.required(),
-              inputFileArg.required(),
+              inputFileArg.required().text("The input file. (mandatory)"),
               opt[String]("commitment")
                 .action((x, c) => c.copy(someCommitment = Some(x)))
                 .text(
@@ -54,8 +54,8 @@ trait SimpleMintingMode extends Args with Coordinates:
               mintTokenType.required(),
               checkConfig(c =>
                 if (
-                  c.mode == PlasmaCliMode.simpleminting &&
-                  c.subcmd == PlasmaCliSubCmd.create &&
+                  c.mode == CliMode.simpleminting &&
+                  c.subcmd == CliSubCmd.create &&
                   c.tokenType != TokenType.group &&
                   c.tokenType != TokenType.series &&
                   c.tokenType != TokenType.asset
@@ -65,8 +65,8 @@ trait SimpleMintingMode extends Args with Coordinates:
                   )
                 else {
                   if (
-                    c.mode == PlasmaCliMode.simpleminting &&
-                    c.subcmd == PlasmaCliSubCmd.create
+                    c.mode == CliMode.simpleminting &&
+                    c.subcmd == CliSubCmd.create
                   ) {
                     if (c.fromAddress.isDefined) {
                       failure(

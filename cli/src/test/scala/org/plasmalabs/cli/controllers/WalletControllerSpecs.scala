@@ -12,7 +12,7 @@ import org.plasmalabs.cli.mockbase.{
   BaseWalletStateAlgebra
 }
 import org.plasmalabs.cli.modules.WalletKeyApiModule
-import org.plasmalabs.cli.{Blake2b, Sha256}
+import org.plasmalabs.cli.params.models.DigestType
 import org.plasmalabs.quivr.models.{KeyPair, Preimage, Proposition}
 import org.plasmalabs.sdk.models.Indices
 import org.plasmalabs.sdk.utils.Encoding
@@ -277,7 +277,7 @@ class WalletControllerSpecs extends CatsEffectSuite with WalletKeyApiModule {
       for {
         res <- controller.addSecret(
           "topl-secret",
-          Sha256
+          DigestType.Sha256
         )
       } yield res,
       Left("Secret already exists")
@@ -314,7 +314,7 @@ class WalletControllerSpecs extends CatsEffectSuite with WalletKeyApiModule {
       for {
         res <- controller.addSecret(
           "topl-secret",
-          Sha256
+          DigestType.Sha256
         )
       } yield res,
       Right(
@@ -348,7 +348,7 @@ class WalletControllerSpecs extends CatsEffectSuite with WalletKeyApiModule {
       for {
         res <- controller.addSecret(
           "topl-secret",
-          Blake2b
+          DigestType.Blake2b
         )
       } yield res,
       Left("Secret already exists")
@@ -386,7 +386,7 @@ class WalletControllerSpecs extends CatsEffectSuite with WalletKeyApiModule {
       for {
         res <- controller.addSecret(
           "topl-secret",
-          Blake2b
+          DigestType.Blake2b
         )
       } yield res,
       Right(

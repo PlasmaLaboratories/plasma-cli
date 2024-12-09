@@ -1,19 +1,19 @@
 package org.plasmalabs.cli.params.mode
 
-import org.plasmalabs.cli.{PlasmaCliMode, PlasmaCliParams, PlasmaCliSubCmd}
+import org.plasmalabs.cli.params.models.*
 import scopt.OParser
 
 trait IndexerQueryMode extends Coordinates with Args:
 
-  def indexerQueryMode: OParser[Unit, PlasmaCliParams] =
+  def indexerQueryMode: OParser[Unit, CliParams] =
     builder
       .cmd("indexer-query")
-      .action((_, c) => c.copy(mode = PlasmaCliMode.indexerquery))
+      .action((_, c) => c.copy(mode = CliMode.indexerquery))
       .text("Indexer query mode")
       .children(
         builder
           .cmd("utxo-by-address")
-          .action((_, c) => c.copy(subcmd = PlasmaCliSubCmd.utxobyaddress))
+          .action((_, c) => c.copy(subcmd = CliSubCmd.utxobyaddress))
           .text("Query utxo")
           .children(
             (coordinates ++ hostPort ++ Seq(

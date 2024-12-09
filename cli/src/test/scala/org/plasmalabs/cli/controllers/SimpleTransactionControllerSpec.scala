@@ -5,7 +5,6 @@ import cats.data.ValidatedNel
 import cats.effect.IO
 import com.google.protobuf.ByteString
 import munit.CatsEffectSuite
-import org.plasmalabs.cli.TokenType
 import org.plasmalabs.cli.impl.{
   AssetStatementParserModule,
   GroupPolicyParserModule,
@@ -14,6 +13,7 @@ import org.plasmalabs.cli.impl.{
 }
 import org.plasmalabs.cli.mockbase.BaseWalletStateAlgebra
 import org.plasmalabs.cli.modules.{DummyObjects, SimpleMintingAlgebraModule}
+import org.plasmalabs.cli.params.models.*
 import org.plasmalabs.sdk.codecs.AddressCodecs
 import org.plasmalabs.sdk.constants.NetworkConstants
 import org.plasmalabs.sdk.models.box.Lock

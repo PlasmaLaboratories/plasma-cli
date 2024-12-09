@@ -5,7 +5,7 @@ import cats.effect.IO
 import com.google.protobuf.ByteString
 import org.plasmalabs.cli.controllers.{SimpleTransactionController, TxController}
 import org.plasmalabs.cli.modules.{SimpleTransactionModeModule, TxModeModule, WalletModeModule}
-import org.plasmalabs.cli.{NetworkIdentifiers, TokenType}
+import org.plasmalabs.cli.params.models.*
 import org.plasmalabs.sdk.constants.NetworkConstants
 import org.plasmalabs.sdk.models.{GroupId, LockAddress, SeriesId}
 import org.plasmalabs.sdk.utils.Encoding

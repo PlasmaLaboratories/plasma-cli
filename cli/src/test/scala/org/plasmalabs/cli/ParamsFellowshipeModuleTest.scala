@@ -1,6 +1,7 @@
 package org.plasmalabs.cli
 
 import munit.FunSuite
+import org.plasmalabs.cli.params.models.CliParams
 import scopt.OParser
 
 import java.io.File
@@ -8,7 +9,7 @@ import java.nio.file.{Files, Path, Paths}
 
 class ParamsFellowshipModuleTest extends FunSuite {
 
-  import PlasmaCliParamsParserModule._
+  import org.plasmalabs.cli.params.CliParamsParser._
 
   val tmpWallet = FunFixture[Path](
     setup = { _ =>
@@ -33,7 +34,7 @@ class ParamsFellowshipModuleTest extends FunSuite {
     )
     assert(
       OParser
-        .parse(paramParser, args0, PlasmaCliParams())
+        .parse(paramParser, args0, CliParams())
         .isDefined
     )
   }
@@ -47,7 +48,7 @@ class ParamsFellowshipModuleTest extends FunSuite {
     )
     assert(
       OParser
-        .parse(paramParser, args0, PlasmaCliParams())
+        .parse(paramParser, args0, CliParams())
         .isEmpty
     )
   }

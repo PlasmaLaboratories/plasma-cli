@@ -2,6 +2,7 @@ package org.plasmalabs.cli
 
 import cats.effect.{ExitCode, IO}
 import munit.CatsEffectSuite
+import org.plasmalabs.cli.params.models.*
 
 import java.nio.file.{Files, Paths}
 import scala.concurrent.duration.Duration

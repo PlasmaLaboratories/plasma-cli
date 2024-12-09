@@ -3,7 +3,8 @@ package org.plasmalabs.cli.modules
 import cats.effect.IO
 import org.plasmalabs.cli.controllers.SimpleMintingController
 import org.plasmalabs.cli.impl.{AssetStatementParserModule, GroupPolicyParserModule, SeriesPolicyParserModule}
-import org.plasmalabs.cli.{PlasmaCliParams, PlasmaCliParamsParserModule, PlasmaCliSubCmd, TokenType}
+import org.plasmalabs.cli.params.CliParamsParser
+import org.plasmalabs.cli.params.models.*
 import org.plasmalabs.sdk.constants.NetworkConstants
 import scopt.OParser
 
@@ -14,7 +15,7 @@ trait SimpleMintingModeModule
     with SimpleMintingAlgebraModule {
 
   def simpleMintingSubcmds(
-    validateParams: PlasmaCliParams
+    validateParams: CliParams
   ): IO[Either[String, String]] = {
     val simpleMintingController = new SimpleMintingController(
       groupPolicyParserAlgebra(validateParams.network.networkId),
@@ -30,15 +31,15 @@ trait SimpleMintingModeModule
       )
     )
     validateParams.subcmd match {
-      case PlasmaCliSubCmd.invalid =>
+      case CliSubCmd.invalid =>
         IO.pure(
           Left(
             OParser.usage(
-              PlasmaCliParamsParserModule.simpleMintingMode
+              CliParamsParser.simpleMintingMode
             ) + "\nA subcommand needs to be specified"
           )
         )
-      case PlasmaCliSubCmd.create =>
+      case CliSubCmd.create =>
         validateParams.tokenType match {
           case TokenType.group =>
             simpleMintingController

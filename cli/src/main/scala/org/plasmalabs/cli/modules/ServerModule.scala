@@ -1,18 +1,19 @@
 package org.plasmalabs.cli.modules
 
 import cats.data.Kleisli
-import cats.effect.{IO, *}
+import cats.effect.*
 import io.circe.generic.auto.*
 import io.circe.syntax.*
+import org.http4s.*
 import org.http4s.circe.*
 import org.http4s.dsl.io.*
 import org.http4s.ember.server.EmberServerBuilder
 import org.http4s.server.Router
 import org.http4s.server.staticcontent.resourceServiceBuilder
-import org.http4s.{HttpRoutes, *}
 import org.plasmalabs.cli.http.WalletHttpService
 import org.plasmalabs.cli.impl.FullTxOps
-import org.plasmalabs.cli.{PlasmaCliParams, PlasmaCliParamsParserModule, PlasmaCliSubCmd}
+import org.plasmalabs.cli.params.CliParamsParser
+import org.plasmalabs.cli.params.models.*
 import org.plasmalabs.sdk.codecs.AddressCodecs
 import org.plasmalabs.shared.models.{TxRequest, TxResponse}
 import scopt.OParser
@@ -44,7 +45,7 @@ trait ServerModule extends FellowshipsModeModule with WalletModeModule {
       TemporaryRedirect(headers.Location(Uri.fromString("/").toOption.get))
   }
 
-  def apiServices(validateParams: PlasmaCliParams) = HttpRoutes.of[IO] { case req @ POST -> Root / "send" =>
+  def apiServices(validateParams: CliParams) = HttpRoutes.of[IO] { case req @ POST -> Root / "send" =>
     implicit val txReqDecoder: EntityDecoder[IO, TxRequest] =
       jsonOf[IO, TxRequest]
 
@@ -79,17 +80,17 @@ trait ServerModule extends FellowshipsModeModule with WalletModeModule {
   }
 
   def serverSubcmd(
-    validateParams: PlasmaCliParams
+    validateParams: CliParams
   ): IO[Either[String, String]] = validateParams.subcmd match {
-    case PlasmaCliSubCmd.invalid =>
+    case CliSubCmd.invalid =>
       IO.pure(
         Left(
           OParser.usage(
-            PlasmaCliParamsParserModule.serverMode
+            CliParamsParser.serverMode
           ) + "\nA subcommand needs to be specified"
         )
       )
-    case PlasmaCliSubCmd.init =>
+    case CliSubCmd.init =>
       val staticAssetsService = resourceServiceBuilder[IO]("/static").toRoutes
       val logger =
         org.typelevel.log4cats.slf4j.Slf4jLogger.getLoggerFromName[IO]("App")

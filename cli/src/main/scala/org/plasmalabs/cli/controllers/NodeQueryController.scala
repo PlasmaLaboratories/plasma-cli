@@ -31,22 +31,18 @@ class NodeQueryController[F[_]: Sync](
       .blockByHeight(
         height
       )
-      .map { someResult =>
-        someResult match {
-          case Some(((blockId, _, _, ioTransactions))) =>
-            Right(BlockDisplayOps.display(blockId, ioTransactions))
-          case None =>
-            Left("No blocks found at that height")
-        }
+      .map {
+        case Some(((blockId, _, _, ioTransactions))) =>
+          Right(BlockDisplayOps.display(blockId, ioTransactions))
+        case None =>
+          Left("No blocks found at that height")
       }
       .attempt
       .map {
-        _ match {
-          case Left(e) =>
-            e.printStackTrace()
-            Left("Problem contacting the network.")
-          case Right(txos) => txos
-        }
+        case Left(e) =>
+          e.printStackTrace()
+          Left("Problem contacting the network.")
+        case Right(txos) => txos
       }
   }
 
@@ -62,20 +58,16 @@ class NodeQueryController[F[_]: Sync](
           .toOption // validation should ensure that this is a Some
           .get
       )
-      .map { someResult =>
-        someResult match {
-          case Some(((blockId, _, _, ioTransactions))) =>
-            Right(BlockDisplayOps.display(blockId, ioTransactions))
-          case None =>
-            Left("No blocks found at that block id")
-        }
+      .map {
+        case Some(((blockId, _, _, ioTransactions))) =>
+          Right(BlockDisplayOps.display(blockId, ioTransactions))
+        case None =>
+          Left("No blocks found at that block id")
       }
       .attempt
       .map {
-        _ match {
-          case Left(_)     => Left("Problem contacting the network.")
-          case Right(txos) => txos
-        }
+        case Left(_)     => Left("Problem contacting the network.")
+        case Right(txos) => txos
       }
   }
 
@@ -89,20 +81,16 @@ class NodeQueryController[F[_]: Sync](
           .toOption // validation should ensure that this is a Some
           .get
       )
-      .map { someResult =>
-        someResult match {
-          case Some(ioTransaction) =>
-            Right(ioTransaction.display)
-          case None =>
-            Left(s"No transaction found with id ${transactionId}")
-        }
+      .map {
+        case Some(ioTransaction) =>
+          Right(ioTransaction.display)
+        case None =>
+          Left(s"No transaction found with id ${transactionId}")
       }
       .attempt
       .map {
-        _ match {
-          case Left(_)     => Left("Problem contacting the network.")
-          case Right(txos) => txos
-        }
+        case Left(_)     => Left("Problem contacting the network.")
+        case Right(txos) => txos
       }
   }
 

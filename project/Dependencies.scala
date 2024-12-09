@@ -2,7 +2,7 @@ import sbt._
 
 object Dependencies {
 
-  val sdkVersion = "0.2.2"
+  val sdkVersion = "0.2.2+8-7da83b34-SNAPSHOT" // TODO bump final version 0.2.3
   val laminarVersion = "17.1.0"
   val circeVersion = "0.15.0-M1"
   val monocleVersion = "3.3.0"

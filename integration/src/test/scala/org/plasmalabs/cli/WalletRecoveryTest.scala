@@ -3,6 +3,7 @@ package org.plasmalabs.cli
 import cats.effect.kernel.{Resource, Sync}
 import cats.effect.{ExitCode, IO}
 import munit.CatsEffectSuite
+import org.plasmalabs.cli.params.models.*
 
 import java.io.FileInputStream
 import java.nio.file.{Files, Paths}
