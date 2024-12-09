@@ -11,7 +11,6 @@ import org.http4s.ember.server.EmberServerBuilder
 import org.http4s.server.Router
 import org.http4s.server.staticcontent.resourceServiceBuilder
 import org.plasmalabs.cli.http.WalletHttpService
-import org.plasmalabs.cli.impl.FullTxOps
 import org.plasmalabs.cli.params.CliParamsParser
 import org.plasmalabs.cli.params.models.*
 import org.plasmalabs.sdk.codecs.AddressCodecs
@@ -20,9 +19,9 @@ import scopt.OParser
 
 import java.nio.file.Files
 
-trait ServerModule extends FellowshipsModeModule with WalletModeModule {
+trait ServerModule extends FellowshipsModeModule with WalletModeModule with FullTxModule {
 
-  lazy val httpService = HttpRoutes.of[IO] {
+  lazy val httpService: HttpRoutes[IO] = HttpRoutes.of[IO] {
 
     // You must serve the index.html file that loads your frontend code for
     // every url that is defined in your frontend (Waypoint) routes, in order
@@ -45,13 +44,13 @@ trait ServerModule extends FellowshipsModeModule with WalletModeModule {
       TemporaryRedirect(headers.Location(Uri.fromString("/").toOption.get))
   }
 
-  def apiServices(validateParams: CliParams) = HttpRoutes.of[IO] { case req @ POST -> Root / "send" =>
+  def apiServices(validateParams: CliParams): HttpRoutes[IO] = HttpRoutes.of[IO] { case req @ POST -> Root / "send" =>
     implicit val txReqDecoder: EntityDecoder[IO, TxRequest] =
       jsonOf[IO, TxRequest]
 
     for {
       input <- req.as[TxRequest]
-      result <- FullTxOps.sendFunds(
+      result <- sendFunds(
         validateParams.network,
         validateParams.password,
         validateParams.walletFile,

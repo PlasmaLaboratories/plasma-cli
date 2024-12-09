@@ -1,16 +1,15 @@
-package org.plasmalabs.cli.impl
+package org.plasmalabs.cli.modules
 
 import cats.data.EitherT
 import cats.effect.IO
 import com.google.protobuf.ByteString
 import org.plasmalabs.cli.controllers.{SimpleTransactionController, TxController}
-import org.plasmalabs.cli.modules.{SimpleTransactionModeModule, TxModeModule, WalletModeModule}
 import org.plasmalabs.cli.params.models.*
 import org.plasmalabs.sdk.constants.NetworkConstants
 import org.plasmalabs.sdk.models.{GroupId, LockAddress, SeriesId}
 import org.plasmalabs.sdk.utils.Encoding
 
-object FullTxOps extends WalletModeModule with SimpleTransactionModeModule with TxModeModule {
+trait FullTxModule extends WalletModeModule with SimpleTransactionModeModule with TxModeModule {
 
   private def selectToken(token: String) =
     if (token == "LVL")
@@ -44,7 +43,7 @@ object FullTxOps extends WalletModeModule with SimpleTransactionModeModule with 
         )
       )
 
-  def selectSeriesId(token: String): Option[SeriesId] =
+  private def selectSeriesId(token: String): Option[SeriesId] =
     if (token.startsWith(":"))
       Some(
         SeriesId(

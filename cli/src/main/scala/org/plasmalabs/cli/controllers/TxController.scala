@@ -1,7 +1,8 @@
 package org.plasmalabs.cli.controllers
 
 import cats.effect.kernel.{Resource, Sync}
-import org.plasmalabs.cli.impl.{CommonParserError, TransactionAlgebra, TxParserAlgebra}
+import org.plasmalabs.cli.impl.{TransactionAlgebra, TxParserAlgebra}
+import org.plasmalabs.cli.parsers.CommonParserError
 
 import java.io.{FileInputStream, FileOutputStream}
 

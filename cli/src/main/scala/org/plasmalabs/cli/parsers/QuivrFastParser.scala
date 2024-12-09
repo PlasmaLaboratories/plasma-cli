@@ -1,4 +1,4 @@
-package org.plasmalabs.cli.impl
+package org.plasmalabs.cli.parsers
 
 import cats.Monad
 import cats.data.ValidatedNel
@@ -58,8 +58,8 @@ object TemplateAST {
   def compilePredicate[F[_]: Monad](
     template: ThresholdPredicate
   ): ValidationStateM[ValidatedNel[ParseError, LockTemplate[F]]] = {
-    import org.plasmalabs.sdk.builders.locks._
-    import cats.implicits._
+    import cats.implicits.*
+    import org.plasmalabs.sdk.builders.locks.*
     template match {
       case ThresholdPredicate(threshold, innerPropositions) =>
         if (threshold > innerPropositions.length)
@@ -93,7 +93,7 @@ object TemplateAST {
   def compile[F[_]: Monad](
     template: TemplateAST
   ): ValidationStateM[ValidatedNel[ParseError, PropositionTemplate[F]]] = {
-    import cats.implicits._
+    import cats.implicits.*
     template match {
       case Sign(location, idx) =>
         if (idx < 0)
@@ -282,7 +282,9 @@ object TemplateAST {
 }
 
 trait QuivrFastParser[F[_]] {
-  import fastparse._, MultiLineWhitespace._
+
+  import fastparse.*
+  import MultiLineWhitespace.*
 
   def parseQuivr(input: String): ValidatedNel[ParseError, LockTemplate[F]]
 
@@ -387,14 +389,14 @@ trait QuivrFastParser[F[_]] {
 }
 
 object QuivrFastParser {
-  import fastparse._
+  import fastparse.*
 
   def make[F[_]: Monad]: QuivrFastParser[F] = new QuivrFastParser[F] {
 
     def parseQuivr(
       input: String
     ): ValidatedNel[ParseError, LockTemplate[F]] = {
-      import cats.implicits._
+      import cats.implicits.*
       parse(input, thresholdPredicate(_)) match {
         case Parsed.Success(value, _) =>
           val (interaction, res) =

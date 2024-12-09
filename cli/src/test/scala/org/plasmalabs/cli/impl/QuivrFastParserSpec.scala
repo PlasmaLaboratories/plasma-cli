@@ -1,6 +1,7 @@
 package org.plasmalabs.cli.impl
 
 import cats.Id
+import org.plasmalabs.cli.parsers.QuivrFastParser
 import org.plasmalabs.cli.views.WalletModelDisplayOps
 
 class QuivrFastParserSpec extends munit.FunSuite {

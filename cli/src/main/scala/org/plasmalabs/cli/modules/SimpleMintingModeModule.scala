@@ -2,25 +2,24 @@ package org.plasmalabs.cli.modules
 
 import cats.effect.IO
 import org.plasmalabs.cli.controllers.SimpleMintingController
-import org.plasmalabs.cli.impl.{AssetStatementParserModule, GroupPolicyParserModule, SeriesPolicyParserModule}
 import org.plasmalabs.cli.params.CliParamsParser
 import org.plasmalabs.cli.params.models.*
 import org.plasmalabs.sdk.constants.NetworkConstants
 import scopt.OParser
 
 trait SimpleMintingModeModule
-    extends GroupPolicyParserModule
-    with SeriesPolicyParserModule
-    with AssetStatementParserModule
+    extends ParserModule.Group
+    with ParserModule.Series
+    with ParserModule.Ams
     with SimpleMintingAlgebraModule {
 
   def simpleMintingSubcmds(
     validateParams: CliParams
   ): IO[Either[String, String]] = {
     val simpleMintingController = new SimpleMintingController(
-      groupPolicyParserAlgebra(validateParams.network.networkId),
-      seriesPolicyParserAlgebra(validateParams.network.networkId),
-      assetMintingStatementParserAlgebra(validateParams.network.networkId),
+      groupPolicyParser(validateParams.network.networkId),
+      seriesPolicyParser(validateParams.network.networkId),
+      assetMintingStatementParser(validateParams.network.networkId),
       simpleMintingAlgebra(
         validateParams.walletFile,
         validateParams.network.networkId,

@@ -4,6 +4,16 @@ import cats.data.Validated
 import cats.effect.kernel.{Resource, Sync}
 import com.google.protobuf.ByteString
 import org.plasmalabs.cli.params.models.NetworkIdentifiers
+import org.plasmalabs.cli.parsers.{
+  CommonParserError,
+  InvalidNetwork,
+  InvalidVerificationKey,
+  InvalidYaml,
+  PropositionInstantationError,
+  PropositionParseError,
+  QuivrFastParser,
+  UnknownError
+}
 import org.plasmalabs.quivr.models.{Int128, VerificationKey}
 import org.plasmalabs.sdk.builders.TransactionBuilderApi
 import org.plasmalabs.sdk.builders.locks.LockTemplate

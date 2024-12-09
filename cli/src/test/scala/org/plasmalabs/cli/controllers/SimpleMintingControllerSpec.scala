@@ -4,14 +4,9 @@ import cats.Monad
 import cats.effect.IO
 import cats.effect.kernel.Sync
 import munit.CatsEffectSuite
-import org.plasmalabs.cli.impl.{
-  AssetStatementParserModule,
-  GroupPolicyParserModule,
-  SeriesPolicyParserModule,
-  SimpleMintingAlgebra
-}
+import org.plasmalabs.cli.impl.SimpleMintingAlgebra
 import org.plasmalabs.cli.mockbase.BaseWalletStateAlgebra
-import org.plasmalabs.cli.modules.{DummyObjects, SimpleMintingAlgebraModule}
+import org.plasmalabs.cli.modules.{DummyObjects, ParserModule, SimpleMintingAlgebraModule}
 import org.plasmalabs.quivr.models.Proposition
 import org.plasmalabs.sdk.constants.NetworkConstants
 import org.plasmalabs.sdk.models.Indices
@@ -21,13 +16,13 @@ import java.io.File
 
 class SimpleMintingControllerSpec
     extends CatsEffectSuite
-    with GroupPolicyParserModule
-    with SeriesPolicyParserModule
-    with AssetStatementParserModule
+    with ParserModule.Group
+    with ParserModule.Series
+    with ParserModule.Ams
     with SimpleMintingAlgebraModule
     with DummyObjects {
 
-  def makeWalletStateAlgebraMockWithAddress[F[_]: Monad] =
+  private def makeWalletStateAlgebraMockWithAddress[F[_]: Monad] =
     new BaseWalletStateAlgebra[F] {
 
       override def getCurrentIndicesForFunds(
@@ -98,13 +93,13 @@ class SimpleMintingControllerSpec
     }
 
   val controllerUnderTest = new SimpleMintingController(
-    groupPolicyParserAlgebra(NetworkConstants.PRIVATE_NETWORK_ID),
-    seriesPolicyParserAlgebra(NetworkConstants.PRIVATE_NETWORK_ID),
-    assetMintingStatementParserAlgebra(NetworkConstants.PRIVATE_NETWORK_ID),
+    groupPolicyParser(NetworkConstants.PRIVATE_NETWORK_ID),
+    seriesPolicyParser(NetworkConstants.PRIVATE_NETWORK_ID),
+    assetMintingStatementParser(NetworkConstants.PRIVATE_NETWORK_ID),
     simpleMintingAlgebra()
   )
 
-  def simpleMintingAlgebra(
+  private def simpleMintingAlgebra(
   ) = SimpleMintingAlgebra.make[IO](
     Sync[IO],
     walletApi,

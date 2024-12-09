@@ -297,7 +297,7 @@ class WalletController[F[_]: Sync](
     import cats.implicits._
     walletStateAlgebra
       .getInteractionList(fromFellowship, fromTemplate)
-      .map(_ match {
+      .map {
         case Some(interactions) =>
           Right(
             interactions
@@ -306,7 +306,7 @@ class WalletController[F[_]: Sync](
               .mkString("\n")
           )
         case None => Left("The fellowship or template does not exist.")
-      })
+      }
   }
 
   def setCurrentInteraction(
@@ -321,10 +321,10 @@ class WalletController[F[_]: Sync](
         fromTemplate,
         fromInteraction
       )
-      .map(_ match {
+      .map {
         case Some(_) => Right("Current interaction set")
         case None    => Left("Error setting current interaction")
-      })
+      }
   }
 
   def recoverKeysFromParams(
@@ -355,10 +355,10 @@ class WalletController[F[_]: Sync](
             params.someFromInteraction
           )
       )
-      .map(_ match {
+      .map {
         case Some(address) => Right(address)
         case None          => Left("No address found")
-      })
+      }
   }
 
   def sync(
@@ -461,24 +461,20 @@ class WalletController[F[_]: Sync](
       someTemplate,
       someInteraction
     ).map {
-      _ match {
-        case Left(error) => Left(error)
-        case Right(balances) =>
-          Right(
-            (balances
-              .collect { x =>
-                x match {
-                  case LvlBalance(b)              => "LVL: " + b
-                  case GroupTokenBalanceDTO(g, b) => "Group(" + g + "): " + b
-                  case SeriesTokenBalanceDTO(id, balance) =>
-                    "Series(" + id + "): " + balance
-                  case AssetTokenBalanceDTO(group, series, balance) =>
-                    "Asset(" + group + ", " + series + "): " + balance
-                }
-              })
-              .mkString("\n")
-          )
-      }
+      case Left(error) => Left(error)
+      case Right(balances) =>
+        Right(
+          (balances
+            .collect {
+              case LvlBalance(b)              => "LVL: " + b
+              case GroupTokenBalanceDTO(g, b) => "Group(" + g + "): " + b
+              case SeriesTokenBalanceDTO(id, balance) =>
+                "Series(" + id + "): " + balance
+              case AssetTokenBalanceDTO(group, series, balance) =>
+                "Asset(" + group + ", " + series + "): " + balance
+            })
+            .mkString("\n")
+        )
     }
   }
 
