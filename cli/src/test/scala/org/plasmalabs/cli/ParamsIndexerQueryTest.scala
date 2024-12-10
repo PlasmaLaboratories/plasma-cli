@@ -1,11 +1,12 @@
 package org.plasmalabs.cli
 
 import munit.FunSuite
+import org.plasmalabs.cli.params.models.CliParams
 import scopt.OParser
 
 class ParamsIndexerQueryTest extends FunSuite {
 
-  import PlasmaCliParamsParserModule._
+  import org.plasmalabs.cli.params.CliParamsParser._
 
   test("Test from-fellowship transactions require index (UTXO query)") {
     val args0 = List(
@@ -24,7 +25,7 @@ class ParamsIndexerQueryTest extends FunSuite {
       "--walletdb",
       "src/test/resources/wallet.db"
     )
-    assert(OParser.parse(paramParser, args0, PlasmaCliParams()).isDefined)
+    assert(OParser.parse(paramParser, args0, CliParams()).isDefined)
   }
 
 }

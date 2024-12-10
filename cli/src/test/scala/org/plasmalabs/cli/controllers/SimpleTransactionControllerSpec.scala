@@ -5,15 +5,10 @@ import cats.data.ValidatedNel
 import cats.effect.IO
 import com.google.protobuf.ByteString
 import munit.CatsEffectSuite
-import org.plasmalabs.cli.TokenType
-import org.plasmalabs.cli.impl.{
-  AssetStatementParserModule,
-  GroupPolicyParserModule,
-  SeriesPolicyParserModule,
-  SimpleTransactionAlgebra
-}
+import org.plasmalabs.cli.impl.SimpleTransactionAlgebra
 import org.plasmalabs.cli.mockbase.BaseWalletStateAlgebra
-import org.plasmalabs.cli.modules.{DummyObjects, SimpleMintingAlgebraModule}
+import org.plasmalabs.cli.modules.{DummyObjects, ParserModule, SimpleMintingAlgebraModule}
+import org.plasmalabs.cli.params.models.*
 import org.plasmalabs.sdk.codecs.AddressCodecs
 import org.plasmalabs.sdk.constants.NetworkConstants
 import org.plasmalabs.sdk.models.box.Lock
@@ -22,13 +17,13 @@ import org.plasmalabs.sdk.utils.Encoding
 
 class SimpleTransactionControllerSpec
     extends CatsEffectSuite
-    with GroupPolicyParserModule
-    with SeriesPolicyParserModule
-    with AssetStatementParserModule
+    with ParserModule.Group
+    with ParserModule.Series
+    with ParserModule.Ams
     with SimpleMintingAlgebraModule
     with DummyObjects {
 
-  def makeWalletStateAlgebraMockWithAddress[F[_]: Monad] =
+  private def makeWalletStateAlgebraMockWithAddress[F[_]: Monad] =
     new BaseWalletStateAlgebra[F] {
 
       override def getAddress(

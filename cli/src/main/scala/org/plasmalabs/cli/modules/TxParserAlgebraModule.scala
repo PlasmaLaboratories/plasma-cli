@@ -5,7 +5,7 @@ import org.plasmalabs.cli.impl.TxParserAlgebra
 
 trait TxParserAlgebraModule extends TransactionBuilderApiModule {
 
-  def txParserAlgebra(networkId: Int, ledgerId: Int) =
+  def txParserAlgebra(networkId: Int, ledgerId: Int): TxParserAlgebra[IO] =
     TxParserAlgebra.make[IO](transactionBuilderApi(networkId, ledgerId))
 
 }

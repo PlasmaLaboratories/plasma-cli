@@ -1,11 +1,12 @@
 package org.plasmalabs.cli
 
 import munit.FunSuite
+import org.plasmalabs.cli.params.models.CliParams
 import scopt.OParser
 
 class ParamsSimpleTransactionTest extends FunSuite {
 
-  import PlasmaCliParamsParserModule._
+  import org.plasmalabs.cli.params.CliParamsParser._
 
   test("Test valid group transaction create using toAddress") {
     val args0 = List(
@@ -36,7 +37,7 @@ class ParamsSimpleTransactionTest extends FunSuite {
       "--walletdb",
       "src/test/resources/wallet.db"
     )
-    assert(OParser.parse(paramParser, args0, PlasmaCliParams()).isDefined)
+    assert(OParser.parse(paramParser, args0, CliParams()).isDefined)
   }
 
   test("Test invalid transaction omitting port") {
@@ -64,7 +65,7 @@ class ParamsSimpleTransactionTest extends FunSuite {
       "--walletdb",
       "src/test/resources/wallet.db"
     )
-    assert(!OParser.parse(paramParser, args0, PlasmaCliParams()).isDefined)
+    assert(!OParser.parse(paramParser, args0, CliParams()).isDefined)
   }
 
   test("Test invalid transaction omitting host") {
@@ -92,7 +93,7 @@ class ParamsSimpleTransactionTest extends FunSuite {
       "--walletdb",
       "src/test/resources/wallet.db"
     )
-    assert(!OParser.parse(paramParser, args0, PlasmaCliParams()).isDefined)
+    assert(!OParser.parse(paramParser, args0, CliParams()).isDefined)
   }
 
   test("Test valid transaction create using toAddress") {
@@ -122,7 +123,7 @@ class ParamsSimpleTransactionTest extends FunSuite {
       "--walletdb",
       "src/test/resources/wallet.db"
     )
-    assert(OParser.parse(paramParser, args0, PlasmaCliParams()).isDefined)
+    assert(OParser.parse(paramParser, args0, CliParams()).isDefined)
   }
 
   test("Test nofellowship transactions require index") {
@@ -156,7 +157,7 @@ class ParamsSimpleTransactionTest extends FunSuite {
       "--walletdb",
       "src/test/resources/wallet.db"
     )
-    assert(OParser.parse(paramParser, args0, PlasmaCliParams()).isEmpty)
+    assert(OParser.parse(paramParser, args0, CliParams()).isEmpty)
   }
 
   test("Test nofellowship transactions require change") {
@@ -191,7 +192,7 @@ class ParamsSimpleTransactionTest extends FunSuite {
       "--walletdb",
       "src/test/resources/wallet.db"
     )
-    assert(OParser.parse(paramParser, args0, PlasmaCliParams()).isEmpty)
+    assert(OParser.parse(paramParser, args0, CliParams()).isEmpty)
   }
 
   test("Test from-fellowship transactions require index") {
@@ -233,7 +234,7 @@ class ParamsSimpleTransactionTest extends FunSuite {
       "--walletdb",
       "src/test/resources/wallet.db"
     )
-    assert(OParser.parse(paramParser, args0, PlasmaCliParams()).isDefined)
+    assert(OParser.parse(paramParser, args0, CliParams()).isDefined)
   }
 
   test("Test valid transaction create using toFellowship and toTemplate") {
@@ -265,7 +266,7 @@ class ParamsSimpleTransactionTest extends FunSuite {
       "--walletdb",
       "src/test/resources/wallet.db"
     )
-    assert(OParser.parse(paramParser, args0, PlasmaCliParams()).isDefined)
+    assert(OParser.parse(paramParser, args0, CliParams()).isDefined)
   }
 
   test(
@@ -297,7 +298,7 @@ class ParamsSimpleTransactionTest extends FunSuite {
       "--walletdb",
       "src/test/resources/wallet.db"
     )
-    assert(OParser.parse(paramParser, args0, PlasmaCliParams()).isEmpty)
+    assert(OParser.parse(paramParser, args0, CliParams()).isEmpty)
   }
 
   test(
@@ -323,7 +324,7 @@ class ParamsSimpleTransactionTest extends FunSuite {
       "--walletdb",
       "src/test/resources/wallet.db"
     )
-    assert(OParser.parse(paramParser, args0, PlasmaCliParams()).isEmpty)
+    assert(OParser.parse(paramParser, args0, CliParams()).isEmpty)
 
   }
 
@@ -352,6 +353,6 @@ class ParamsSimpleTransactionTest extends FunSuite {
       "--walletdb",
       "src/test/resources/wallet.db"
     )
-    assert(OParser.parse(paramParser, args0, PlasmaCliParams()).isEmpty)
+    assert(OParser.parse(paramParser, args0, CliParams()).isEmpty)
   }
 }

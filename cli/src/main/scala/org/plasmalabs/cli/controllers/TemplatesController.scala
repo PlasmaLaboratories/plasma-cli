@@ -3,7 +3,7 @@ package org.plasmalabs.cli.controllers
 import cats.Id
 import cats.data.Validated
 import cats.effect.kernel.Sync
-import org.plasmalabs.cli.impl.QuivrFastParser
+import org.plasmalabs.cli.parsers.QuivrFastParser
 import org.plasmalabs.sdk.codecs.LockTemplateCodecs
 import org.plasmalabs.sdk.dataApi.{TemplateStorageAlgebra, WalletTemplate}
 

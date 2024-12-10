@@ -1,4 +1,4 @@
-package org.plasmalabs.cli.impl
+package org.plasmalabs.cli.parsers
 
 sealed trait CommonParserError extends Throwable {
   val description: String

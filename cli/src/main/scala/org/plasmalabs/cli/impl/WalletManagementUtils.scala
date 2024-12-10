@@ -1,6 +1,7 @@
 package org.plasmalabs.cli.impl
 
 import cats.effect.kernel.Sync
+import cats.implicits.*
 import org.plasmalabs.crypto.encryption.VaultStore
 import org.plasmalabs.quivr.models.KeyPair
 import org.plasmalabs.sdk.dataApi.WalletKeyApiAlgebra
@@ -11,8 +12,7 @@ class WalletManagementUtils[F[_]: Sync](
   dataApi:   WalletKeyApiAlgebra[F]
 ) {
 
-  def loadKeys(keyfile: String, password: String) = {
-    import cats.implicits._
+  def loadKeys(keyfile: String, password: String): F[KeyPair] =
     for {
       wallet <- readInputFile(keyfile)
       keyPair <-
@@ -38,12 +38,10 @@ class WalletManagementUtils[F[_]: Sync](
             )
           )
     } yield keyPair
-  }
 
   def readInputFile(
     inputFile: String
-  ): F[VaultStore[F]] = {
-    import cats.implicits._
+  ): F[VaultStore[F]] =
     dataApi
       .getMainKeyVaultStore(inputFile)
       .flatMap(
@@ -55,7 +53,5 @@ class WalletManagementUtils[F[_]: Sync](
           Sync[F].point(_)
         )
       )
-
-  }
 
 }

@@ -1,16 +1,16 @@
 package org.plasmalabs.cli.params.mode
 
-import org.plasmalabs.cli.{PlasmaCliMode, PlasmaCliParams}
+import org.plasmalabs.cli.params.models.*
 import scopt.{OParser, OParserBuilder}
 
 trait HelpMode:
 
-  given builder: OParserBuilder[PlasmaCliParams]
+  given builder: OParserBuilder[CliParams]
 
-  def helpMode: OParser[Unit, PlasmaCliParams] =
+  def helpMode: OParser[Unit, CliParams] =
     builder
       .cmd("help")
-      .action((_, c) => c.copy(mode = PlasmaCliMode.help))
+      .action((_, c) => c.copy(mode = CliMode.help))
       .text("""Welcome to Plasma-Cli
           |Valid modes are:
           |   - templates: Template mode

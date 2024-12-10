@@ -1,7 +1,7 @@
 package org.plasmalabs.cli.params.mode
 
 import org.plasmalabs.cli.params.implicits.*
-import org.plasmalabs.cli.{DigestType, NetworkIdentifiers, PlasmaCliParams, TokenType}
+import org.plasmalabs.cli.params.models.*
 import org.plasmalabs.sdk.codecs.AddressCodecs
 import org.plasmalabs.sdk.models.{GroupId, LockAddress, SeriesId}
 import org.plasmalabs.sdk.utils.Encoding
@@ -12,11 +12,11 @@ import java.nio.file.Paths
 
 trait Args:
 
-  val builder: OParserBuilder[PlasmaCliParams]
+  val builder: OParserBuilder[CliParams]
 
   import builder._
 
-  def inputFileArg: OParser[String, PlasmaCliParams] =
+  def inputFileArg: OParser[String, CliParams] =
     opt[String]('i', "input")
       .action((x, c) => c.copy(someInputFile = Some(x)))
       .text("The input file. (mandatory)")
@@ -29,7 +29,7 @@ trait Args:
           success
       )
 
-  def feeArg: OParser[Long, PlasmaCliParams] = opt[Long]("fee")
+  def feeArg: OParser[Long, CliParams] = opt[Long]("fee")
     .action((x, c) => c.copy(fee = x))
     .text("Fee paid for the transaction")
     .validate(x =>
@@ -38,7 +38,7 @@ trait Args:
     )
     .required()
 
-  def passphraseArg: OParser[String, PlasmaCliParams] =
+  def passphraseArg: OParser[String, CliParams] =
     opt[String]('P', "passphrase")
       .action((x, c) => c.copy(somePassphrase = Some(x)))
       .text("Passphrase for the encrypted key. (optional))")
@@ -47,7 +47,7 @@ trait Args:
         else success
       )
 
-  def amountArg: OParser[Long, PlasmaCliParams] = opt[Long]('a', "amount")
+  def amountArg: OParser[Long, CliParams] = opt[Long]('a', "amount")
     .action((x, c) => c.copy(amount = x))
     .text("Amount to send")
     .validate(x =>
@@ -55,12 +55,12 @@ trait Args:
       else failure("Amount must be greater than 0")
     )
 
-  def mintAmountArg: OParser[Long, PlasmaCliParams] = opt[Long]("mint-amount")
+  def mintAmountArg: OParser[Long, CliParams] = opt[Long]("mint-amount")
     .action((x, c) => c.copy(amount = x))
     .text("Amount to mint")
     .optional()
 
-  def newwalletdbArg: OParser[String, PlasmaCliParams] = opt[String]("newwalletdb")
+  def newwalletdbArg: OParser[String, CliParams] = opt[String]("newwalletdb")
     .action((x, c) => c.copy(walletFile = x))
     .text("Wallet DB file. (mandatory)")
     .validate(x =>
@@ -71,7 +71,7 @@ trait Args:
       }
     )
 
-  def outputArg: OParser[String, PlasmaCliParams] = opt[String]('o', "output")
+  def outputArg: OParser[String, CliParams] = opt[String]('o', "output")
     .action((x, c) => c.copy(someOutputFile = Some(x)))
     .text("The output file. (mandatory)")
     .validate(x =>
@@ -84,13 +84,13 @@ trait Args:
     )
     .required()
 
-  def walletDbArg: OParser[String, PlasmaCliParams] = opt[String]("walletdb")
+  def walletDbArg: OParser[String, CliParams] = opt[String]("walletdb")
     .action((x, c) => c.copy(walletFile = x))
     .validate(validateWalletDbFile)
     .text("Wallet DB file. (mandatory)")
     .required()
 
-  def templateNameArg: OParser[String, PlasmaCliParams] = opt[String]("template-name")
+  def templateNameArg: OParser[String, CliParams] = opt[String]("template-name")
     .validate(x =>
       if (x.trim().isEmpty) failure("Template name may not be empty")
       else success
@@ -99,13 +99,13 @@ trait Args:
     .text("Name of the template. (mandatory)")
     .required()
 
-  def networkArg: OParser[NetworkIdentifiers, PlasmaCliParams] = opt[NetworkIdentifiers]('n', "network")
+  def networkArg: OParser[NetworkIdentifiers, CliParams] = opt[NetworkIdentifiers]('n', "network")
     .action((x, c) => c.copy(network = x))
     .text(
       "Network name: Possible values: mainnet, testnet, private. (mandatory)"
     )
 
-  def passwordArg: OParser[String, PlasmaCliParams] = opt[String]('w', "password")
+  def passwordArg: OParser[String, CliParams] = opt[String]('w', "password")
     .action((x, c) => c.copy(password = x))
     .validate(x =>
       if (x.trim().isEmpty) failure("Password may not be empty")
@@ -114,7 +114,7 @@ trait Args:
     .text("Password for the encrypted key. (mandatory)")
     .required()
 
-  def fellowshipNameArg: OParser[String, PlasmaCliParams] = opt[String]("fellowship-name")
+  def fellowshipNameArg: OParser[String, CliParams] = opt[String]("fellowship-name")
     .validate(x =>
       if (x.trim().isEmpty) failure("Fellowship name may not be empty")
       else success
@@ -123,7 +123,7 @@ trait Args:
     .text("Name of the fellowship. (mandatory)")
     .required()
 
-  def secretArg: OParser[String, PlasmaCliParams] = opt[String]("secret")
+  def secretArg: OParser[String, CliParams] = opt[String]("secret")
     .validate(x =>
       if (x.trim().isEmpty) failure("Secret may not be empty")
       else if (x.trim().getBytes().length > 32)
@@ -134,12 +134,12 @@ trait Args:
     .text("Secret to be encoded. (mandatory)")
     .required()
 
-  def digestArg: OParser[DigestType, PlasmaCliParams] = opt[DigestType]("digest")
+  def digestArg: OParser[DigestType, CliParams] = opt[DigestType]("digest")
     .action((x, c) => c.copy(digest = x))
     .text("Digest algorithm used to encode the secret. (mandatory)")
     .required()
 
-  def digestTextArg: OParser[String, PlasmaCliParams] = opt[String]("digest-text")
+  def digestTextArg: OParser[String, CliParams] = opt[String]("digest-text")
     .action((x, c) => c.copy(digestText = x))
     .validate { x =>
       if (x.trim().isEmpty) failure("Digest text may not be empty")
@@ -171,26 +171,26 @@ trait Args:
     )
     .required()
 
-  def secureArg: OParser[Boolean, PlasmaCliParams] =
+  def secureArg: OParser[Boolean, CliParams] =
     opt[Boolean]('s', "secure")
       .action((x, c) => c.copy(secureConnection = x))
       .text("Enables the secure connection to the node. (optional)")
 
-  def hostPort: Seq[OParser[? >: String & Int & Boolean, PlasmaCliParams]] = Seq(
+  def hostPort: Seq[OParser[? >: String & Int & Boolean, CliParams]] = Seq(
     hostArg,
     portArg,
     secureArg
   )
 
-  def groupId: OParser[Option[GroupId], PlasmaCliParams] = opt[Option[GroupId]]("group-id")
+  def groupId: OParser[Option[GroupId], CliParams] = opt[Option[GroupId]]("group-id")
     .action((x, c) => c.copy(someGroupId = x))
     .text("Group id.")
 
-  def seriesId: OParser[Option[SeriesId], PlasmaCliParams] = opt[Option[SeriesId]]("series-id")
+  def seriesId: OParser[Option[SeriesId], CliParams] = opt[Option[SeriesId]]("series-id")
     .action((x, c) => c.copy(someSeriesId = x))
     .text("Series id.")
 
-  def hostPortNetwork: Seq[OParser[? >: NetworkIdentifiers & String & Int & Boolean, PlasmaCliParams]] =
+  def hostPortNetwork: Seq[OParser[? >: NetworkIdentifiers & String & Int & Boolean, CliParams]] =
     Seq(
       networkArg,
       hostArg,
@@ -198,13 +198,13 @@ trait Args:
       secureArg
     )
 
-  def tokenType: OParser[TokenType.Value, PlasmaCliParams] = opt[TokenType.Value]("token")
+  def tokenType: OParser[TokenType.Value, CliParams] = opt[TokenType.Value]("token")
     .action((x, c) => c.copy(tokenType = x))
     .text(
       "The token type. The valid token types are 'lvl', 'topl', 'asset', 'group', 'series', and 'all'"
     )
 
-  def mintTokenType: OParser[TokenType.Value, PlasmaCliParams] = opt[TokenType.Value]("mint-token")
+  def mintTokenType: OParser[TokenType.Value, CliParams] = opt[TokenType.Value]("mint-token")
     .action((x, c) => c.copy(tokenType = x))
     .text(
       "The token type. The valid token types are 'asset', 'group', 'series'."
@@ -219,7 +219,7 @@ trait Args:
       }
     )
 
-  def transferTokenType: OParser[TokenType.Value, PlasmaCliParams] = opt[TokenType.Value]("transfer-token")
+  def transferTokenType: OParser[TokenType.Value, CliParams] = opt[TokenType.Value]("transfer-token")
     .action((x, c) => c.copy(tokenType = x))
     .text(
       "The token type. The valid token types are 'lvl', 'asset', 'group', 'series'."
@@ -235,7 +235,7 @@ trait Args:
     )
     .required()
 
-  def fromAddress: OParser[Option[String], PlasmaCliParams] = opt[Option[String]]("from-address")
+  def fromAddress: OParser[Option[String], CliParams] = opt[Option[String]]("from-address")
     .action((x, c) => c.copy(fromAddress = x))
     .text("Address where we are sending the funds from")
     .validate(someAddress =>
@@ -259,7 +259,7 @@ trait Args:
     )
     .required()
 
-  def keyfileAndPassword: Seq[OParser[String, PlasmaCliParams]] =
+  def keyfileAndPassword: Seq[OParser[String, CliParams]] =
     Seq(
       keyfileArg,
       passwordArg

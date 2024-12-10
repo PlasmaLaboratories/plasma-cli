@@ -1,22 +1,13 @@
-package org.plasmalabs.cli.impl
+package org.plasmalabs.cli.parsers
 
 import cats.effect.kernel.{Resource, Sync}
 import com.google.protobuf.struct.Value
 import io.circe.Json
+import org.plasmalabs.cli.impl.*
 import org.plasmalabs.sdk.models.*
 import org.plasmalabs.sdk.models.box.{FungibilityType, QuantityDescriptorType}
 
 import scala.io.BufferedSource
-
-case class SeriesPolicyInternal(
-  label:                   String,
-  tokenSupply:             Option[Int],
-  registrationUtxo:        String,
-  fungibility:             String,
-  quantityDescriptor:      String,
-  ephemeralMetadataScheme: Option[Json],
-  permanentMetadataScheme: Option[Json]
-)
 
 trait SeriesPolicyParser[F[_]] {
 
@@ -27,12 +18,22 @@ trait SeriesPolicyParser[F[_]] {
 
 object SeriesPolicyParser {
 
+  private case class SeriesPolicyInternal(
+    label:                   String,
+    tokenSupply:             Option[Int],
+    registrationUtxo:        String,
+    fungibility:             String,
+    quantityDescriptor:      String,
+    ephemeralMetadataScheme: Option[Json],
+    permanentMetadataScheme: Option[Json]
+  )
+
   def make[F[_]: Sync](
     networkId: Int
-  ) = new SeriesPolicyParser[F] with CommonTxOps {
+  ): SeriesPolicyParser[F] & CommonTxOps = new SeriesPolicyParser[F] with CommonTxOps {
 
-    import cats.implicits._
-    import io.circe.generic.auto._
+    import cats.implicits.*
+    import io.circe.generic.auto.*
     import io.circe.yaml
 
     private def seriesPolicyToPBSeriesPolicy(
@@ -115,11 +116,11 @@ object SeriesPolicyParser {
             }
         )
       sp <- seriesPolicyToPBSeriesPolicy(seriesPolicy)
-    } yield sp).attempt.map(_ match {
+    } yield sp).attempt.map {
       case Right(value)               => Right(value)
       case Left(e: CommonParserError) => Left(e)
       case Left(e)                    => Left(InvalidYaml(e))
-    })
+    }
 
   }
 

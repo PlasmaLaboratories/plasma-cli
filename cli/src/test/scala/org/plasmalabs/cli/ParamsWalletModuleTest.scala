@@ -1,13 +1,14 @@
 package org.plasmalabs.cli
 
 import munit.FunSuite
+import org.plasmalabs.cli.params.models.CliParams
 import scopt.OParser
 
 import java.nio.file.{Files, Paths}
 
 class ParamsWalletModuleTest extends FunSuite {
 
-  import PlasmaCliParamsParserModule._
+  import org.plasmalabs.cli.params.CliParamsParser._
 
   val tmpWallet = FunFixture[(String, String)](
     setup = { _ =>
@@ -39,7 +40,7 @@ class ParamsWalletModuleTest extends FunSuite {
       "--mnemonicfile",
       mnemonic
     )
-    assert(OParser.parse(paramParser, args0, PlasmaCliParams()).isDefined)
+    assert(OParser.parse(paramParser, args0, CliParams()).isDefined)
     val args1 = List(
       "wallet",
       "init",
@@ -54,7 +55,7 @@ class ParamsWalletModuleTest extends FunSuite {
       "--mnemonicfile",
       "mnemonic.txt"
     )
-    assert(OParser.parse(paramParser, args1, PlasmaCliParams()).isDefined)
+    assert(OParser.parse(paramParser, args1, CliParams()).isDefined)
     val args2 = List(
       "wallet",
       "init",
@@ -69,14 +70,14 @@ class ParamsWalletModuleTest extends FunSuite {
       "--mnemonicfile",
       "mnemonic.txt"
     )
-    assert(OParser.parse(paramParser, args2, PlasmaCliParams()).isDefined)
+    assert(OParser.parse(paramParser, args2, CliParams()).isDefined)
   }
 
   test("Test invalid key create") {
     val args0 = List("wallet", "init")
     assert(
       OParser
-        .parse(paramParser, args0, PlasmaCliParams())
+        .parse(paramParser, args0, CliParams())
         .isEmpty
     )
   }
@@ -100,7 +101,7 @@ class ParamsWalletModuleTest extends FunSuite {
     )
     assert(
       OParser
-        .parse(paramParser, args0, PlasmaCliParams())
+        .parse(paramParser, args0, CliParams())
         .isDefined
     )
   }
@@ -114,7 +115,7 @@ class ParamsWalletModuleTest extends FunSuite {
     )
     assert(
       OParser
-        .parse(paramParser, args0, PlasmaCliParams())
+        .parse(paramParser, args0, CliParams())
         .isEmpty
     )
   }
@@ -128,7 +129,7 @@ class ParamsWalletModuleTest extends FunSuite {
     )
     assert(
       OParser
-        .parse(paramParser, args0, PlasmaCliParams())
+        .parse(paramParser, args0, CliParams())
         .isEmpty
     )
   }

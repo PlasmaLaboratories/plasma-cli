@@ -2,24 +2,25 @@ package org.plasmalabs.cli.modules
 
 import cats.effect.IO
 import org.plasmalabs.cli.controllers.IndexerQueryController
-import org.plasmalabs.cli.{PlasmaCliParams, PlasmaCliParamsParserModule, PlasmaCliSubCmd}
+import org.plasmalabs.cli.params.CliParamsParser
+import org.plasmalabs.cli.params.models.*
 import org.plasmalabs.sdk.dataApi.{IndexerQueryAlgebra, RpcChannelResource}
 import scopt.OParser
 
 trait IndexerQueryModeModule extends WalletStateAlgebraModule with RpcChannelResource {
 
   def indexerQuerySubcmd(
-    validateParams: PlasmaCliParams
+    validateParams: CliParams
   ): IO[Either[String, String]] = validateParams.subcmd match {
-    case PlasmaCliSubCmd.invalid =>
+    case CliSubCmd.invalid =>
       IO.pure(
         Left(
           OParser.usage(
-            PlasmaCliParamsParserModule.indexerQueryMode
+            CliParamsParser.indexerQueryMode
           ) + "\nA subcommand needs to be specified"
         )
       )
-    case PlasmaCliSubCmd.utxobyaddress =>
+    case CliSubCmd.utxobyaddress =>
       new IndexerQueryController(
         walletStateAlgebra(
           validateParams.walletFile

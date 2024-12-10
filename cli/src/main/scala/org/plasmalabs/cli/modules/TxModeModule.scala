@@ -1,26 +1,27 @@
 package org.plasmalabs.cli.modules
 
 import cats.effect.IO
-import org.plasmalabs.cli.controllers.TxController
-import org.plasmalabs.cli.{PlasmaCliParams, PlasmaCliParamsParserModule, PlasmaCliSubCmd}
+import org.plasmalabs.cli.controllers.{SimpleController, TxController}
+import org.plasmalabs.cli.params.CliParamsParser
+import org.plasmalabs.cli.params.models.*
 import org.plasmalabs.sdk.constants.NetworkConstants
 import scopt.OParser
 
 trait TxModeModule extends TxParserAlgebraModule with TransactionAlgebraModule {
 
   def txModeSubcmds(
-    validateParams: PlasmaCliParams
+    validateParams: CliParams
   ): IO[Either[String, String]] =
     validateParams.subcmd match {
-      case PlasmaCliSubCmd.invalid =>
+      case CliSubCmd.invalid =>
         IO.pure(
           Left(
             OParser.usage(
-              PlasmaCliParamsParserModule.transactionMode
+              CliParamsParser.transactionMode
             ) + "\nA subcommand needs to be specified"
           )
         )
-      case PlasmaCliSubCmd.broadcast =>
+      case CliSubCmd.broadcast =>
         new TxController(
           txParserAlgebra(
             validateParams.network.networkId,
@@ -33,7 +34,7 @@ trait TxModeModule extends TxParserAlgebraModule with TransactionAlgebraModule {
             validateParams.secureConnection
           )
         ).broadcastSimpleTransactionFromParams(validateParams.someInputFile.get)
-      case PlasmaCliSubCmd.prove =>
+      case CliSubCmd.prove =>
         new TxController(
           txParserAlgebra(
             validateParams.network.networkId,
@@ -51,20 +52,10 @@ trait TxModeModule extends TxParserAlgebraModule with TransactionAlgebraModule {
           validateParams.password,
           validateParams.someOutputFile.get
         )
-      case PlasmaCliSubCmd.inspect =>
-        new TxController(
-          txParserAlgebra(
-            validateParams.network.networkId,
-            NetworkConstants.MAIN_LEDGER_ID
-          ),
-          transactionOps(
-            validateParams.walletFile,
-            validateParams.host,
-            validateParams.nodePort,
-            validateParams.secureConnection
-          )
-        ).inspectTransaction(validateParams.someInputFile.get)
-      case PlasmaCliSubCmd.create =>
+      case CliSubCmd.inspect =>
+        SimpleController
+          .inspectTransaction(validateParams.someInputFile.get)
+      case CliSubCmd.create =>
         new TxController(
           txParserAlgebra(
             validateParams.network.networkId,

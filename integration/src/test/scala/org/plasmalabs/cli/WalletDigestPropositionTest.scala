@@ -2,6 +2,7 @@ package org.plasmalabs.cli
 
 import cats.effect.ExitCode
 import munit.CatsEffectSuite
+import org.plasmalabs.cli.params.models.*
 
 import java.nio.file.{Files, Path, Paths}
 
@@ -82,7 +83,7 @@ class WalletDigestPropositionTest extends CatsEffectSuite with WalletConstants w
       _ <- assertIO(
         walletController(WALLET)
           .getPreimage(
-            Sha256,
+            DigestType.Sha256,
             "ee15b31e49931db6551ed8a82f1422ce5a5a8debabe8e81a724c88f79996d0df"
           )
           .map(_.toOption),
@@ -111,7 +112,7 @@ class WalletDigestPropositionTest extends CatsEffectSuite with WalletConstants w
       _ <- assertIO(
         walletController(WALLET)
           .getPreimage(
-            Blake2b,
+            DigestType.Blake2b,
             "0a0f4e1461688b3dbf01cad2882e5779998efcf7ee3800c80e964fd0424d7e0c"
           )
           .map(_.toOption),
