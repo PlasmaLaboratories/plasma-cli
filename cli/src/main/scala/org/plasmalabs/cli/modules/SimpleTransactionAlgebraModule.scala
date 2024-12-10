@@ -7,7 +7,8 @@ import org.plasmalabs.sdk.constants.NetworkConstants
 trait SimpleTransactionAlgebraModule
     extends WalletStateAlgebraModule
     with WalletManagementUtilsModule
-    with IndexerQueryAlgebraModule {
+    with IndexerQueryAlgebraModule
+    with TransactionBuilderApiModule {
 
   def simplTransactionOps(
     walletFile:       String,
